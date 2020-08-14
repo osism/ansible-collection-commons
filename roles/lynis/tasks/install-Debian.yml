@@ -19,6 +19,7 @@
     state: present
     filename: lynis
     update_cache: yes
+    mode: 0600
   become: true
   when: lynis_configure_repository|bool
 

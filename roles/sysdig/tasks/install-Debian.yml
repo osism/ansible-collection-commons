@@ -19,6 +19,7 @@
     state: present
     filename: sysdig
     update_cache: yes
+    mode: 0600
   become: true
   when: sysdig_configure_repository|bool
 
