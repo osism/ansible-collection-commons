@@ -1,0 +1,7 @@
+---
+ansible_collection_name: commons
+distributions:
+  - bionic
+  - focal
+releases:
+  - 2.9
