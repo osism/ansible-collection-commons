@@ -1,0 +1,14 @@
+---
+##########################
+# packages
+
+lynis_package_name: lynis
+
+##########################
+# repository
+
+lynis_configure_repository: no
+
+lynis_debian_repository_arch: amd64
+lynis_debian_repository_key: https://packages.cisofy.com/keys/cisofy-software-public.key
+lynis_debian_repository: "deb [ arch={{ lynis_debian_repository_arch }} ] https://packages.cisofy.com/community/lynis/deb/ stable main"

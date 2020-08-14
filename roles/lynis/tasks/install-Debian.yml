@@ -1,0 +1,29 @@
+---
+- name: Install apt-transport-https package
+  apt:
+    name: apt-transport-https
+    state: present
+  become: true
+  when: lynis_configure_repository|bool
+  changed_when: false
+
+- name: Add repository gpg key
+  apt_key:
+    url: "{{ lynis_debian_repository_key }}"
+  become: true
+  when: lynis_configure_repository|bool
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ lynis_debian_repository }}"
+    state: present
+    filename: lynis
+    update_cache: yes
+  become: true
+  when: lynis_configure_repository|bool
+
+- name: Install lynis package
+  apt:
+    name: "{{ lynis_package_name }}"
+    state: present
+  become: true
