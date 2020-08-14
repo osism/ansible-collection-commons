@@ -4,7 +4,7 @@ The following ansible roles are included in this collection.
 
 | Rolename | Status                                                                                                   |
 |----------|----------------------------------------------------------------------------------------------------------|
-| sysdig   | ![Test sysdig](https://github.com/osism/ansible-collection-services/workflows/Test%20sysdig/badge.svg)   |
+| sysdig   | ![Test sysdig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sysdig/badge.svg)    |
 
 ## Author information
 
