@@ -1,0 +1,30 @@
+---
+- name: Install apt-transport-https package
+  apt:
+    name: apt-transport-https
+    state: present
+  become: true
+  when: trivy_configure_repository|bool
+  changed_when: false
+
+- name: Add repository gpg key
+  apt_key:
+    url: "{{ trivy_debian_repository_key }}"
+  become: true
+  when: trivy_configure_repository|bool
+
+- name: Add repository
+  apt_repository:
+    repo: "{{ trivy_debian_repository }}"
+    state: present
+    filename: trivy
+    update_cache: yes
+    mode: 0600
+  become: true
+  when: trivy_configure_repository|bool
+
+- name: Install trivy package
+  apt:
+    name: "{{ trivy_package_name }}"
+    state: present
+  become: true
