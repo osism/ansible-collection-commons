@@ -13,7 +13,7 @@ provisioner:
         ansible_python_interpreter: /usr/bin/python3
 verifier:
   name: testinfra
-  enabled: true
+  enabled: false
 scenario:
   name: lynis
   test_sequence:
