@@ -1,0 +1,6 @@
+---
+- name: Restart hddtemp service
+  service:
+    name: "{{ hddtemp_service_name }}"
+    state: restarted
+  become: true

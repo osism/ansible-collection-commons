@@ -1,0 +1,31 @@
+---
+- name: Stop motd-news timer
+  service:
+    name: motd-news.timer
+    state: stopped
+    enabled: false
+  become: true
+
+- name: Cleanup /etc/update-motd.d
+  file:
+    state: absent
+    path: "/etc/update-motd.d/{{ item }}"
+  become: true
+  loop:
+    - 10-help-text
+    - 50-landscape-sysinfo
+    - 50-motd-news
+    - 80-livepatch
+    - 97-overlayroot
+
+- name: Disable motd banner in ssh pam session
+  replace:
+    path: /etc/pam.d/sshd
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.replace }}"
+  become: true
+  loop:
+    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
+      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+    - regex: '^session.*optional.*pam_motd.so.*noupdate$'
+      replace: '# session  optional  pam_motd.so  noupdate'
