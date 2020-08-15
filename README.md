@@ -2,11 +2,12 @@
 
 The following ansible roles are included in this collection.
 
-| Rolename | Status                                                                                                   |
-|----------|----------------------------------------------------------------------------------------------------------|
-| lynis    | ![Test lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20lynis/badge.svg)      |
-| sysdig   | ![Test sysdig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sysdig/badge.svg)    |
-| trivy    | ![Test trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20trivy/badge.svg)      |
+| Rolename  | Status                                                                                                      |
+|-----------|-------------------------------------------------------------------------------------------------------------|
+| lynis     | ![Test lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20lynis/badge.svg)         |
+| sshconfig | ![Test sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sshconfig/badge.svg) |
+| sysdig    | ![Test sysdig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sysdig/badge.svg)       |
+| trivy     | ![Test trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20trivy/badge.svg)         |
 
 ## Author information
 
