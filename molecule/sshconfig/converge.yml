@@ -1,0 +1,12 @@
+---
+- name: Playbook for role testing
+  hosts: all
+
+  collections:
+    - osism.commons
+
+  vars:
+    operator_user: ubuntu
+
+  roles:
+    - role: sshconfig

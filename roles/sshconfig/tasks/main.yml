@@ -1,0 +1,23 @@
+---
+- name: Ensure .ssh/config.d exist
+  file:
+    path: "{{ sshconfig_destination }}/config.d"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0700
+
+- name: Ensure config for each host exist
+  template:
+    src: config.j2
+    dest: "{{ sshconfig_destination }}/config.d/{{ sshconfig_order }}-{{ hostvars[item].inventory_hostname_short }}"
+    mode: 0600
+  when: item != "localhost" and item != "127.0.0.1"
+  loop: "{{ groups[sshconfig_groupname] }}"
+
+- name: Assemble ssh config
+  assemble:
+    src: "{{ sshconfig_destination }}/config.d"
+    dest: "{{ sshconfig_destination }}/config"
+    delimiter: "####################"
+    mode: 0600

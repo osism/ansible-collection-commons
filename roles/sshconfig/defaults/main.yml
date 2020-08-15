@@ -1,0 +1,16 @@
+---
+##########################
+# operator user
+
+operator_user: dragon
+operator_group: "{{ operator_user }}"
+
+##########################
+# sshconfig
+
+sshconfig_destination: "/home/{{ operator_user }}/.ssh"
+sshconfig_groupname: all
+sshconfig_order: 20
+sshconfig_port: 22
+sshconfig_private_key_file: /opt/ansible/secrets/id_rsa.operator
+sshconfig_user: "{{ operator_user }}"
