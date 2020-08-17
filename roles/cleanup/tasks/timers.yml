@@ -1,0 +1,10 @@
+---
+- name: Disable apt-daily timers
+  become: true
+  systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - apt-daily-upgrade.timer
+    - apt-daily.timer
