@@ -1,0 +1,6 @@
+---
+- name: Include timer tasks
+  include_tasks: timers.yml
+
+- name: Include service tasks
+  include_tasks: services.yml
