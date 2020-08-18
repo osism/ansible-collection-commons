@@ -1,32 +1,55 @@
 ---
+- name: Remove update-motd package
+  become: true
+  package:
+    name: update-motd
+    state: absent
+
 - name: Stop motd-news timer
+  become: true
   service:
     name: motd-news.timer
     state: stopped
     enabled: false
-  become: true
 
-- name: Cleanup /etc/update-motd.d
-  file:
-    state: absent
-    path: "/etc/update-motd.d/{{ item }}"
+- name: Stop motd-news service
   become: true
-  loop:
-    - 10-help-text
-    - 50-landscape-sysinfo
-    - 50-motd-news
-    - 80-livepatch
-    - 97-overlayroot
+  service:
+    name: motd-news.service
+    state: stopped
+    enabled: false
 
-- name: Disable motd banner in ssh pam session
+- name: Disable dynamic motd banner in pam configuration for ssh
+  become: true
   replace:
     path: /etc/pam.d/sshd
     regexp: "{{ item.regex }}"
     replace: "{{ item.replace }}"
     mode: 0644
-  become: true
   loop:
     - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
       replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+
+    # NOTE: The ssh banner directive is used to output /etc/motd.
     - regex: '^session.*optional.*pam_motd.so.*noupdate$'
       replace: '# session  optional  pam_motd.so  noupdate'
+
+- name: Disable dynamic motd banner in pam configuration for login
+  become: true
+  replace:
+    path: /etc/pam.d/login
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.replace }}"
+    mode: 0644
+  loop:
+    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
+      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+
+- name: Copy motd file
+  become: true
+  copy:
+    content: "{{ motd_content }}"
+    dest: "{{ motd_path }}"
+    owner: root
+    group: root
+    mode: 0644
