@@ -1,0 +1,29 @@
+---
+- name: Install apt-transport-https package
+  become: true
+  apt:
+    name: apt-transport-https
+    state: present
+  when: podman_configure_repository|bool
+  changed_when: false
+
+- name: Add repository gpg key
+  become: true
+  apt_key:
+    url: "{{ podman_debian_repository_key }}"
+  when: podman_configure_repository|bool
+
+- name: Add repository
+  become: true
+  apt_repository:
+    repo: "{{ podman_debian_repository }}"
+    state: present
+    update_cache: yes
+    mode: 0644
+  when: podman_configure_repository|bool
+
+- name: Install required packages
+  become: true
+  apt:
+    name: ['uidmap', '{{ podman_package_name }}']
+    state: present
