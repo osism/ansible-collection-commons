@@ -1,4 +1,7 @@
 ---
+- name: Collect facts about services
+  scan_services:
+
 - name: Remove update-motd package
   become: true
   package:
@@ -18,6 +21,7 @@
     name: motd-news.service
     state: stopped
     enabled: false
+  when: "'motd-news.service' in services"
 
 - name: Disable dynamic motd banner in pam configuration for ssh
   become: true
