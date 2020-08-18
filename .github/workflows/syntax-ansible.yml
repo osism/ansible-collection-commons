@@ -4,10 +4,12 @@ name: Check ansible syntax
 on:
   push:
     paths:
+      - .ansible-lint
       - .github/workflows/syntax-ansible.yml
       - '**.yml'
   pull_request:
     paths:
+      - .ansible-lint
       - .github/workflows/syntax-ansible.yml
       - '**.yml'
 
