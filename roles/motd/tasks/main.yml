@@ -23,6 +23,7 @@
     path: /etc/pam.d/sshd
     regexp: "{{ item.regex }}"
     replace: "{{ item.replace }}"
+    mode: 0644
   become: true
   loop:
     - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
