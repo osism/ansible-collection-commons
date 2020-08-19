@@ -4,3 +4,6 @@
 
 - name: Include service tasks
   include_tasks: services.yml
+
+- name: Include packages tasks
+  include_tasks: packages.yml

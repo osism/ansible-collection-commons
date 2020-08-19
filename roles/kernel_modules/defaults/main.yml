@@ -1,0 +1,4 @@
+---
+kernel_modules:
+  - bonding
+  - 8021q

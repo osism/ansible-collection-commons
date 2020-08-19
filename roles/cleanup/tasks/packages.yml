@@ -1,0 +1,24 @@
+---
+- name: Cleanup installed packages
+  become: true
+  apt:
+    name: "{{ cleanup_packages }}"
+    state: absent
+    purge: yes
+
+- name: Uninstall unattended-upgrades package
+  become: true
+  apt:
+    name: unattended-upgrades
+    state: absent
+    purge: yes
+
+- name: Remove useless packages from the cache
+  become: true
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  become: true
+  apt:
+    autoremove: yes

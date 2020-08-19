@@ -1,4 +1,6 @@
 ---
+# NOTE: excluded because of "couldn't resolve module/action 'scan_services'"
 exclude_paths:
   - roles/cleanup/tasks/services.yml
   - roles/motd/tasks/main.yml
+  - roles/services/tasks/main.yml

@@ -1,0 +1,30 @@
+---
+sysctl:
+  elasticsearch:
+    # https://github.com/docker-library/elasticsearch/issues/98
+    - name: vm.max_map_count
+      value: 262144
+  rabbitmq:
+    - name: net.ipv4.tcp_keepalive_time
+      value: 6
+    - name: net.ipv4.tcp_keepalive_intvl
+      value: 3
+    - name: net.ipv4.tcp_keepalive_probes
+      value: 3
+    - name: net.core.wmem_max
+      value: 16777216
+    - name: net.core.rmem_max
+      value: 16777216
+    - name: net.ipv4.tcp_fin_timeout
+      value: 20
+    - name: net.ipv4.tcp_tw_reuse
+      value: 1
+    - name: net.core.somaxconn
+      value: 4096
+    - name: net.ipv4.tcp_syncookies
+      value: 0
+    - name: net.ipv4.tcp_max_syn_backlog
+      value: 8192
+  all:
+    - name: vm.swappiness
+      value: 1
