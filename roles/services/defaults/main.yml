@@ -1,0 +1,6 @@
+---
+services_warning:
+  - nscd
+
+services_required:
+  - cron

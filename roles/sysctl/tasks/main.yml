@@ -1,0 +1,4 @@
+---
+- name: Include sysctl tasks
+  include: sysctl.yml
+  loop: "{{ sysctl|dict2items }}"

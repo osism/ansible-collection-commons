@@ -1,0 +1,5 @@
+---
+- name: Sync hardware clock
+  become: true
+  command: hwclock --systohc
+  changed_when: false

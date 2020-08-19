@@ -1,0 +1,6 @@
+---
+- name: Install microcode packages
+  become: true
+  apt:
+    name: "{{ microcode_packages }}"
+    state: present

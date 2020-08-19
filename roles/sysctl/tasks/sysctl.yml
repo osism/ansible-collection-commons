@@ -1,0 +1,12 @@
+---
+- name: "Set sysctl parameters on {{ item }} nodes"
+  become: true
+  sysctl:
+    name: "{{ item_in_block.name }}"
+    value: "{{ item_in_block.value }}"
+    sysctl_set: yes
+    sysctl_file: "/etc/sysctl.d/70-{{ item.key }}.conf"
+  loop: "{{ item.value }}"
+  loop_control:
+    loop_var: item_in_block
+  when: "item.key in group_names"

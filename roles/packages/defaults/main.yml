@@ -1,0 +1,11 @@
+---
+apt_cache_valid_time: 3600
+
+upgrade_packages: yes
+
+required_packages:
+  - debsums
+  - ethtool
+  - rsyslog
+  - selinux-utils
+  - ssh

@@ -1,0 +1,13 @@
+---
+cleanup_packages:
+  - apport
+  - apport-symptoms
+  - libvirt-bin
+  - lxc
+  - lxd
+  - open-iscsi
+  - python3-apport
+  - snapd
+  - ubuntu-server
+
+cleanup_services: []
