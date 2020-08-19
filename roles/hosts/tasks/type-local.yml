@@ -1,0 +1,33 @@
+---
+- name: Create temporary file
+  tempfile:
+    state: file
+    suffix: hosts
+  register: hosts_tempfile
+  delegate_to: localhost
+  run_once: true
+
+- name: Generate temporary /etc/hosts file
+  template:
+    src: "hosts-template.j2"
+    dest: "{{ hosts_tempfile.path }}"
+    mode: 0644
+  delegate_to: localhost
+  run_once: true
+
+- name: Copy /etc/hosts file
+  become: true
+  copy:
+    src: "{{ hosts_tempfile.path }}"
+    dest: "{{ hosts_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: "{{ hosts_file_backup }}"
+
+- name: Delete temporary file
+  file:
+    path: "{{ hosts_tempfile.path }}"
+    state: absent
+  delegate_to: localhost
+  run_once: true

@@ -1,0 +1,83 @@
+---
+- name: Create operator group
+  become: true
+  group:
+    name: "{{ operator_group }}"
+    gid: "{{ operator_group_id }}"
+
+- name: Create operator user
+  become: true
+  user:
+    name: "{{ operator_user }}"
+    comment: OSISM operator user
+    shell: "{{ operator_shell }}"
+    uid: "{{ operator_user_id }}"
+    group: "{{ operator_group }}"
+
+- name: Add operator user to additional groups
+  become: true
+  user:
+    name: "{{ operator_user }}"
+    groups: "{{ item }}"
+    append: yes
+  loop: "{{ operator_groups }}"
+
+- name: Copy operator user sudoers file
+  become: true
+  template:
+    src: operator-sudoers.j2
+    dest: "/etc/sudoers.d/{{ operator_user }}-sudoers"
+    owner: root
+    group: root
+    mode: 0440
+    validate: /usr/sbin/visudo -cf %s
+
+# NOTE: http://stackoverflow.com/questions/33343215/how-to-get-remote-users-home-directory-in-ansible
+
+- name: Get home directory of operator user
+  become: true
+  shell: |
+    set -o pipefail
+    getent passwd {{ operator_user }} | cut -d: -f6
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: operator_home
+
+- name: Set language variables in .bashrc configuration file
+  become: true
+  lineinfile:
+    dest: "{{ operator_home.stdout }}/.bashrc"
+    line: "{{ item }}"
+    create: yes
+    mode: 0640
+  loop:
+    - "export LANGUAGE=en_US.UTF-8"
+    - "export LANG=en_US.UTF-8"
+    - "export LC_ALL=en_US.UTF-8"
+
+- name: Create .ssh directory
+  become: true
+  file:
+    path: "{{ operator_home.stdout }}/.ssh"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    state: directory
+    mode: 0700
+
+- name: Set ssh authorized keys
+  become: true
+  authorized_key:
+    key: "{{ item }}"
+    user: "{{ operator_user }}"
+  loop: "{{ operator_authorized_keys }}"
+  no_log: true
+
+- name: Set password of operator user
+  become: true
+  user:
+    name: "{{ operator_user }}"
+    update_password: always
+    password: "{{ operator_password }}"
+  when: operator_password is defined and operator_password
+  no_log: true

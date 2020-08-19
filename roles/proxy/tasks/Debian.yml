@@ -1,0 +1,10 @@
+---
+- name: Configure proxy parameters for apt
+  become: true
+  template:
+    src: proxy-apt.j2
+    dest: "{{ proxy_apt_conf_path }}"
+    owner: root
+    group: root
+    mode: 0644
+  when: proxy_proxies != {}

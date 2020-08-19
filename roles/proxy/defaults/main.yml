@@ -1,0 +1,13 @@
+---
+proxy_proxies:
+  http: http://proxy.tld:8080
+  # https: http://proxy.tld:8080
+  # ftp: http://proxy.tld:8080
+
+proxy_package_manager: yes
+
+proxy_no_proxy:
+  - 127.0.0.1
+  - localhost
+
+proxy_apt_conf_path: /etc/apt/apt.conf.d/01proxy
