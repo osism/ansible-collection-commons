@@ -1,6 +1,0 @@
----
-##########################
-# smartd
-
-smartd_package_name: smartmontools
-smartd_service_name: smartd
