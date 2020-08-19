@@ -1,0 +1,14 @@
+---
+- name: Set hostname
+  become: true
+  hostname:
+    name: "{{ inventory_hostname_short }}"
+
+- name: Copy /etc/hostname
+  become: true
+  copy:
+    content: "{{ inventory_hostname_short }}{{ '\n' }}"
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: 0644

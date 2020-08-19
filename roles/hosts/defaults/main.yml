@@ -1,0 +1,19 @@
+---
+##########################
+# generic
+
+management_interface: eth0
+
+##########################
+# role parameters
+
+hosts_group_name: all
+
+# valid values: [block, local, template]
+hosts_type: block
+
+hosts_file: /etc/hosts
+hosts_file_backup: yes
+hosts_file_reset: no
+
+hosts_additional_entries: {}
