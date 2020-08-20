@@ -11,7 +11,7 @@
 - name: Copy fact files
   become: true
   copy:
-    src: "facts/{{ item }}.fact"
+    src: "{{ item }}.fact"
     dest: "/etc/ansible/facts.d/{{ item }}.fact"
     owner: root
     group: root
