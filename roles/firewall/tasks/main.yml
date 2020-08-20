@@ -1,4 +1,12 @@
 ---
+- name: Copy ufw.conf configuration file
+  become: true
+  template:
+    src: ufw.conf.j2
+    dest: /etc/ufw/ufw.conf
+    mode: 0644
+  notify: "Restart {{ ufw_service_name }} service"
+
 - name: "Start {{ ufw_service_name }} service"
   become: true
   service:
