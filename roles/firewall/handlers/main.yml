@@ -1,5 +1,5 @@
 ---
-- name: "Start {{ ufw_service_name }} service"
+- name: "Restart {{ ufw_service_name }} service"
   become: true
   service:
     name: "{{ ufw_service_name }}"
