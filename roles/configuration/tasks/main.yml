@@ -1,0 +1,14 @@
+---
+- name: Create required directories
+  become: true
+  file:
+    path: "{{ item }}"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    state: directory
+    mode: 0750
+  with_items:
+    - "{{ configuration_directory }}"
+
+- name: Include tasks required by the specific configuration type
+  include: "{{ configuration_type }}.yml"
