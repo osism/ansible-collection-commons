@@ -1,14 +1,34 @@
 # Ansible collection osism.commons
 
-The following ansible roles are included in this collection.
+The following Ansible roles are included in this collection.
 
-| Rolename  | Status                                                                                                      |
-|-----------|-------------------------------------------------------------------------------------------------------------|
-| lynis     | ![Test lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20lynis/badge.svg)         |
-| sshconfig | ![Test sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sshconfig/badge.svg) |
-| sysdig    | ![Test sysdig](https://github.com/osism/ansible-collection-commons/workflows/Test%20sysdig/badge.svg)       |
-| trivy     | ![Test trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20trivy/badge.svg)         |
+| Rolename       |
+|----------------|
+| cleanup        |
+| configfs       |
+| configuration  |
+| docker_compose |
+| facts          |
+| firewall       |
+| hostname       |
+| hosts          |
+| kernel_modules |
+| lynis          |
+| microcode      |
+| motd           |
+| operator       |
+| packages       |
+| podman         |
+| proxy          |
+| repository     |
+| resolvconf     |
+| services       |
+| sshconfig      |
+| sysctl         |
+| sysdig         |
+| systohc        |
+| trivy          |
 
 ## Author information
 
-This ansible collection was created by [Betacloud Solutions GmbH](https://www.betacloud-solutions.de).
+This Ansible collection was created by [Betacloud Solutions GmbH](https://www.betacloud-solutions.de).
