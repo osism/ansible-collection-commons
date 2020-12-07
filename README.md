@@ -16,6 +16,7 @@ The following Ansible roles are included in this collection.
 | lynis          |
 | microcode      |
 | motd           |
+| network        |
 | operator       |
 | packages       |
 | podman         |
