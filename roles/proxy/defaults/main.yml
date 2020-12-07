@@ -4,7 +4,7 @@ proxy_proxies:
   # https: http://proxy.tld:8080
   # ftp: http://proxy.tld:8080
 
-proxy_package_manager: yes
+proxy_package_manager: true
 
 proxy_no_proxy:
   - 127.0.0.1
