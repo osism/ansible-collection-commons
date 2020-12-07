@@ -1,0 +1,13 @@
+---
+- name: Install lldpd package
+  apt:
+    name: "{{ network_lldpd_package_name }}"
+    state: present
+  become: true
+
+- name: Start/enable lldpd service
+  service:
+    name: "{{ network_lldpd_service_name }}"
+    state: started
+    enabled: true
+  become: true
