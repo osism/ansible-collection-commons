@@ -33,8 +33,8 @@
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
     key_file: "{{ configuration_git_private_key_file }}"
-    accept_hostkey: yes
-    force: yes
+    accept_hostkey: true
+    force: true
   when: configuration_git_protocol == 'ssh'
 
 - name: git - clone configuration repository (without auth)
@@ -42,7 +42,7 @@
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
-    accept_hostkey: yes
-    force: yes
+    accept_hostkey: true
+    force: true
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key|length)) or
         configuration_git_protocol != 'ssh'
