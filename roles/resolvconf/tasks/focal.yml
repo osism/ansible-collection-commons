@@ -4,7 +4,7 @@
   service:
     name: resolvconf
     state: stopped
-    enabled: no
+    enabled: false
   register: result
   failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
 
@@ -25,7 +25,7 @@
   synchronize:
     src: "/etc/resolv.conf"
     dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
-    archive: yes
+    archive: true
   delegate_to: "{{ inventory_hostname }}"
   when: resolvconf_file.stat.islnk is defined and not resolvconf_file.stat.islnk
 
@@ -47,7 +47,7 @@
   when: resolved_conf.changed  # noqa 503
   systemd:
     name: systemd-resolved
-    daemon_reload: yes
+    daemon_reload: true
     state: restarted
 
 - name: Link /etc/resolv.conf to /run/systemd/resolve/stub-resolv.conf
@@ -56,5 +56,5 @@
     src: /run/systemd/resolve/stub-resolv.conf
     dest: /etc/resolv.conf
     state: link
-    force: yes
+    force: true
     mode: 0644

@@ -23,7 +23,7 @@
   service:
     name: resolvconf
     state: started
-    enabled: yes
+    enabled: true
   ignore_errors: true
 
 - name: Update resolvconf file
