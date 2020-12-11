@@ -8,7 +8,7 @@ The following Ansible roles are included in this collection.
 | configfs       |                                                                                                                         |
 | configuration  |                                                                                                                         |
 | docker_compose |                                                                                                                         |
-| facts          |                                                                                                                         |
+| facts          | ![Test role facts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20facts/badge.svg)         |
 | firewall       |                                                                                                                         |
 | hostname       |                                                                                                                         |
 | hosts          |                                                                                                                         |
