@@ -1,0 +1,27 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: molecule-${MOLECULE_JOB_ID:-0}
+    image: ${MOLECULE_DOCKER_IMAGE:-ubuntu:20.04}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+  inventory:
+    group_vars:
+      all:
+        ansible_python_interpreter: /usr/bin/python3
+        molecule_role: ${MOLECULE_ROLE:-packages}
+scenario:
+  name: default
+  test_sequence:
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - verify
+    - destroy
