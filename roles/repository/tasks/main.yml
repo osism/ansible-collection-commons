@@ -30,5 +30,4 @@
 - name: Update package cache
   become: true
   apt:
-    update_cache: yes
     cache_valid_time: "{{ repository_cache_valid_time }}"
