@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MOLECULE_PACKAGE: microcode
+      MOLECULE_ROLE: microcode
 
     strategy:
       max-parallel: 4

@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MOLECULE_PACKAGE: facts
+      MOLECULE_ROLE: facts
 
     strategy:
       max-parallel: 4

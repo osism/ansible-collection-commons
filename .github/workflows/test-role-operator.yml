@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MOLECULE_PACKAGE: operator
+      MOLECULE_ROLE: operator
 
     strategy:
       max-parallel: 4
