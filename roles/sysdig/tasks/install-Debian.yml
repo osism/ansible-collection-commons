@@ -5,7 +5,6 @@
     name: apt-transport-https
     state: present
   when: sysdig_configure_repository|bool
-  changed_when: false
 
 - name: Add repository gpg key
   become: true
