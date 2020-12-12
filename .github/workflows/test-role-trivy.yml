@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MOLECULE_PACKAGE: trivy
+      MOLECULE_ROLE: trivy
 
     strategy:
       max-parallel: 4
