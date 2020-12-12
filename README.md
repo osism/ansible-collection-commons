@@ -28,4 +28,4 @@ The following Ansible roles are included in this collection.
 | sysctl         |                                                                                                                         |
 | sysdig         |                                                                                                                         |
 | systohc        |                                                                                                                         |
-| trivy          |                                                                                                                         |
+| trivy          | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)         |
