@@ -11,3 +11,14 @@
     state: present
   loop:
     - gpg
+
+# NOTE: this directory does not exist inside a Docker image
+
+- name: Create /etc/modules-load.d directory
+  become: true
+  file:
+    path: /etc/modules-load.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
