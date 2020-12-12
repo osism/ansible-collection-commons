@@ -17,7 +17,7 @@ The following Ansible roles are included in this collection.
 | microcode      | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)   |
 | motd           |                                                                                                                           |
 | network        |                                                                                                                           |
-| operator       |                                                                                                                           |
+| operator       | ![Test role operator](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20operator/badge.svg)     |
 | packages       | ![Test role packages](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20packages/badge.svg)     |
 | podman         |                                                                                                                           |
 | proxy          | ![Test role proxy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20proxy/badge.svg)           |
