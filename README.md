@@ -23,7 +23,7 @@ The following Ansible roles are included in this collection.
 | proxy          | ![Test role proxy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20proxy/badge.svg)                   |
 | repository     | ![Test role repository](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20repository/badge.svg)         |
 | resolvconf     | ![Test role resolvconf](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20resolvconf/badge.svg)         |
-| services       |                                                                                                                                   |
+| services       | ![Test role services](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20services/badge.svg)             |
 | sshconfig      | ![Test role sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sshconfig/badge.svg)           |
 | sysctl         | ![Test role sysctl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysctl/badge.svg)                 |
 | sysdig         |                                                                                                                                   |
