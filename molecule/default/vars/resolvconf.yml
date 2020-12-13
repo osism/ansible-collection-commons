@@ -1,0 +1,2 @@
+---
+resolvconf_file: /etc/resolv.conf.ansible

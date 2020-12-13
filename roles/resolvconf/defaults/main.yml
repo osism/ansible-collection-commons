@@ -6,7 +6,7 @@ resolvconf_nameserver:
   - 9.9.9.9
   - 149.112.112.112
 resolvconf_fallback_nameserver: []
-resolvconf_search: osism.local
+resolvconf_search: osism.test
 
 resolvconf_package: resolvconf
 
@@ -15,3 +15,4 @@ resolvconf_minimum_number_of_nameservers: 2
 resolvconf_always_validate_dnssec: allow-downgrade
 resolvconf_cache: true
 resolvconf_dns_over_tls: false
+resolvconf_file: /etc/resolv.conf
