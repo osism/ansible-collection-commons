@@ -25,7 +25,7 @@ The following Ansible roles are included in this collection.
 | resolvconf     |                                                                                                                                   |
 | services       |                                                                                                                                   |
 | sshconfig      | ![Test role sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sshconfig/badge.svg)           |
-| sysctl         |                                                                                                                                   |
+| sysctl         | ![Test role sysctl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysctl/badge.svg)                 |
 | sysdig         |                                                                                                                                   |
 | systohc        | ![Test role systohc](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20systohc/badge.svg)               |
 | trivy          | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                   |
