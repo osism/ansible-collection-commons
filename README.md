@@ -4,7 +4,7 @@ The following Ansible roles are included in this collection.
 
 | Rolename       | Test                                                                                                                              |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| cleanup        | ![Test role cleanup](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20cleanup/badge.svg) |
+| cleanup        | ![Test role cleanup](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20cleanup/badge.svg)               |
 | configfs       |                                                                                                                                   |
 | configuration  | ![Test role configuration](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configuration/badge.svg)   |
 | docker_compose | ![Test role docker_compose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20docker_compose/badge.svg) |
@@ -22,7 +22,7 @@ The following Ansible roles are included in this collection.
 | podman         | ![Test role podman](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20podman/badge.svg)                 |
 | proxy          | ![Test role proxy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20proxy/badge.svg)                   |
 | repository     | ![Test role repository](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20repository/badge.svg)         |
-| resolvconf     |                                                                                                                                   |
+| resolvconf     | ![Test role resolvconf](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20resolvconf/badge.svg)         |
 | services       |                                                                                                                                   |
 | sshconfig      | ![Test role sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sshconfig/badge.svg)           |
 | sysctl         | ![Test role sysctl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysctl/badge.svg)                 |

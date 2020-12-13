@@ -6,7 +6,13 @@ platforms:
     image: ${MOLECULE_DOCKER_IMAGE:-ubuntu:20.04}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
     privileged: true
+    command: /lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
 provisioner:
   name: ansible
   env:

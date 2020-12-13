@@ -15,19 +15,19 @@
     state: absent
   when: resolvconf_package|length
 
-- name: Retrieve resolv.conf file status
+- name: "Retrieve {{ resolvconf_file }} file status"
   stat:
-    path: /etc/resolv.conf
-  register: resolvconf_file
+    path: "{{ resolvconf_file }}"
+  register: stat_resolvconf_file
 
-- name: Archive existing /etc/resolv.conf file
+- name: "Archive existing {{ resolvconf_file }} file"
   become: true
   synchronize:
     src: "/etc/resolv.conf"
     dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
     archive: true
   delegate_to: "{{ inventory_hostname }}"
-  when: resolvconf_file.stat.islnk is defined and not resolvconf_file.stat.islnk
+  when: stat_resolvconf_file.stat.islnk is defined and not stat_resolvconf_file.stat.islnk
 
 - name: Copy configuration files
   become: true
@@ -50,11 +50,11 @@
     daemon_reload: true
     state: restarted
 
-- name: Link /etc/resolv.conf to /run/systemd/resolve/stub-resolv.conf
+- name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
   become: true
   file:
     src: /run/systemd/resolve/stub-resolv.conf
-    dest: /etc/resolv.conf
+    dest: "{{ resolvconf_file }}"
     state: link
     force: true
     mode: 0644
