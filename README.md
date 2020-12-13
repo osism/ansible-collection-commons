@@ -10,7 +10,7 @@ The following Ansible roles are included in this collection.
 | docker_compose | ![Test role docker_compose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20docker_compose/badge.svg) |
 | facts          | ![Test role facts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20facts/badge.svg)                   |
 | firewall       |                                                                                                                                   |
-| hostname       |                                                                                                                                   |
+| hostname       | ![Test role hostname](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hostname/badge.svg)             |
 | hosts          |                                                                                                                                   |
 | kernel_modules |                                                                                                                                   |
 | lynis          |                                                                                                                                   |
