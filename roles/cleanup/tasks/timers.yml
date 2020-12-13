@@ -2,9 +2,10 @@
 - name: Disable apt-daily timers
   become: true
   systemd:
-    name: "{{ item }}"
+    name: "{{ item }}.timer"
     state: stopped
     enabled: false
+  when: item + ".timer" in services
   loop:
-    - apt-daily-upgrade.timer
-    - apt-daily.timer
+    - apt-daily-upgrade
+    - apt-daily
