@@ -4,7 +4,7 @@ The following Ansible roles are included in this collection.
 
 | Rolename       | Test                                                                                                                              |
 |----------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| cleanup        |                                                                                                                                   |
+| cleanup        | ![Test role cleanup](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20cleanup/badge.svg) |
 | configfs       |                                                                                                                                   |
 | configuration  | ![Test role configuration](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configuration/badge.svg)   |
 | docker_compose | ![Test role docker_compose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20docker_compose/badge.svg) |

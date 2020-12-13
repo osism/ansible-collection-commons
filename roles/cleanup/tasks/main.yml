@@ -1,4 +1,7 @@
 ---
+- name: Collect facts about services
+  scan_services:
+
 - name: Include timer tasks
   include_tasks: timers.yml
 
