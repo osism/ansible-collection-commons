@@ -9,7 +9,7 @@ podman_package_name: podman
 ##########################
 # repository
 
-podman_configure_repository: no
+podman_configure_repository: true
 
 podman_debian_repository_arch: amd64
 podman_debian_repository_key: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_{{ ansible_distribution_version }}/Release.key"
