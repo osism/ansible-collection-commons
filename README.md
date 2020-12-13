@@ -27,5 +27,5 @@ The following Ansible roles are included in this collection.
 | sshconfig      |                                                                                                                                 |
 | sysctl         |                                                                                                                                 |
 | sysdig         |                                                                                                                                 |
-| systohc        |                                                                                                                                 |
+| systohc        | ![Test role systohc](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20systohc/badge.svg)             |
 | trivy          | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                 |
