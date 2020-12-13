@@ -19,7 +19,7 @@ The following Ansible roles are included in this collection.
 | network        |                                                                                                                                 |
 | operator       | ![Test role operator](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20operator/badge.svg)           |
 | packages       | ![Test role packages](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20packages/badge.svg)           |
-| podman         |                                                                                                                                 |
+| podman         | ![Test role podman](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20podman/badge.svg)               |
 | proxy          | ![Test role proxy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20proxy/badge.svg)                 |
 | repository     | ![Test role repository](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20repository/badge.svg)       |
 | resolvconf     |                                                                                                                                 |
