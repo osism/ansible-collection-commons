@@ -14,6 +14,7 @@
     name: motd-news.timer
     state: stopped
     enabled: false
+  when: "'motd-news.timer' in services"
 
 - name: Stop motd-news service
   become: true

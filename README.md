@@ -15,7 +15,7 @@ The following Ansible roles are included in this collection.
 | kernel_modules |                                                                                                                                 |
 | lynis          |                                                                                                                                 |
 | microcode      | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)         |
-| motd           |                                                                                                                                 |
+| motd           | ![Test role motd](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20motd/badge.svg)                   |
 | network        |                                                                                                                                 |
 | operator       | ![Test role operator](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20operator/badge.svg)           |
 | packages       | ![Test role packages](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20packages/badge.svg)           |
