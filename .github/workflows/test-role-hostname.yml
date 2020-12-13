@@ -4,14 +4,16 @@ name: Test role hostname
 "on":
   push:
     paths:
-      - 'roles/hostname/**'
-      - 'molecule/hostname/**'
       - '.github/workflows/test-role-hostname.yml'
+      - 'molecule/default/*'
+      - 'molecule/hostname/**'
+      - 'roles/hostname/**'
   pull_request:
     paths:
-      - 'roles/hostname/**'
-      - 'molecule/hostname/**'
       - '.github/workflows/test-role-hostname.yml'
+      - 'molecule/default/*'
+      - 'molecule/hostname/**'
+      - 'roles/hostname/**'
 
 jobs:
   test-role-hostname:

@@ -4,14 +4,16 @@ name: Test role motd
 "on":
   push:
     paths:
-      - 'roles/motd/**'
-      - 'molecule/motd/**'
       - '.github/workflows/test-role-motd.yml'
+      - 'molecule/default/*'
+      - 'molecule/motd/**'
+      - 'roles/motd/**'
   pull_request:
     paths:
-      - 'roles/motd/**'
-      - 'molecule/motd/**'
       - '.github/workflows/test-role-motd.yml'
+      - 'molecule/default/*'
+      - 'molecule/motd/**'
+      - 'roles/motd/**'
 
 jobs:
   test-role-motd:

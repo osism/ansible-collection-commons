@@ -4,14 +4,16 @@ name: Test role configuration
 "on":
   push:
     paths:
-      - 'roles/configuration/**'
-      - 'molecule/configuration/**'
       - '.github/workflows/test-role-configuration.yml'
+      - 'molecule/configuration/**'
+      - 'molecule/default/*'
+      - 'roles/configuration/**'
   pull_request:
     paths:
-      - 'roles/configuration/**'
-      - 'molecule/configuration/**'
       - '.github/workflows/test-role-configuration.yml'
+      - 'molecule/configuration/**'
+      - 'molecule/default/*'
+      - 'roles/configuration/**'
 
 jobs:
   test-role-configuration:

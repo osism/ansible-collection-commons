@@ -4,14 +4,16 @@ name: Test role repository
 "on":
   push:
     paths:
-      - 'roles/repository/**'
-      - 'molecule/repository/**'
       - '.github/workflows/test-role-repository.yml'
+      - 'molecule/default/*'
+      - 'molecule/repository/**'
+      - 'roles/repository/**'
   pull_request:
     paths:
-      - 'roles/repository/**'
-      - 'molecule/repository/**'
       - '.github/workflows/test-role-repository.yml'
+      - 'molecule/default/*'
+      - 'molecule/repository/**'
+      - 'roles/repository/**'
 
 jobs:
   test-role-repository:

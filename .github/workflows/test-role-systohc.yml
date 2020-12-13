@@ -4,14 +4,16 @@ name: Test role systohc
 "on":
   push:
     paths:
-      - 'roles/systohc/**'
-      - 'molecule/systohc/**'
       - '.github/workflows/test-role-systohc.yml'
+      - 'molecule/default/*'
+      - 'molecule/systohc/**'
+      - 'roles/systohc/**'
   pull_request:
     paths:
-      - 'roles/systohc/**'
-      - 'molecule/systohc/**'
       - '.github/workflows/test-role-systohc.yml'
+      - 'molecule/default/*'
+      - 'molecule/systohc/**'
+      - 'roles/systohc/**'
 
 jobs:
   test-role-systohc:

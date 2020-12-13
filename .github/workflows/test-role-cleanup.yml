@@ -4,14 +4,16 @@ name: Test role cleanup
 "on":
   push:
     paths:
-      - 'roles/cleanup/**'
-      - 'molecule/cleanup/**'
       - '.github/workflows/test-role-cleanup.yml'
+      - 'molecule/cleanup/**'
+      - 'molecule/default/*'
+      - 'roles/cleanup/**'
   pull_request:
     paths:
-      - 'roles/cleanup/**'
-      - 'molecule/cleanup/**'
       - '.github/workflows/test-role-cleanup.yml'
+      - 'molecule/cleanup/**'
+      - 'molecule/default/*'
+      - 'roles/cleanup/**'
 
 jobs:
   test-role-cleanup:

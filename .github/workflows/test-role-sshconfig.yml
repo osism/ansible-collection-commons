@@ -4,14 +4,16 @@ name: Test role sshconfig
 "on":
   push:
     paths:
-      - 'roles/sshconfig/**'
-      - 'molecule/sshconfig/**'
       - '.github/workflows/test-role-sshconfig.yml'
+      - 'molecule/default/*'
+      - 'molecule/sshconfig/**'
+      - 'roles/sshconfig/**'
   pull_request:
     paths:
-      - 'roles/sshconfig/**'
-      - 'molecule/sshconfig/**'
       - '.github/workflows/test-role-sshconfig.yml'
+      - 'molecule/default/*'
+      - 'molecule/sshconfig/**'
+      - 'roles/sshconfig/**'
 
 jobs:
   test-role-sshconfig:

@@ -4,14 +4,16 @@ name: Test role docker_compose
 "on":
   push:
     paths:
-      - 'roles/docker_compose/**'
-      - 'molecule/docker_compose/**'
       - '.github/workflows/test-role-docker_compose.yml'
+      - 'molecule/default/*'
+      - 'molecule/docker_compose/**'
+      - 'roles/docker_compose/**'
   pull_request:
     paths:
-      - 'roles/docker_compose/**'
-      - 'molecule/docker_compose/**'
       - '.github/workflows/test-role-docker_compose.yml'
+      - 'molecule/default/*'
+      - 'molecule/docker_compose/**'
+      - 'roles/docker_compose/**'
 
 jobs:
   test-role-docker_compose:

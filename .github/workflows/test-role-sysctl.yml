@@ -4,14 +4,16 @@ name: Test role sysctl
 "on":
   push:
     paths:
-      - 'roles/sysctl/**'
-      - 'molecule/sysctl/**'
       - '.github/workflows/test-role-sysctl.yml'
+      - 'molecule/default/*'
+      - 'molecule/sysctl/**'
+      - 'roles/sysctl/**'
   pull_request:
     paths:
-      - 'roles/sysctl/**'
-      - 'molecule/sysctl/**'
       - '.github/workflows/test-role-sysctl.yml'
+      - 'molecule/default/*'
+      - 'molecule/sysctl/**'
+      - 'roles/sysctl/**'
 
 jobs:
   test-role-sysctl:
