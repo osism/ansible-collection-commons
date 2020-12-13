@@ -10,6 +10,7 @@ platforms:
 provisioner:
   name: ansible
   env:
+    ANSIBLE_LIBRARY: ../../plugins
     ANSIBLE_ROLES_PATH: ../../roles
   inventory:
     group_vars:
