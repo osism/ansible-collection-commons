@@ -4,14 +4,16 @@ name: Test role proxy
 "on":
   push:
     paths:
-      - 'roles/proxy/**'
-      - 'molecule/proxy/**'
       - '.github/workflows/test-role-proxy.yml'
+      - 'molecule/default/*'
+      - 'molecule/proxy/**'
+      - 'roles/proxy/**'
   pull_request:
     paths:
-      - 'roles/proxy/**'
-      - 'molecule/proxy/**'
       - '.github/workflows/test-role-proxy.yml'
+      - 'molecule/default/*'
+      - 'molecule/proxy/**'
+      - 'roles/proxy/**'
 
 jobs:
   test-role-proxy:

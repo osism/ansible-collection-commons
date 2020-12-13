@@ -4,14 +4,16 @@ name: Test role podman
 "on":
   push:
     paths:
-      - 'roles/podman/**'
-      - 'molecule/podman/**'
       - '.github/workflows/test-role-podman.yml'
+      - 'molecule/default/*'
+      - 'molecule/podman/**'
+      - 'roles/podman/**'
   pull_request:
     paths:
-      - 'roles/podman/**'
-      - 'molecule/podman/**'
       - '.github/workflows/test-role-podman.yml'
+      - 'molecule/default/*'
+      - 'molecule/podman/**'
+      - 'roles/podman/**'
 
 jobs:
   test-role-podman:

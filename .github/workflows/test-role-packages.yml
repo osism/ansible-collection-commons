@@ -4,14 +4,16 @@ name: Test role packages
 "on":
   push:
     paths:
-      - 'roles/packages/**'
-      - 'molecule/packages/**'
       - '.github/workflows/test-role-packages.yml'
+      - 'molecule/default/*'
+      - 'molecule/packages/**'
+      - 'roles/packages/**'
   pull_request:
     paths:
-      - 'roles/packages/**'
-      - 'molecule/packages/**'
       - '.github/workflows/test-role-packages.yml'
+      - 'molecule/default/*'
+      - 'molecule/packages/**'
+      - 'roles/packages/**'
 
 jobs:
   test-role-packages:

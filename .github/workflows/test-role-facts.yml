@@ -4,14 +4,16 @@ name: Test role facts
 "on":
   push:
     paths:
-      - 'roles/facts/**'
-      - 'molecule/facts/**'
       - '.github/workflows/test-role-facts.yml'
+      - 'molecule/default/*'
+      - 'molecule/facts/**'
+      - 'roles/facts/**'
   pull_request:
     paths:
-      - 'roles/facts/**'
-      - 'molecule/facts/**'
       - '.github/workflows/test-role-facts.yml'
+      - 'molecule/default/*'
+      - 'molecule/facts/**'
+      - 'roles/facts/**'
 
 jobs:
   test-role-facts:

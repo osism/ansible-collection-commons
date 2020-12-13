@@ -4,14 +4,16 @@ name: Test role trivy
 "on":
   push:
     paths:
-      - 'roles/trivy/**'
-      - 'molecule/trivy/**'
       - '.github/workflows/test-role-trivy.yml'
+      - 'molecule/default/*'
+      - 'molecule/trivy/**'
+      - 'roles/trivy/**'
   pull_request:
     paths:
-      - 'roles/trivy/**'
-      - 'molecule/trivy/**'
       - '.github/workflows/test-role-trivy.yml'
+      - 'molecule/default/*'
+      - 'molecule/trivy/**'
+      - 'roles/trivy/**'
 
 jobs:
   test-role-trivy:

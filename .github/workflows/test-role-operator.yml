@@ -4,14 +4,16 @@ name: Test role operator
 "on":
   push:
     paths:
-      - 'roles/operator/**'
-      - 'molecule/operator/**'
       - '.github/workflows/test-role-operator.yml'
+      - 'molecule/default/*'
+      - 'molecule/operator/**'
+      - 'roles/operator/**'
   pull_request:
     paths:
-      - 'roles/operator/**'
-      - 'molecule/operator/**'
       - '.github/workflows/test-role-operator.yml'
+      - 'molecule/default/*'
+      - 'molecule/operator/**'
+      - 'roles/operator/**'
 
 jobs:
   test-role-operator:

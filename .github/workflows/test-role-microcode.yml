@@ -4,14 +4,16 @@ name: Test role microcode
 "on":
   push:
     paths:
-      - 'roles/microcode/**'
-      - 'molecule/microcode/**'
       - '.github/workflows/test-role-microcode.yml'
+      - 'molecule/default/*'
+      - 'molecule/microcode/**'
+      - 'roles/microcode/**'
   pull_request:
     paths:
-      - 'roles/microcode/**'
-      - 'molecule/microcode/**'
       - '.github/workflows/test-role-microcode.yml'
+      - 'molecule/default/*'
+      - 'molecule/microcode/**'
+      - 'roles/microcode/**'
 
 jobs:
   test-role-microcode:
