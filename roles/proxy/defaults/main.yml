@@ -6,8 +6,10 @@ proxy_proxies:
 
 proxy_package_manager: true
 
-proxy_no_proxy:
+proxy_no_proxy_default:
   - 127.0.0.1
   - localhost
+proxy_no_proxy_extra: []
+proxy_no_proxy: "{{ proxy_no_proxy_default + proxy_no_proxy_extra }}"
 
 proxy_apt_conf_path: /etc/apt/apt.conf.d/01proxy
