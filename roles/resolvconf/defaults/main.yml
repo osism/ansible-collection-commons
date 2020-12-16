@@ -2,9 +2,12 @@
 ##########################
 # resolvconf
 
-resolvconf_nameserver:
+resolvconf_nameserver_default:
   - 9.9.9.9
   - 149.112.112.112
+resolvconf_nameserver_extra: []
+resolvconf_nameserver: "{{ resolvconf_nameserver_default + resolvconf_nameserver_extra }}"
+
 resolvconf_fallback_nameserver: []
 resolvconf_search: osism.test
 

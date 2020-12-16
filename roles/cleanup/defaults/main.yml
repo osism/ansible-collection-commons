@@ -1,5 +1,5 @@
 ---
-cleanup_packages:
+cleanup_packages_default:
   - apport
   - apport-symptoms
   - libvirt-bin
@@ -9,5 +9,9 @@ cleanup_packages:
   - python3-apport
   - snapd
   - ubuntu-server
+cleanup_packages_extra: []
+cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra }}"
 
-cleanup_services: []
+cleanup_services_default: []
+cleanup_services_extra: []
+cleanup_services: "{{ cleanup_services_default + cleanup_services_extra }}"
