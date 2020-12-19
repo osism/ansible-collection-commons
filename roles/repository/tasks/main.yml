@@ -24,7 +24,7 @@
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
   notify: Force update of package cache
 
 - name: Update package cache

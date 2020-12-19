@@ -19,7 +19,7 @@
     repo: "{{ lynis_debian_repository }}"
     state: present
     filename: lynis
-    update_cache: yes
+    update_cache: true
     mode: 0600
   when: lynis_configure_repository|bool
 

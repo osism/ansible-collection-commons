@@ -13,7 +13,7 @@ hosts_group_name: all
 hosts_type: block
 
 hosts_file: /etc/hosts
-hosts_file_backup: yes
-hosts_file_reset: no
+hosts_file_backup: true
+hosts_file_reset: false
 
 hosts_additional_entries: {}
