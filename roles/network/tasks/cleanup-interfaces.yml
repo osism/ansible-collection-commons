@@ -1,7 +1,7 @@
 ---
 - name: List existing configuration files
   command: "find {{ network_interface_path }} -type f"
-  changed_when: no
+  changed_when: false
   register: network_existing_files
 
 # NOTE: depending on change the result stores dest or path

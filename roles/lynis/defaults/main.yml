@@ -7,7 +7,7 @@ lynis_package_name: lynis
 ##########################
 # repository
 
-lynis_configure_repository: no
+lynis_configure_repository: true
 
 lynis_debian_repository_arch: amd64
 lynis_debian_repository_key: https://packages.cisofy.com/keys/cisofy-software-public.key

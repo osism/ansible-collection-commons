@@ -18,7 +18,7 @@
     repo: "{{ sysdig_debian_repository }}"
     state: present
     filename: sysdig
-    update_cache: yes
+    update_cache: true
     mode: 0600
   when: sysdig_configure_repository|bool
 

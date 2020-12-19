@@ -19,7 +19,7 @@
   user:
     name: "{{ operator_user }}"
     groups: "{{ item }}"
-    append: yes
+    append: true
   loop: "{{ operator_groups }}"
 
 - name: Copy operator user sudoers file
@@ -49,7 +49,7 @@
   lineinfile:
     dest: "{{ operator_home.stdout }}/.bashrc"
     line: "{{ item }}"
-    create: yes
+    create: true
     mode: 0640
   loop:
     - "export LANGUAGE=en_US.UTF-8"
