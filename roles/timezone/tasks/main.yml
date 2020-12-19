@@ -1,5 +1,6 @@
 ---
 - name: "Set timezone to {{ timezone_name }}"
+  become: true
   community.general.timezone:
     hwclock: "{{ timezone_hwclock }}"
     name: "{{ timezone_name }}"
