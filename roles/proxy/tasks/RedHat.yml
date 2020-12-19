@@ -7,7 +7,6 @@
     option: enabled
     value: 0
     mode: 0644
-  when: proxy_proxies != {}
 
 - name: Configure proxy parameters for yum
   become: true
@@ -17,4 +16,3 @@
     option: proxy
     value: "{{ proxy_proxies['https']default(proxy_proxies['http']) }}"
     mode: 0644
-  when: proxy_proxies != {}
