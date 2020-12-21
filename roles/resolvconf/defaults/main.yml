@@ -11,8 +11,6 @@ resolvconf_nameserver: "{{ resolvconf_nameserver_default + resolvconf_nameserver
 resolvconf_fallback_nameserver: []
 resolvconf_search: osism.test
 
-resolvconf_package: resolvconf
-
 resolvconf_minimum_number_of_nameservers: 2
 
 resolvconf_always_validate_dnssec: allow-downgrade

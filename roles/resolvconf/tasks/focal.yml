@@ -8,13 +8,6 @@
   register: result
   failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
 
-- name: Remove resolvconf package
-  become: true
-  package:
-    name: "{{ resolvconf_package }}"
-    state: absent
-  when: resolvconf_package|length
-
 - name: "Retrieve {{ resolvconf_file }} file status"
   stat:
     path: "{{ resolvconf_file }}"
