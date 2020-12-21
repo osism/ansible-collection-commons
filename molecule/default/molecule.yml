@@ -1,4 +1,6 @@
 ---
+dependency:
+  name: galaxy
 driver:
   name: docker
 platforms:
@@ -26,6 +28,7 @@ provisioner:
 scenario:
   name: default
   test_sequence:
+    - dependency
     - create
     - prepare
     - converge

@@ -1,0 +1,6 @@
+---
+state_name: osism
+state_section: status
+
+state_option: deployed
+state_value: false
