@@ -10,7 +10,6 @@ client = docker.APIClient(base_url='unix://var/run/docker.sock')
 containers = []
 for container in client.containers():
     containers.append({
-        "hostname": socket.gethostname(),
         "name": container['Names'][0],
         "image": container['Image'],
         "state": container['State'],
