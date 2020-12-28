@@ -1,4 +1,4 @@
-{% set docker_compose_dir = '/usr/local/bin/' if docker_compose_install_type in ['file', 'url'] else '/usr/bin/' %}
+{% set docker_compose_dir = '/usr/local/bin' if docker_compose_install_type in ['file', 'url'] else '/usr/bin' %}
 [Unit]
 Description=%i service managed by Docker Compose
 Requires=docker.service
