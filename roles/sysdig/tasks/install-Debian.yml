@@ -1,4 +1,7 @@
 ---
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
+
 - name: Install apt-transport-https package
   become: true
   apt:
@@ -31,6 +34,9 @@
   debug:
     msg: "Reboot of {{ inventory_hostname }} required to get the latest kernel running"
   when: result.stat.islnk is defined
+
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
 
 - name: Install sysdig package
   become: true

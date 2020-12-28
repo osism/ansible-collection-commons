@@ -19,9 +19,12 @@
   when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key|length)
   no_log: true
 
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
+
 - name: git - install required packages
   become: true
-  package:
+  apt:
     name: "{{ item }}"
     state: present
   with_items:

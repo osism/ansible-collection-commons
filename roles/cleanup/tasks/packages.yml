@@ -1,10 +1,16 @@
 ---
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
+
 - name: Cleanup installed packages
   become: true
   apt:
     name: "{{ cleanup_packages }}"
     state: absent
     purge: true
+
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
 
 - name: Uninstall unattended-upgrades package
   become: true
@@ -13,10 +19,16 @@
     state: absent
     purge: true
 
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
+
 - name: Remove useless packages from the cache
   become: true
   apt:
     autoclean: true
+
+- name: Wait for apt lock
+  shell: while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do sleep 5; done
 
 - name: Remove dependencies that are no longer required
   become: true
