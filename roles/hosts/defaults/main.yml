@@ -16,4 +16,6 @@ hosts_file: /etc/hosts
 hosts_file_backup: true
 hosts_file_reset: false
 
+hosts_ignore: []
+
 hosts_additional_entries: {}
