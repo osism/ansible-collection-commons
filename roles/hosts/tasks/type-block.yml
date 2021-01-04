@@ -24,6 +24,7 @@
     marker: "# {mark} osism.hosts managed block {{ item }}"
   loop: "{{ groups[hosts_group_name]|default([]) }}"
   when:
+    - item not in hosts_ignore
     - hostvars[item] is defined
     - hostvars[item]['management_interface'] is defined
     - hostvars[item]['ansible_' + hostvars[item]['management_interface']] is defined
