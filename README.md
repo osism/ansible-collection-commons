@@ -12,6 +12,7 @@ The following Ansible roles are included in this collection.
 | firewall       |                                                                                                                                   |
 | hostname       | ![Test role hostname](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hostname/badge.svg)             |
 | hosts          | ![Test role hosts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hosts/badge.svg)                   |
+| ipmitool       |                                                                                                                                   |
 | kernel_modules |                                                                                                                                   |
 | lynis          |                                                                                                                                   |
 | microcode      | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)           |

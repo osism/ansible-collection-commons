@@ -1,0 +1,17 @@
+---
+- name: Include distribution specific install tasks
+  include: "install-{{ ansible_os_family }}.yml"
+
+- name: Persist kernel modules via modules-load.d
+  become: true
+  template:
+    src: module-load.conf.j2
+    dest: "/etc/modules-load.d/{{ item }}.conf"
+  loop: "{{ ipmitool_kernel_modules }}"
+
+- name: Load required kernel modules
+  become: true
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ ipmitool_kernel_modules }}"
