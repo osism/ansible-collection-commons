@@ -1,0 +1,6 @@
+---
+ipmitool_package_name: ipmitool
+
+ipmitool_kernel_modules:
+  - ipmi_devintf
+  - ipmi_si
