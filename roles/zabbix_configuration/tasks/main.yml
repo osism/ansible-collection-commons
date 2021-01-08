@@ -1,0 +1,9 @@
+---
+- name: Create host gropus
+  local_action:
+    module: community.zabbix.zabbix_group
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_groups: "{{ zabbix_host_groups }}"
