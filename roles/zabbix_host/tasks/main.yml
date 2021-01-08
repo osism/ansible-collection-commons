@@ -1,4 +1,19 @@
 ---
+- name: Create host
+  local_action:
+    module: community.zabbix.zabbix_host
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    visible_name: "{{ zabbix_host_visible_name }}"
+    host_groups: "{{ zabbix_host_host_groups }}"
+    status: "{{ zabbix_host_status }}"
+    inventory_mode: "{{ zabbix_host_inventory_mode }}"
+    interfaces: "{{ zabbix_host_interfaces }}"
+    link_templates: "{{ zabbix_host_link_templates }}"
+
 - name: Create OSISM_API_INTERFACE_ADDRESS macro
   local_action:
     module: community.zabbix.zabbix_hostmacro
@@ -6,7 +21,6 @@
     login_user: "{{ zabbix_login_username }}"
     login_password: "{{ zabbix_login_password }}"
     state: present
-    host_name: "{{ inventory_hostname }}"
+    host_name: "{{ zabbix_host_host_name }}"
     macro_name: "{$OSISM_API_INTERFACE_ADDRESS}"
     macro_value: "{{ 'api' | kolla_address }}"
-  delegate_to: localhost
