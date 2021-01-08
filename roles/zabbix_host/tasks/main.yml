@@ -11,6 +11,7 @@
     host_groups: "{{ zabbix_host_host_groups }}"
     status: "{{ zabbix_host_status }}"
     inventory_mode: "{{ zabbix_host_inventory_mode }}"
+    inventory_zabbix: "{{ zabbix_host_inventory }}"
     interfaces: "{{ zabbix_host_interfaces }}"
     link_templates: "{{ zabbix_host_link_templates }}"
 
