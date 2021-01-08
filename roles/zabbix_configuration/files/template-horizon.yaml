@@ -1,0 +1,42 @@
+---
+zabbix_export:
+  version: '5.2'
+  date: '2021-01-08T16:20:05Z'
+  groups:
+    -
+      name: Templates
+  templates:
+    -
+      template: 'OpenStack Horizon'
+      name: 'OpenStack Horizon'
+      groups:
+        -
+          name: Templates
+      applications:
+        -
+          name: 'OpenStack Horizon'
+      items:
+        -
+          name: 'horizon: service on port 80/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},80]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Horizon'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'horizon: service is not listening on port 80 on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'horizon: process horizon-http'
+          key: 'proc.num[,,,horizon-http]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Horizon'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'horizon: process horizon-http is not running on {HOST.NAME}'
+              priority: HIGH
