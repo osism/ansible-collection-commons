@@ -1,0 +1,66 @@
+---
+zabbix_export:
+  version: '5.2'
+  date: '2021-01-08T16:14:09Z'
+  groups:
+    -
+      name: Templates
+  templates:
+    -
+      template: 'OpenStack Keystone'
+      name: 'OpenStack Keystone'
+      groups:
+        -
+          name: Templates
+      applications:
+        -
+          name: 'OpenStack Keystone'
+      items:
+        -
+          name: 'keystone: service on port 5000/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},5000]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'keystone: service is not listening on port 5000 on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'keystone: service on port 35357/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},35357]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'keystone: service is not listening on port 35357 on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'keystone: process keystone-admin'
+          key: 'proc.num[,,,keystone-ad]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'keystone: process keystone-admin is not running on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'keystone: process keystone-public'
+          key: 'proc.num[,,,keystone-pu]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'keystone: process keystone-public is not running on {HOST.NAME}'
+              priority: HIGH

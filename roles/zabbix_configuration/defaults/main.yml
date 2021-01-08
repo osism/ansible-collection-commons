@@ -21,5 +21,7 @@ zabbix_host_groups: "{{ zabbix_host_groups_default + zabbix_host_groups_extra }}
 
 zabbix_templates_default:
   - template-glance.yaml
+  - template-horizon.yaml
+  - template-keystone.yaml
 zabbix_templates_extra: []
 zabbix_templates: "{{ zabbix_templates_default + zabbix_templates_extra }}"
