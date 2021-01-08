@@ -30,7 +30,7 @@ zabbix_export:
               priority: HIGH
         -
           name: 'glance: process glance-api'
-          key: 'proc.num[python,,,glance-api]'
+          key: 'proc.num[,,,/var/lib/kolla/venv/bin/glance-api]'
           delay: '30'
           applications:
             -

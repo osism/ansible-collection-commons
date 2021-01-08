@@ -41,8 +41,8 @@ zabbix_export:
               name: 'keystone: service is not listening on port 35357 on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'keystone: process keystone-admin'
-          key: 'proc.num[,,,keystone-ad]'
+          name: 'keystone: process wsgi:keystone-admin'
+          key: 'proc.num[,,,.*wsgi:keystone-ad]'
           delay: '30'
           applications:
             -
@@ -50,11 +50,11 @@ zabbix_export:
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: process keystone-admin is not running on {HOST.NAME}'
+              name: 'keystone: process wsgi:keystone-admin is not running on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'keystone: process keystone-public'
-          key: 'proc.num[,,,keystone-pu]'
+          name: 'keystone: process wsgi:keystone-public'
+          key: 'proc.num[,,,.*wsgi:keystone-pu]'
           delay: '30'
           applications:
             -
@@ -62,5 +62,5 @@ zabbix_export:
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: process keystone-public is not running on {HOST.NAME}'
+              name: 'keystone: process wsgi:keystone-public is not running on {HOST.NAME}'
               priority: HIGH

@@ -29,8 +29,8 @@ zabbix_export:
               name: 'horizon: service is not listening on port 80 on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'horizon: process horizon-http'
-          key: 'proc.num[,,,horizon-http]'
+          name: 'horizon: process wsgi:horizon-http'
+          key: 'proc.num[,,,.*wsgi:horizon-htt]'
           delay: '30'
           applications:
             -
@@ -38,5 +38,5 @@ zabbix_export:
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'horizon: process horizon-http is not running on {HOST.NAME}'
+              name: 'horizon: process wsgi:horizon-http is not running on {HOST.NAME}'
               priority: HIGH
