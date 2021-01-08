@@ -1,0 +1,12 @@
+---
+- name: Create OSISM_API_INTERFACE_ADDRESS macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ inventory_hostname }}"
+    macro_name: "{$OSISM_API_INTERFACE_ADDRESS}"
+    macro_value: "{{ 'api' | kolla_address }}"
+  delegate_to: localhost
