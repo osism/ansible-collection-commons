@@ -1,4 +1,28 @@
 ---
+- name: Set link_templates fact
+  set_fact:
+    link_templates: "{{ zabbix_host_link_templates }}"
+
+- name: Add 'Docker' template
+  set_fact:
+    link_templates: "{{ link_templates + ['Docker'] }}"
+  when: "'docker' in group_names"
+
+- name: Add 'OpenStack Glance' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OpenStack Glance'] }}"
+  when: "'glance-api' in group_names"
+
+- name: Add 'OpenStack Horizon' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OpenStack Horizon'] }}"
+  when: "'horizon' in group_names"
+
+- name: Add 'OpenStack Keystone' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OpenStack Keystone'] }}"
+  when: "'keystone' in group_names"
+
 - name: Create host
   local_action:
     module: community.zabbix.zabbix_host
@@ -13,7 +37,7 @@
     inventory_mode: "{{ zabbix_host_inventory_mode }}"
     inventory_zabbix: "{{ zabbix_host_inventory }}"
     interfaces: "{{ zabbix_host_interfaces }}"
-    link_templates: "{{ zabbix_host_link_templates }}"
+    link_templates: "{{ link_templates }}"
 
 - name: Create OSISM_API_INTERFACE_ADDRESS macro
   local_action:

@@ -23,6 +23,8 @@ zabbix_host_host_groups: "{{ zabbix_host_host_groups_default + zabbix_host_host_
 
 zabbix_host_link_templates_default:
   - Linux by Zabbix agent
+  - ICMP Ping
+  - SSH Service
 zabbix_host_link_templates_extra: []
 zabbix_host_link_templates: "{{ zabbix_host_link_templates_default + zabbix_host_link_templates_extra }}"
 
