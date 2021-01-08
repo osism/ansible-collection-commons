@@ -1,0 +1,18 @@
+---
+zabbix_server_host: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}"
+zabbix_server_port: 10051
+zabbix_server_url: "http://{{ zabbix_server_host }}:{{ zabbix_server_port }}"
+
+zabbix_login_username: Admin
+zabbix_login_password: zabbix
+
+zabbix_host_groups:
+  - ceph-control
+  - ceph-resource
+  - compute
+  - control
+  - generic
+  - linux
+  - manager
+  - monitoring
+  - network
