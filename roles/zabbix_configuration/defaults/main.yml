@@ -24,5 +24,6 @@ zabbix_templates_default:
   - template-horizon.yaml
   - template-keystone.yaml
   - template-mariadb.yaml
+  - template-rabbitmq.yaml
 zabbix_templates_extra: []
 zabbix_templates: "{{ zabbix_templates_default + zabbix_templates_extra }}"

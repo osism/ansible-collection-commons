@@ -28,9 +28,9 @@
     link_templates: "{{ link_templates + ['OSISM - MariaDB'] }}"
   when: "'mariadb' in group_names"
 
-- name: Add 'RabbitMQ node by Zabbix agent' template
+- name: Add 'OSISM - RabbitMQ' template
   set_fact:
-    link_templates: "{{ link_templates + ['RabbitMQ node by Zabbix agent'] }}"
+    link_templates: "{{ link_templates + ['OSISM - RabbitMQ'] }}"
   when: "'rabbitmq' in group_names"
 
 - name: Create host

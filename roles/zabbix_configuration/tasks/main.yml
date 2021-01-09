@@ -11,6 +11,7 @@
   loop: "{{ zabbix_host_groups }}"
 
 - name: Create templates
+  ignore_errors: true
   local_action:
     module: community.zabbix.zabbix_template
     server_url: "{{ zabbix_server_url }}"
