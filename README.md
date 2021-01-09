@@ -33,4 +33,5 @@ The following Ansible roles are included in this collection.
 | timezone             | ![Test role timezone](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20timezone/badge.svg)             |
 | trivy                | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                   |
 | zabbix_configuration |                                                                                                                                   |
+| zabbix_cluster       |                                                                                                                                   |
 | zabbix_host          |                                                                                                                                   |
