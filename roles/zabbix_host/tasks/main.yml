@@ -23,9 +23,9 @@
     link_templates: "{{ link_templates + ['OSISM - OpenStack - Keystone'] }}"
   when: "'keystone' in group_names"
 
-- name: Add 'OSISM - OpenStack - MariaDB' template
+- name: Add 'OSISM - MariaDB' template
   set_fact:
-    link_templates: "{{ link_templates + ['OSISM - OpenStack - MariaDB'] }}"
+    link_templates: "{{ link_templates + ['OSISM - MariaDB'] }}"
   when: "'mariadb' in group_names"
 
 - name: Add 'RabbitMQ node by Zabbix agent' template
