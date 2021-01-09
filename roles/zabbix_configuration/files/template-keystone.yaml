@@ -7,60 +7,60 @@ zabbix_export:
       name: Templates
   templates:
     -
-      template: 'OpenStack Keystone'
-      name: 'OpenStack Keystone'
+      template: 'OSISM - OpenStack - Keystone'
+      name: 'OSISM - OpenStack - Keystone'
       groups:
         -
           name: Templates
       applications:
         -
-          name: 'OpenStack Keystone'
+          name: 'OpenStack - Keystone'
       items:
         -
-          name: 'keystone: service on port 5000/tcp'
+          name: 'Keystone: Service on port 5000/tcp'
           key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},5000]'
           delay: '30'
           applications:
             -
-              name: 'OpenStack Keystone'
+              name: 'OpenStack - Keystone'
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: service is not listening on port 5000 on {HOST.NAME}'
+              name: 'Keystone: Service is not listening on port 5000 on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'keystone: service on port 35357/tcp'
+          name: 'Keystone: Service on port 35357/tcp'
           key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},35357]'
           delay: '30'
           applications:
             -
-              name: 'OpenStack Keystone'
+              name: 'OpenStack - Keystone'
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: service is not listening on port 35357 on {HOST.NAME}'
+              name: 'Keystone: Service is not listening on port 35357 on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'keystone: process wsgi:keystone-admin'
+          name: 'Keystone: Process wsgi:keystone-admin'
           key: 'proc.num[,,,.*wsgi:keystone-ad]'
           delay: '30'
           applications:
             -
-              name: 'OpenStack Keystone'
+              name: 'OpenStack - Keystone'
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: process wsgi:keystone-admin is not running on {HOST.NAME}'
+              name: 'Keystone: Process wsgi:keystone-admin is not running on {HOST.NAME}'
               priority: HIGH
         -
-          name: 'keystone: process wsgi:keystone-public'
+          name: 'Keystone: Process wsgi:keystone-public'
           key: 'proc.num[,,,.*wsgi:keystone-pu]'
           delay: '30'
           applications:
             -
-              name: 'OpenStack Keystone'
+              name: 'OpenStack - Keystone'
           triggers:
             -
               expression: '{last(0)}=0'
-              name: 'keystone: process wsgi:keystone-public is not running on {HOST.NAME}'
+              name: 'Keystone: Process wsgi:keystone-public is not running on {HOST.NAME}'
               priority: HIGH
