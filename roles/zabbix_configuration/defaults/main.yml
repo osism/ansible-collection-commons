@@ -9,8 +9,10 @@ zabbix_login_password: zabbix
 zabbix_host_groups_default:
   - ceph-control
   - ceph-resource
+  - cluster
   - compute
   - control
+  - elasticsearch
   - generic
   - linux
   - manager

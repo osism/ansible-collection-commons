@@ -23,6 +23,6 @@ zabbix_cluster_link_templates_extra: []
 zabbix_cluster_link_templates: "{{ zabbix_cluster_link_templates_default + zabbix_cluster_link_templates_extra }}"
 
 zabbix_cluster_host_groups_default:
-  - Cluster
+  - cluster
 zabbix_cluster_host_groups_extra: []
 zabbix_cluster_host_groups: "{{ zabbix_cluster_host_groups_default + zabbix_cluster_host_groups_extra }}"
