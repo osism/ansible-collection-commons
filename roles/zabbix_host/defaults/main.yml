@@ -60,3 +60,8 @@ zabbix_host_mariadb_password: zabbix
 
 zabbix_host_mariadb_host: "{{ 'api' | kolla_address }}"
 zabbix_host_mariadb_port: 3306
+
+# memcached
+
+zabbix_host_memcached_host: "{{ 'api' | kolla_address }}"
+zabbix_host_memcached_port: 11211

@@ -33,6 +33,11 @@
     link_templates: "{{ link_templates + ['OSISM - RabbitMQ'] }}"
   when: "'rabbitmq' in group_names"
 
+- name: Add 'Memcached' template
+  set_fact:
+    link_templates: "{{ link_templates + ['Memcached'] }}"
+  when: "'memcached' in group_names"
+
 - name: Create host
   local_action:
     module: community.zabbix.zabbix_host
@@ -167,3 +172,15 @@
     macro_name: "{$MYSQL_DSN}"
     macro_value: "{{ zabbix_host_mariadb_host }}:{{ zabbix_host_mariadb_port }}"
   when: "'mariadb' in group_names"
+
+- name: Create MEMCACHED.CONN.URI macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$MEMCACHED.CONN.URI}"
+    macro_value: "{{ zabbix_host_memcached_host }}:{{ zabbix_host_memcached_port }}"
+  when: "'memcached' in group_names"
