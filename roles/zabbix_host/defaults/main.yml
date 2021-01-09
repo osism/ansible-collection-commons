@@ -44,3 +44,19 @@ zabbix_host_inventory_default:
   vendor: "{{ ansible_system_vendor }}"
 zabbix_host_inventory_extra: {}
 zabbix_host_inventory: "{{ zabbix_host_inventory_default | combine(zabbix_host_inventory_extra) }}"
+
+# rabbitmq
+
+zabbix_host_rabbitmq_username: monitoring
+zabbix_host_rabbitmq_password: zabbix
+
+zabbix_host_rabbitmq_host: "{{ 'api' | kolla_address }}"
+zabbix_host_rabbitmq_port: 15672
+
+# mariadb
+
+zabbix_host_mariadb_username: monitoring
+zabbix_host_mariadb_password: zabbix
+
+zabbix_host_mariadb_host: "{{ 'api' | kolla_address }}"
+zabbix_host_mariadb_port: 3306

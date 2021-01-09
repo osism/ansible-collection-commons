@@ -23,5 +23,6 @@ zabbix_templates_default:
   - template-glance.yaml
   - template-horizon.yaml
   - template-keystone.yaml
+  - template-mariadb.yaml
 zabbix_templates_extra: []
 zabbix_templates: "{{ zabbix_templates_default + zabbix_templates_extra }}"
