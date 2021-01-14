@@ -1,0 +1,18 @@
+---
+- name: Create custom facts directory
+  become: true
+  file:
+    path: /etc/ansible/facts.d
+    state: "directory"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Write state into file
+  become: true
+  community.general.ini_file:
+    path: "/etc/ansible/facts.d/{{ state_name }}.fact"
+    section: "{{ state_section }}"
+    option: "{{ state_option }}"
+    value: "{{ state_value }}"
+    mode: 0644

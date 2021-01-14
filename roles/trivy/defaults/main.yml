@@ -7,7 +7,7 @@ trivy_package_name: trivy
 ##########################
 # repository
 
-trivy_configure_repository: no
+trivy_configure_repository: true
 
 trivy_debian_repository_arch: amd64
 trivy_debian_repository_key: https://aquasecurity.github.io/trivy-repo/deb/public.key

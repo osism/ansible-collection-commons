@@ -1,11 +1,17 @@
 ---
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
 - name: Install apt-transport-https package
   become: true
   apt:
     name: apt-transport-https
     state: present
   when: sysdig_configure_repository|bool
-  changed_when: false
 
 - name: Add repository gpg key
   become: true
@@ -19,7 +25,7 @@
     repo: "{{ sysdig_debian_repository }}"
     state: present
     filename: sysdig
-    update_cache: yes
+    update_cache: true
     mode: 0600
   when: sysdig_configure_repository|bool
 
@@ -32,6 +38,13 @@
   debug:
     msg: "Reboot of {{ inventory_hostname }} required to get the latest kernel running"
   when: result.stat.islnk is defined
+
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
 
 - name: Install sysdig package
   become: true

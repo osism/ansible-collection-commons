@@ -1,6 +1,10 @@
 ---
-services_warning:
+services_warning_default:
   - nscd
+services_warning_extra: []
+services_warning: "{{ services_warning_default + services_warning_extra }}"
 
-services_required:
+services_required_default:
   - cron
+services_required_extra: []
+services_required: "{{ services_required_default + services_required_extra }}"

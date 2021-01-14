@@ -27,7 +27,7 @@
     repo: "{{ docker_compose_debian_repository }}"
     state: present
     filename: docker-compose
-    update_cache: yes
+    update_cache: true
     mode: 0644
   when: docker_compose_configure_repository|bool
 
@@ -37,9 +37,16 @@
     path: /usr/local/bin/docker-compose
     state: absent
 
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
 - name: Install docker-compose package
   become: true
   apt:
     name: "{{ docker_compose_package_name }}"
     state: present
-    install_recommends: no
+    install_recommends: false

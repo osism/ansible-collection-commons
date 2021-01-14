@@ -1,0 +1,13 @@
+---
+- name: Update package cache
+  become: true
+  apt:
+    update_cache: true
+
+- name: Install required packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gpg

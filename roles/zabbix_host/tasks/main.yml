@@ -1,0 +1,186 @@
+---
+- name: Set link_templates fact
+  set_fact:
+    link_templates: "{{ zabbix_host_link_templates }}"
+
+- name: Add 'Docker' template
+  set_fact:
+    link_templates: "{{ link_templates + ['Docker'] }}"
+  when: "'docker' in group_names"
+
+- name: Add 'OSISM - OpenStack - Glance' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OSISM - OpenStack - Glance'] }}"
+  when: "'glance-api' in group_names"
+
+- name: Add 'OSISM - OpenStack - Horizon' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OSISM - OpenStack - Horizon'] }}"
+  when: "'horizon' in group_names"
+
+- name: Add 'OSISM - OpenStack - Keystone' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OSISM - OpenStack - Keystone'] }}"
+  when: "'keystone' in group_names"
+
+- name: Add 'OSISM - MariaDB' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OSISM - MariaDB'] }}"
+  when: "'mariadb' in group_names"
+
+- name: Add 'OSISM - RabbitMQ' template
+  set_fact:
+    link_templates: "{{ link_templates + ['OSISM - RabbitMQ'] }}"
+  when: "'rabbitmq' in group_names"
+
+- name: Add 'Memcached' template
+  set_fact:
+    link_templates: "{{ link_templates + ['Memcached'] }}"
+  when: "'memcached' in group_names"
+
+- name: Create host
+  local_action:
+    module: community.zabbix.zabbix_host
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    visible_name: "{{ zabbix_host_visible_name }}"
+    host_groups: "{{ zabbix_host_host_groups }}"
+    status: "{{ zabbix_host_status }}"
+    inventory_mode: "{{ zabbix_host_inventory_mode }}"
+    inventory_zabbix: "{{ zabbix_host_inventory }}"
+    interfaces: "{{ zabbix_host_interfaces }}"
+    link_templates: "{{ link_templates }}"
+
+- name: Create ZABBIX_SERVER_IP macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$ZABBIX_SERVER_IP}"
+    macro_value: "{{ zabbix_server_host }}"
+
+- name: Create ZABBIX_SERVER_PORT macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$ZABBIX_SERVER_PORT}"
+    macro_value: "10051"
+
+- name: Create OSISM_API_INTERFACE_ADDRESS macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$OSISM_API_INTERFACE_ADDRESS}"
+    macro_value: "{{ 'api' | kolla_address }}"
+
+- name: Create RABBITMQ.API.CLUSTER_HOST macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$RABBITMQ.API.CLUSTER_HOST}"
+    macro_value: "{{ zabbix_host_rabbitmq_host }}"
+  when: "'rabbitmq' in group_names"
+
+- name: Create RABBITMQ.API.PORT macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$RABBITMQ.API.PORT}"
+    macro_value: "{{ zabbix_host_rabbitmq_port }}"
+  when: "'rabbitmq' in group_names"
+
+- name: Create RABBITMQ.API.USER macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$RABBITMQ.API.USER}"
+    macro_value: "{{ zabbix_host_rabbitmq_username }}"
+  when: "'rabbitmq' in group_names"
+
+- name: Create RABBITMQ.API.PASSWORD macro
+  no_log: true
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$RABBITMQ.API.PASSWORD}"
+    macro_value: "{{ zabbix_host_rabbitmq_password }}"
+  when: "'rabbitmq' in group_names"
+
+- name: Create MYSQL_USER macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$MYSQL_USER}"
+    macro_value: "{{ zabbix_host_mariadb_username }}"
+  when: "'mariadb' in group_names"
+
+- name: Create MYSQL_PASS macro
+  no_log: true
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$MYSQL_PASS}"
+    macro_value: "{{ zabbix_host_mariadb_password }}"
+  when: "'mariadb' in group_names"
+
+- name: Create MYSQL_DSN macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$MYSQL_DSN}"
+    macro_value: "{{ zabbix_host_mariadb_host }}:{{ zabbix_host_mariadb_port }}"
+  when: "'mariadb' in group_names"
+
+- name: Create MEMCACHED.CONN.URI macro
+  local_action:
+    module: community.zabbix.zabbix_hostmacro
+    server_url: "{{ zabbix_server_url }}"
+    login_user: "{{ zabbix_login_username }}"
+    login_password: "{{ zabbix_login_password }}"
+    state: present
+    host_name: "{{ zabbix_host_host_name }}"
+    macro_name: "{$MEMCACHED.CONN.URI}"
+    macro_value: "{{ zabbix_host_memcached_host }}:{{ zabbix_host_memcached_port }}"
+  when: "'memcached' in group_names"

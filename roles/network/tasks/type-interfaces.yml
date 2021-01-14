@@ -1,0 +1,81 @@
+---
+- name: Get existing netplan configuration files
+  find:
+    paths: /etc/netplan
+    patterns: "*.yml,*.yaml"
+  register: netplan_configuration_files
+
+- name: Backup existing netplan configuration files
+  copy:
+    src: "{{ item['path'] }}"
+    dest: "{{ item['path'] }}.unused"
+    remote_src: true
+  become: true
+  with_items: "{{ netplan_configuration_files['files'] }}"
+
+- name: Remove existing netplan configuration files
+  file:
+    path: "{{ item['path'] }}"
+    state: absent
+  become: true
+  with_items: "{{ netplan_configuration_files['files'] }}"
+
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "interfaces/{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "interfaces/{{ ansible_distribution | lower }}.yml"
+    - "interfaces/{{ ansible_os_family | lower }}.yml"
+  tags:
+    - always
+
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Ensure basic networking tools are installed
+  apt:
+    name: "{{ network_interface_required_packages }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 86400
+  when: network_interfaces|length > 0
+
+- name: Create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ network_interface_path }}"
+  when: network_interfaces|length > 0
+
+- name: Copy interfaces file
+  template:
+    src: interfaces/all_interfaces.j2
+    dest: "{{ network_all_interfaces_path }}"
+  notify:
+    - Interfaces file changed
+  when: network_interfaces|length > 0
+
+- name: Copy device configuration files
+  template:
+    src: interfaces/device.j2
+    dest: "{{ network_interface_path }}/device-{{ item.0 }}"
+    mode: "{{ network_interface_permissions }}"
+  with_items:
+    - "{{ network_interfaces | default([]) | groupby('device') }}"
+  register: network_configuration_result
+  notify:
+    - Restart network service
+    - Restart network command
+
+- name: Include cleanup tasks
+  include: cleanup-interfaces.yml
+  when:
+    - network_manage_devices
+    - network_interfaces|length > 0

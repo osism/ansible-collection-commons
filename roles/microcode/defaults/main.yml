@@ -1,4 +1,6 @@
 ---
-microcode_packages:
+microcode_packages_default:
   - amd64-microcode
   - intel-microcode
+microcode_packages_extra: []
+microcode_packages: "{{ microcode_packages_default + microcode_packages_extra }}"

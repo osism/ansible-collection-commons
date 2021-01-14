@@ -1,15 +1,36 @@
 ---
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
 - name: Update package cache
   become: true
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: "{{ apt_cache_valid_time }}"
+
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
 
 - name: Upgrade packages
   become: true
   apt:
     upgrade: dist
   when: upgrade_packages|bool
+
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
 
 - name: Install required packages
   become: true

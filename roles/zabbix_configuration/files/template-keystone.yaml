@@ -1,0 +1,66 @@
+---
+zabbix_export:
+  version: '5.2'
+  date: '2021-01-08T16:14:09Z'
+  groups:
+    -
+      name: Templates
+  templates:
+    -
+      template: 'OSISM - OpenStack - Keystone'
+      name: 'OSISM - OpenStack - Keystone'
+      groups:
+        -
+          name: Templates
+      applications:
+        -
+          name: 'OpenStack - Keystone'
+      items:
+        -
+          name: 'Keystone: Service on port 5000/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},5000]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Keystone: Service is not listening on port 5000 on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'Keystone: Service on port 35357/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},35357]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Keystone: Service is not listening on port 35357 on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'Keystone: Process wsgi:keystone-admin'
+          key: 'proc.num[,,,.*wsgi:keystone-ad]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Keystone: Process wsgi:keystone-admin is not running on {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'Keystone: Process wsgi:keystone-public'
+          key: 'proc.num[,,,.*wsgi:keystone-pu]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Keystone'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Keystone: Process wsgi:keystone-public is not running on {HOST.NAME}'
+              priority: HIGH

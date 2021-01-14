@@ -1,0 +1,42 @@
+---
+zabbix_export:
+  version: '5.2'
+  date: '2021-01-08T14:57:27Z'
+  groups:
+    -
+      name: Templates
+  templates:
+    -
+      template: 'OSISM - OpenStack - Glance'
+      name: 'OSISM - OpenStack - Glance'
+      groups:
+        -
+          name: Templates
+      applications:
+        -
+          name: 'OpenStack - Glance'
+      items:
+        -
+          name: 'Glance: Service on port 9292/tcp'
+          key: 'net.tcp.service[http,{$OSISM_API_INTERFACE_ADDRESS},9292]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Glance'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Glance: Service is not listening on port 9292 on host {HOST.NAME}'
+              priority: HIGH
+        -
+          name: 'Glance: process glance-api'
+          key: 'proc.num[,,,/var/lib/kolla/venv/bin/glance-api]'
+          delay: '30'
+          applications:
+            -
+              name: 'OpenStack - Glance'
+          triggers:
+            -
+              expression: '{last(0)}=0'
+              name: 'Glance: Process glance-api is not running on {HOST.NAME}'
+              priority: HIGH

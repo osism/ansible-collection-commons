@@ -4,7 +4,7 @@
   sysctl:
     name: "{{ item_in_block.name }}"
     value: "{{ item_in_block.value }}"
-    sysctl_set: yes
+    sysctl_set: true
     sysctl_file: "/etc/sysctl.d/70-{{ item.key }}.conf"
   loop: "{{ item.value }}"
   loop_control:

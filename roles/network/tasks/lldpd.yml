@@ -1,0 +1,20 @@
+---
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Install lldpd package
+  apt:
+    name: "{{ network_lldpd_package_name }}"
+    state: present
+  become: true
+
+- name: Start/enable lldpd service
+  service:
+    name: "{{ network_lldpd_service_name }}"
+    state: started
+    enabled: true
+  become: true

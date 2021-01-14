@@ -2,9 +2,16 @@
 - name: Collect facts about services
   scan_services:
 
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
 - name: Remove update-motd package
   become: true
-  package:
+  apt:
     name: update-motd
     state: absent
 
@@ -14,6 +21,7 @@
     name: motd-news.timer
     state: stopped
     enabled: false
+  when: "'motd-news.timer' in services"
 
 - name: Stop motd-news service
   become: true

@@ -1,7 +1,4 @@
 ---
-- name: Collect facts about services
-  scan_services:
-
 - name: Cleanup services
   become: true
   service:

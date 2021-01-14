@@ -19,9 +19,16 @@
   when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key|length)
   no_log: true
 
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
 - name: git - install required packages
   become: true
-  package:
+  apt:
     name: "{{ item }}"
     state: present
   with_items:
@@ -33,8 +40,8 @@
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
     key_file: "{{ configuration_git_private_key_file }}"
-    accept_hostkey: yes
-    force: yes
+    accept_hostkey: true
+    force: true
   when: configuration_git_protocol == 'ssh'
 
 - name: git - clone configuration repository (without auth)
@@ -42,7 +49,7 @@
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
-    accept_hostkey: yes
-    force: yes
+    accept_hostkey: true
+    force: true
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key|length)) or
         configuration_git_protocol != 'ssh'
