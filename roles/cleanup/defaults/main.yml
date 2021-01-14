@@ -8,6 +8,5 @@ cleanup_packages:
   - open-iscsi
   - python3-apport
   - snapd
-  - ubuntu-server
 
 cleanup_services: []
