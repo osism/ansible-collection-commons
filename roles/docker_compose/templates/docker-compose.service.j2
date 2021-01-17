@@ -12,7 +12,7 @@ User={{ docker_compose_service_user }}
 Group={{ docker_compose_service_group }}
 ExecStartPre={{ docker_compose_dir }}/docker-compose pull
 ExecStart={{ docker_compose_dir }}/docker-compose up -d --remove-orphans
-ExecStop={{ docker_compose_dir }}/docker-compose down
+ExecStop={{ docker_compose_dir }}/docker-compose stop
 
 [Install]
 WantedBy=multi-user.target
