@@ -10,3 +10,6 @@ docker_compose_package_name: docker-compose
 
 docker_compose_configure_repository: "{{ ansible_distribution_release == 'bionic' }}"
 docker_compose_debian_repository: "deb [ trusted=yes ] https://packages.osism.de bionic-backports/"
+
+docker_compose_service_user: "{{ operator_user | default('dragon') }}"
+docker_compose_service_group: "{{ operator_group | default('dragon') }}"
