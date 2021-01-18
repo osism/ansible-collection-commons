@@ -1,13 +1,9 @@
 ---
 cleanup_packages_default:
-  - apport
-  - apport-symptoms
   - libvirt-bin
   - lxc
   - lxd
   - open-iscsi
-  - python3-apport
-  - snapd
 cleanup_packages_extra: []
 cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra }}"
 
