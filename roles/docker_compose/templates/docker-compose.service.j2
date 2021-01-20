@@ -15,4 +15,4 @@ ExecStart={{ docker_compose_dir }}/docker-compose up -d --remove-orphans
 ExecStop={{ docker_compose_dir }}/docker-compose stop
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
