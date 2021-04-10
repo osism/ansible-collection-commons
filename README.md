@@ -14,6 +14,7 @@ The following Ansible roles are included in this collection.
 | hosts                | ![Test role hosts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hosts/badge.svg)                   |
 | ipmitool             |                                                                                                                                   |
 | kernel_modules       |                                                                                                                                   |
+| kubectl              | ![Test role kubectl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kubectl/badge.svg)               |
 | lynis                |                                                                                                                                   |
 | microcode            | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)           |
 | motd                 | ![Test role motd](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20motd/badge.svg)                     |
