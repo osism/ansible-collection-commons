@@ -1,0 +1,44 @@
+---
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+  when: kubectl_configure_repository|bool
+
+- name: Install apt-transport-https package
+  become: true
+  apt:
+    name: apt-transport-https
+    state: present
+  when: kubectl_configure_repository|bool
+
+- name: Add repository gpg key
+  become: true
+  apt_key:
+    url: "{{ kubectl_debian_repository_key }}"
+  when: kubectl_configure_repository|bool
+
+- name: Add repository
+  become: true
+  apt_repository:
+    repo: "{{ kubectl_debian_repository }}"
+    state: present
+    filename: kubectl
+    update_cache: true
+    mode: 0600
+  when: kubectl_configure_repository|bool
+
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: "Install {{ kubectl_package_name }} package"
+  become: true
+  apt:
+    name: "{{ kubectl_package_name }}"
+    state: present
