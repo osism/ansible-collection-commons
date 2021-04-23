@@ -14,6 +14,7 @@ The following Ansible roles are included in this collection.
 | hosts                | ![Test role hosts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hosts/badge.svg)                   |
 | ipmitool             |                                                                                                                                   |
 | kernel_modules       |                                                                                                                                   |
+| kompose              | ![Test role kompose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kompose/badge.svg)               |
 | kubectl              | ![Test role kubectl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kubectl/badge.svg)               |
 | lynis                |                                                                                                                                   |
 | microcode            | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)           |
@@ -33,6 +34,6 @@ The following Ansible roles are included in this collection.
 | systohc              | ![Test role systohc](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20systohc/badge.svg)               |
 | timezone             | ![Test role timezone](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20timezone/badge.svg)             |
 | trivy                | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                   |
-| zabbix_configuration |                                                                                                                                   |
 | zabbix_cluster       |                                                                                                                                   |
+| zabbix_configuration |                                                                                                                                   |
 | zabbix_host          |                                                                                                                                   |

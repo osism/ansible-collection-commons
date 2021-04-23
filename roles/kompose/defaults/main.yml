@@ -1,0 +1,6 @@
+---
+kompose_install_type: url
+
+kompose_version: 1.22.0
+kompose_checksum: 6203d67263886bbd455168f59309496d486fc3a6df330b7ba37823b283bd9ea5
+kompose_url: "https://github.com/kubernetes/kompose/releases/download/v{{ kompose_version }}/kompose-linux-amd64"
