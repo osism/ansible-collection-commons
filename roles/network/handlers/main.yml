@@ -1,4 +1,8 @@
 ---
+- name: Netplan configuration changed
+  command: netplan apply
+  when: network_allow_service_restart
+
 - name: Interfaces file changed
   service:
     name: "{{ network_service }}"

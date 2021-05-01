@@ -1,9 +1,11 @@
 ---
+# possible values: [interfaces, netplan]
 network_type: interfaces
+
 
 # Flag whether all network devices are controlled by this role
 #
-# If true, all additional scripts are deleted
+# If true, all additional configurations are deleted
 network_manage_devices: true
 
 # Allow the network to restart
@@ -19,6 +21,8 @@ network_allow_service_restart: false
 #   nothing - do nothing
 #   * - undefined behavior
 network_restart_method: nothing
+
+# configuration for type interfaces
 
 # List of all network interface configurations
 #
@@ -78,7 +82,7 @@ network_interfaces:
     down: []  # down script lines
     post-down: []  # post-down script lines
 
-network_all_interfaces_path: "/etc/network/interfaces"
+network_interfaces_path: "/etc/network/interfaces"
 network_interface_path: "/etc/network/interfaces.d"
 network_interface_permissions: 0644
 
@@ -91,6 +95,22 @@ network_interface_required_packages:
   - ifmetric
   - ifupdown
   - vlan
+
+# configuration for type netplan
+
+network_netplan_required_packages: []
+network_netplan_path: "/etc/netplan"
+network_netplan_permissions: 0644
+
+network_version: 2
+network_renderer: networkd
+
+network_bonds: {}
+network_bridges: {}
+network_ethernets: {}
+network_tunnels: {}
+network_vlans: {}
+
 
 # lldpd
 
