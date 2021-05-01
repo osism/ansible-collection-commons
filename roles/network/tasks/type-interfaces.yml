@@ -38,7 +38,7 @@
     - lock
     - lock-frontend
 
-- name: Ensure basic networking tools are installed
+- name: Install required packages
   apt:
     name: "{{ network_interface_required_packages }}"
     state: present

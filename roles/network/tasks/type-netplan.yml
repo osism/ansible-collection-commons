@@ -6,13 +6,19 @@
     - lock
     - lock-frontend
 
-- name: Ensure basic networking tools are installed
+- name: Install required packages
   become: true
   apt:
     name: "{{ network_netplan_required_packages }}"
     state: present
     update_cache: true
     cache_valid_time: 86400
+
+- name: Remove ifupdown package
+  become: true
+  apt:
+    name: ifupdown
+    state: absent
 
 - name: Create required directories
   become: true
@@ -25,8 +31,8 @@
 - name: Copy netplan configuration
   become: true
   template:
-    src: netplan/01-osism.yml.j2
-    dest: "{{ network_netplan_path }}/01-osism.yml"
+    src: netplan/01-osism.yaml.j2
+    dest: "{{ network_netplan_path }}/01-osism.yaml"
   notify:
     - Netplan configuration changed
 
