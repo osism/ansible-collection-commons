@@ -25,6 +25,9 @@
   file:
     path: "{{ item }}"
     state: directory
+    mode: 0755
+    owner: root
+    group: root
   with_items:
     - "{{ network_netplan_path }}"
 
@@ -33,10 +36,27 @@
   template:
     src: netplan/01-osism.yaml.j2
     dest: "{{ network_netplan_path }}/01-osism.yaml"
+    mode: 0644
+    owner: root
+    group: root
   notify:
     - Netplan configuration changed
 
 - name: Copy interfaces file
+  become: true
   template:
     src: netplan/interfaces.j2
     dest: "{{ network_interfaces_path }}"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Copy dispatcher scripts
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ network_dispatcher_scripts }}"
