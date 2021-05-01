@@ -98,7 +98,8 @@ network_interface_required_packages:
 
 # configuration for type netplan
 
-network_netplan_required_packages: []
+network_netplan_required_packages:
+  - netplan.io
 network_netplan_path: "/etc/netplan"
 network_netplan_permissions: 0644
 
