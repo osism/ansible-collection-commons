@@ -1,0 +1,36 @@
+---
+- name: Wait for apt lock
+  become: true
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Ensure basic networking tools are installed
+  become: true
+  apt:
+    name: "{{ network_netplan_required_packages }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Create required directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ network_netplan_path }}"
+
+- name: Copy netplan configuration
+  become: true
+  template:
+    src: netplan/01-osism.yml.j2
+    dest: "{{ network_netplan_path }}/01-osism.yml"
+  notify:
+    - Netplan configuration changed
+
+- name: Copy interfaces file
+  template:
+    src: netplan/interfaces.j2
+    dest: "{{ network_interfaces_path }}"
