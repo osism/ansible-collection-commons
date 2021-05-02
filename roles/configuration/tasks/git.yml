@@ -29,10 +29,8 @@
 - name: git - install required packages
   become: true
   apt:
-    name: "{{ item }}"
+    name: "{{ configuration_git_package_name }}"
     state: present
-  with_items:
-    - git
 
 - name: git - clone configuration repository (ssh / with auth)
   git:
