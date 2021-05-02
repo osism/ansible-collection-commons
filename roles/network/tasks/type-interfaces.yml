@@ -32,13 +32,13 @@
     - always
 
 - name: Wait for apt lock
-  become: true
   shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
 
 - name: Install required packages
+  become: true
   apt:
     name: "{{ network_interface_required_packages }}"
     state: present
@@ -47,6 +47,7 @@
   when: network_interfaces|length > 0
 
 - name: Create required directories
+  become: true
   file:
     path: "{{ item }}"
     state: directory
@@ -55,6 +56,7 @@
   when: network_interfaces|length > 0
 
 - name: Copy interfaces file
+  become: true
   template:
     src: interfaces/interfaces.j2
     dest: "{{ network_interfaces_path }}"
@@ -63,6 +65,7 @@
   when: network_interfaces|length > 0
 
 - name: Copy device configuration files
+  become: true
   template:
     src: interfaces/device.j2
     dest: "{{ network_interface_path }}/device-{{ item.0 }}"
