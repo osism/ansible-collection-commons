@@ -30,16 +30,31 @@
   with_items:
     - "{{ network_netplan_path }}"
 
+# NOTE: The use of the local actions are a workaround to allow
+#       the use of variables as keys in the dictionaries.
+
+- name: Prepare netplan configuration template
+  local_action:
+    module: ansible.builtin.template
+    src: netplan/01-osism.yaml.j2
+    dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+
 - name: Copy netplan configuration
   become: true
   template:
-    src: netplan/01-osism.yaml.j2
+    src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
     dest: "{{ network_netplan_path }}/01-osism.yaml"
     mode: 0644
     owner: root
     group: root
   notify:
     - Netplan configuration changed
+
+- name: Remove netplan configuration template
+  local_action:
+    module: ansible.builtin.file
+    path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    state: absent
 
 - name: Copy interfaces file
   become: true
