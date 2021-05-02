@@ -1,9 +1,11 @@
 ---
 - name: Netplan configuration changed
+  become: true
   command: netplan apply
   when: network_allow_service_restart
 
 - name: Interfaces file changed
+  become: true
   service:
     name: "{{ network_service }}"
     state: restarted
@@ -14,6 +16,7 @@
 #       = [ { "item": [ <device>, [<config>, ...] ], ... }, ... ]
 
 - name: Restart network service
+  become: true
   service:
     name: "{{ network_service }}"
     state: restarted
@@ -29,6 +32,7 @@
     - skip_ansible_lint
 
 - name: Restart network command
+  become: true
   shell: >
     {{ network_interface_restart_commands[ network_restart_method ] }}
   when: >
