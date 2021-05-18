@@ -1,8 +1,10 @@
 ---
-proxy_proxies:
-  http: http://proxy.tld:8080
-  # https: http://proxy.tld:8080
-  # ftp: http://proxy.tld:8080
+proxy_proxies: {}
+
+# proxy_proxies:
+#   http: http://proxy.tld:8080
+#   https: http://proxy.tld:8080
+#   ftp: http://proxy.tld:8080
 
 proxy_no_proxy_default:
   - 127.0.0.1
