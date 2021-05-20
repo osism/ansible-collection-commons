@@ -101,6 +101,7 @@ network_interface_required_packages:
 network_netplan_required_packages:
   - netplan.io
 network_netplan_path: "/etc/netplan"
+network_netplan_file: "01-osism.yaml"
 network_netplan_permissions: 0644
 
 network_version: 2

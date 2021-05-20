@@ -43,7 +43,7 @@
   become: true
   template:
     src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    dest: "{{ network_netplan_path }}/01-osism.yaml"
+    dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
     mode: 0644
     owner: root
     group: root
