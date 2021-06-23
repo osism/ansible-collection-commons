@@ -1,0 +1,43 @@
+---
+- name: Wait for apt lock
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Ensure kompose is not installed
+  become: true
+  apt:
+    name: kompose
+    state: absent
+
+- name: Block installation of kompose package
+  become: true
+  copy:
+    content: |
+      Package: kompose
+      Pin: version *
+      Pin-Priority: -1
+    mode: 0644
+    dest: /etc/apt/preferences.d/kompose
+
+- name: Download kompose binary
+  become: true
+  get_url:
+    url: "{{ kompose_url }}"
+    dest: /usr/local/bin/kompose
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Get checksum of kompose binary
+  stat:
+    path: /usr/local/bin/kompose
+    checksum_algorithm: sha256
+  register: p
+
+- name: Check checksum of kompose binary
+  fail:
+    msg: "Expected checksum of kompose does not match"
+  when:
+    - "p.stat.checksum != kompose_checksum"
