@@ -1,0 +1,15 @@
+---
+- name: Cleanup installed packages
+  become: true
+  dnf:
+    name: "{{ cleanup_packages }}"
+    state: absent
+
+- name: Remove useless packages from the cache
+  become: true
+  shell: "dnf clean all"
+
+- name: Remove dependencies that are no longer required
+  become: true
+  dnf:
+    autoremove: yes
