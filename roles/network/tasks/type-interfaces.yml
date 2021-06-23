@@ -1,23 +1,23 @@
 ---
 - name: Get existing netplan configuration files
   find:
-    paths: /etc/netplan
+    paths: "{{ network_netplan_path }}"
     patterns: "*.yml,*.yaml"
   register: netplan_configuration_files
 
 - name: Backup existing netplan configuration files
+  become: true
   copy:
     src: "{{ item['path'] }}"
     dest: "{{ item['path'] }}.unused"
     remote_src: true
-  become: true
   with_items: "{{ netplan_configuration_files['files'] }}"
 
 - name: Remove existing netplan configuration files
+  become: true
   file:
     path: "{{ item['path'] }}"
     state: absent
-  become: true
   with_items: "{{ netplan_configuration_files['files'] }}"
 
 - name: Gather variables for each operating system
@@ -32,13 +32,13 @@
     - always
 
 - name: Wait for apt lock
-  become: true
   shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
 
-- name: Ensure basic networking tools are installed
+- name: Install required packages
+  become: true
   apt:
     name: "{{ network_interface_required_packages }}"
     state: present
@@ -47,6 +47,7 @@
   when: network_interfaces|length > 0
 
 - name: Create required directories
+  become: true
   file:
     path: "{{ item }}"
     state: directory
@@ -55,14 +56,16 @@
   when: network_interfaces|length > 0
 
 - name: Copy interfaces file
+  become: true
   template:
-    src: interfaces/all_interfaces.j2
-    dest: "{{ network_all_interfaces_path }}"
+    src: interfaces/interfaces.j2
+    dest: "{{ network_interfaces_path }}"
   notify:
     - Interfaces file changed
   when: network_interfaces|length > 0
 
 - name: Copy device configuration files
+  become: true
   template:
     src: interfaces/device.j2
     dest: "{{ network_interface_path }}/device-{{ item.0 }}"

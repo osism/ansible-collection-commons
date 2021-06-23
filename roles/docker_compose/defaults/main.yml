@@ -1,15 +1,19 @@
 ---
-docker_compose_install_type: file
+# possible values: [package, container, url]
+docker_compose_install_type: package
 
 docker_compose_version: 1.25.3
 docker_compose_checksum: b3835d30f66bd3b926511974138923713a253d634315479b9aa3166c0050da98
-
 docker_compose_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
 
 docker_compose_package_name: docker-compose
 
-docker_compose_configure_repository: "{{ ansible_distribution_release == 'bionic' }}"
-docker_compose_debian_repository: "deb [ trusted=yes ] https://packages.osism.de bionic-backports/"
-
 docker_compose_service_user: "{{ operator_user | default('dragon') }}"
 docker_compose_service_group: "{{ operator_group | default('dragon') }}"
+
+##########################
+# docker
+
+docker_registry_docker_compose: ghcr.io
+docker_compose_tag: version-1.29.1
+docker_compose_image: "{{ docker_registry_docker_compose }}/linuxserver/docker-compose:{{ docker_compose_tag }}"

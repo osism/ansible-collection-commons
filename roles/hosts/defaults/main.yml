@@ -2,7 +2,7 @@
 ##########################
 # generic
 
-management_interface: eth0
+hosts_interface: "{{ management_interface|default('lo') }}"
 
 ##########################
 # role parameters
