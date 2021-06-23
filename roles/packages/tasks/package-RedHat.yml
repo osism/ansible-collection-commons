@@ -1,0 +1,20 @@
+---
+- name: Update package cache
+  become: true
+  dnf:
+    name: '*'
+    update_cache: yes
+    state: latest
+
+- name: Upgrade packages
+  become: true
+  dnf:
+    name: '*'
+    state: latest
+  when: upgrade_packages|bool
+
+- name: Install required packages
+  become: true
+  dnf:
+    name: "{{ required_packages }}"
+    state: present
