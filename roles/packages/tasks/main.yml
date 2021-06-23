@@ -1,6 +1,5 @@
 ---
 - name: Wait for apt lock
-  become: true
   shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
@@ -13,7 +12,6 @@
     cache_valid_time: "{{ apt_cache_valid_time }}"
 
 - name: Wait for apt lock
-  become: true
   shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
@@ -26,7 +24,6 @@
   when: upgrade_packages|bool
 
 - name: Wait for apt lock
-  become: true
   shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock

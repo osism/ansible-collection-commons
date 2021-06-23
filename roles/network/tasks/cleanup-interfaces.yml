@@ -16,6 +16,7 @@
       {%- endfor %}]
 
 - name: Remove unused configuration files
+  become: true
   file:
     dest: "{{ item }}"
     state: absent
