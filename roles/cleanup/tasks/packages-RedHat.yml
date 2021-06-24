@@ -14,4 +14,4 @@
 - name: Remove dependencies that are no longer required
   become: true
   dnf:
-    autoremove: yes
+    autoremove: true
