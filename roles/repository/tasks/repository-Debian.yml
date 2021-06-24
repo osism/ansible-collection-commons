@@ -1,0 +1,39 @@
+---
+- name: Add repository keys via URLs
+  become: true
+  apt_key:
+    url: "{{ item }}"
+    state: present
+  loop: "{{ repository_keys }}"
+
+- name: Add repository keys via keyservers
+  become: true
+  apt_key:
+    id: "{{ item.key }}"
+    keyserver: "{{ item.value }}"
+    state: present
+  loop: "{{ repository_key_ids|dict2items }}"
+
+# NOTE: Not using apt_repository here because it requires python-apt.
+
+- name: Copy source.list file
+  become: true
+  template:
+    src: source.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    group: root
+    mode: 0644
+    backup: true
+  notify: Force update of package cache
+
+- name: Wait for apt lock
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Update package cache
+  become: true
+  apt:
+    cache_valid_time: "{{ repository_cache_valid_time }}"
