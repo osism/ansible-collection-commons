@@ -1,4 +1,10 @@
 ---
+- name: This family is not supported
+  debug:
+    msg: "This family, {{ ansible_os_family }}, is not supported yet."
+  when: ansible_os_family != "Debian"
+  failed_when: ansible_os_family != "Debian"
+
 - name: Include install type specific tasks
   include: "install-{{ docker_compose_install_type }}.yml"
 
