@@ -1,7 +1,7 @@
 ---
 name: Check yaml syntax
 
-on:  # yamllint disable-line rule:truthy
+"on":
   push:
     paths:
       - '**.yml'
