@@ -3,7 +3,7 @@
   become: true
   dnf:
     name: '*'
-    update_cache: yes
+    update_cache: true
     state: latest
 
 - name: Upgrade packages
