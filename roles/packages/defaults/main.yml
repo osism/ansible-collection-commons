@@ -1,14 +1,10 @@
 ---
-apt_cache_valid_time: 3600
-
 upgrade_packages: true
 
 required_packages_default:
-  - debsums
   - ethtool
   - jq
   - rsyslog
-  - selinux-utils
-  - ssh
+
 required_packages_extra: []
-required_packages: "{{ required_packages_default + required_packages_extra }}"
+required_packages: "{{ required_packages_default + required_packages_extra + required_packages_distribution }}"

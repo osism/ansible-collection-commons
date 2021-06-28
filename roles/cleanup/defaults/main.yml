@@ -1,12 +1,10 @@
 ---
 cleanup_packages_default:
-  - libvirt-bin
   - lxc
-  - lxd
-  - open-iscsi
+
 cleanup_packages_extra: []
-cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra }}"
+cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra + cleanup_packages_distribution }}"
 
 cleanup_services_default: []
 cleanup_services_extra: []
-cleanup_services: "{{ cleanup_services_default + cleanup_services_extra }}"
+cleanup_services: "{{ cleanup_services_default + cleanup_services_extra + cleanup_services_distribution }}"

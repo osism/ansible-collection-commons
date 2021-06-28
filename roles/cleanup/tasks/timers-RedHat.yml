@@ -1,0 +1,10 @@
+---
+- name: Disable dnf-makecache timers
+  become: true
+  systemd:
+    name: "{{ item }}.timer"
+    state: stopped
+    enabled: false
+  when: item + ".timer" in services
+  loop:
+    - dnf-makecache
