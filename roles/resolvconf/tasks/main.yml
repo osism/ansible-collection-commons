@@ -7,6 +7,6 @@
       name server(s) are configured.
   when: resolvconf_nameserver|length < resolvconf_minimum_number_of_nameservers|int
 
-- name: Include release specific tasks
-  include: "{{ ansible_distribution_release }}.yml"
+- name: Include resolvconf tasks
+  include: "configure-resolv.yml"
   when: resolvconf_nameserver|length > 0
