@@ -74,3 +74,10 @@
     owner: root
     group: root
   loop: "{{ network_dispatcher_scripts }}"
+
+- name: "Enable {{ network_dispatcher_service_name }} service"
+  become: true
+  service:
+    name: "{{ network_dispatcher_service_name }}"
+    enabled: true
+    state: started
