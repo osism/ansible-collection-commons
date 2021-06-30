@@ -113,6 +113,7 @@ network_ethernets: {}
 network_tunnels: {}
 network_vlans: {}
 
+network_dispatcher_service_name: networkd-dispatcher
 network_dispatcher_scripts: {}
 
 # network_dispatcher_scripts:
