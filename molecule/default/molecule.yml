@@ -4,8 +4,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: molecule-${MOLECULE_JOB_ID:-0}
-    image: ${MOLECULE_DOCKER_IMAGE:-ubuntu:20.04}
+  - name: "molecule-${ANSIBLE_ROLE}"
+    image: "${DOCKER_IMAGE}"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     tmpfs:
@@ -24,7 +24,7 @@ provisioner:
     group_vars:
       all:
         ansible_python_interpreter: /usr/bin/python3
-        molecule_role: ${MOLECULE_ROLE:-packages}
+        molecule_role: "${ANSIBLE_ROLE}"
 scenario:
   name: default
   test_sequence:
