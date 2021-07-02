@@ -12,8 +12,8 @@ The following Ansible roles are included in this collection.
 | firewall             |                                                                                                                                   |
 | hostname             | ![Test role hostname](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hostname/badge.svg)             |
 | hosts                | ![Test role hosts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hosts/badge.svg)                   |
-| ipmitool             |                                                                                                                                   |
-| kernel_modules       |                                                                                                                                   |
+| ipmitool             | ![Test role ipmitool](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20ipmitool/badge.svg)             |
+| kernel_modules       | ![Test role kernel_modules](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kernel_modules/badge.svg) |
 | kompose              | ![Test role kompose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kompose/badge.svg)               |
 | kubectl              | ![Test role kubectl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kubectl/badge.svg)               |
 | lynis                | ![Test role lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20lynis/badge.svg)                   |
