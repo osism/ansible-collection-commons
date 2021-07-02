@@ -4,7 +4,7 @@
 
 # requirements: pip3 install jinja-cli
 
-for role in cleanup configuration docker_compose facts hostname kompose kubectl microcode motd operator packages podman proxy repository resolvconf services sshconfig state sysctl systohc trivy; do
+for role in cleanup configuration docker_compose facts hostname kompose kubectl microcode motd operator packages podman proxy repository resolvconf services sshconfig state sysctl systohc trivy timezone; do
   jinja -D ansible_role $role \
         -D ansible_versions "['4.2.0']" \
         -D python_versions "['3.8']" \
