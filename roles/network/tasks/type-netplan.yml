@@ -43,7 +43,7 @@
   become: true
   template:
     src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    dest: "{{ network_netplan_path }}/01-osism.yaml"
+    dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
     mode: 0644
     owner: root
     group: root
@@ -74,3 +74,24 @@
     owner: root
     group: root
   loop: "{{ network_dispatcher_scripts }}"
+
+- name: Wait for apt lock
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: "Install {{ network_dispatcher_package_name }} package"
+  become: true
+  apt:
+    name: "{{ network_dispatcher_package_name }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: "Enable {{ network_dispatcher_service_name }} service"
+  become: true
+  service:
+    name: "{{ network_dispatcher_service_name }}"
+    enabled: true
+    state: started

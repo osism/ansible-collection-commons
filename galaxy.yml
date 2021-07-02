@@ -4,7 +4,7 @@ name: commons
 version: 0.4.0
 readme: README.md
 authors:
-  - OSISM community <info@osism.de> (https://github.com/osism/ansible-collection-commons/graphs/contributors)
+  - OSISM community <info@osism.tech> (https://github.com/osism/ansible-collection-commons/graphs/contributors)
 description: OSISM common roles
 license_file: LICENSE
 tags:
@@ -12,5 +12,5 @@ tags:
 dependencies: {}
 repository: https://github.com/osism/ansible-collection-commons.git
 documentation: https://docs.osism.de
-homepage: https://osism.de
+homepage: https://www.osism.tech
 issues: https://github.com/osism/ansible-collection-commons/issues

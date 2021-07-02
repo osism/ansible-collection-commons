@@ -2,59 +2,8 @@
 - name: Collect facts about services
   scan_services:
 
-- name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-
-- name: Remove update-motd package
-  become: true
-  apt:
-    name: update-motd
-    state: absent
-
-- name: Stop motd-news timer
-  become: true
-  service:
-    name: motd-news.timer
-    state: stopped
-    enabled: false
-  when: "'motd-news.timer' in services"
-
-- name: Stop motd-news service
-  become: true
-  service:
-    name: motd-news.service
-    state: stopped
-    enabled: false
-  when: "'motd-news.service' in services"
-
-- name: Disable dynamic motd banner in pam configuration for ssh
-  become: true
-  replace:
-    path: /etc/pam.d/sshd
-    regexp: "{{ item.regex }}"
-    replace: "{{ item.replace }}"
-    mode: 0644
-  loop:
-    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
-      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
-
-    # NOTE: The ssh banner directive is used to output /etc/motd.
-    - regex: '^session.*optional.*pam_motd.so.*noupdate$'
-      replace: '# session  optional  pam_motd.so  noupdate'
-
-- name: Disable dynamic motd banner in pam configuration for login
-  become: true
-  replace:
-    path: /etc/pam.d/login
-    regexp: "{{ item.regex }}"
-    replace: "{{ item.replace }}"
-    mode: 0644
-  loop:
-    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
-      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+- name: Include distribution specific configure tasks
+  include_tasks: "configure-{{ ansible_os_family }}.yml"
 
 - name: Copy motd file
   become: true

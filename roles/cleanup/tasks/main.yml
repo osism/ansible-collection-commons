@@ -2,11 +2,11 @@
 - name: Collect facts about services
   scan_services:
 
-- name: Include timer tasks
-  include_tasks: timers.yml
+- name: Include distribution specific timer tasks
+  include_tasks: "timers-{{ ansible_os_family }}.yml"
 
 - name: Include service tasks
   include_tasks: services.yml
 
 - name: Include packages tasks
-  include_tasks: packages.yml
+  include_tasks: "packages-{{ ansible_os_family }}.yml"

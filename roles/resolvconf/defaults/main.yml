@@ -13,7 +13,15 @@ resolvconf_search: osism.test
 
 resolvconf_minimum_number_of_nameservers: 2
 
-resolvconf_always_validate_dnssec: allow-downgrade
 resolvconf_cache: true
+resolvconf_cache_from_localhost: false
 resolvconf_dns_over_tls: false
+resolvconf_dnssec: allow-downgrade
+resolvconf_read_etc_hosts: true
+
 resolvconf_file: /etc/resolv.conf
+
+
+# NOTE: Deprecated or renamed parameters. Do not use them. They are still available for
+#       backwards compatibility.
+resolvconf_always_validate_dnssec: "{{ resolvconf_dnssec }}"

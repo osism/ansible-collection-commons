@@ -2,13 +2,16 @@
 galaxy_info:
   author: Christian Berendt
   description: Role osism.commons.repository
-  company: Betacloud Solutions GmbH
+  company: OSISM GmbH
   license: Apache License 2.0
   min_ansible_version: 3.0.0
   platforms:
     - name: Ubuntu
       versions:
         - focal
+    - name: EL
+      versions:
+        - 8
   galaxy_tags:
     - system
 dependencies: []

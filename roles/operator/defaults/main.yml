@@ -5,10 +5,6 @@ operator_user_id: 45000
 operator_group: dragon
 operator_group_id: 45000
 
-operator_groups:
-  - adm
-  - sudo
-
 operator_shell: /bin/bash
 
 operator_authorized_keys: []
