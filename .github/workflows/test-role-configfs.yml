@@ -1,28 +1,28 @@
 ---
-name: Test role kompose
+name: Test role configfs
 
 "on":
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/test-role-kompose.yml'
-      - 'molecule/default/*'
-      - 'molecule/kompose/**'
-      - 'roles/kompose/**'
+      - '.github/workflows/test-role-configfs.yml'
+      - 'molecule/delegated/*'
+      - 'molecule/configfs/**'
+      - 'roles/configfs/**'
   pull_request:
     paths:
-      - '.github/workflows/test-role-kompose.yml'
-      - 'molecule/default/*'
-      - 'molecule/kompose/**'
-      - 'roles/kompose/**'
+      - '.github/workflows/test-role-configfs.yml'
+      - 'molecule/delegated/*'
+      - 'molecule/configfs/**'
+      - 'roles/configfs/**'
 
 jobs:
-  test-role-kompose:
+  test-role-configfs:
 
     runs-on: ubuntu-latest
 
     env:
-      ANSIBLE_ROLE: kompose
+      ANSIBLE_ROLE: configfs
 
     strategy:
       max-parallel: 4
@@ -47,15 +47,15 @@ jobs:
       #       work here. Hence this workaround.
       - name: Prepare molecule.yml
         run: |
-          sed -i "s/\${DOCKER_IMAGE}/${{ matrix.docker-image }}/g" molecule/default/molecule.yml
-          sed -i "s/\${ANSIBLE_ROLE}/${{ env.ANSIBLE_ROLE }}/g" molecule/default/molecule.yml
+          sed -i "s/\${DOCKER_IMAGE}/${{ matrix.docker-image }}/g" molecule/delegated/molecule.yml
+          sed -i "s/\${ANSIBLE_ROLE}/${{ env.ANSIBLE_ROLE }}/g" molecule/delegated/molecule.yml
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install -r molecule/requirements.txt
           python3 -m pip install ansible~=${{ matrix.ansible-version }}
       - name: Run molecule
-        run: molecule test -s default
+        run: molecule test -s delegated
       - name: Cleanup molecule
-        run: molecule destroy -s default
+        run: molecule destroy -s delegated
         if: ${{ always() }}
