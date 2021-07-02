@@ -1,7 +1,7 @@
 ---
 namespace: osism
 name: commons
-version: 0.4.0
+version: 0.5.0
 readme: README.md
 authors:
   - OSISM community <info@osism.tech> (https://github.com/osism/ansible-collection-commons/graphs/contributors)
