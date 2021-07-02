@@ -13,7 +13,7 @@ for role in cleanup configuration docker_compose facts hostname kompose kubectl 
     templates/test-role.yml.j2 > workflows/test-role-$role.yml
 done
 
-for role in configfs sysdig lynis; do
+for role in configfs sysdig lynis ipmitool kernel_modules; do
   jinja -D ansible_role $role \
         -D ansible_versions "['4.2.0']" \
         -D python_versions "['3.8']" \
