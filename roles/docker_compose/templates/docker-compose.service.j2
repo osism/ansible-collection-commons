@@ -1,0 +1,18 @@
+{% set docker_compose_dir = '/usr/local/bin' if docker_compose_install_type in ['file', 'url'] else '/usr/bin' %}
+[Unit]
+Description=%i service managed by Docker Compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/opt/%i
+User={{ docker_compose_service_user }}
+Group={{ docker_compose_service_group }}
+ExecStartPre={{ docker_compose_dir }}/docker-compose pull
+ExecStart={{ docker_compose_dir }}/docker-compose up -d --remove-orphans
+ExecStop={{ docker_compose_dir }}/docker-compose stop
+
+[Install]
+WantedBy=default.target

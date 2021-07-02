@@ -20,13 +20,14 @@
   blockinfile:
     dest: "{{ hosts_file }}"
     block: |
-      {{ hostvars[item]['ansible_' + hostvars[item]['management_interface']]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
+      {{ hostvars[item]['ansible_' + hostvars[item]['hosts_interface']]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
     marker: "# {mark} osism.hosts managed block {{ item }}"
   loop: "{{ groups[hosts_group_name]|default([]) }}"
   when:
+    - item not in hosts_ignore
     - hostvars[item] is defined
-    - hostvars[item]['management_interface'] is defined
-    - hostvars[item]['ansible_' + hostvars[item]['management_interface']] is defined
+    - hostvars[item]['hosts_interface'] is defined
+    - hostvars[item]['ansible_' + hostvars[item]['hosts_interface']] is defined
 
 - name: Add additional hosts
   become: true

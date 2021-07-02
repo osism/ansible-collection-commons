@@ -2,7 +2,7 @@
 ##########################
 # generic
 
-management_interface: eth0
+hosts_interface: "{{ management_interface|default('lo') }}"
 
 ##########################
 # role parameters
@@ -15,5 +15,7 @@ hosts_type: block
 hosts_file: /etc/hosts
 hosts_file_backup: true
 hosts_file_reset: false
+
+hosts_ignore: []
 
 hosts_additional_entries: {}

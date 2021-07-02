@@ -1,0 +1,21 @@
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+---
+network:
+  version: {{ network_version }}
+  renderer: {{ network_renderer }}
+
+  bonds:
+    {{ network_bonds|to_nice_yaml(indent=4)|indent(2) }}
+
+  bridges:
+    {{ network_bridges|to_nice_yaml(indent=4)|indent(2) }}
+
+  ethernets:
+    {{ network_ethernets|to_nice_yaml(indent=4)|indent(2) }}
+
+  tunnels:
+    {{ network_tunnels|to_nice_yaml(indent=4)|indent(2) }}
+
+  vlans:
+    {{ network_vlans|to_nice_yaml(indent=4)|indent(2) }}

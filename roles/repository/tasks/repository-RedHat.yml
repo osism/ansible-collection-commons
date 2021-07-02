@@ -1,0 +1,26 @@
+---
+- name: Add mirrorlist repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    mirrorlist: "{{ item.mirrorlist }}"
+    gpgkey: "{{ item.gpgkey }}"
+    gpgcheck: true
+    enabled: true
+    file: "{{ item.file }}"
+  loop: "{{ repositories }}"
+  become: true
+  when: item.mirrorlist is defined
+
+- name: Add metalink repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    metalink: "{{ item.metalink }}"
+    gpgkey: "{{ item.gpgkey }}"
+    gpgcheck: true
+    enabled: true
+    file: "{{ item.file }}"
+  loop: "{{ repositories }}"
+  become: true
+  when: item.metalink is defined

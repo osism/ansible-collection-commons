@@ -1,0 +1,97 @@
+---
+- name: Wait for apt lock
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: Install required packages
+  become: true
+  apt:
+    name: "{{ network_netplan_required_packages }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Remove ifupdown package
+  become: true
+  apt:
+    name: ifupdown
+    state: absent
+
+- name: Create required directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  with_items:
+    - "{{ network_netplan_path }}"
+
+# NOTE: The use of the local actions are a workaround to allow
+#       the use of variables as keys in the dictionaries.
+
+- name: Prepare netplan configuration template
+  local_action:
+    module: ansible.builtin.template
+    src: netplan/01-osism.yaml.j2
+    dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+
+- name: Copy netplan configuration
+  become: true
+  template:
+    src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - Netplan configuration changed
+
+- name: Remove netplan configuration template
+  local_action:
+    module: ansible.builtin.file
+    path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    state: absent
+
+- name: Copy interfaces file
+  become: true
+  template:
+    src: netplan/interfaces.j2
+    dest: "{{ network_interfaces_path }}"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Copy dispatcher scripts
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ network_dispatcher_scripts }}"
+
+- name: Wait for apt lock
+  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+
+- name: "Install {{ network_dispatcher_package_name }} package"
+  become: true
+  apt:
+    name: "{{ network_dispatcher_package_name }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: "Enable {{ network_dispatcher_service_name }} service"
+  become: true
+  service:
+    name: "{{ network_dispatcher_service_name }}"
+    enabled: true
+    state: started

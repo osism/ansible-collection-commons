@@ -15,4 +15,4 @@
     section: "{{ state_section }}"
     option: "{{ state_option }}"
     value: "{{ state_value }}"
-    mode: 0640
+    mode: 0644

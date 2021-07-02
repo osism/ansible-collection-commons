@@ -1,0 +1,53 @@
+---
+- name: Stopp/disable resolvconf service
+  become: true
+  service:
+    name: resolvconf
+    state: stopped
+    enabled: false
+  register: result
+  failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
+
+- name: "Retrieve {{ resolvconf_file }} file status"
+  stat:
+    path: "{{ resolvconf_file }}"
+  register: stat_resolvconf_file
+
+- name: "Archive existing {{ resolvconf_file }} file"
+  become: true
+  synchronize:
+    src: "/etc/resolv.conf"
+    dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
+    archive: true
+  delegate_to: "{{ inventory_hostname }}"
+  when: stat_resolvconf_file.stat.islnk is defined and not stat_resolvconf_file.stat.islnk
+
+- name: Copy configuration files
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - src: resolved.conf.j2
+      dest: /etc/systemd/resolved.conf
+  register: resolved_conf
+
+- name: Restart systemd-resolved service
+  become: true
+  when: resolved_conf.changed  # noqa 503
+  systemd:
+    name: systemd-resolved
+    daemon_reload: true
+    state: restarted
+
+- name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
+  become: true
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: "{{ resolvconf_file }}"
+    state: link
+    force: true
+    mode: 0644

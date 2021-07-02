@@ -155,7 +155,7 @@ class SystemctlScanService(BaseService):
         systemctl_path = self.module.get_bin_path("systemctl", opt_dirs=["/usr/bin", "/usr/local/bin"])
         if systemctl_path is None:
             return None
-        rc, stdout, stderr = self.module.run_command("%s list-unit-files --type=service | tail -n +2 | head -n -2" % systemctl_path, use_unsafe_shell=True)
+        rc, stdout, stderr = self.module.run_command("%s list-unit-files --type=service --type=timer | awk '{ print $1, \"\t\", $2 }' | tail -n +2 | head -n -2" % systemctl_path, use_unsafe_shell=True)
         for line in stdout.split("\n"):
             line_data = line.split()
             if len(line_data) != 2:
