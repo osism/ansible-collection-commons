@@ -4,6 +4,7 @@ upgrade_packages: true
 required_packages_default:
   - ethtool
   - jq
+  - python-dotenv
   - rsyslog
 
 required_packages_extra: []
