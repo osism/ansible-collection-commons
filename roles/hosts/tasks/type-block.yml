@@ -22,7 +22,7 @@
     block: |
       {{ hostvars[item]['ansible_' + hostvars[item]['hosts_interface']]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
     marker: "# {mark} osism.hosts managed block {{ item }}"
-  loop: "{{ groups[hosts_group_name]|default([]) }}"
+  loop: "{{ groups[hosts_group_name]|default([])|sort }}"
   when:
     - item not in hosts_ignore
     - hostvars[item] is defined
