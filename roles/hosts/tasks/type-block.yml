@@ -26,6 +26,7 @@
   when:
     - item not in hosts_ignore
     - hostvars[item] is defined
+    - hostvars[item]['hosts_enable']|default(hosts_enable)|bool
     - hostvars[item]['hosts_interface'] is defined
     - hostvars[item]['ansible_' + hostvars[item]['hosts_interface']] is defined
 

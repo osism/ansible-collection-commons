@@ -2,6 +2,7 @@
 ##########################
 # generic
 
+hosts_enable: true
 hosts_interface: "{{ management_interface|default('lo') }}"
 
 ##########################
