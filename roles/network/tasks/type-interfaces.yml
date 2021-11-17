@@ -36,6 +36,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Install required packages
   become: true

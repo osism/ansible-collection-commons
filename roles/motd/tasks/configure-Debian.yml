@@ -5,6 +5,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Remove update-motd package
   become: true

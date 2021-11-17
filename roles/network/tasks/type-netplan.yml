@@ -4,6 +4,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Install required packages
   become: true
@@ -80,6 +81,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: "Install {{ network_dispatcher_package_name }} package"
   become: true
