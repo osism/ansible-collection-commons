@@ -16,6 +16,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Install docker-compose package
   become: true
