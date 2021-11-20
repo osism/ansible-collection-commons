@@ -70,7 +70,7 @@
 
 - name: Set ssh authorized keys
   become: true
-  authorized_key:
+  ansible.posix.authorized_key:
     key: "{{ item }}"
     user: "{{ operator_user }}"
   loop: "{{ operator_authorized_keys }}"
