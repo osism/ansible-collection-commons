@@ -5,6 +5,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Update package cache
   become: true
@@ -18,6 +19,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Upgrade packages
   become: true
@@ -31,6 +33,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Install required packages
   become: true

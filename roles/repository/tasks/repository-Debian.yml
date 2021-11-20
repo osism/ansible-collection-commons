@@ -32,6 +32,7 @@
   loop:
     - lock
     - lock-frontend
+  changed_when: false
 
 - name: Update package cache
   become: true
