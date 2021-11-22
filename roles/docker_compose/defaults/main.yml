@@ -1,8 +1,0 @@
----
-docker_compose_install_type: package
-
-docker_compose_package_name: docker-compose
-docker_compose_plugin_package_name: docker-compose-plugin
-
-docker_compose_service_user: "{{ operator_user | default('dragon') }}"
-docker_compose_service_group: "{{ operator_group | default('dragon') }}"

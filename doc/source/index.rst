@@ -18,8 +18,6 @@ https://github.com/osism/ansible-collection-commons/issues.
 
 .. zuul:autorole:: configuration
 
-.. zuul:autorole:: docker_compose
-
 .. zuul:autorole:: facts
 
 .. zuul:autorole:: firewall
