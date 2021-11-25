@@ -115,7 +115,7 @@ network_vlans: {}
 
 network_dispatcher_package_name: networkd-dispatcher
 network_dispatcher_service_name: networkd-dispatcher
-network_dispatcher_scripts: {}
+network_dispatcher_scripts: []
 
 # network_dispatcher_scripts:
 #   - src: /opt/configuration/network/vxlan.sh
