@@ -6,16 +6,16 @@ network:
   renderer: {{ network_renderer }}
 
   bonds:
-    {{ network_bonds|to_nice_yaml(indent=4)|indent(2) }}
+    {{ network_bonds|to_nice_yaml(indent=4)|indent(4) }}
 
   bridges:
-    {{ network_bridges|to_nice_yaml(indent=4)|indent(2) }}
+    {{ network_bridges|to_nice_yaml(indent=4)|indent(4) }}
 
   ethernets:
-    {{ network_ethernets|to_nice_yaml(indent=4)|indent(2) }}
+    {{ network_ethernets|to_nice_yaml(indent=4)|indent(4) }}
 
   tunnels:
-    {{ network_tunnels|to_nice_yaml(indent=4)|indent(2) }}
+    {{ network_tunnels|to_nice_yaml(indent=4)|indent(4) }}
 
   vlans:
-    {{ network_vlans|to_nice_yaml(indent=4)|indent(2) }}
+    {{ network_vlans|to_nice_yaml(indent=4)|indent(4) }}
