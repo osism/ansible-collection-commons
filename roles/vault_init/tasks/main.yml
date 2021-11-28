@@ -1,0 +1,31 @@
+---
+- name: Enable kv secrets engine
+  hashivault_secret_engine:
+    authtype: token
+    url: "{{ vault_url }}"
+    token: "{{ vault_token }}"
+    name: kv
+    backend: kv
+
+- name: Enable approle auth module
+  hashivault_auth_method:
+    authtype: token
+    url: "{{ vault_url }}"
+    token: "{{ vault_token }}"
+    method_type: approle
+
+- name: Create read policy
+  hashivault_policy:
+    authtype: token
+    url: "{{ vault_url }}"
+    token: "{{ vault_token }}"
+    name: read
+    rules: "{{ vault_rules_read }}"
+
+- name: Create write policy
+  hashivault_policy:
+    authtype: token
+    url: "{{ vault_url }}"
+    token: "{{ vault_token }}"
+    name: write
+    rules: "{{ vault_rules_write }}"
