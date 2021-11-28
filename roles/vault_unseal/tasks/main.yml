@@ -1,0 +1,15 @@
+---
+- name: Unseal vault with key 1
+  community.docker.docker_container_exec:
+    container: "{{ vault_container_name }}"
+    command: sh -c 'VAULT_ADDR=http://localhost:8200 vault operator unseal {{ vault_unseal_key_1 }}'
+
+- name: Unseal vault with key 2
+  community.docker.docker_container_exec:
+    container: "{{ vault_container_name }}"
+    command: sh -c 'VAULT_ADDR=http://localhost:8200 vault operator unseal {{ vault_unseal_key_2 }}'
+
+- name: Unseal vault with key 3
+  community.docker.docker_container_exec:
+    container: "{{ vault_container_name }}"
+    command: sh -c 'VAULT_ADDR=http://localhost:8200 vault operator unseal {{ vault_unseal_key_3 }}'

@@ -1,0 +1,6 @@
+---
+vault_container_name: manager_vault_1
+
+vault_unseal_key_1: ""
+vault_unseal_key_2: ""
+vault_unseal_key_3: ""
