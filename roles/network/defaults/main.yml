@@ -104,6 +104,12 @@ network_netplan_path: "/etc/netplan"
 network_netplan_file: "01-osism.yaml"
 network_netplan_permissions: 0644
 
+network_netplan_remove_unmanaged_files: true
+network_netplan_managed_files_defaults:
+  - "{{ network_netplan_file }}"
+network_netplan_managed_files_extra: []
+network_netplan_managed_files: "{{ network_netplan_managed_files_defaults + network_netplan_managed_files_extra }}"
+
 network_version: 2
 network_renderer: networkd
 
