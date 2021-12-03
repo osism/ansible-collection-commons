@@ -1,7 +1,7 @@
 ---
 - name: Disable apt-daily timers
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}.timer"
     state: stopped
     enabled: false
