@@ -1,17 +1,17 @@
 ---
 - name: Cleanup installed packages
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ cleanup_packages }}"
     state: absent
 
 - name: Remove useless packages from the cache
   become: true
-  shell:
+  sansible.builtin.shell:
     cmd: "dnf clean all"
     warn: false
 
 - name: Remove dependencies that are no longer required
   become: true
-  dnf:
+  ansible.builtin.dnf:
     autoremove: true

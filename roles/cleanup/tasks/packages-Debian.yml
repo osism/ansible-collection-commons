@@ -1,6 +1,6 @@
 ---
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -8,13 +8,13 @@
 
 - name: Cleanup installed packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ cleanup_packages }}"
     state: absent
     purge: true
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -22,13 +22,13 @@
 
 - name: Uninstall unattended-upgrades package
   become: true
-  apt:
+  ansible.builtin.apt:
     name: unattended-upgrades
     state: absent
     purge: true
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -36,11 +36,11 @@
 
 - name: Remove useless packages from the cache
   become: true
-  apt:
+  ansible.builtin.apt:
     autoclean: true
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -48,5 +48,5 @@
 
 - name: Remove dependencies that are no longer required
   become: true
-  apt:
+  ansible.builtin.apt:
     autoremove: true

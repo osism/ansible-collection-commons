@@ -3,10 +3,10 @@
   scan_services:
 
 - name: Include distribution specific timer tasks
-  include_tasks: "timers-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "timers-{{ ansible_os_family }}.yml"
 
 - name: Include service tasks
-  include_tasks: services.yml
+  ansible.builtin.include_tasks: services.yml
 
 - name: Include packages tasks
-  include_tasks: "packages-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "packages-{{ ansible_os_family }}.yml"
