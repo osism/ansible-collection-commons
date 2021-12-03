@@ -1,12 +1,12 @@
 ---
 - name: Update package cache
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
 
 - name: Install required packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: present
   loop:
