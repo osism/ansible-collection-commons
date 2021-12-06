@@ -1,7 +1,7 @@
 ---
 - name: Start sys-kernel-config mount
   become: true
-  service:
+  ansible.builtin.service:
     name: sys-kernel-config.mount
     state: started
     enabled: true
