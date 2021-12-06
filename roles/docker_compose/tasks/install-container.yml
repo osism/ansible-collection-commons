@@ -1,6 +1,6 @@
 ---
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -8,13 +8,13 @@
 
 - name: Ensure docker-compose is not installed
   become: true
-  apt:
+  ansible.builtin.apt:
     name: docker-compose
     state: absent
 
 - name: Block installation of docker-compose package
   become: true
-  copy:
+  ansible.builtin.copy:
     content: |
       Package: docker-compose
       Pin: version *
@@ -24,7 +24,7 @@
 
 - name: Copy docker-compose script
   become: true
-  template:
+  ansible.builtin.template:
     src: docker-compose.j2
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"

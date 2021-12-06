@@ -1,18 +1,18 @@
 ---
 - name: Remove docker-compose apt preferences file
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/apt/preferences.d/docker-compose
     state: absent
 
 - name: Remove docker-compose binary
   become: true
-  file:
+  ansible.builtin.file:
     path: /usr/local/bin/docker-compose
     state: absent
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -20,7 +20,7 @@
 
 - name: Install docker-compose package
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ docker_compose_package_name }}"
     state: present
     install_recommends: false
