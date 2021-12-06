@@ -1,7 +1,7 @@
 ---
 - name: Copy /etc/hosts file
   become: true
-  template:
+  ansible.builtin.template:
     src: "hosts-template.j2"
     dest: "{{ hosts_file }}"
     owner: root

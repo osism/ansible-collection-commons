@@ -1,12 +1,12 @@
 ---
 - name: Get /etc/hosts file
-  slurp:
+  ansible.builtin.slurp:
     src: "{{ hosts_file }}"
   register: hosts
 
 - name: Copy initial /etc/hosts file
   become: true
-  template:
+  ansible.builtin.template:
     src: "hosts-block.j2"
     dest: "{{ hosts_file }}"
     owner: root
@@ -17,7 +17,7 @@
 
 - name: Add hosts
   become: true
-  blockinfile:
+  ansible.builtin.blockinfile:
     dest: "{{ hosts_file }}"
     block: |
       {{ hostvars[item]['ansible_' + hostvars[item]['hosts_interface']]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
@@ -32,7 +32,7 @@
 
 - name: Add additional hosts
   become: true
-  blockinfile:
+  ansible.builtin.blockinfile:
     dest: "{{ hosts_file }}"
     block: |
       {{ item.1 }} {{ item.0 }} {{ item.0.split('.')[0] }}
