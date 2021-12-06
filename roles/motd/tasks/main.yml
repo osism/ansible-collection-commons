@@ -3,11 +3,11 @@
   scan_services:
 
 - name: Include distribution specific configure tasks
-  include_tasks: "configure-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}.yml"
 
 - name: Copy motd file
   become: true
-  copy:
+  ansible.builtin.copy:
     content: "{{ motd_content }}"
     dest: "{{ motd_path }}"
     owner: root
