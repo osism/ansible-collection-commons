@@ -10,6 +10,7 @@ ff00::0          ip6-mcastprefix
 ff02::1          ip6-allnodes
 ff02::2          ip6-allrouters
 
+{% if not hosts_use_dns_as_single_source_of_truth|bool %}
 # Hosts defined in the inventory
 
 {% for item in groups[hosts_group_name]|default([])|sort %}
@@ -17,6 +18,7 @@ ff02::2          ip6-allrouters
 {{ hostvars[item]['ansible_' + hostvars[item]['hosts_interface']|default(hosts_interface)]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
 {% endif %}
 {% endfor %}
+{% endif %}
 {% if hosts_additional_entries|length %}
 
 # Additional hosts defined in the configuration
