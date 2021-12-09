@@ -1,7 +1,7 @@
 ---
 - name: Disable fastmirror plugin
   become: true
-  ini_file:
+  community.general.ini_file:
     path: /etc/yum/pluginconf.d/fastestmirror.conf
     section: main
     option: enabled
@@ -10,7 +10,7 @@
 
 - name: Configure proxy parameters for yum
   become: true
-  ini_file:
+  community.general.ini_file:
     path: /etc/yum.conf
     section: main
     option: proxy
