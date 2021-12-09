@@ -1,6 +1,6 @@
 ---
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -8,20 +8,20 @@
 
 - name: Install apt-transport-https package
   become: true
-  apt:
+  ansible.builtin.apt:
     name: apt-transport-https
     state: present
   when: sysdig_configure_repository|bool
 
 - name: Add repository gpg key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ sysdig_debian_repository_key }}"
   when: sysdig_configure_repository|bool
 
 - name: Add repository
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ sysdig_debian_repository }}"
     state: present
     filename: sysdig
@@ -30,17 +30,17 @@
   when: sysdig_configure_repository|bool
 
 - name: Check if /var/run/reboot-required exist
-  stat:
+  ansible.builtin.stat:
     path: /var/run/reboot-required
   register: result
 
 - name: Print message if /var/run/reboot-required exist
-  debug:
+  ansible.builtin.debug:
     msg: "Reboot of {{ inventory_hostname }} required to get the latest kernel running"
   when: result.stat.islnk is defined
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -48,13 +48,13 @@
 
 - name: Install sysdig package
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ sysdig_package_name }}"
     state: present
 
 - name: Persist sysdig_probe kernel module via modules-load.d
   become: true
-  copy:
+  ansible.builtin.copy:
     content: sysdig_probe
     dest: /etc/modules-load.d/sysdig.conf
     owner: root
@@ -63,6 +63,6 @@
 
 - name: Load sysdig_probe kernel module
   become: true
-  modprobe:
+  community.general.modprobe:
     name: sysdig_probe
     state: present
