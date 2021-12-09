@@ -1,6 +1,6 @@
 ---
 - name: Add mirrorlist repositories
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.description }}"
     mirrorlist: "{{ item.mirrorlist }}"
@@ -13,7 +13,7 @@
   when: item.mirrorlist is defined
 
 - name: Add metalink repositories
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.description }}"
     metalink: "{{ item.metalink }}"

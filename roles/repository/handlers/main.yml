@@ -1,6 +1,6 @@
 ---
 - name: Force update of package cache
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     cache_valid_time: "{{ repository_cache_valid_time }}"
