@@ -1,16 +1,16 @@
 ---
 - name: Gather variables for each operating system
-  include_vars: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Create operator group
   become: true
-  group:
+  ansible.builtin.group:
     name: "{{ operator_group }}"
     gid: "{{ operator_group_id }}"
 
 - name: Create operator user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ operator_user }}"
     comment: OSISM operator user
     shell: "{{ operator_shell }}"
@@ -19,7 +19,7 @@
 
 - name: Add operator user to additional groups
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ operator_user }}"
     groups: "{{ item }}"
     append: true
@@ -27,7 +27,7 @@
 
 - name: Copy operator user sudoers file
   become: true
-  template:
+  ansible.builtin.template:
     src: operator-sudoers.j2
     dest: "/etc/sudoers.d/{{ operator_user }}-sudoers"
     owner: root
@@ -39,7 +39,7 @@
 
 - name: Get home directory of operator user
   become: true
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     getent passwd {{ operator_user }} | cut -d: -f6
   args:
@@ -49,7 +49,7 @@
 
 - name: Set language variables in .bashrc configuration file
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ operator_home.stdout }}/.bashrc"
     line: "{{ item }}"
     create: true
@@ -61,7 +61,7 @@
 
 - name: Create .ssh directory
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ operator_home.stdout }}/.ssh"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
@@ -78,7 +78,7 @@
 
 - name: Set password of operator user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ operator_user }}"
     update_password: always
     password: "{{ operator_password }}"
