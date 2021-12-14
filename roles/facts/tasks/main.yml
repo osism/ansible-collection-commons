@@ -1,7 +1,7 @@
 ---
 - name: Create custom facts directory
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/ansible/facts.d
     state: "directory"
     owner: root
@@ -10,7 +10,7 @@
 
 - name: Copy fact files
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}.fact"
     dest: "/etc/ansible/facts.d/{{ item }}.fact"
     owner: root
