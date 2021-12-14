@@ -1,7 +1,7 @@
 ---
 - name: Create custom facts directory
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/ansible/facts.d
     state: "directory"
     owner: root
