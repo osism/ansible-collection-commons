@@ -1,20 +1,20 @@
 ---
 - name: Update package cache
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name: '*'
     update_cache: true
     state: latest
 
 - name: Upgrade packages
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name: '*'
     state: latest
   when: upgrade_packages|bool
 
 - name: Install required packages
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ required_packages }}"
     state: present
