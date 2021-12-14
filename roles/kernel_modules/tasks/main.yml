@@ -1,7 +1,7 @@
 ---
 - name: Enable kernel modules
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     line: "{{ item }}"
     dest: /etc/modules
     mode: 0644
@@ -10,7 +10,7 @@
 
 - name: Load kernel module
   become: true
-  modprobe:
+  community.general.modprobe:
     name: "{{ item }}"
     state: present
   loop: "{{ kernel_modules }}"
