@@ -1,13 +1,13 @@
 ---
 - name: Include distribution specific tasks
-  include: "{{ ansible_os_family }}.yml"
+  ansible.builtin.include: "{{ ansible_os_family }}.yml"
   when:
     - proxy_package_manager|bool
     - proxy_proxies != {}
 
 - name: Set system wide settings in environment file
   become: true
-  blockinfile:
+  ansible.builtin.blockinfile:
     dest: /etc/environment
     marker: "# {mark} ANSIBLE MANAGED BLOCK (osism.proxy)"
     block: |

@@ -1,7 +1,7 @@
 ---
 - name: Configure proxy parameters for apt
   become: true
-  template:
+  ansible.builtin.template:
     src: proxy-apt.j2
     dest: "{{ proxy_apt_conf_path }}"
     owner: root
