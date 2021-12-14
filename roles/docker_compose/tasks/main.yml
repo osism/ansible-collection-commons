@@ -1,15 +1,15 @@
 ---
 - name: This family is not supported
-  fail:
+  ansible.builtin.fail:
     msg: "This family, {{ ansible_os_family }}, is not supported yet."
   when: ansible_os_family != "Debian"
 
 - name: Include install type specific tasks
-  include: "install-{{ docker_compose_install_type }}.yml"
+  ansible.builtin.include: "install-{{ docker_compose_install_type }}.yml"
 
 - name: Copy docker-compose systemd unit file
   become: true
-  template:
+  ansible.builtin.template:
     src: docker-compose.service.j2
     dest: "/etc/systemd/system/docker-compose@.service"
     mode: 0644
@@ -19,6 +19,6 @@
 
 - name: Reload systemd daemon if docker-compose systemd unit file is changed
   become: true
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
   when: systemd_docker_compose_template is changed
