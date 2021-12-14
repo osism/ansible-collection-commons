@@ -1,6 +1,6 @@
 ---
 - name: Ensure .ssh/config.d exist
-  file:
+  ansible.builtin.file:
     path: "{{ sshconfig_destination }}/config.d"
     state: directory
     owner: "{{ operator_user }}"
@@ -8,7 +8,7 @@
     mode: 0700
 
 - name: Ensure config for each host exist
-  template:
+  ansible.builtin.template:
     src: config.j2
     dest: "{{ sshconfig_destination }}/config.d/{{ sshconfig_order }}-{{ hostvars[item].inventory_hostname_short }}"
     mode: 0600
@@ -16,7 +16,7 @@
   loop: "{{ groups[sshconfig_groupname] }}"
 
 - name: Assemble ssh config
-  assemble:
+  ansible.builtin.assemble:
     src: "{{ sshconfig_destination }}/config.d"
     dest: "{{ sshconfig_destination }}/config"
     delimiter: "####################"
