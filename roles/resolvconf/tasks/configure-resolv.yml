@@ -1,7 +1,7 @@
 ---
 - name: Stopp/disable resolvconf service
   become: true
-  service:
+  ansible.builtin.service:
     name: resolvconf
     state: stopped
     enabled: false
@@ -9,13 +9,13 @@
   failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
 
 - name: "Retrieve {{ resolvconf_file }} file status"
-  stat:
+  ansible.builtin.stat:
     path: "{{ resolvconf_file }}"
   register: stat_resolvconf_file
 
 - name: "Archive existing {{ resolvconf_file }} file"
   become: true
-  synchronize:
+  ansible.posix.synchronize:
     src: "/etc/resolv.conf"
     dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
     archive: true
@@ -24,7 +24,7 @@
 
 - name: Copy configuration files
   become: true
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
@@ -38,14 +38,14 @@
 - name: Restart systemd-resolved service
   become: true
   when: resolved_conf.changed  # noqa 503
-  systemd:
+  ansible.builtin.systemd:
     name: systemd-resolved
     daemon_reload: true
     state: restarted
 
 - name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
   become: true
-  file:
+  ansible.builtin.file:
     src: /run/systemd/resolve/stub-resolv.conf
     dest: "{{ resolvconf_file }}"
     state: link

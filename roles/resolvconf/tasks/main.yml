@@ -1,6 +1,6 @@
 ---
 - name: Check minimum number of name servers
-  fail:
+  ansible.builtin.fail:
     msg: |
       {{ resolvconf_minimum_number_of_nameservers }} or more name servers
       must be configured. Currently only {{ resolvconf_nameserver|length }}
@@ -8,5 +8,5 @@
   when: resolvconf_nameserver|length < resolvconf_minimum_number_of_nameservers|int
 
 - name: Include resolvconf tasks
-  include: "configure-resolv.yml"
+  ansible.builtin.include: "configure-resolv.yml"
   when: resolvconf_nameserver|length > 0
