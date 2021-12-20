@@ -1,7 +1,7 @@
 ---
 - name: Copy ufw.conf configuration file
   become: true
-  template:
+  ansible.builtin.template:
     src: ufw.conf.j2
     dest: /etc/ufw/ufw.conf
     mode: 0644
@@ -9,7 +9,7 @@
 
 - name: "Start {{ ufw_service_name }} service"
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ ufw_service_name }}"
     state: started
     enabled: true

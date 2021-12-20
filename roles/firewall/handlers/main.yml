@@ -1,6 +1,6 @@
 ---
 - name: "Restart {{ ufw_service_name }} service"
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ ufw_service_name }}"
     state: restarted
