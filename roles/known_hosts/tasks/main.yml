@@ -5,7 +5,7 @@
 
 - name: Set file permissions
   ansible.builtin.file:
-    path: "{{ known_hosts_destination }}"
+    path: "{{ known_hosts_destination }}/known_hosts"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
-    mode: "0644"
+    mode: "0600"
