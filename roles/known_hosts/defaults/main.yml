@@ -1,0 +1,12 @@
+---
+##########################
+# operator user
+
+operator_user: dragon
+operator_group: "{{ operator_user }}"
+
+##########################
+# known_hosts
+
+known_hosts_group_name: all
+known_hosts_destination: "/home/{{ operator_user }}/.ssh"

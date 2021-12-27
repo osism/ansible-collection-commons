@@ -1,0 +1,17 @@
+---
+- name: Include secrets
+  ansible.builtin.include_vars:
+    name: secrets
+    file: "{{ vault_secrets_path }}"
+
+- name: Create secret
+  no_log: true
+  hashivault_secret:
+    authtype: token
+    url: "{{ vault_url }}"
+    token: "{{ vault_token }}"
+    mount_point: kv
+    secret: "{{ item.key }}"
+    data:
+      value: "{{ item.value }}"
+  loop: "{{ secrets|dict2items }}"
