@@ -1,0 +1,11 @@
+---
+- name: Run ssh-keyscan for all hosts
+  ansible.builtin.shell: "ssh-keyscan {{ item }}  >> {{ known_hosts_destination }}/known_hosts"
+  loop: "{{ groups[known_hosts_group_name] }}"
+
+- name: Set file permissions
+  ansible.builtin.file:
+    path: "{{ known_hosts_destination }}"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: "0644"
