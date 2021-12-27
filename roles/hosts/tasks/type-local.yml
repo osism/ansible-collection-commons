@@ -1,6 +1,6 @@
 ---
 - name: Create temporary file
-  tempfile:
+  ansible.builtin.tempfile:
     state: file
     suffix: hosts
   register: hosts_tempfile
@@ -8,7 +8,7 @@
   run_once: true
 
 - name: Generate temporary /etc/hosts file
-  template:
+  ansible.builtin.template:
     src: "hosts-template.j2"
     dest: "{{ hosts_tempfile.path }}"
     mode: 0644
@@ -17,7 +17,7 @@
 
 - name: Copy /etc/hosts file
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "{{ hosts_tempfile.path }}"
     dest: "{{ hosts_file }}"
     owner: root
@@ -26,7 +26,7 @@
     backup: "{{ hosts_file_backup }}"
 
 - name: Delete temporary file
-  file:
+  ansible.builtin.file:
     path: "{{ hosts_tempfile.path }}"
     state: absent
   delegate_to: localhost
