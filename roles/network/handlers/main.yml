@@ -1,12 +1,12 @@
 ---
 - name: Netplan configuration changed
   become: true
-  command: netplan apply
+  ansible.builtin.command: netplan apply
   when: network_allow_service_restart
 
 - name: Interfaces file changed
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ network_service }}"
     state: restarted
   when: network_allow_service_restart
@@ -17,7 +17,7 @@
 
 - name: Restart network service
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ network_service }}"
     state: restarted
     arguments: "INTERFACE={{ item.item.0 }}"
@@ -33,7 +33,7 @@
 
 - name: Restart network command
   become: true
-  shell: >
+  ansible.builtin.shell: >
     {{ network_interface_restart_commands[ network_restart_method ] }}
   when: >
     network_allow_service_restart

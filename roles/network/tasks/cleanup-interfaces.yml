@@ -1,6 +1,6 @@
 ---
 - name: List existing configuration files
-  command: "find {{ network_interface_path }} -type f"
+  ansible.builtin.command: "find {{ network_interface_path }} -type f"
   changed_when: false
   register: network_existing_files
 
@@ -8,7 +8,7 @@
 #       check mode doesn't store any of those so use module args
 
 - name: Set network_configured_files fact
-  set_fact:
+  ansible.builtin.set_fact:
     network_configured_files: >-
       [{% for item in network_configuration_result.results | default([]) -%}
         u"{{ item.dest | default(item.path) | default(item.invocation.module_args.dest) }}"
@@ -17,7 +17,7 @@
 
 - name: Remove unused configuration files
   become: true
-  file:
+  ansible.builtin.file:
     dest: "{{ item }}"
     state: absent
   when: item not in network_configured_files

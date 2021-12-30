@@ -1,6 +1,6 @@
 ---
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -8,7 +8,7 @@
 
 - name: Install required packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ network_netplan_required_packages }}"
     state: present
     update_cache: true
@@ -16,13 +16,13 @@
 
 - name: Remove ifupdown package
   become: true
-  apt:
+  ansible.builtin.apt:
     name: ifupdown
     state: absent
 
 - name: Create required directories
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     mode: 0755
@@ -42,7 +42,7 @@
 
 - name: Copy netplan configuration
   become: true
-  template:
+  ansible.builtin.template:
     src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
     dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
     mode: 0644
@@ -59,7 +59,7 @@
 
 - name: Copy interfaces file
   become: true
-  template:
+  ansible.builtin.template:
     src: netplan/interfaces.j2
     dest: "{{ network_interfaces_path }}"
     mode: 0644
@@ -68,7 +68,7 @@
 
 - name: Copy dispatcher scripts
   become: true
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "/etc/networkd-dispatcher/{{ item.dest }}"
     mode: 0755
@@ -77,7 +77,7 @@
   loop: "{{ network_dispatcher_scripts }}"
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -85,7 +85,7 @@
 
 - name: "Install {{ network_dispatcher_package_name }} package"
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ network_dispatcher_package_name }}"
     state: present
     update_cache: true
@@ -93,12 +93,12 @@
 
 - name: "Enable {{ network_dispatcher_service_name }} service"
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ network_dispatcher_service_name }}"
     enabled: true
     state: started
 
 - name: Include cleanup tasks
-  include: cleanup-netplan.yml
+  ansible.builtin.include: cleanup-netplan.yml
   when:
     - network_netplan_remove_unmanaged_files|bool

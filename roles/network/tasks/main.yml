@@ -1,7 +1,7 @@
 ---
 - name: Include type specific tasks
-  include: "type-{{ network_type }}.yml"
+  ansible.builtin.include: "type-{{ network_type }}.yml"
 
 - name: Include lldpd tasks
-  include: lldpd.yml
+  ansible.builtin.include: lldpd.yml
   when: network_lldpd|bool

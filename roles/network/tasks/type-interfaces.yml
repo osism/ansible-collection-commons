@@ -1,13 +1,13 @@
 ---
 - name: Get existing netplan configuration files
-  find:
+  ansible.builtin.find:
     paths: "{{ network_netplan_path }}"
     patterns: "*.yml,*.yaml"
   register: netplan_configuration_files
 
 - name: Backup existing netplan configuration files
   become: true
-  copy:
+  ansible.builtin.copy:
     src: "{{ item['path'] }}"
     dest: "{{ item['path'] }}.unused"
     remote_src: true
@@ -15,13 +15,13 @@
 
 - name: Remove existing netplan configuration files
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ item['path'] }}"
     state: absent
   with_items: "{{ netplan_configuration_files['files'] }}"
 
 - name: Gather variables for each operating system
-  include_vars: "{{ item }}"
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
     - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
@@ -32,7 +32,7 @@
     - always
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -40,7 +40,7 @@
 
 - name: Install required packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ network_interface_required_packages }}"
     state: present
     update_cache: true
@@ -49,7 +49,7 @@
 
 - name: Create required directories
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
   with_items:
@@ -58,7 +58,7 @@
 
 - name: Copy interfaces file
   become: true
-  template:
+  ansible.builtin.template:
     src: interfaces/interfaces.j2
     dest: "{{ network_interfaces_path }}"
   notify:
@@ -67,7 +67,7 @@
 
 - name: Copy device configuration files
   become: true
-  template:
+  ansible.builtin.template:
     src: interfaces/device.j2
     dest: "{{ network_interface_path }}/device-{{ item.0 }}"
     mode: "{{ network_interface_permissions }}"
@@ -79,7 +79,7 @@
     - Restart network command
 
 - name: Include cleanup tasks
-  include: cleanup-interfaces.yml
+  ansible.builtin.include: cleanup-interfaces.yml
   when:
     - network_manage_devices
     - network_interfaces|length > 0
