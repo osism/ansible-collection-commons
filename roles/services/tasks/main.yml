@@ -1,16 +1,16 @@
 ---
 - name: Collect facts about services
-  scan_services:
+  ansible.builtin.service_facts:
 
 - name: Check services
-  debug:
+  ansible.builtin.debug:
     msg: "The {{ item }} service is running. It should be deactivated and not run."
   loop: "{{ services_warning }}"
   when: item + ".service" in services
 
 - name: Start/enable required services
   become: true
-  service:
+  ansible.builtin.service:
     name: "{{ item }}"
     state: started
     enabled: true
