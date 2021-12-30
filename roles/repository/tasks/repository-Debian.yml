@@ -1,14 +1,14 @@
 ---
 - name: Add repository keys via URLs
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ item }}"
     state: present
   loop: "{{ repository_keys }}"
 
 - name: Add repository keys via keyservers
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     id: "{{ item.key }}"
     keyserver: "{{ item.value }}"
     state: present
@@ -18,7 +18,7 @@
 
 - name: Copy source.list file
   become: true
-  template:
+  ansible.builtin.template:
     src: source.list.j2
     dest: /etc/apt/sources.list
     owner: root
@@ -28,7 +28,7 @@
   notify: Force update of package cache
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -36,5 +36,5 @@
 
 - name: Update package cache
   become: true
-  apt:
+  ansible.builtin.apt:
     cache_valid_time: "{{ repository_cache_valid_time }}"

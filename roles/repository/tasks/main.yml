@@ -1,6 +1,6 @@
 ---
 - name: Gather variables for each operating system
-  include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
 
 - name: Include distribution specific repository tasks
-  include_tasks: "repository-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "repository-{{ ansible_os_family }}.yml"
