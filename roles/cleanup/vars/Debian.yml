@@ -1,5 +1,4 @@
 ---
-# distribution specific packages
 cleanup_services_distribution: []
 cleanup_packages_distribution:
   - libvirt-bin

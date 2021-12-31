@@ -1,0 +1,13 @@
+---
+- name: Gather variables for each operating system
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Cleanup services
+  become: true
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  ignore_errors: true
+  loop: "{{ cleanup_services }}"
+  when: item + ".service" in services
