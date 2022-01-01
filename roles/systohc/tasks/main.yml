@@ -1,6 +1,6 @@
 ---
 - name: Sync hardware clock
   become: true
-  ansible.buitlin.command: hwclock --systohc
+  ansible.builtin.command: hwclock --systohc
   changed_when: false
   when: systohc|bool
