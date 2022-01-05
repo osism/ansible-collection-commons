@@ -9,6 +9,8 @@ name: Test role facts
       - 'molecule/default/*'
       - 'molecule/facts/**'
       - 'roles/facts/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-facts.yml'

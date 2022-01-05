@@ -9,6 +9,8 @@ name: Test role lynis
       - 'molecule/delegated/*'
       - 'molecule/lynis/**'
       - 'roles/lynis/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-lynis.yml'

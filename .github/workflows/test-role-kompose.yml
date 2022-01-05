@@ -9,6 +9,8 @@ name: Test role kompose
       - 'molecule/default/*'
       - 'molecule/kompose/**'
       - 'roles/kompose/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-kompose.yml'

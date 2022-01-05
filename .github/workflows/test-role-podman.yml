@@ -9,6 +9,8 @@ name: Test role podman
       - 'molecule/default/*'
       - 'molecule/podman/**'
       - 'roles/podman/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-podman.yml'

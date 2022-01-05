@@ -9,6 +9,8 @@ name: Test role microcode
       - 'molecule/default/*'
       - 'molecule/microcode/**'
       - 'roles/microcode/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-microcode.yml'

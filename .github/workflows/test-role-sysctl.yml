@@ -9,6 +9,8 @@ name: Test role sysctl
       - 'molecule/default/*'
       - 'molecule/sysctl/**'
       - 'roles/sysctl/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-sysctl.yml'

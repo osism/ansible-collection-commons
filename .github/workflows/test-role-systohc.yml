@@ -9,6 +9,8 @@ name: Test role systohc
       - 'molecule/default/*'
       - 'molecule/systohc/**'
       - 'roles/systohc/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-systohc.yml'

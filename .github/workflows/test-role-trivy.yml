@@ -9,6 +9,8 @@ name: Test role trivy
       - 'molecule/default/*'
       - 'molecule/trivy/**'
       - 'roles/trivy/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-trivy.yml'

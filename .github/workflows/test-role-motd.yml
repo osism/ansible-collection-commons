@@ -9,6 +9,8 @@ name: Test role motd
       - 'molecule/default/*'
       - 'molecule/motd/**'
       - 'roles/motd/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-motd.yml'

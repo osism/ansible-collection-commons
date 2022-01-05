@@ -9,6 +9,8 @@ name: Test role proxy
       - 'molecule/default/*'
       - 'molecule/proxy/**'
       - 'roles/proxy/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-proxy.yml'

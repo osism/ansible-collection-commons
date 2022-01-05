@@ -9,6 +9,8 @@ name: Test role docker_compose
       - 'molecule/default/*'
       - 'molecule/docker_compose/**'
       - 'roles/docker_compose/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-docker_compose.yml'
