@@ -9,6 +9,8 @@ name: Test role timezone
       - 'molecule/default/*'
       - 'molecule/timezone/**'
       - 'roles/timezone/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-timezone.yml'

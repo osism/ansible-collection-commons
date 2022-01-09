@@ -9,6 +9,8 @@ name: Test role sshconfig
       - 'molecule/default/*'
       - 'molecule/sshconfig/**'
       - 'roles/sshconfig/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-sshconfig.yml'

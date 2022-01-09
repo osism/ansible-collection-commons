@@ -9,6 +9,8 @@ name: Test role firewall
       - 'molecule/delegated/*'
       - 'molecule/firewall/**'
       - 'roles/firewall/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-firewall.yml'

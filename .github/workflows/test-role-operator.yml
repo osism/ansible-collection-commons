@@ -9,6 +9,8 @@ name: Test role operator
       - 'molecule/default/*'
       - 'molecule/operator/**'
       - 'roles/operator/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-operator.yml'

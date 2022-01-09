@@ -9,6 +9,8 @@ name: Test role configfs
       - 'molecule/delegated/*'
       - 'molecule/configfs/**'
       - 'roles/configfs/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-configfs.yml'

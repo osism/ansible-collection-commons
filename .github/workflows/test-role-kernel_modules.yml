@@ -9,6 +9,8 @@ name: Test role kernel_modules
       - 'molecule/delegated/*'
       - 'molecule/kernel_modules/**'
       - 'roles/kernel_modules/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-kernel_modules.yml'

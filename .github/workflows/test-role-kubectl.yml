@@ -9,6 +9,8 @@ name: Test role kubectl
       - 'molecule/default/*'
       - 'molecule/kubectl/**'
       - 'roles/kubectl/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-kubectl.yml'

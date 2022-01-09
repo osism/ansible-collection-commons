@@ -9,6 +9,8 @@ name: Test role ipmitool
       - 'molecule/delegated/*'
       - 'molecule/ipmitool/**'
       - 'roles/ipmitool/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-ipmitool.yml'

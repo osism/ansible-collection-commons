@@ -9,6 +9,8 @@ name: Test role hostname
       - 'molecule/default/*'
       - 'molecule/hostname/**'
       - 'roles/hostname/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-hostname.yml'

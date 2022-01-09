@@ -9,6 +9,8 @@ name: Test role repository
       - 'molecule/default/*'
       - 'molecule/repository/**'
       - 'roles/repository/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-repository.yml'

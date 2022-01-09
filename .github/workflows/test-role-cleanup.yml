@@ -9,6 +9,8 @@ name: Test role cleanup
       - 'molecule/default/*'
       - 'molecule/cleanup/**'
       - 'roles/cleanup/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-cleanup.yml'

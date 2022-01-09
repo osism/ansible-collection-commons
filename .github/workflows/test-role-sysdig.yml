@@ -9,6 +9,8 @@ name: Test role sysdig
       - 'molecule/delegated/*'
       - 'molecule/sysdig/**'
       - 'roles/sysdig/**'
+    branches:
+      - main
   pull_request:
     paths:
       - '.github/workflows/test-role-sysdig.yml'
