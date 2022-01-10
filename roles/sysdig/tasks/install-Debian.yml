@@ -46,23 +46,23 @@
     - lock-frontend
   changed_when: false
 
-- name: Install sysdig package
+- name: "Install {{ sysdig_package_name }} package"
   become: true
   ansible.builtin.apt:
     name: "{{ sysdig_package_name }}"
     state: present
 
-- name: Persist sysdig_probe kernel module via modules-load.d
+- name: "Persist {{ sysdig_kernel_module_name }} kernel module via modules-load.d"
   become: true
   ansible.builtin.copy:
-    content: sysdig_probe
+    content: "{{ sysdig_kernel_module_name }}"
     dest: /etc/modules-load.d/sysdig.conf
     owner: root
     group: root
     mode: 0644
 
-- name: Load sysdig_probe kernel module
+- name: "Load {{ sysdig_kernel_module_name }} kernel module"
   become: true
   community.general.modprobe:
-    name: sysdig_probe
+    name: "{{ sysdig_kernel_module_name }}"
     state: present

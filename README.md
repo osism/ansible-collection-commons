@@ -31,7 +31,7 @@ The following Ansible roles are included in this collection.
 | sshconfig            | ![Test role sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sshconfig/badge.svg)           |
 | state                | ![Test role state](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20state/badge.svg)                   |
 | sysctl               | ![Test role sysctl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysctl/badge.svg)                 |
-| sysdig               | ![Test role sysdig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysdig/badge.svg)                 |
+| sysdig               |                                                                                                                                   |
 | systohc              | ![Test role systohc](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20systohc/badge.svg)               |
 | timezone             | ![Test role timezone](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20timezone/badge.svg)             |
 | trivy                | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                   |
