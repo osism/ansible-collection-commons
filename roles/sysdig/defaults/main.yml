@@ -1,11 +1,7 @@
 ---
-##########################
-# packages
-
 sysdig_package_name: sysdig
 
-##########################
-# repository
+sysdig_kernel_module_name: sysdig_probe
 
 sysdig_configure_repository: true
 
