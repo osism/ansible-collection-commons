@@ -11,6 +11,7 @@
     src: "{{ item['path'] }}"
     dest: "{{ item['path'] }}.unused"
     remote_src: true
+    mode: 0644
   with_items: "{{ netplan_configuration_files['files'] }}"
 
 - name: Remove existing netplan configuration files
@@ -52,6 +53,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
+    mode: 0755
   with_items:
     - "{{ network_interface_path }}"
   when: network_interfaces|length > 0
@@ -61,6 +63,7 @@
   ansible.builtin.template:
     src: interfaces/interfaces.j2
     dest: "{{ network_interfaces_path }}"
+    mode: 0644
   notify:
     - Interfaces file changed
   when: network_interfaces|length > 0
@@ -79,7 +82,7 @@
     - Restart network command
 
 - name: Include cleanup tasks
-  ansible.builtin.include: cleanup-interfaces.yml
+  ansible.builtin.include_tasks: cleanup-interfaces.yml
   when:
     - network_manage_devices
     - network_interfaces|length > 0

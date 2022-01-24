@@ -8,5 +8,5 @@
   when: resolvconf_nameserver|length < resolvconf_minimum_number_of_nameservers|int
 
 - name: Include resolvconf tasks
-  ansible.builtin.include: "configure-resolv.yml"
+  ansible.builtin.include_tasks: "configure-resolv.yml"
   when: resolvconf_nameserver|length > 0

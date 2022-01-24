@@ -1,12 +1,13 @@
 ---
 - name: Include distribution specific install tasks
-  ansible.builtin.include: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Persist kernel modules via modules-load.d
   become: true
   ansible.builtin.template:
     src: module-load.conf.j2
     dest: "/etc/modules-load.d/{{ item }}.conf"
+    mode: 0644
   loop: "{{ ipmitool_kernel_modules }}"
 
 - name: Load required kernel modules

@@ -8,6 +8,6 @@
     name: "{{ item }}"
     state: stopped
     enabled: false
-  ignore_errors: true
+  failed_when: false
   loop: "{{ cleanup_services }}"
   when: item + ".service" in services
