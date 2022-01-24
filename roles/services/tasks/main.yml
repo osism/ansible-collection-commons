@@ -14,6 +14,6 @@
     name: "{{ item }}"
     state: started
     enabled: true
-  ignore_errors: true
+  failed_when: false
   loop: "{{ services_required }}"
   when: item + ".service" in services

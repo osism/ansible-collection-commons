@@ -1,14 +1,14 @@
 ---
 - name: Update package cache
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.dnf:  # noqa package-latest
     name: '*'
     update_cache: true
     state: latest
 
 - name: Upgrade packages
   become: true
-  ansible.builtin.dnf:
+  ansible.builtin.dnf:  # noqa package-latest
     name: '*'
     state: latest
   when: upgrade_packages|bool

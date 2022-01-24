@@ -5,7 +5,7 @@
   when: ansible_os_family != "Debian"
 
 - name: Include install type specific tasks
-  ansible.builtin.include: "install-{{ docker_compose_install_type }}.yml"
+  ansible.builtin.include_tasks: "install-{{ docker_compose_install_type }}.yml"
 
 - name: Copy docker-compose systemd unit file
   become: true
@@ -15,10 +15,4 @@
     mode: 0644
     owner: root
     group: root
-  register: systemd_docker_compose_template
-
-- name: Reload systemd daemon if docker-compose systemd unit file is changed
-  become: true
-  ansible.builtin.systemd:
-    daemon_reload: true
-  when: systemd_docker_compose_template is changed
+  notify: Reload systemd daemon

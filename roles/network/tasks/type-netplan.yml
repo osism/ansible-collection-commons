@@ -35,10 +35,11 @@
 #       the use of variables as keys in the dictionaries.
 
 - name: Prepare netplan configuration template
-  local_action:
+  local_action:  # noqa deprecated-local-action
     module: ansible.builtin.template
     src: netplan/01-osism.yaml.j2
     dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    mode: 0644
 
 - name: Copy netplan configuration
   become: true
@@ -52,7 +53,7 @@
     - Netplan configuration changed
 
 - name: Remove netplan configuration template
-  local_action:
+  local_action:  # noqa deprecated-local-action
     module: ansible.builtin.file
     path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
     state: absent
@@ -99,6 +100,6 @@
     state: started
 
 - name: Include cleanup tasks
-  ansible.builtin.include: cleanup-netplan.yml
+  ansible.builtin.include_tasks: cleanup-netplan.yml
   when:
     - network_netplan_remove_unmanaged_files|bool
