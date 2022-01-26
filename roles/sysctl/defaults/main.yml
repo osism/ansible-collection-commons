@@ -1,5 +1,5 @@
 ---
-sysctl:
+sysctl_defaults:
   elasticsearch:
     # https://github.com/docker-library/elasticsearch/issues/98
     - name: vm.max_map_count
@@ -28,3 +28,5 @@ sysctl:
   all:
     - name: vm.swappiness
       value: 1
+
+sysctl_extra: {}
