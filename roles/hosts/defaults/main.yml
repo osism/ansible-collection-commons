@@ -1,27 +1,39 @@
 ---
-##########################
-# generic
-
+# This parameter can be set to false to not list certain hosts
+# or groups of hosts in the hosts file.
 hosts_enable: true
+
+# The IPv4 address assigned to this interface is placed in the
+# hosts file.
 hosts_interface: "{{ management_interface|default('lo') }}"
 
-##########################
-# role parameters
-
+# Write only hosts that are included in this group to the
+# hosts file.
 hosts_group_name: all
 
 # Set this parameter to True if DNS is to be used as a
 # single source of truth. No hosts from the hosts defined
-# under hosts_group_name are then included in /etc/hosts.
+# under hosts_group_name are then included in the hosts file.
 hosts_use_dns_as_single_source_of_truth: false
 
 # valid values: [block, local, template]
 hosts_type: block
 
+# Path to the managed hosts file.
 hosts_file: /etc/hosts
+
+# If this value is set to true, a backup of the file is
+# created before any changes are made.
 hosts_file_backup: true
+
+# If the type block is used and this value is set to True
+# the hosts file is always completely reset.
 hosts_file_reset: false
 
+# A list of hosts that should always be ignored and not
+# included in the hosts file.
 hosts_ignore: []
 
+# A dictionary with entries in the form FQDN: IP_ADDRESS
+# which are always added to the end of the hosts file.
 hosts_additional_entries: {}
