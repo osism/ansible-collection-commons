@@ -7,7 +7,7 @@
 
 - name: Remove useless packages from the cache
   become: true
-  sansible.builtin.shell:
+  ansible.builtin.shell:
     cmd: "dnf clean all"
     warn: false
 
