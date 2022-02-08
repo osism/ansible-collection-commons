@@ -10,6 +10,7 @@
   ansible.builtin.shell:
     cmd: "dnf clean all"
     warn: false
+  changed_when: false
 
 - name: Remove dependencies that are no longer required
   become: true
