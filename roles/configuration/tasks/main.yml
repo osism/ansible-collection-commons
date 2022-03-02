@@ -11,4 +11,4 @@
     - "{{ configuration_directory }}"
 
 - name: Include tasks required by the specific configuration type
-  include: "{{ configuration_type }}.yml"
+  include_tasks: "{{ configuration_type }}.yml"
