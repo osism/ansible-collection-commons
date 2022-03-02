@@ -134,3 +134,10 @@ network_dispatcher_scripts: []
 network_lldpd: false
 network_lldpd_package_name: lldpd
 network_lldpd_service_name: lldpd
+
+# dummy
+
+network_dummy_interfaces_enable: false
+network_dummy_interfaces:
+  - lo-bgp
+  - lo-vxlan
