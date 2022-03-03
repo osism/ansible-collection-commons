@@ -5,3 +5,7 @@
 - name: Include lldpd tasks
   ansible.builtin.include_tasks: lldpd.yml
   when: network_lldpd|bool
+
+- name: Include dummy interfaces
+  ansible.builtin.include_tasks: dummy-interfaces.yml
+  when: network_dummy_interfaces|length > 0

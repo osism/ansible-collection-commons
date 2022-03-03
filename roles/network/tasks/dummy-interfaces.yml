@@ -1,0 +1,10 @@
+---
+- name: Create systemd networkd netdev files
+  become: true
+  ansible.builtin.template:
+    src: dummy.netdev.j2
+    dest: "/etc/systemd/network/2{{ item.0 }}-{{ item.1 }}.netdev"
+    mode: 0644
+    owner: root
+    group: root
+  with_indexed_items: "{{ network_dummy_interfaces }}"
