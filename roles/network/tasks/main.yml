@@ -7,5 +7,5 @@
   when: network_lldpd|bool
 
 - name: Include dummy interfaces
-  include_tasks: dummy-interfaces.yml
-  when: network_dummy_interfaces_enable|bool
+  ansible.builtin.include_tasks: dummy-interfaces.yml
+  when: network_dummy_interfaces|length > 0

@@ -137,7 +137,7 @@ network_lldpd_service_name: lldpd
 
 # dummy
 
-network_dummy_interfaces_enable: false
-network_dummy_interfaces:
-  - lo-bgp
-  - lo-vxlan
+## network_dummy_interfaces:
+##   - lo-bgp
+##   - lo-vxlan
+network_dummy_interfaces: []
