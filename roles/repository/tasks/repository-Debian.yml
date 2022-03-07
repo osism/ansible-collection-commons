@@ -6,6 +6,14 @@
     state: present
   loop: "{{ repository_keys }}"
 
+- name: Add repository keys via file
+  become: true
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', item) }}"
+    state: present
+  with_items: "{{ repository_keys_file }}"
+  when: repository_keys_file|length > 0
+
 - name: Add repository keys via keyservers
   become: true
   ansible.builtin.apt_key:
