@@ -1,8 +1,8 @@
 ---
 repository_cache_valid_time: 120
 
+repository_key_files_directory: "/opt/configuration/environments/generic/files/repository/keys"
 repository_keys: []
-
 repository_key_ids: {}
 
 repositories:

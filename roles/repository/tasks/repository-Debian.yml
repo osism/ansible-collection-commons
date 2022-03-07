@@ -14,6 +14,19 @@
     state: present
   loop: "{{ repository_key_ids|dict2items }}"
 
+- name: Check if the keys directory exists
+  ansible.builtin.stat:
+    path: "{{ repository_key_files_directory }}"
+  register: result
+
+- name: Add repository keys via files
+  become: true
+  ansible.builtin.apt_key:
+    data: "{{ lookup('file', item) }}"
+    state: present
+  with_fileglob: "{{ repository_key_files_directory }}"
+  when: result.stat.isdir is defined and result.stat.isdir
+
 # NOTE: Not using apt_repository here because it requires python-apt.
 
 - name: Copy source.list file
