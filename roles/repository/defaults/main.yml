@@ -1,3 +1,3 @@
 ---
-repository_keys_file: []
-repository_keys_file_dir: "/opt/configuration/environments/generic/repokeys"
+repository_key_files: []
+repository_key_files_dir: "/opt/configuration/environments/generic/repokeys"

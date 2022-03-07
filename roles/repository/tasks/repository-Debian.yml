@@ -9,10 +9,10 @@
 - name: Add repository keys via file
   become: true
   ansible.builtin.apt_key:
-    data: "{{ lookup('file', item) }}"
+    data: "{{ lookup('file', repository_key_files_dir/item) }}"
     state: present
-  with_items: "{{ repository_keys_file }}"
-  when: repository_keys_file|length > 0
+  with_items: "{{ repository_key_files }}"
+  when: repository_key_files|length > 0
 
 - name: Add repository keys via keyservers
   become: true
