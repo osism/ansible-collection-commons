@@ -28,5 +28,8 @@ sysctl_defaults:
   all:
     - name: vm.swappiness
       value: 1
+  compute:
+    - name: net.netfilter.nf_conntrack_max
+      value: 1048576
 
 sysctl_extra: {}
