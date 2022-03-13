@@ -6,6 +6,7 @@
     value: "{{ item_in_block.value }}"
     sysctl_set: true
     sysctl_file: "/etc/sysctl.d/70-{{ item.key }}.conf"
+    ignoreerrors: true
   loop: "{{ item.value }}"
   loop_control:
     loop_var: item_in_block
