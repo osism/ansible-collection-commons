@@ -5,7 +5,7 @@ hosts_enable: true
 
 # The IPv4 address assigned to this interface is placed in the
 # hosts file.
-hosts_interface: "{{ management_interface|default('lo') }}"
+# hosts_interface:
 
 # Write only hosts that are included in this group to the
 # hosts file.

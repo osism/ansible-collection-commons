@@ -14,8 +14,13 @@ ff02::2          ip6-allrouters
 # Hosts defined in the inventory
 
 {% for item in groups[hosts_group_name]|default([])|sort %}
-{% if item not in hosts_ignore and hostvars[item] is defined and hostvars[item]['ansible_' + hostvars[item]['hosts_interface']|default(hosts_interface)] is defined and hostvars[item]['hosts_enable']|default(hosts_enable)|bool %}
-{{ hostvars[item]['ansible_' + hostvars[item]['hosts_interface']|default(hosts_interface)]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
+{% if item not in hosts_ignore and hostvars[item] is defined and hostvars[item]['hosts_enable']|default(hosts_enable)|bool %}
+{% if hostvars[item]['hosts_interface'] is defined %}
+{% set hosts_interface = hostvars[item]['hosts_interface'] %}
+{% else %}
+{% set hosts_interface = hostvars[item]['management_interface']|default('lo') %}
+{% endif %}
+{{ hostvars[item]['ansible_' + hosts_interface]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
 {% endif %}
 {% endfor %}
 {% endif %}
