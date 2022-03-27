@@ -21,12 +21,13 @@ configuration_directory: /opt/configuration
 
 configuration_git_package_name: git
 
-configuration_git_public_key: ""
-configuration_git_private_key: ""
-configuration_git_private_key_file: ~/.ssh/id_rsa.configuration
-configuration_git_version: main
-configuration_git_username: git
 configuration_git_host: github.com
 configuration_git_port: 22
-configuration_git_repository: osism/ansible-collection-commons.git
+configuration_git_private_key: ""
+configuration_git_private_key_file: ~/.ssh/id_rsa.configuration
 configuration_git_protocol: ssh
+configuration_git_public_key: ""
+configuration_git_repository: osism/ansible-collection-commons.git
+configuration_git_username: git
+configuration_git_version: main
+configuration_git_personal_access_token: ""

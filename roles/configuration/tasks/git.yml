@@ -1,16 +1,22 @@
 ---
 - name: git - set configuration_git_repository_url fact (with username)
-  set_fact:
+  ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_username }}@{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"  # noqa 204
   when: configuration_git_username is defined and configuration_git_username|length
 
 - name: git - set configuration_git_repository_url fact (without username)
-  set_fact:
+  ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"  # noqa 204
   when: configuration_git_username is not defined or not configuration_git_username|length
 
+- name: git - set/overwrite configuration_git_repository_url fact (with personal access token)
+  ansible.builtin.set_fact:
+    configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_personal_access_token }}:@{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"  # noqa 204
+  when: configuration_git_personal_access_token is defined and configuration_git_personal_access_token|length
+  no_log: true
+
 - name: git - copy private ssh key
-  copy:
+  ansible.builtin.copy:
     content: "{{ configuration_git_private_key }}"
     dest: "{{ configuration_git_private_key_file }}"
     owner: "{{ operator_user }}"
@@ -20,7 +26,7 @@
   no_log: true
 
 - name: Wait for apt lock
-  shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
   loop:
     - lock
     - lock-frontend
@@ -28,12 +34,12 @@
 
 - name: git - install required packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ configuration_git_package_name }}"
     state: present
 
 - name: git - clone configuration repository (ssh / with auth)
-  git:
+  ansible.builtin.git:
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
@@ -42,8 +48,8 @@
     force: true
   when: configuration_git_protocol == 'ssh'
 
-- name: git - clone configuration repository (without auth)
-  git:
+- name: git - clone configuration repository (without auth or with personal access token)
+  ansible.builtin.git:
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
@@ -51,3 +57,5 @@
     force: true
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key|length)) or
         configuration_git_protocol != 'ssh'
+  # NOTE: We use no_log here to avoid the leak of a PAT when using it as username.
+  no_log: true
