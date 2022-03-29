@@ -1,4 +1,2 @@
 ---
-fact_files:
-  - docker_containers
-  - docker_images
+fact_files: []
