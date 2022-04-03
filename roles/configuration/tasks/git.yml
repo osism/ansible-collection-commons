@@ -34,6 +34,13 @@
     name: "{{ configuration_git_package_name }}"
     state: present
 
+- name: git - set proxy configuration
+  community.general.git_config:
+    name: http.proxy
+    scope: global
+    value: "{{ configuration_git_proxy }}"
+  when: configuration_git_proxy is defined and configuration_git_proxy|length
+
 - name: git - clone configuration repository (ssh / with auth)
   git:
     repo: "{{ configuration_git_repository_url }}"

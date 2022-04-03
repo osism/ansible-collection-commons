@@ -21,6 +21,8 @@ configuration_directory: /opt/configuration
 
 configuration_git_package_name: git
 
+configuration_git_proxy: ""
+
 configuration_git_public_key: ""
 configuration_git_private_key: ""
 configuration_git_private_key_file: ~/.ssh/id_rsa.configuration
