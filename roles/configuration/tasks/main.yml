@@ -1,7 +1,7 @@
 ---
 - name: Create required directories
   become: true
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
@@ -11,4 +11,4 @@
     - "{{ configuration_directory }}"
 
 - name: Include tasks required by the specific configuration type
-  include_tasks: "{{ configuration_type }}.yml"
+  ansible.builtin.include_tasks: "{{ configuration_type }}.yml"
