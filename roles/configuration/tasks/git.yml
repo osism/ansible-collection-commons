@@ -1,8 +1,10 @@
 ---
-- name: git - set configuration_git_repository_url fact (with username)
+- name: git - set configuration_git_repository_url fact (with username or personal access token)
   set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_username }}@{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"  # noqa 204
   when: configuration_git_username is defined and configuration_git_username|length
+  # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
+  no_log: true
 
 - name: git - set configuration_git_repository_url fact (without username)
   set_fact:
@@ -42,7 +44,7 @@
     force: true
   when: configuration_git_protocol == 'ssh'
 
-- name: git - clone configuration repository (without auth)
+- name: git - clone configuration repository (without auth or personal access token)
   git:
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
@@ -51,3 +53,5 @@
     force: true
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key|length)) or
         configuration_git_protocol != 'ssh'
+  # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
+  no_log: true
