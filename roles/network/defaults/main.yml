@@ -141,3 +141,4 @@ network_lldpd_service_name: lldpd
 ##   - lo-bgp
 ##   - lo-vxlan
 network_dummy_interfaces: []
+network_dummy_interface_mtu: 9000
