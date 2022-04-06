@@ -1,6 +1,7 @@
 {
   "extends": [
     "github>osism/renovate-config",
-    "github>osism/renovate-config:ansibleCollection"
+    "github>osism/renovate-config:ansibleCollection",
+    "github>osism/renovate-config:python"
   ]
 }
