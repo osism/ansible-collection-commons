@@ -24,4 +24,5 @@
       RSYNC_PROXY={{ proxy_proxies['http']  }}
 
       no_proxy={{ proxy_no_proxy|join(',') }}
+      NO_PROXY={{ proxy_no_proxy|join(',') }}
   when: proxy_proxies != {}
