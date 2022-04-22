@@ -13,3 +13,6 @@ operator_authorized_keys: []
 # operator_password:
 
 operator_sudo_nopasswd: true
+
+operator_sudo_cmd_list:
+  - ALL
