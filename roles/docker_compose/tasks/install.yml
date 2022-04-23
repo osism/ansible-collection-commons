@@ -18,9 +18,11 @@
     - lock-frontend
   changed_when: false
 
-- name: Install docker-compose package
+- name: Install packages
   become: true
   ansible.builtin.apt:
-    name: "{{ docker_compose_package_name }}"
+    name:
+      - "{{ docker_compose_package_name }}"
+      - "{{ docker_compose_plugin_package_name }}"
     state: present
     install_recommends: false
