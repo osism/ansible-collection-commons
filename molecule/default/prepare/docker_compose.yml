@@ -1,4 +1,25 @@
 ---
+- name: Install apt-transport-https package
+  become: true
+  ansible.builtin.apt:
+    name: apt-transport-https
+    state: present
+  changed_when: false
+
+- name: Add repository gpg key
+  become: true
+  ansible.builtin.apt_key:
+    url: "{{ docker_debian_repository_key }}"
+
+- name: Add repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ docker_debian_repository }}"
+    state: present
+    filename: docker
+    update_cache: true
+    mode: 0644
+
 - name: Update package cache
   become: true
   ansible.builtin.apt:
