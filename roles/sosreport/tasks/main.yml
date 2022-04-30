@@ -1,0 +1,82 @@
+---
+- name: Install required packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ sosreport_required_packages }}"
+
+- name: Remove temporary directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ sosreport_tmpdir }}"
+    state: absent
+
+- name: Create required directories
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0755
+  loop:
+    - "{{ sosreport_tmpdir }}"
+
+- name: Create local required directories
+  ansible.builtin.file:
+    path: "{{ sosreport_archive_directory }}"
+    state: directory
+    mode: 0755
+    recurse: true
+  delegate_to: localhost
+
+- name: Generate report
+  become: true
+  ansible.builtin.command: "sosreport --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins|join(',') }}"
+  changed_when: true
+
+- name: Rename md5 file
+  ansible.builtin.command: "mv -f {{ sosreport_tmpdir }}/*.md5 {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
+  changed_when: true
+
+- name: Rename archive
+  ansible.builtin.command: "mv -f {{ sosreport_tmpdir }}/*.tar.gz {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
+  changed_when: true
+
+- name: Fetch md5 file
+  become: true
+  ansible.builtin.fetch:
+    src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
+    dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.md5"
+    flat: true
+
+- name: Fetch archive
+  become: true
+  ansible.builtin.fetch:
+    src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
+    dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}"
+    flat: true
+
+- name: Create archive directory
+  ansible.builtin.file:
+    path: "{{ sosreport_archive_directory }}/{{ sosreport_name }}"
+    state: directory
+    mode: 0755
+  delegate_to: localhost
+  when: sosreport_unarchive
+
+- name: Unarchive archive
+  ansible.builtin.unarchive:
+    src: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}"
+    dest: "{{ sosreport_archive_directory }}/{{ sosreport_name }}"
+    remote_src: true
+    extra_opts: --strip-components=1
+  delegate_to: localhost
+  when: sosreport_unarchive
+
+- name: Remove temporary directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ sosreport_tmpdir }}"
+    state: absent

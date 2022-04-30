@@ -1,0 +1,38 @@
+---
+sosreport_unarchive: false
+sosreport_tmpdir: /tmp/sosreport
+sosreport_cmd: sosreport
+sosreport_required_packages:
+  - sosreport
+sosreport_name: "{{ inventory_hostname_short }}-{{ ansible_date_time.date }}"
+sosreport_archive_filename: "{{ sosreport_name }}.tar.gz"
+sosreport_archive_directory: "/archive/sosreport/{{ ansible_date_time.date }}"
+sosreport_plugins:
+  - apt
+  - auditd
+  - block
+  - devices
+  - docker
+  - dpkg
+  - filesys
+  - hardware
+  - kernel
+  - kvm
+  - last
+  - md
+  - memory
+  - networking
+  - pci
+  - process
+  - processor
+  - python
+  - services
+  - ssh
+  - system
+  - systemd
+  - ubuntu
+  - udev
+  - usb
+  - xfs
+operator_user: dragon
+operator_group: "{{ operator_user }}"
