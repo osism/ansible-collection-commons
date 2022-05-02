@@ -18,7 +18,6 @@ sosreport_plugins:
   - hardware
   - kernel
   - kvm
-  - last
   - md
   - memory
   - networking
