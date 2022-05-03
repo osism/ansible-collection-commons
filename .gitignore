@@ -1,4 +1,5 @@
 .molecule
+doc/build
 galaxy.yml
 osism-commons-*.tar.gz
 scripts/render-template.py
