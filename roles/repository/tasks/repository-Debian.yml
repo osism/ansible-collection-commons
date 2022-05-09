@@ -15,6 +15,7 @@
   loop: "{{ repository_key_ids|dict2items }}"
 
 - name: Check if the keys directory exists
+  become: true
   ansible.builtin.stat:
     path: "{{ repository_key_files_directory }}"
   register: result
