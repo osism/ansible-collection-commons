@@ -14,11 +14,15 @@
     state: present
   loop: "{{ repository_key_ids|dict2items }}"
 
+# NOTE: We ignore errors that can occur during the seeding of the
+#       environment in constellations where the repository keys are
+#       still missing.
 - name: Check if the keys directory exists
   ansible.builtin.stat:
     path: "{{ repository_key_files_directory }}"
   register: result
-  delegate_to: localhost
+  delegate_to: "{{ groups['manager'][0] }}"
+  ignore_errors: true
 
 - name: Add repository keys via files
   become: true
@@ -26,7 +30,7 @@
     data: "{{ lookup('file', item) }}"
     state: present
   with_fileglob: "{{ repository_key_files_directory }}/*"
-  when: result.stat.isdir is defined and result.stat.isdir
+  when: result is defined and result.stat.isdir is defined and result.stat.isdir
 
 # NOTE: Not using apt_repository here because it requires python-apt.
 
