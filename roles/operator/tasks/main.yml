@@ -16,6 +16,7 @@
     shell: "{{ operator_shell }}"
     uid: "{{ operator_user_id }}"
     group: "{{ operator_group }}"
+  register: result_create_operator_user
 
 - name: Add operator user to additional groups
   become: true
@@ -35,22 +36,10 @@
     mode: 0440
     validate: /usr/sbin/visudo -cf %s
 
-# NOTE: http://stackoverflow.com/questions/33343215/how-to-get-remote-users-home-directory-in-ansible
-
-- name: Get home directory of operator user
-  become: true
-  ansible.builtin.shell: |
-    set -o pipefail
-    getent passwd {{ operator_user }} | cut -d: -f6
-  args:
-    executable: /bin/bash
-  changed_when: false
-  register: operator_home
-
 - name: Set language variables in .bashrc configuration file
   become: true
   ansible.builtin.lineinfile:
-    dest: "{{ operator_home.stdout }}/.bashrc"
+    dest: "{{ result_create_operator_user.home }}/.bashrc"
     line: "{{ item }}"
     create: true
     mode: 0640
@@ -62,7 +51,7 @@
 - name: Create .ssh directory
   become: true
   ansible.builtin.file:
-    path: "{{ operator_home.stdout }}/.ssh"
+    path: "{{ result_create_operator_user.home }}/.ssh"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     state: directory
