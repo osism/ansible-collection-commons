@@ -7,3 +7,5 @@ cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra + cleanu
 cleanup_services_default: []
 cleanup_services_extra: []
 cleanup_services: "{{ cleanup_services_default + cleanup_services_extra + cleanup_services_distribution }}"
+
+cleanup_cloudinit: true
