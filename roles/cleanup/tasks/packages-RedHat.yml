@@ -5,6 +5,13 @@
     name: "{{ cleanup_packages }}"
     state: absent
 
+- name: Remove cloudinit package
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ cleanup_cloudinit_package_name }}"
+    state: absent
+  when: cleanup_cloudinit|bool
+
 - name: Remove useless packages from the cache
   become: true
   ansible.builtin.command:

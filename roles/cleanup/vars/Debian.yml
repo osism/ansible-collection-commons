@@ -4,3 +4,5 @@ cleanup_packages_distribution:
   - libvirt-bin
   - lxd
   - open-iscsi
+
+cleanup_cloudinit_package_name: cloud-init

@@ -10,3 +10,7 @@
 
 - name: Include packages tasks
   ansible.builtin.include_tasks: "packages-{{ ansible_os_family }}.yml"
+
+- name: Include cloudinit tasks
+  ansible.builtin.include_tasks: cloudinit.yml
+  when: cleanup_cloudinit|bool
