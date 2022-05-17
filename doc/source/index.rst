@@ -1,6 +1,8 @@
 ansible-collections-commons
 ===========================
 
+.. zuul:autorole:: certificates
+
 .. zuul:autorole:: cleanup
 
 .. zuul:autorole:: firewall
