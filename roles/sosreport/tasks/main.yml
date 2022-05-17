@@ -15,18 +15,19 @@
 - name: Create required directories
   become: true
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ sosreport_tmpdir }}"
     state: directory
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     mode: 0755
-  loop:
-    - "{{ sosreport_tmpdir }}"
 
 - name: Create local required directories
+  become: true
   ansible.builtin.file:
     path: "{{ sosreport_archive_directory }}"
     state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
     mode: 0755
     recurse: true
   delegate_to: localhost
@@ -36,33 +37,45 @@
   ansible.builtin.command: "sosreport --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins|join(',') }}"
   changed_when: true
 
-- name: Rename md5 file
-  ansible.builtin.command: "mv -f {{ sosreport_tmpdir }}/*.md5 {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
+- name: Rename sha256 file
+  become: true
+  ansible.builtin.shell: "mv -f {{ sosreport_tmpdir }}/*.sha256 {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.sha256"
   changed_when: true
 
 - name: Rename archive
-  ansible.builtin.command: "mv -f {{ sosreport_tmpdir }}/*.tar.gz {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
+  become: true
+  ansible.builtin.shell: "mv -f {{ sosreport_tmpdir }}/*.tar.gz {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
   changed_when: true
 
-- name: Fetch md5 file
+- name: Change report mode
   become: true
+  ansible.builtin.file:
+    path: "{{ sosreport_tmpdir }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0755
+    recurse: true
+
+- name: Fetch sha256 file
   ansible.builtin.fetch:
-    src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
-    dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.md5"
+    src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.sha256"
+    dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.sha256"
     flat: true
+    change: true
 
 - name: Fetch archive
-  become: true
   ansible.builtin.fetch:
     src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
     dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}"
     flat: true
+    change: true
 
 - name: Create archive directory
   ansible.builtin.file:
     path: "{{ sosreport_archive_directory }}/{{ sosreport_name }}"
     state: directory
-    mode: 0755
+    mode: 0600
   delegate_to: localhost
   when: sosreport_unarchive
 
