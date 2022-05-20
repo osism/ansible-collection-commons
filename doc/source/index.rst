@@ -17,4 +17,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: hostname
 
+.. zuul:autorole:: hosts
+
 .. zuul:autorole:: motd
