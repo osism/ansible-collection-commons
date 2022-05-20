@@ -13,4 +13,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: firewall
 
+.. zuul:autorole:: hostname
+
 .. zuul:autorole:: motd
