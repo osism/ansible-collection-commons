@@ -11,6 +11,8 @@ ansible-collections-commons
 
 .. zuul:autorole:: docker_compose
 
+.. zuul:autorole:: facts
+
 .. zuul:autorole:: firewall
 
 .. zuul:autorole:: hostname
