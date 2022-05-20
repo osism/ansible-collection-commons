@@ -23,4 +23,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: kernel_modules
 
+.. zuul:autorole:: known_hosts
+
 .. zuul:autorole:: motd
