@@ -9,6 +9,8 @@ ansible-collections-commons
 
 .. zuul:autorole:: configuration
 
+.. zuul:autorole:: docker_compose
+
 .. zuul:autorole:: firewall
 
 .. zuul:autorole:: motd
