@@ -19,4 +19,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: hosts
 
+.. zuul:autorole:: ipmitool
+
 .. zuul:autorole:: motd
