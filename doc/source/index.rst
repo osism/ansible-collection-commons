@@ -21,4 +21,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: ipmitool
 
+.. zuul:autorole:: kernel_modules
+
 .. zuul:autorole:: motd
