@@ -36,3 +36,5 @@ ansible-collections-commons
 .. zuul:autorole:: motd
 
 .. zuul:autorole:: operator
+
+.. zuul:autorole:: packages
