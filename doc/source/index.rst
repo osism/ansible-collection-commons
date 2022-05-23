@@ -27,4 +27,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: kompose
 
+.. zuul:autorole:: kubectl
+
 .. zuul:autorole:: motd
