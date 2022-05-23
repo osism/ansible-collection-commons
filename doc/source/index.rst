@@ -29,4 +29,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: kubectl
 
+.. zuul:autorole:: lynis
+
 .. zuul:autorole:: motd
