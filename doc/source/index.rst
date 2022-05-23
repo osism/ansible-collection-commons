@@ -31,4 +31,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: lynis
 
+.. zuul:autorole:: microcode
+
 .. zuul:autorole:: motd
