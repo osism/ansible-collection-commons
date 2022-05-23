@@ -42,3 +42,5 @@ ansible-collections-commons
 .. zuul:autorole:: podman
 
 .. zuul:autorole:: proxy
+
+.. zuul:autorole:: repository
