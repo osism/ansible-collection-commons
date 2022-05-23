@@ -38,3 +38,5 @@ ansible-collections-commons
 .. zuul:autorole:: operator
 
 .. zuul:autorole:: packages
+
+.. zuul:autorole:: podman
