@@ -34,3 +34,5 @@ ansible-collections-commons
 .. zuul:autorole:: microcode
 
 .. zuul:autorole:: motd
+
+.. zuul:autorole:: operator
