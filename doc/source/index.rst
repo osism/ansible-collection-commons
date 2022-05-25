@@ -50,3 +50,5 @@ ansible-collections-commons
 .. zuul:autorole:: services
 
 .. zuul:autorole:: sosreport
+
+.. zuul:autorole:: sshconfig
