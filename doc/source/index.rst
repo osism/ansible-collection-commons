@@ -44,3 +44,5 @@ ansible-collections-commons
 .. zuul:autorole:: proxy
 
 .. zuul:autorole:: repository
+
+.. zuul:autorole:: resolvconf
