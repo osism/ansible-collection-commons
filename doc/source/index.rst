@@ -48,3 +48,5 @@ ansible-collections-commons
 .. zuul:autorole:: resolvconf
 
 .. zuul:autorole:: services
+
+.. zuul:autorole:: sosreport
