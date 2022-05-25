@@ -46,3 +46,5 @@ ansible-collections-commons
 .. zuul:autorole:: repository
 
 .. zuul:autorole:: resolvconf
+
+.. zuul:autorole:: services
