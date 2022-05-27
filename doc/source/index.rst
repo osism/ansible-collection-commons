@@ -62,3 +62,5 @@ ansible-collections-commons
 .. zuul:autorole:: systohc
 
 .. zuul:autorole:: timezone
+
+.. zuul:autorole:: trivy
