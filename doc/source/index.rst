@@ -52,3 +52,5 @@ ansible-collections-commons
 .. zuul:autorole:: sosreport
 
 .. zuul:autorole:: sshconfig
+
+.. zuul:autorole:: state
