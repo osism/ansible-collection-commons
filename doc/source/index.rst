@@ -54,3 +54,5 @@ ansible-collections-commons
 .. zuul:autorole:: sshconfig
 
 .. zuul:autorole:: state
+
+.. zuul:autorole:: sysctl
