@@ -60,3 +60,5 @@ ansible-collections-commons
 .. zuul:autorole:: sysdig
 
 .. zuul:autorole:: systohc
+
+.. zuul:autorole:: timezone
