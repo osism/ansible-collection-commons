@@ -24,5 +24,6 @@
     name:
       - "{{ docker_compose_package_name }}"
       - "{{ docker_compose_plugin_package_name }}"
+      - pass
     state: present
     install_recommends: false
