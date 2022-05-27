@@ -57,4 +57,6 @@ ansible-collections-commons
 
 .. zuul:autorole:: sysctl
 
+.. zuul:autorole:: sysdig
+
 .. zuul:autorole:: systohc
