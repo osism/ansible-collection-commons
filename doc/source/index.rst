@@ -56,3 +56,5 @@ ansible-collections-commons
 .. zuul:autorole:: state
 
 .. zuul:autorole:: sysctl
+
+.. zuul:autorole:: systohc
