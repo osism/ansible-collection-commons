@@ -68,3 +68,5 @@ ansible-collections-commons
 .. zuul:autorole:: vault_import
 
 .. zuul:autorole:: vault_init
+
+.. zuul:autorole:: vault_seal
