@@ -1,0 +1,29 @@
+---
+- name: Update initramfs
+  become: true
+  ansible.builtin.command: "update-initramfs -u -k all"
+  changed_when: false
+
+- name: "Enable {{ clevis_service_name }} service"
+  become: true
+  ansible.builtin.service:
+    name: "{{ clevis_service_name }}"
+    enabled: true
+
+- name: Chain tang pin
+  become: true
+  ansible.builtin.command: |-
+     clevis luks bind -s 2 -f -d {{ clevis_root_disk }} tang '{ "url": "{{ clevis_tang_url }}", "adv": "{{ tmp_clevis_env.path }}/adv.jws" }' {{ clevis_initial_luks_password }}
+  environment:
+    KEY: "{{ tmp_clevis_env.path }}/pass"
+
+- name: Enable tang boot environment
+  become: true
+  ansible.builtin.command: "dracut -fv --regenerate-all"
+
+- name: Delete clevis environment
+  become: true
+  ansible.builtin.file:
+    dest: "{{ tmp_clevis_env.path }}"
+    state: absent
+  when: tmp_clevis_env.path is defined
