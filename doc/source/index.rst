@@ -66,3 +66,5 @@ ansible-collections-commons
 .. zuul:autorole:: trivy
 
 .. zuul:autorole:: vault_import
+
+.. zuul:autorole:: vault_init
