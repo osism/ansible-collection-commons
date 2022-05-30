@@ -64,3 +64,5 @@ ansible-collections-commons
 .. zuul:autorole:: timezone
 
 .. zuul:autorole:: trivy
+
+.. zuul:autorole:: vault_import
