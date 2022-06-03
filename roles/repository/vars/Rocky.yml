@@ -1,5 +1,5 @@
 ---
-repositories:
+repository_default:
   - name: "appstream"
     description: "{{ansible_distribution }} Linux $releasever - AppStream"
     mirrorlist: "http://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=AppStream-$releasever"

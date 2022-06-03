@@ -1,5 +1,5 @@
 ---
-repositories:
+repository_default:
   - name: "appstream"
     description: "{{ansible_distribution }} Stream $releasever - AppStream"
     mirrorlist: "http://mirrorlist.centos.org/?release=$stream&arch=$basearch&repo=AppStream&infra=$infra"
