@@ -41,7 +41,7 @@
     value: "{{ configuration_git_proxy }}"
   when: configuration_git_proxy is defined and configuration_git_proxy|length
 
-- name: git - clone configuration repository (ssh / with auth)
+- name: git - clone configuration repository (ssh / with auth) with branch {{ configuration_git_version }}
   ansible.builtin.git:
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
@@ -51,7 +51,7 @@
     force: true
   when: configuration_git_protocol == 'ssh'
 
-- name: git - clone configuration repository (without auth or personal access token)
+- name: git - clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
   ansible.builtin.git:
     repo: "{{ configuration_git_repository_url }}"
     dest: "{{ configuration_directory }}"
