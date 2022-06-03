@@ -4,3 +4,7 @@ extends: default
 rules:
   comments: enable
   line-length: disable
+
+ignore: |
+  .git
+  .tox

@@ -3,3 +3,7 @@ exclude_paths:
   - .github/playbook-publish-collection.yml
 mock_modules:
   - scan_services
+skip_list:
+  - experimental  # all rules tagged as experimental
+  - parser-error  # AnsibleParserError.
+  - var-spacing  # Variables should have spaces before and after: {{ var_name }}.
