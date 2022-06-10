@@ -37,11 +37,11 @@
 
 - name: Restart systemd-resolved service
   become: true
-  when: resolved_conf.changed  # noqa 503
   ansible.builtin.systemd:
     name: systemd-resolved
     daemon_reload: true
     state: restarted
+  when: resolved_conf.changed  # noqa 503
 
 - name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
   become: true
