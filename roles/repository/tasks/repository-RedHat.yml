@@ -1,5 +1,6 @@
 ---
 - name: Add mirrorlist repositories
+  become: true
   ansible.builtin.yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.description }}"
@@ -9,10 +10,10 @@
     enabled: true
     file: "{{ item.file }}"
   loop: "{{ repositories }}"
-  become: true
   when: item.mirrorlist is defined
 
 - name: Add metalink repositories
+  become: true
   ansible.builtin.yum_repository:
     name: "{{ item.name }}"
     description: "{{ item.description }}"
@@ -22,5 +23,4 @@
     enabled: true
     file: "{{ item.file }}"
   loop: "{{ repositories }}"
-  become: true
   when: item.metalink is defined
