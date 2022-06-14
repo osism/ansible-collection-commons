@@ -13,11 +13,6 @@ The user who will own the configuration directory.
 
 The group which will own th econfiguration directory.
 
-.. zuul:rolevar:: sshconfig_destination
-   :default: /home/{{ operator_user }}/.ssh
-
-Directory where the configuration file will be stored in.
-
 .. zuul:rolevar:: sshconfig_groupname
    :default: all
 

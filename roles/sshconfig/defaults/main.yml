@@ -8,7 +8,6 @@ operator_group: "{{ operator_user }}"
 ##########################
 # sshconfig
 
-sshconfig_destination: "/home/{{ operator_user }}/.ssh"
 sshconfig_groupname: all
 sshconfig_order: 20
 sshconfig_port: 22
