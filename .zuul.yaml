@@ -9,3 +9,6 @@
       jobs:
         - build-sphinx-docs
         - tox-linters
+    post:
+      jobs:
+        - osism-publish-tox-docs-staging
