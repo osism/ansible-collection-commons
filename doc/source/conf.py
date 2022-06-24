@@ -29,7 +29,6 @@ extensions = [
     'sphinx.ext.graphviz',
     'sphinxcontrib.blockdiag',
     'sphinxcontrib.programoutput',
-    'sphinxcontrib.openapi',
     'zuul_sphinx',
     'reno.sphinxext',
     'sphinx_rtd_theme',
