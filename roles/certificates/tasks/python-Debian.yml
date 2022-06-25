@@ -1,0 +1,9 @@
+---
+- name: Link CA certificates to Python
+  become: true
+  ansible.builtin.file:
+    src: /etc/ssl/certs/ca-certificates.crt
+    dest: /usr/lib/ssl/cert.pem
+    owner: root
+    group: root
+    state: link

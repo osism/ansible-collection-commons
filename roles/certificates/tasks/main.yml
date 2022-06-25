@@ -12,3 +12,6 @@
     mode: 0644
   loop: "{{ certificates_ca }}"
   notify: Update CA certificates
+
+- name: Include distribution specific Python tasks
+  ansible.builtin.include_tasks: "python-{{ ansible_os_family }}.yml"
