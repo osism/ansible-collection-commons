@@ -60,3 +60,15 @@ ansible-collections-commons
 .. zuul:autorole:: sysdig
 
 .. zuul:autorole:: systohc
+
+.. zuul:autorole:: timezone
+
+.. zuul:autorole:: trivy
+
+.. zuul:autorole:: vault_import
+
+.. zuul:autorole:: vault_init
+
+.. zuul:autorole:: vault_seal
+
+.. zuul:autorole:: vault_unseal
