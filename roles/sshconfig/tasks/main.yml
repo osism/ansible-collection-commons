@@ -1,23 +1,34 @@
 ---
+- name: Get home directory of operator user
+  become: true
+  ansible.builtin.shell: |
+    set -o pipefail
+    getent passwd {{ operator_user }} | cut -d: -f6
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: sshconfig_destination
+
 - name: Ensure .ssh/config.d exist
   ansible.builtin.file:
-    path: "{{ sshconfig_destination }}/config.d"
+    path: "{{ sshconfig_destination.stdout }}/.ssh/config.d"
     state: directory
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     mode: 0700
+    recurse: true
 
 - name: Ensure config for each host exist
   ansible.builtin.template:
     src: config.j2
-    dest: "{{ sshconfig_destination }}/config.d/{{ sshconfig_order }}-{{ hostvars[item].inventory_hostname_short }}"
+    dest: "{{ sshconfig_destination.stdout }}/.ssh/config.d/{{ sshconfig_order }}-{{ hostvars[item].inventory_hostname_short }}"
     mode: 0600
   when: item != "localhost" and item != "127.0.0.1"
   loop: "{{ groups[sshconfig_groupname] }}"
 
 - name: Assemble ssh config
   ansible.builtin.assemble:
-    src: "{{ sshconfig_destination }}/config.d"
-    dest: "{{ sshconfig_destination }}/config"
+    src: "{{ sshconfig_destination.stdout }}/.ssh/config.d"
+    dest: "{{ sshconfig_destination.stdout }}/.ssh/config"
     delimiter: "####################"
     mode: 0600

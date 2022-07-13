@@ -1,0 +1,10 @@
+---
+clevis_packages:
+  - clevis
+  - clevis-dracut
+  - clevis-initramfs
+  - clevis-luks
+
+dropbear_packages:
+  - dropbear-bin
+  - dropbear-initramfs

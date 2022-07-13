@@ -29,7 +29,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        ansible-version: ['5.8.0']
+        ansible-version: ['5.10.0']
         python-version: ['3.8']
         docker-image: ['ubuntu:22.04']
 
@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Set up Docker Buildx

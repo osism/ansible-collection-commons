@@ -1,1 +1,12 @@
 ---
+- name: Create required group
+  become: true
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Create required user
+  become: true
+  ansible.builtin.user:
+    name: runner
+    group: docker

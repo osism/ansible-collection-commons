@@ -1,8 +1,14 @@
 ---
 - project:
+    default-branch: main
     check:
       jobs:
         - build-sphinx-docs
+        - tox-linters
     gate:
       jobs:
         - build-sphinx-docs
+        - tox-linters
+    post:
+      jobs:
+        - osism-publish-tox-docs-staging
