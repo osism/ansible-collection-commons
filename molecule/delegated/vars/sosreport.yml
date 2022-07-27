@@ -1,3 +1,5 @@
 ---
 operator_user: runner
 operator_group: docker
+
+sosreport_archive_directory: "/tmp/sosreport/{{ ansible_date_time.date }}"

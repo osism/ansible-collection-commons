@@ -13,7 +13,6 @@
     state: absent
 
 - name: Create required directories
-  become: true
   ansible.builtin.file:
     path: "{{ sosreport_tmpdir }}"
     state: directory
@@ -22,7 +21,6 @@
     mode: 0755
 
 - name: Create local required directories
-  become: true
   ansible.builtin.file:
     path: "{{ sosreport_archive_directory }}"
     state: directory
