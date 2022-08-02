@@ -12,29 +12,33 @@ Possible values are ``interfaces``and ``netplan``.
    :default: true
 
 Flag whether all network devices are controlled by this role.
-    ----------------------------------------------------------
-    * WARNING                                                *
-    * If true, all additional configurations are deleted.    *
-    ----------------------------------------------------------
+
+.. note::
+
+  Attention!
+  If true, all additional configurations are deleted.
+
 
 .. zuul:rolevar:: network_allow_service_restart
    :default: false
 
 Allow the network to restart.
-    ---------------------------------------------------------------------
-    * ATTENTION                                                         *
-    * This is only triggered, when the all interface file was changed.  *
-    ---------------------------------------------------------------------
+
+.. note::
+
+  Attention!
+  This is only triggered, when the all interface file was changed.
 
 .. zuul:rolevar:: network_restart_method
    :default: nothing
 
 How should changed interfaces be treated?
 Options:
-   ``service`` - restart the network service for the interface
-   ``interface`` - down & up the interface
-   ``nothing`` - do nothing
-   ``*`` - undefined behavior
+
+  ``service`` - restart the network service for the interface
+  ``interface`` - down & up the interface
+  ``nothing`` - do nothing
+  ``*`` - undefined behavior
 
 
 **Configuration for type interfaces**
