@@ -4,3 +4,11 @@
   community.general.timezone:
     hwclock: "{{ timezone_hwclock }}"
     name: "{{ timezone_name }}"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20"
+
+- name: "Set timezone to {{ timezone_name }}"
+  become: true
+  community.general.timezone:
+    hwclock: "{{ timezone_hwclock_extended }}"
+    name: "{{ timezone_name }}"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "22"

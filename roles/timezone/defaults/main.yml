@@ -1,3 +1,4 @@
 ---
 timezone_hwclock: UTC
 timezone_name: UTC
+timezone_hwclock_extended: Etc/UTC
