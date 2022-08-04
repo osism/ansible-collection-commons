@@ -5,9 +5,9 @@ Ansible role for timezone configuration.
 .. zuul:rolevar:: timezone_hwclock
    :default: UTC
 
-The timezone which the system has to use.
+Whether the hardware clock is in UTC or in local timezone. Possible values are local and UTC.
 
 .. zuul:rolevar:: timezone_name
    :default: UTC
 
-Name of the timezone which should be used.
+Name of the timezone for the system clock.
