@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # source: https://github.com/ansible/awx/blob/devel/awx/plugins/library/scan_services.py
 
