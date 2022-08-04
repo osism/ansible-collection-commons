@@ -1,4 +1,10 @@
 ---
+- name: Ensure tzdata exists
+  ansible.builtin.apt:
+    name: tzdata
+    state: present
+    update_cache: true
+
 - name: "Set timezone to {{ timezone_name }}"
   become: true
   community.general.timezone:
