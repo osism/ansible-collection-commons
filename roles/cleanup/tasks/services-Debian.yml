@@ -10,4 +10,4 @@
     enabled: false
   failed_when: false
   loop: "{{ cleanup_services }}"
-  when: item + ".service" in services
+  when: item + ".service" in ansible_facts.services

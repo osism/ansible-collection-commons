@@ -5,7 +5,7 @@
     name: "{{ item }}.timer"
     state: stopped
     enabled: false
-  when: item + ".timer" in services
+  when: item + ".timer" in ansible_facts.services
   loop:
     - apt-daily-upgrade
     - apt-daily

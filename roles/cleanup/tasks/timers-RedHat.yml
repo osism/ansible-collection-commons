@@ -5,6 +5,6 @@
     name: "{{ item }}.timer"
     state: stopped
     enabled: false
-  when: item + ".timer" in services
+  when: item + ".timer" in ansible_facts.services
   loop:
     - dnf-makecache

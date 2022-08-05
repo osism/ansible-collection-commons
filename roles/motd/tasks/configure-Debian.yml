@@ -19,7 +19,7 @@
     name: motd-news.timer
     state: stopped
     enabled: false
-  when: "'motd-news.timer' in services"
+  when: "'motd-news.timer' in ansible_facts.services"
 
 - name: Stop motd-news service
   become: true
@@ -27,7 +27,7 @@
     name: motd-news.service
     state: stopped
     enabled: false
-  when: "'motd-news.service' in services"
+  when: "'motd-news.service' in ansible_facts.services"
 
 - name: Disable dynamic motd banner in pam configuration for ssh
   become: true

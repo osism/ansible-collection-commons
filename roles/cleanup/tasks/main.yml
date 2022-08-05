@@ -1,6 +1,6 @@
 ---
-- name: Collect facts about services
-  scan_services:
+- name: Populate service facts
+  ansible.builtin.service_facts:
 
 - name: Include distribution specific timer tasks
   ansible.builtin.include_tasks: "timers-{{ ansible_os_family }}.yml"
