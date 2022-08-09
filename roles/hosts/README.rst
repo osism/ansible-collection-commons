@@ -48,7 +48,7 @@ If the type block is used and this value is set to True the hosts file is
 always completely reset.
 
 .. zuul:rolevar:: hosts_ignore
-   default: []
+   :default: []
 
 A list of hosts that should not be included in the hosts file.
 

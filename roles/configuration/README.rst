@@ -63,7 +63,7 @@ The host from where you get the repositories.
 .. zuul:rolevar:: configuration_git_port
    :default: 22
 
-The port that is used for downloading the repoository.
+The port that is used for downloading the repository.
 
 .. zuul:rolevar:: configuration_git_repository
    :default: osism/ansible-collection-commons.git
