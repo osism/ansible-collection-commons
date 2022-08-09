@@ -1,17 +1,18 @@
-Ansible role for installing kernel modules.
+Ansible role for installing kernel modules. The configured modules are
+both loaded immediately via ``modprobe`` as well as added to the
+``/etc/modules`` so that they will be automatically installed on boot.
 
 **Role Variables**
 
 .. zuul:rolevar:: kernel_modules_default
-   :default: - bonding
-             - 8021q
+   :default: [ "bonding", "8021q" ]
 
-Kernel modules which you want to install.
+Default list of kernel modules to install.
 
 .. zuul:rolevar:: kernel_modules_extra
    :default: []
 
-Extra modules defiened in a list which you want to install.
+List of extra modules to install.
 
 .. zuul:rolevar:: kernel_modules
    :default: kernel_modules_default + kernel_modules_extra
