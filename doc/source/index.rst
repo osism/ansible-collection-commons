@@ -1,6 +1,15 @@
 ansible-collections-commons
 ===========================
 
+This is a collection of Ansible roles that perform common management
+tasks. The selection of roles is targeted at deploying the OSISM stack,
+but some of them may also be useful in other contexts.
+
+The collection is published at https://galaxy.ansible.com/osism/commons.
+
+For bugs or feature requests, please open an issue at
+https://github.com/osism/ansible-collection-commons/issues.
+
 .. zuul:autorole:: certificates
 
 .. zuul:autorole:: cleanup
