@@ -6,7 +6,7 @@ Ansible role for managing and configuring the internal network types.
    :default: interfaces
 
 Which type of network you want to install.
-Possible values are ``interfaces``and ``netplan``.
+Possible values are ``interfaces`` and ``netplan``.
 
 .. zuul:rolevar:: network_manage_devices
    :default: true
@@ -35,10 +35,10 @@ Allow the network to restart.
 How should changed interfaces be treated?
 Options:
 
-  ``service`` - restart the network service for the interface
-  ``interface`` - down & up the interface
-  ``nothing`` - do nothing
-  ``*`` - undefined behavior
+  - ``service`` - restart the network service for the interface
+  - ``interface`` - down & up the interface
+  - ``nothing`` - do nothing
+  - ``*`` - undefined behavior
 
 
 **Configuration for type interfaces**
@@ -240,7 +240,7 @@ Example:
 .. zuul:rolevar:: network_lldpd
    :default: false
 
-If you wan to use lldpd set the value to true. The link layer discovery protocol is a protocol to discover networks in a lan.
+If you want to use lldpd set the value to true. The link layer discovery protocol is a protocol to discover networks in a lan.
 
 .. zuul:rolevar:: network_lldpd_package_name
    :default: lldpd

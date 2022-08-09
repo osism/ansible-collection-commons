@@ -1,11 +1,11 @@
 Ansible role to unseal the vault-server.
 
-**Role Variable**
+**Role Variables**
 
 .. zuul:rolevar:: vault_container_name
    :default: manager_vault_1
 
-The name from the vault-container to interact with it.
+The name of the vault-container.
 
 The algorithm to unseal the vault-server is called shamir.
 For the unsealing you will need at least three keys:

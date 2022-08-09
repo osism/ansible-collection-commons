@@ -5,7 +5,7 @@ Ansible role to install podman.
 .. zuul:rolevar:: podman_action
    :default: deploy
 
-Name for which file should be iuncluded.
+Name for which file should be included.
 
 Example: ``config.yml`` or ``deploy.yml``
 
