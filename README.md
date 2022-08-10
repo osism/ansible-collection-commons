@@ -1,5 +1,7 @@
 # Ansible collection osism.commons
 
+Documentation: https://docs.osism.tech/ansible-collection-commons/
+
 The following Ansible roles are included in this collection.
 
 | Rolename             | Test                                                                                                                              |
