@@ -6,8 +6,13 @@ mock_modules:
 use_default_rules: true
 rulesdir:
   - ./.ansible-lint-rules/
+warn_list:
+  - template-instead-of-copy
+  - name[casing]
+  - jinja
 skip_list:
   - parser-error  # AnsibleParserError.
   - var-spacing  # Variables should have spaces before and after: {{ var_name }}.
   - schema
   - fqcn-builtins
+  - name[template]
