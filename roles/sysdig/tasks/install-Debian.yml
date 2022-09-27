@@ -54,8 +54,8 @@
 
 - name: "Persist {{ sysdig_kernel_module_name }} kernel module via modules-load.d"
   become: true
-  ansible.builtin.copy:
-    content: "{{ sysdig_kernel_module_name }}"
+  ansible.builtin.template:
+    src: config.j2
     dest: /etc/modules-load.d/sysdig.conf
     owner: root
     group: root

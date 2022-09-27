@@ -14,5 +14,5 @@
     path: /etc/yum.conf
     section: main
     option: proxy
-    value: "{{ proxy_proxies['https']default(proxy_proxies['http']) }}"
+    value: "{{ proxy_proxies['https'] | default(proxy_proxies['http']) }}"
     mode: 0644

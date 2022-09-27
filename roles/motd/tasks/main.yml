@@ -7,8 +7,8 @@
 
 - name: Copy motd file
   become: true
-  ansible.builtin.copy:
-    content: "{{ motd_content }}"
+  ansible.builtin.template:
+    src: config.j2
     dest: "{{ motd_path }}"
     owner: root
     group: root

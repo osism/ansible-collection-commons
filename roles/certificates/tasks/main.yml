@@ -4,8 +4,8 @@
 
 - name: Copy CA certificates
   become: true
-  ansible.builtin.copy:
-    content: "{{ item.certificate }}"
+  ansible.builtin.template:
+    src: certificates.j2
     dest: "{{ certificates_ca_path }}/{{ item.name }}"
     owner: root
     group: root
