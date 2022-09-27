@@ -39,8 +39,8 @@
 
 - name: Insert the keyfile for luks unlock
   become: true
-  ansible.builtin.copy:
-    content: "{{ clevis_initial_luks_password }}"
+  ansible.builtin.template:
+    src: keyfile.j2
     dest: "{{ tmp_clevis_env.path }}/pass"
     group: root
     owner: root

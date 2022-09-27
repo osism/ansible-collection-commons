@@ -41,7 +41,7 @@
     name: systemd-resolved
     daemon_reload: true
     state: restarted
-  when: resolved_conf.changed  # noqa 503
+  when: resolved_conf.changed  # noqa no-handler
 
 - name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
   become: true
