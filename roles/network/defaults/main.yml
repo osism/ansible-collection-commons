@@ -131,7 +131,7 @@ network_dispatcher_scripts: []
 
 # lldpd
 
-network_lldpd: false
+network_lldpd: true
 network_lldpd_package_name: lldpd
 network_lldpd_service_name: lldpd
 

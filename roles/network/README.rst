@@ -238,7 +238,7 @@ Example:
 **Configuration lldpd**
 
 .. zuul:rolevar:: network_lldpd
-   :default: false
+   :default: true
 
 If you want to use lldpd set the value to true. The link layer discovery protocol is a protocol to discover networks in a lan.
 
