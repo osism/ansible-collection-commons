@@ -235,29 +235,6 @@ Example:
      dest: routable.d/iptables.sh
 
 
-**Configuration lldpd**
-
-.. zuul:rolevar:: network_lldpd
-   :default: false
-
-If you want to use lldpd set the value to true. The link layer discovery protocol is a protocol to discover networks in a lan.
-
-.. zuul:rolevar:: network_lldpd_package_name
-   :default: lldpd
-
-The package name for lldpd.
-
-.. zuul:rolevar:: network_lldpd_service_name
-   :default: lldpd
-
-The name of the service from lldpd.
-
-
-**Configuration for the dummy interfaces**
-
-.. zuul:rolevar:: network_dummy_interfaces
-   :default: []
-
 This is a interface to avoid error because ansible does not recognize. 
 
 Example:
