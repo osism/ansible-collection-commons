@@ -12,3 +12,5 @@ skip_list:
   - schema
   - fqcn-builtins
   - name[template]
+warn_list:
+  - experimental  # all rules tagged as experimental
