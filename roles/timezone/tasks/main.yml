@@ -13,7 +13,10 @@
     state: present
     update_cache: true
 
-- name: "Set timezone to {{ timezone_name }}"
+# NOTE: We use a variable for the value of hwclock at this point. However,
+# ansible-lint expects UTC or Local and does not resolve the default value
+# of the variable. Therefore, the rule args[module] is ignored at this point.
+- name: "Set timezone to {{ timezone_name }}"  # # noqa: args[module]
   become: true
   community.general.timezone:
     hwclock: "{{ timezone_hwclock }}"
