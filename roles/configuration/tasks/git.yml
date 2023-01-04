@@ -50,6 +50,7 @@
     accept_hostkey: true
     force: true
   when: configuration_git_protocol == 'ssh'
+  tags: update-configuration
 
 - name: Git - clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
   ansible.builtin.git:
@@ -62,3 +63,4 @@
         configuration_git_protocol != 'ssh'
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
   no_log: true
+  tags: update-configuration
