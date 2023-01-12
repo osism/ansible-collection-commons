@@ -1,5 +1,6 @@
 ---
-operator_user: root
+operator_user: runner
+operator_group: docker
 
 configuration_git_port: 443
 configuration_git_protocol: https
