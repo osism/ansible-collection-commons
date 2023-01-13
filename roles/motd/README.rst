@@ -1,11 +1,12 @@
-Sets the content of the Message of the Day (MOTD) file.
+Sets the content of the Message of the Day (/etc/motd) and the
+prelogin message and identification (/etc/issue) file.
 
 **Role Variables**
 
 .. zuul:rolevar:: motd_content
    :default: ""
 
-   Contents to be written to ``motd_path``.
+   Contents to be written to ``motd_path`` and ``issue_path``.
 
    Example:
 
@@ -23,3 +24,8 @@ Sets the content of the Message of the Day (MOTD) file.
    :default: /etc/motd
 
    The full path to the motd file.
+
+.. zuul:rolevar:: issue_path
+   :default: /etc/issue
+
+   The full path to the issue file.
