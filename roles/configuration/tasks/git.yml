@@ -5,11 +5,13 @@
   when: configuration_git_username is defined and configuration_git_username|length
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
   no_log: true
+  tags: update-configuration
 
 - name: Git - set configuration_git_repository_url fact (without username)
   ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"  # noqa 204
   when: configuration_git_username is not defined or not configuration_git_username|length
+  tags: update-configuration
 
 - name: Git - copy private ssh key
   ansible.builtin.template:
