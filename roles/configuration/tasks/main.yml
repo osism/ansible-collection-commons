@@ -12,3 +12,4 @@
 
 - name: Include tasks required by the specific configuration type
   ansible.builtin.include_tasks: "{{ configuration_type }}.yml"
+  tags: update-configuration
