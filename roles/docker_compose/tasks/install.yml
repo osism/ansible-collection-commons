@@ -18,11 +18,31 @@
     - lock-frontend
   changed_when: false
 
-- name: Install packages
+- name: Unnstall docker-compose package
   become: true
   ansible.builtin.apt:
     name:
       - "{{ docker_compose_package_name }}"
+    state: absent
+
+- name: Copy docker-compose script
+  become: true
+  ansible.builtin.copy:
+    src: docker-compose
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+
+- name: Wait for apt lock
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+  changed_when: false
+
+- name: Install docker-compose-plugin package
+  become: true
+  ansible.builtin.apt:
+    name:
       - "{{ docker_compose_plugin_package_name }}"
     state: present
     install_recommends: false

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# The docker-compose CLI has been removed in OSISM.
+# The Compose plugin for Docker is now used.
+# The plugin can be called via 'docker compose'.
+
+/usr/bin/docker compose "$@"
