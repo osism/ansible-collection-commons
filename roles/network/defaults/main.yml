@@ -118,6 +118,7 @@ network_bridges: {}
 network_ethernets: {}
 network_tunnels: {}
 network_vlans: {}
+network_vrfs: {}
 
 network_dispatcher_package_name: networkd-dispatcher
 network_dispatcher_service_name: networkd-dispatcher

@@ -210,6 +210,10 @@ Netplan-tunnels configuration. For more information please look at the netplan d
 
 Netplan-vlans configuration. For more information please look at the netplan documentation.
 
+.. zuul:rolevar:: network_vrfs
+
+Netplan-vrfs configuration. For more information please look at the netplan documentation.
+
 .. zuul:rolevar:: network_dispatcher_package_name
    :default: networkd-dispatcher
 
