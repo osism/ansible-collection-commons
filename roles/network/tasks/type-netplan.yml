@@ -40,6 +40,10 @@
     dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
     mode: 0644
   delegate_to: localhost
+  # NOTE: This task does not change anything on the target host and always
+  #       changes. Regardless of whether changes really take place. Therefore
+  #       changed_when is set to False here.
+  changed_when: false
 
 - name: Copy netplan configuration
   become: true
@@ -57,6 +61,10 @@
     path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
     state: absent
   delegate_to: localhost
+  # NOTE: This task does not change anything on the target host and always
+  #       changes. Regardless of whether changes really take place. Therefore
+  #       changed_when is set to False here.
+  changed_when: false
 
 - name: Copy interfaces file
   become: true
