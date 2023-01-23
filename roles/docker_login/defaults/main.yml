@@ -1,0 +1,4 @@
+---
+docker_login_registry: index.docker.io
+docker_login_username:
+docker_login_password:

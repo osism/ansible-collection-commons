@@ -11,6 +11,7 @@ The following Ansible roles are included in this collection.
 | configfs             | ![Test role configfs](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configfs/badge.svg)             |
 | configuration        | ![Test role configuration](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configuration/badge.svg)   |
 | docker_compose       | ![Test role docker_compose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20docker_compose/badge.svg) |
+| docker_login         |                                                                                                                                   |
 | facts                | ![Test role facts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20facts/badge.svg)                   |
 | firewall             | ![Test role firewall](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20firewall/badge.svg)             |
 | hostname             | ![Test role hostname](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hostname/badge.svg)             |

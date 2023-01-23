@@ -1,0 +1,20 @@
+---
+- name: Wait for apt lock
+  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
+  loop:
+    - lock
+    - lock-frontend
+  changed_when: false
+
+- name: Install packages required by docker login
+  become: true
+  ansible.builtin.apt:
+    name: ["gnupg2", "pass"]
+    state: present
+
+- name: Login to registry and force re-authorization
+  community.docker.docker_login:
+    registry: "{{ docker_login_registry }}"
+    username: "{{ docker_login_username }}"
+    password: "{{ docker_login_password }}"
+    reauthorize: true
