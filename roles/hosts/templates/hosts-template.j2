@@ -18,7 +18,7 @@ ff02::2          ip6-allrouters
 {% if hostvars[item]['hosts_interface'] is defined %}
 {% set hosts_interface = hostvars[item]['hosts_interface'] %}
 {% else %}
-{% set hosts_interface = hostvars[item]['management_interface']|default('lo') %}
+{% set hosts_interface = hostvars[item]['internal_interface']|default('lo') %}
 {% endif %}
 {{ hostvars[item]['ansible_' + hosts_interface]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
 {% endif %}
