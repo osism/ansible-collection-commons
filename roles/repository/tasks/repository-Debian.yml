@@ -1,4 +1,11 @@
 ---
+- name: Copy 99osism apt configuration
+  become: true
+  ansible.builtin.template:
+    src: 99osism.j2
+    dest: /etc/apt/apt.conf.d/99osism
+    mode: 0644
+
 - name: Add repository keys via URLs
   become: true
   ansible.builtin.apt_key:
