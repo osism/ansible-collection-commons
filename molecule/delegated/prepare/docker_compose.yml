@@ -31,3 +31,9 @@
   become: true
   ansible.builtin.apt:
     update_cache: true
+
+- name: Remove moby-compose package
+  become: true
+  ansible.builtin.apt:
+    name: moby-compose
+    state: absent

@@ -11,7 +11,7 @@ Currently only 'package' is supported.
 .. zuul:rolevar:: docker_compose_package_name
    :default: docker-compose
 
-The name of the docker-compose package to install.
+The name of the docker-compose package to uninstall.
 
 .. zuul:rolevar:: docker_compose_plugin_package_name
    :default: docker-compose-plugin
