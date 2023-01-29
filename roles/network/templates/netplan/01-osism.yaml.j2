@@ -19,6 +19,3 @@ network:
 
   vlans:
     {{ network_vlans|to_nice_yaml(indent=4)|indent(4) }}
-
-  vrfs:
-    {{ network_vrfs|to_nice_yaml(indent=4)|indent(4) }}
