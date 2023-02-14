@@ -1,6 +1,6 @@
 ---
 exclude_paths:
-  - .github/playbook-publish-collection.yml
+  - .github/
 mock_modules:
   - scan_services
 use_default_rules: true
