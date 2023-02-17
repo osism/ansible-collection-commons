@@ -5,13 +5,13 @@
     check:
       jobs:
         - build-sphinx-docs
-        - tox-linters
         - ansible-lint
+        - yamllint
     gate:
       jobs:
         - build-sphinx-docs
-        - tox-linters
         - ansible-lint
+        - yamllint
     post:
       jobs:
         - osism-publish-tox-docs-production
