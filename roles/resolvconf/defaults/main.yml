@@ -11,7 +11,7 @@ resolvconf_nameserver: "{{ resolvconf_nameserver_default + resolvconf_nameserver
 resolvconf_fallback_nameserver: []
 resolvconf_search: osism.test
 
-resolvconf_minimum_number_of_nameservers: 2
+resolvconf_minimum_number_of_nameservers: 1
 
 resolvconf_cache: true
 resolvconf_cache_from_localhost: false
