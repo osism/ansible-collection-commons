@@ -1,12 +1,12 @@
 ---
 - name: Stopp/disable resolvconf service
-  become: true
   ansible.builtin.service:
     name: resolvconf
     state: stopped
     enabled: false
   register: result
   failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
+  become: true
 
 - name: "Retrieve {{ resolvconf_file }} file status"
   ansible.builtin.stat:
@@ -14,13 +14,13 @@
   register: stat_resolvconf_file
 
 - name: "Archive existing {{ resolvconf_file }} file"
-  become: true
   ansible.posix.synchronize:
     src: "/etc/resolv.conf"
     dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
     archive: true
   delegate_to: "{{ inventory_hostname }}"
   when: stat_resolvconf_file.stat.islnk is defined and not stat_resolvconf_file.stat.islnk
+  become: true
 
 - name: Copy configuration files
   become: true

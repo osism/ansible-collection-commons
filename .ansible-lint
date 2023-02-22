@@ -13,3 +13,5 @@ skip_list:
   - var-spacing  # Variables should have spaces before and after: {{ var_name }}.
 warn_list:
   - experimental  # all rules tagged as experimental
+rulesdir:
+  - ./.ansible-lint-rules/
