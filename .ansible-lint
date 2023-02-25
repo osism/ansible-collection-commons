@@ -4,6 +4,8 @@ exclude_paths:
 mock_modules:
   - scan_services
 use_default_rules: true
+rulesdir:
+  - ./.ansible-lint-rules/
 skip_list:
   - fqcn-builtins
   - galaxy[no-changelog]
@@ -11,5 +13,7 @@ skip_list:
   - parser-error  # AnsibleParserError.
   - schema
   - var-spacing  # Variables should have spaces before and after: {{ var_name }}.
+# DO NOT DELETE THE WARNLIST! It is required for our custom rules!
+# If this isn't there our custom rules will only through a warning and wont generate a failure!:
 warn_list:
-  - experimental  # all rules tagged as experimental
+  - dummy

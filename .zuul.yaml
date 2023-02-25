@@ -4,13 +4,15 @@
     default-branch: main
     check:
       jobs:
-        - build-sphinx-docs
         - ansible-lint
+        - build-sphinx-docs
+        - dco-license
         - yamllint
     gate:
       jobs:
-        - build-sphinx-docs
         - ansible-lint
+        - build-sphinx-docs
+        - dco-license
         - yamllint
     post:
       jobs:
