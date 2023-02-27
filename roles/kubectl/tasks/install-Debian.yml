@@ -5,6 +5,7 @@
     - lock
     - lock-frontend
   when: kubectl_configure_repository|bool
+  changed_when: false
 
 - name: Install apt-transport-https package
   become: true
