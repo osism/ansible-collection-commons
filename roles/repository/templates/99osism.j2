@@ -1,3 +1,6 @@
 {% if not enable_phased_updates|bool %}
 Update-Manager::Never-Include-Phased-Updates;
 {% endif %}
+{% if repository_apt_acquire_forceipv4|bool %}
+Acquire::ForceIPv4 "true";
+{% endif %}

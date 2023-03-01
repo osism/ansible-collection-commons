@@ -48,3 +48,10 @@ keyserver and added to APT as trusted key.
 Only for Debian/Ubuntu:
 
 Enable phased updates.
+
+.. zuul:rolevar:: repository_apt_acquire_forceipv4
+   :default: false
+
+Only for Debian/Ubuntu:
+
+Forcing IPv4 transport with apt-get.
