@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: ["gnupg2", "pass"]
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Login to registry and force re-authorization
   community.docker.docker_login:

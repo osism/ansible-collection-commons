@@ -11,7 +11,7 @@
   ansible.builtin.apt:
     name: tzdata
     state: present
-    update_cache: true
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 # NOTE: We use a variable for the value of hwclock at this point. However,
 # ansible-lint expects UTC or Local and does not resolve the default value

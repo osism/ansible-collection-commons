@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
   when: sysdig_configure_repository|bool
 
 - name: Add repository gpg key
@@ -51,6 +52,7 @@
   ansible.builtin.apt:
     name: "{{ sysdig_package_name }}"
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: "Persist {{ sysdig_kernel_module_name }} kernel module via modules-load.d"
   become: true

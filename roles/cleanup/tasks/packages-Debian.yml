@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: "{{ cleanup_packages }}"
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     purge: true
 
 - name: Wait for apt lock
@@ -25,6 +26,7 @@
   ansible.builtin.apt:
     name: "{{ cleanup_cloudinit_package_name }}"
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     purge: true
   when: cleanup_cloudinit|bool
 
@@ -40,6 +42,7 @@
   ansible.builtin.apt:
     name: unattended-upgrades
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     purge: true
 
 - name: Wait for apt lock
@@ -53,6 +56,7 @@
   become: true
   ansible.builtin.apt:
     autoclean: true
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Wait for apt lock
   ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
@@ -65,3 +69,4 @@
   become: true
   ansible.builtin.apt:
     autoremove: true
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"

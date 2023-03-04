@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: kompose
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Block installation of kompose package
   become: true

@@ -11,6 +11,7 @@
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
   when: lynis_configure_repository|bool
   changed_when: false
 
@@ -42,3 +43,4 @@
   ansible.builtin.apt:
     name: "{{ lynis_package_name }}"
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"

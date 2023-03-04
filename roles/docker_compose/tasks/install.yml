@@ -24,6 +24,7 @@
     name:
       - "{{ docker_compose_package_name }}"
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Copy docker-compose script
   become: true
@@ -45,4 +46,5 @@
     name:
       - "{{ docker_compose_plugin_package_name }}"
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     install_recommends: false
