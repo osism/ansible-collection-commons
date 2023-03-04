@@ -11,14 +11,14 @@
   ansible.builtin.apt:
     name: "{{ network_netplan_required_packages }}"
     state: present
-    update_cache: true
-    cache_valid_time: 86400
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Remove ifupdown package
   become: true
   ansible.builtin.apt:
     name: ifupdown
     state: absent
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Create required directories
   become: true
@@ -97,8 +97,7 @@
   ansible.builtin.apt:
     name: "{{ network_dispatcher_package_name }}"
     state: present
-    update_cache: true
-    cache_valid_time: 86400
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: "Enable {{ network_dispatcher_service_name }} service"
   become: true

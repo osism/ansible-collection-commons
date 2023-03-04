@@ -35,6 +35,7 @@
   ansible.builtin.apt:
     name: "{{ configuration_git_package_name }}"
     state: present
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
 
 - name: Git - set proxy configuration
   community.general.git_config:

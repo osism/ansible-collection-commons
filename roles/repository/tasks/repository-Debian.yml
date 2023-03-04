@@ -63,3 +63,4 @@
   become: true
   ansible.builtin.apt:
     cache_valid_time: "{{ repository_cache_valid_time }}"
+    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
