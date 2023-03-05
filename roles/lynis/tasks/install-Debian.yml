@@ -15,11 +15,25 @@
   when: lynis_configure_repository|bool
   changed_when: false
 
-- name: Add repository gpg key
+- name: Add repository gpg key with apt-key
   become: true
   ansible.builtin.apt_key:
     url: "{{ lynis_debian_repository_key }}"
-  when: lynis_configure_repository|bool
+  when:
+    - lynis_configure_repository|bool
+    - ansible_distribution_version is version('22.04', '<')
+
+- name: Add repository gpg key
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ lynis_debian_repository_key }}"
+    dest: /etc/apt/trusted.gpg.d/lynis.asc
+    mode: 0644
+    owner: root
+    group: root
+  when:
+    - lynis_configure_repository|bool
+    - ansible_distribution_version is version('22.04', '>=')
 
 - name: Add repository
   become: true

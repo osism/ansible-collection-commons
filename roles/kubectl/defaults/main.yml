@@ -10,5 +10,5 @@ kubectl_package_name: kubectl
 kubectl_configure_repository: true
 
 kubectl_debian_repository_arch: amd64
-kubectl_debian_repository_key: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-kubectl_debian_repository: "deb [ arch={{ kubectl_debian_repository_arch }} ] https://apt.kubernetes.io/ kubernetes-xenial main"
+kubectl_debian_repository_key: https://raw.githubusercontent.com/kubernetes/k8s.io/main/apt/doc/apt-key.gpg
+kubectl_debian_repository: "deb [ arch={{ kubectl_debian_repository_arch }} signed-by=/usr/share/keyrings/kubectl.gpg ] https://apt.kubernetes.io/ kubernetes-xenial main"
