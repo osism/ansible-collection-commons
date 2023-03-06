@@ -17,8 +17,12 @@
 
 - name: Add repository gpg key
   become: true
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: "{{ kubectl_debian_repository_key }}"
+    dest: /usr/share/keyrings/kubectl.gpg
+    mode: 0644
+    owner: root
+    group: root
   when: kubectl_configure_repository|bool
 
 - name: Add repository
