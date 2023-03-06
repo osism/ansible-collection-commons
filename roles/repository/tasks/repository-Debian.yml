@@ -60,7 +60,7 @@
   ansible.builtin.apt_key:
     data: "{{ lookup('file', item) }}"
     state: present
-  with_fileglob: "{{ repository_key_files_directory }}/*"
+  with_fileglob: "{{ repository_key_files_directory }}/*.gpg"
   when:
     - result is defined and result.stat.isdir is defined and result.stat.isdir
     - ansible_distribution_version is version('22.04', '<')
@@ -73,7 +73,7 @@
     mode: 0644
     owner: root
     group: root
-  with_fileglob: "{{ repository_key_files_directory }}/*"
+  with_fileglob: "{{ repository_key_files_directory }}/*.gpg"
   when:
     - result is defined and result.stat.isdir is defined and result.stat.isdir
     - ansible_distribution_version is version('22.04', '>=')
