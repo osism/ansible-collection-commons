@@ -1,12 +1,4 @@
 ---
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  when: kubectl_configure_repository|bool
-  changed_when: false
-
 - name: Install apt-transport-https package
   become: true
   ansible.builtin.apt:
@@ -34,13 +26,6 @@
     update_cache: true
     mode: 0600
   when: kubectl_configure_repository|bool
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: "Install {{ kubectl_package_name }} package"
   become: true
