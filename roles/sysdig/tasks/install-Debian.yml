@@ -1,11 +1,4 @@
 ---
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Install apt-transport-https package
   become: true
   ansible.builtin.apt:
@@ -53,13 +46,6 @@
   ansible.builtin.debug:
     msg: "Reboot of {{ inventory_hostname }} required to get the latest kernel running"
   when: result.stat.islnk is defined
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: "Install {{ sysdig_package_name }} package"
   become: true
