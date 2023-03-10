@@ -91,13 +91,6 @@
     backup: true
   notify: Force update of package cache
 
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Update package cache
   become: true
   ansible.builtin.apt:
