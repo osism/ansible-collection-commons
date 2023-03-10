@@ -1,11 +1,4 @@
 ---
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Install required packages
   become: true
   ansible.builtin.apt:
@@ -84,13 +77,6 @@
     owner: root
     group: root
   loop: "{{ network_dispatcher_scripts }}"
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: "Install {{ network_dispatcher_package_name }} package"
   become: true
