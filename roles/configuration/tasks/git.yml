@@ -23,13 +23,6 @@
   when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key|length)
   no_log: true
 
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Git - install required packages
   become: true
   ansible.builtin.apt:
