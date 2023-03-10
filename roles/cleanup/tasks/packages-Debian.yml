@@ -1,11 +1,4 @@
 ---
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Cleanup installed packages
   become: true
   ansible.builtin.apt:
@@ -13,13 +6,6 @@
     state: absent
     lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     purge: true
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: Remove cloudinit package
   become: true
@@ -30,13 +16,6 @@
     purge: true
   when: cleanup_cloudinit|bool
 
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Uninstall unattended-upgrades package
   become: true
   ansible.builtin.apt:
@@ -45,25 +24,11 @@
     lock_timeout: "{{ apt_lock_timeout|default(300) }}"
     purge: true
 
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Remove useless packages from the cache
   become: true
   ansible.builtin.apt:
     autoclean: true
     lock_timeout: "{{ apt_lock_timeout|default(300) }}"
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: Remove dependencies that are no longer required
   become: true
