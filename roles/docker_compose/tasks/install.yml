@@ -11,13 +11,6 @@
     path: /usr/local/bin/docker-compose
     state: absent
 
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
-
 - name: Unnstall docker-compose package
   become: true
   ansible.builtin.apt:
@@ -32,13 +25,6 @@
     src: docker-compose
     dest: /usr/local/bin/docker-compose
     mode: 0755
-
-- name: Wait for apt lock
-  ansible.builtin.shell: "while fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 5; done;"
-  loop:
-    - lock
-    - lock-frontend
-  changed_when: false
 
 - name: Install docker-compose-plugin package
   become: true
