@@ -16,10 +16,12 @@
      clevis luks bind -s 2 -f -d {{ clevis_root_disk }} tang '{ "url": "{{ clevis_tang_url }}", "adv": "{{ tmp_clevis_env.path }}/adv.jws" }' {{ clevis_initial_luks_password }}
   environment:
     KEY: "{{ tmp_clevis_env.path }}/pass"
+  changed_when: true
 
 - name: Enable tang boot environment
   become: true
   ansible.builtin.command: "dracut -fv --regenerate-all"
+  changed_when: true
 
 - name: Delete clevis environment
   become: true
