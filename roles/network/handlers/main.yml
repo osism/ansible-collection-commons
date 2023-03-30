@@ -3,6 +3,7 @@
   become: true
   ansible.builtin.command: netplan apply
   when: network_allow_service_restart
+  changed_when: true
 
 - name: Interfaces file changed
   become: true
