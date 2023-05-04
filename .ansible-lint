@@ -2,6 +2,12 @@
 exclude_paths:
   - .github/
 mock_modules:
+  - community.docker.docker_container_exec
+  - community.docker.docker_login
+  - hashivault_auth_method
+  - hashivault_policy
+  - hashivault_secret
+  - hashivault_secret_engine
   - scan_services
 use_default_rules: true
 rulesdir:
