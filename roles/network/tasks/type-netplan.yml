@@ -78,14 +78,14 @@
     group: root
   loop: "{{ network_dispatcher_scripts }}"
 
-- name: "Install {{ network_dispatcher_package_name }} package"
+- name: "Install package {{ network_dispatcher_package_name }}"
   become: true
   ansible.builtin.apt:
     name: "{{ network_dispatcher_package_name }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
-- name: "Enable {{ network_dispatcher_service_name }} service"
+- name: "Enable service {{ network_dispatcher_service_name }}"
   become: true
   ansible.builtin.service:
     name: "{{ network_dispatcher_service_name }}"

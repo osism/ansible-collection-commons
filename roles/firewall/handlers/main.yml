@@ -1,5 +1,5 @@
 ---
-- name: "Restart {{ ufw_service_name }} service"
+- name: "Restart service {{ ufw_service_name }}"
   become: true
   ansible.builtin.service:
     name: "{{ ufw_service_name }}"

@@ -4,7 +4,7 @@
   ansible.builtin.command: "update-initramfs -u -k all"
   changed_when: false
 
-- name: "Enable {{ clevis_service_name }} service"
+- name: "Enable service {{ clevis_service_name }}"
   become: true
   ansible.builtin.service:
     name: "{{ clevis_service_name }}"

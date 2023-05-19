@@ -1,5 +1,5 @@
 ---
-- name: "Set sysctl parameters on {{ item.key }} nodes"
+- name: "Set sysctl parameters on {{ item.key }}"
   become: true
   ansible.posix.sysctl:
     name: "{{ item_in_block.name }}"
