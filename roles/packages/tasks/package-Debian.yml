@@ -4,18 +4,18 @@
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: "{{ apt_cache_valid_time }}"
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
 - name: Upgrade packages
   become: true
   ansible.builtin.apt:
     upgrade: dist
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
-  when: upgrade_packages|bool
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: upgrade_packages | bool
 
 - name: Install required packages
   become: true
   ansible.builtin.apt:
     name: "{{ required_packages }}"
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"

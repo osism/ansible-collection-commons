@@ -2,7 +2,7 @@
 - name: Include distribution specific tasks
   ansible.builtin.include_tasks: "{{ ansible_os_family }}.yml"
   when:
-    - proxy_package_manager|bool
+    - proxy_package_manager | bool
     - proxy_proxies != {}
 
 - name: Set system wide settings in environment file
@@ -11,18 +11,18 @@
     dest: /etc/environment
     marker: "# {mark} ANSIBLE MANAGED BLOCK (osism.proxy)"
     block: |
-      http_proxy={{ proxy_proxies['http']  }}
-      HTTP_PROXY={{ proxy_proxies['http']  }}
+      http_proxy={{ proxy_proxies['http'] }}
+      HTTP_PROXY={{ proxy_proxies['http'] }}
 
-      https_proxy={{ proxy_proxies['https'] |default(proxy_proxies['http'] ) }}
-      HTTPS_PROXY={{ proxy_proxies['https'] |default(proxy_proxies['http'] ) }}
+      https_proxy={{ proxy_proxies['https'] | default(proxy_proxies['http']) }}
+      HTTPS_PROXY={{ proxy_proxies['https'] | default(proxy_proxies['http']) }}
 
-      ftp_proxy={{ proxy_proxies['http']  }}
-      FTP_PROXY={{ proxy_proxies['http']  }}
+      ftp_proxy={{ proxy_proxies['http'] }}
+      FTP_PROXY={{ proxy_proxies['http'] }}
 
       rsync_proxy={{ proxy_proxies['http'] }}
-      RSYNC_PROXY={{ proxy_proxies['http']  }}
+      RSYNC_PROXY={{ proxy_proxies['http'] }}
 
-      no_proxy={{ proxy_no_proxy|join(',') }}
-      NO_PROXY={{ proxy_no_proxy|join(',') }}
+      no_proxy={{ proxy_no_proxy | join(',') }}
+      NO_PROXY={{ proxy_no_proxy | join(',') }}
   when: proxy_proxies != {}

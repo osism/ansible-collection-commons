@@ -11,7 +11,7 @@
   ansible.builtin.dnf:  # noqa package-latest
     name: '*'
     state: latest
-  when: upgrade_packages|bool
+  when: upgrade_packages | bool
 
 - name: Install required packages
   become: true

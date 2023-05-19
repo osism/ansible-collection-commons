@@ -17,7 +17,6 @@ skip_list:
   - name[template]
   - parser-error  # AnsibleParserError.
   - schema
-  - var-spacing  # Variables should have spaces before and after: {{ var_name }}.
   - var-naming[no-role-prefix]
 # DO NOT DELETE THE WARNLIST! It is required for our custom rules!
 # If this isn't there our custom rules will only through a warning and wont generate a failure!:

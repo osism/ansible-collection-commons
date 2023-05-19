@@ -1,4 +1,4 @@
 ---
 - name: Include sysctl tasks
   ansible.builtin.include_tasks: sysctl.yml
-  loop: "{{ sysctl_defaults|combine(sysctl_extra)|dict2items }}"
+  loop: "{{ sysctl_defaults | combine(sysctl_extra) | dict2items }}"

@@ -37,8 +37,8 @@
   ansible.builtin.apt:
     name: "{{ network_interface_required_packages }}"
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
-  when: network_interfaces|length > 0
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: network_interfaces | length > 0
 
 - name: Create required directories
   become: true
@@ -48,7 +48,7 @@
     mode: 0755
   with_items:
     - "{{ network_interface_path }}"
-  when: network_interfaces|length > 0
+  when: network_interfaces | length > 0
 
 - name: Copy interfaces file
   become: true
@@ -58,7 +58,7 @@
     mode: 0644
   notify:
     - Interfaces file changed
-  when: network_interfaces|length > 0
+  when: network_interfaces | length > 0
 
 - name: Copy device configuration files
   become: true
@@ -77,4 +77,4 @@
   ansible.builtin.include_tasks: cleanup-interfaces.yml
   when:
     - network_manage_devices
-    - network_interfaces|length > 0
+    - network_interfaces | length > 0
