@@ -14,4 +14,4 @@
     secret: "{{ item.key }}"
     data:
       value: "{{ item.value }}"
-  loop: "{{ secrets|dict2items }}"
+  loop: "{{ secrets | dict2items }}"

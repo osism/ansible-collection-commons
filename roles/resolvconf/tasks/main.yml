@@ -3,10 +3,10 @@
   ansible.builtin.fail:
     msg: |
       {{ resolvconf_minimum_number_of_nameservers }} or more name servers
-      must be configured. Currently only {{ resolvconf_nameserver|length }}
+      must be configured. Currently only {{ resolvconf_nameserver | length }}
       name server(s) are configured.
-  when: resolvconf_nameserver|length < resolvconf_minimum_number_of_nameservers|int
+  when: resolvconf_nameserver | length < resolvconf_minimum_number_of_nameservers | int
 
 - name: Include resolvconf tasks
   ansible.builtin.include_tasks: "configure-resolv.yml"
-  when: resolvconf_nameserver|length > 0
+  when: resolvconf_nameserver | length > 0

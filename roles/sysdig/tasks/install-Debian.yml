@@ -4,15 +4,15 @@
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
-  when: sysdig_configure_repository|bool
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: sysdig_configure_repository | bool
 
 - name: Add repository gpg key with apt-key
   become: true
   ansible.builtin.apt_key:
     url: "{{ sysdig_debian_repository_key }}"
   when:
-    - sysdig_configure_repository|bool
+    - sysdig_configure_repository | bool
     - ansible_distribution_version is version('22.04', '<')
 
 - name: Add repository gpg key
@@ -24,7 +24,7 @@
     owner: root
     group: root
   when:
-    - sysdig_configure_repository|bool
+    - sysdig_configure_repository | bool
     - ansible_distribution_version is version('22.04', '>=')
 
 - name: Add repository
@@ -35,7 +35,7 @@
     filename: sysdig
     update_cache: true
     mode: 0600
-  when: sysdig_configure_repository|bool
+  when: sysdig_configure_repository | bool
 
 - name: Check if /var/run/reboot-required exist
   ansible.builtin.stat:
@@ -52,7 +52,7 @@
   ansible.builtin.apt:
     name: "{{ sysdig_package_name }}"
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
 - name: "Persist {{ sysdig_kernel_module_name }} kernel module via modules-load.d"
   become: true

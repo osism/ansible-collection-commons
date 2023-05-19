@@ -32,7 +32,7 @@
 
 - name: Generate report
   become: true
-  ansible.builtin.command: "sosreport --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins|join(',') }}"
+  ansible.builtin.command: "sosreport --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins | join(',') }}"
   changed_when: true
 
 - name: Rename sha256 file

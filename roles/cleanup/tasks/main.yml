@@ -13,4 +13,4 @@
 
 - name: Include cloudinit tasks
   ansible.builtin.include_tasks: cloudinit.yml
-  when: cleanup_cloudinit|bool
+  when: cleanup_cloudinit | bool

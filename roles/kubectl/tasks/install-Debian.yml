@@ -4,8 +4,8 @@
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
-  when: kubectl_configure_repository|bool
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: kubectl_configure_repository | bool
 
 - name: Add repository gpg key
   become: true
@@ -15,7 +15,7 @@
     mode: 0644
     owner: root
     group: root
-  when: kubectl_configure_repository|bool
+  when: kubectl_configure_repository | bool
 
 - name: Add repository
   become: true
@@ -25,11 +25,11 @@
     filename: kubectl
     update_cache: true
     mode: 0600
-  when: kubectl_configure_repository|bool
+  when: kubectl_configure_repository | bool
 
 - name: "Install {{ kubectl_package_name }} package"
   become: true
   ansible.builtin.apt:
     name: "{{ kubectl_package_name }}"
     state: present
-    lock_timeout: "{{ apt_lock_timeout|default(300) }}"
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"

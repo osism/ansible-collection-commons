@@ -10,7 +10,7 @@
   ansible.builtin.dnf:
     name: "{{ cleanup_cloudinit_package_name }}"
     state: absent
-  when: cleanup_cloudinit|bool
+  when: cleanup_cloudinit | bool
 
 - name: Remove useless packages from the cache
   become: true

@@ -4,4 +4,4 @@
 
 - name: Include dummy interfaces
   ansible.builtin.include_tasks: dummy-interfaces.yml
-  when: network_dummy_interfaces|length > 0
+  when: network_dummy_interfaces | length > 0
