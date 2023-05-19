@@ -15,7 +15,6 @@ rulesdir:
 skip_list:
   - galaxy[no-changelog]
   - name[template]
-  - parser-error  # AnsibleParserError.
   - schema
   - var-naming[no-role-prefix]
 # DO NOT DELETE THE WARNLIST! It is required for our custom rules!
