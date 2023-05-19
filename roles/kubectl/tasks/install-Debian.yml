@@ -27,7 +27,7 @@
     mode: 0600
   when: kubectl_configure_repository | bool
 
-- name: "Install {{ kubectl_package_name }} package"
+- name: "Install package {{ kubectl_package_name }}"
   become: true
   ansible.builtin.apt:
     name: "{{ kubectl_package_name }}"

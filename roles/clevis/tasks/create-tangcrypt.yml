@@ -14,7 +14,7 @@
     dest: /etc/initramfs-tools/conf.d/dropbear.conf
     state: absent
 
-- name: "Check if disk {{ clevis_root_disk }} already bind to tang"
+- name: "Check if disk already bind to tang"
   become: true
   ansible.builtin.command: "clevis luks list -d {{ clevis_root_disk }} -s 2"
   register: result_clevis_luks_list
@@ -50,5 +50,5 @@
   notify:
     - Chain tang pin
     - Enable tang boot environment
-    - "Enable {{ clevis_service_name }} service"
+    - "Enable service {{ clevis_service_name }}"
     - Delete clevis environment

@@ -14,7 +14,6 @@ rulesdir:
   - ./.ansible-lint-rules/
 skip_list:
   - galaxy[no-changelog]
-  - name[template]
   - schema
   - var-naming[no-role-prefix]
 # DO NOT DELETE THE WARNLIST! It is required for our custom rules!

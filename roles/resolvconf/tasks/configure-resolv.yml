@@ -8,12 +8,12 @@
   register: result
   failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
 
-- name: "Retrieve {{ resolvconf_file }} file status"
+- name: "Retrieve file status of {{ resolvconf_file }}"
   ansible.builtin.stat:
     path: "{{ resolvconf_file }}"
   register: stat_resolvconf_file
 
-- name: "Archive existing {{ resolvconf_file }} file"
+- name: "Archive existing file {{ resolvconf_file }}"
   become: true
   ansible.posix.synchronize:
     src: "/etc/resolv.conf"
@@ -43,7 +43,7 @@
     state: restarted
   when: resolved_conf.changed  # noqa no-handler
 
-- name: "Link {{ resolvconf_file }} to /run/systemd/resolve/stub-resolv.conf"
+- name: "Link /run/systemd/resolve/stub-resolv.conf to {{ resolvconf_file }}"
   become: true
   ansible.builtin.file:
     src: /run/systemd/resolve/stub-resolv.conf

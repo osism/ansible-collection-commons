@@ -5,9 +5,9 @@
     src: ufw.conf.j2
     dest: /etc/ufw/ufw.conf
     mode: 0644
-  notify: "Restart {{ ufw_service_name }} service"
+  notify: "Restart service {{ ufw_service_name }}"
 
-- name: "Start {{ ufw_service_name }} service"
+- name: "Start service {{ ufw_service_name }}"
   become: true
   ansible.builtin.service:
     name: "{{ ufw_service_name }}"
