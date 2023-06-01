@@ -2,7 +2,7 @@
 - name: Get /etc/hosts file
   ansible.builtin.slurp:
     src: "{{ hosts_file }}"
-  register: hosts
+  register: hosts_entries
 
 - name: Copy initial /etc/hosts file
   become: true
@@ -13,7 +13,7 @@
     group: root
     mode: 0644
     backup: "{{ hosts_file_backup }}"
-  when: "'osism.hosts' not in hosts['content']|b64decode or hosts_file_reset | bool"
+  when: "'osism.hosts' not in hosts_entries['content']|b64decode or hosts_file_reset | bool"
 
 - name: Add hosts
   become: true
