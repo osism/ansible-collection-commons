@@ -35,13 +35,13 @@
       dest: /etc/systemd/resolved.conf
   register: resolved_conf
 
-- name: Restart systemd-resolved service
+- name: Restart systemd-resolved service  # noqa no-handler
   become: true
   ansible.builtin.systemd:
     name: systemd-resolved
     daemon_reload: true
     state: restarted
-  when: resolved_conf.changed  # noqa no-handler
+  when: resolved_conf.changed
 
 - name: "Link /run/systemd/resolve/stub-resolv.conf to {{ resolvconf_file }}"
   become: true
