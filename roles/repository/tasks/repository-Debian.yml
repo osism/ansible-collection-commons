@@ -54,6 +54,7 @@
   register: result
   delegate_to: "{{ groups['manager'][0] }}"
   ignore_errors: true
+  run_once: true
 
 - name: Add repository keys via files with apt-key
   become: true
