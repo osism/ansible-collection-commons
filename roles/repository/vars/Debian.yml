@@ -1,0 +1,8 @@
+---
+repository_default:
+  - name: "{{ ansible_distribution_release }}"
+    repository: "deb http://deb.debian.org/debian {{ ansible_distribution_release }} main contrib"
+  - name: "{{ ansible_distribution_release }}-security"
+    repository: "deb http://security.debian.org/debian-security {{ ansible_distribution_release }}-security main contrib"
+  - name: "{{ ansible_distribution_release }}-updates"
+    repository: "deb http://deb.debian.org/debian {{ ansible_distribution_release }}-updates main contrib"
