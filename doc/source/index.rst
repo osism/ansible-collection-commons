@@ -36,8 +36,6 @@ https://github.com/osism/ansible-collection-commons/issues.
 
 .. zuul:autorole:: kompose
 
-.. zuul:autorole:: kubectl
-
 .. zuul:autorole:: lynis
 
 .. zuul:autorole:: microcode

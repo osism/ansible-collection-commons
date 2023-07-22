@@ -20,7 +20,6 @@ The following Ansible roles are included in this collection.
 | kernel_modules       | ![Test role kernel_modules](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kernel_modules/badge.svg) |
 | known_hosts          |                                                                                                                                   |
 | kompose              | ![Test role kompose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kompose/badge.svg)               |
-| kubectl              | ![Test role kubectl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kubectl/badge.svg)               |
 | lynis                | ![Test role lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20lynis/badge.svg)                   |
 | microcode            | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)           |
 | motd                 | ![Test role motd](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20motd/badge.svg)                     |
