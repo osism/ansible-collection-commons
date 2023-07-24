@@ -24,7 +24,7 @@
     state: present
     filename: kubectl
     update_cache: true
-    mode: 0600
+    mode: 0644
   when: kubectl_configure_repository | bool
 
 - name: "Install package {{ kubectl_package_name }}"
