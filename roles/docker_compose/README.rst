@@ -27,3 +27,8 @@ The user the docker-compose service should run with.
    :default: "{{ operator_group | default('dragon') }}"
 
 The group the docker-compose service should run with.
+
+.. zuul:rolevar:: docker_compose_pull
+   :default: True
+
+Switch to enable or disable the container image pull in the service.
