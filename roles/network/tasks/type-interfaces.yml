@@ -1,6 +1,6 @@
 ---
 - name: Warning when used on Ubuntu >= 22.04
-  debug:
+  ansible.builtin.debug:
     msg: "For Ubuntu >= 22.04 Netplan should be used instead of Interface"
   when: "ansible_distribution is version('22.04, '>=')"
 
