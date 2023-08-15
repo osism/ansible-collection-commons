@@ -1,7 +1,7 @@
 ---
 - name: Set Servername
   ansible.builtin.set_fact:
-    servername: "{{ inventory_hostname if hostname_use_fqdni | bool else inventory_hostname_short }}"
+    servername: "{{ inventory_hostname if hostname_use_fqdn | bool else inventory_hostname_short }}"
 
 - name: Set hostname
   become: true
