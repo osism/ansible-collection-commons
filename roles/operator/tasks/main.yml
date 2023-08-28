@@ -44,9 +44,9 @@
     create: true
     mode: 0640
   loop:
-    - "export LANGUAGE=en_US.UTF-8"
-    - "export LANG=en_US.UTF-8"
-    - "export LC_ALL=en_US.UTF-8"
+    - "export LANGUAGE=C.UTF-8"
+    - "export LANG=C.UTF-8"
+    - "export LC_ALL=C.UTF-8"
 
 - name: Create .ssh directory
   become: true
