@@ -11,7 +11,7 @@
     path: /usr/local/bin/docker-compose
     state: absent
 
-- name: Unnstall docker-compose package
+- name: Uninstall docker-compose package
   become: true
   ansible.builtin.apt:
     name:
