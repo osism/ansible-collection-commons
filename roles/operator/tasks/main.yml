@@ -65,6 +65,13 @@
   loop: "{{ operator_authorized_keys }}"
   no_log: true
 
+- name: Set authorized github accounts
+  become: true
+  ansible.posix.authorized_key:
+    key: "{{ lookup('url', 'https://github.com/' + item + '.keys', split_lines=False) }}"
+    user: "{{ operator_user }}"
+  loop: "{{ operator_authorized_github_accounts }}"
+
 - name: Set password of operator user
   become: true
   ansible.builtin.user:
