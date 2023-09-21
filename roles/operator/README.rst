@@ -30,7 +30,12 @@ The default shell for the operator.
 .. zuul:rolevar:: operator_authorized_keys
    :default: []
 
-A list of ssh authorized keys to add.
+List of SSH public keys to add to the authorized keys for the operator account.
+
+.. zuul:rolevar:: operator_authorized_github_accounts
+   :default: []
+
+List of Github accounts from which the SSH public keys are added to the authorized keys.
 
 .. zuul:rolevar:: operator_password
 
