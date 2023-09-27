@@ -1,1 +1,11 @@
 ---
+- name: Update package cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install ufw package
+  become: true
+  ansible.builtin.apt:
+    name: ufw
+    state: present
