@@ -10,210 +10,210 @@
     name: ansible-collection-commons-ansible-molecule-cleanup 
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: cleanup
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-configfs
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: configfs
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-configuration
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: configuration
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-docker_compose
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: docker_compose
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-facts
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: facts
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-firewall
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: firewall
       ansible_molecule_ansible_version: "8.4.0"
           
 - job:
     name: ansible-collection-commons-ansible-molecule-hostname
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: hostname
       ansible_molecule_ansible_version: "8.4.0"
         
 - job:
     name: ansible-collection-commons-ansible-molecule-hosts
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: hosts
       ansible_molecule_ansible_version: "8.4.0"
         
 - job:
     name: ansible-collection-commons-ansible-molecule-ipmitool
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: ipmitool
       ansible_molecule_ansible_version: "8.4.0"
         
 - job:
     name: ansible-collection-commons-ansible-molecule-kernel_modules
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: kernel_modules
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-kompose
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: kompose
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-kubectl
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: kubectl
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-lynis
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: lynis
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-microcode
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: microcode
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-motd
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: motd
       ansible_molecule_ansible_version: "8.4.0"
           
 - job:
     name: ansible-collection-commons-ansible-molecule-operator
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: operator
       ansible_molecule_ansible_version: "8.4.0"
         
 - job:
     name: ansible-collection-commons-ansible-molecule-packages
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: packages
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-podman
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: podman
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-proxy
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: proxy
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-repository
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: repository
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-resolvconf
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: resolvconf
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-runc
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: runc
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-services
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: services
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-sosreport
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: sosreport
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-sshconfig
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: sshconfig
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-state
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: state
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-sysctl
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: sysctl
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-systohc
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: systohc
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-timezone
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: timezone
       ansible_molecule_ansible_version: "8.4.0"
 
 - job:
     name: ansible-collection-commons-ansible-molecule-trivy
     parent: ansible-molecule
     vars:
-      ansible_role: certificates
+      ansible_role: trivy
       ansible_molecule_ansible_version: "8.4.0"
 
 - project:
