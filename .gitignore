@@ -4,3 +4,4 @@ galaxy.yml
 osism-commons-*.tar.gz
 scripts/render-template.py
 .env.yml
+*.swp
