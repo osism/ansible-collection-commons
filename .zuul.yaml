@@ -224,156 +224,187 @@
         - ansible-collection-commons-ansible-molecule-certificates:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/certificates\/.*$'
               - '^roles\/certificates\/.*$'
         - ansible-collection-commons-ansible-molecule-cleanup:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/cleanup\/.*$'
               - '^roles\/cleanup\/.*$'
         - ansible-collection-commons-ansible-molecule-configfs:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/configfs\/.*$'
               - '^roles\/configfs\/.*$'
         - ansible-collection-commons-ansible-molecule-configuration:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/configuration\/.*$'
               - '^roles\/configuraion\/.*$'
         - ansible-collection-commons-ansible-molecule-docker_compose:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/docker_compose\/.*$'
               - '^roles\/docker_compose\/.*$'
         - ansible-collection-commons-ansible-molecule-facts:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/facts\/.*$'
               - '^roles\/facts\/.*$'
         - ansible-collection-commons-ansible-molecule-firewall:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/firewall\/.*$'
               - '^roles\/firewall\/.*$'
         - ansible-collection-commons-ansible-molecule-hostname:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/hostname\/.*$'
               - '^roles\/hostname\/.*$'
         - ansible-collection-commons-ansible-molecule-hosts:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/hosts\/.*$'
               - '^roles\/hosts\/.*$'
         - ansible-collection-commons-ansible-molecule-ipmitool:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/ipimtool\/.*$'
               - '^roles\/ipimtool\/.*$'
         - ansible-collection-commons-ansible-molecule-kernel_modules:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kernel_modules\/.*$'
               - '^roles\/kernel_modules\/.*$'
         - ansible-collection-commons-ansible-molecule-kompose:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kompose\/.*$'
               - '^roles\/kompose\/.*$'
         - ansible-collection-commons-ansible-molecule-kubectl:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kubectl\/.*$'
               - '^roles\/kubectl\/.*$'
         - ansible-collection-commons-ansible-molecule-lynis:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/lynis\/.*$'
               - '^roles\/lynis\/.*$'
         - ansible-collection-commons-ansible-molecule-microcode:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/microcode\/.*$'
               - '^roles\/microcode\/.*$'
         - ansible-collection-commons-ansible-molecule-motd:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/motd\/.*$'
               - '^roles\/motd\/.*$'
         - ansible-collection-commons-ansible-molecule-operator:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/operator\/.*$'
               - '^roles\/operator\/.*$'
         - ansible-collection-commons-ansible-molecule-packages:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/packages\/.*$'
               - '^roles\/packages\/.*$'
         - ansible-collection-commons-ansible-molecule-podman:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/podman\/.*$'
               - '^roles\/podman\/.*$'
         - ansible-collection-commons-ansible-molecule-proxy:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/proxy\/.*$'
               - '^roles\/proxy\/.*$'
         - ansible-collection-commons-ansible-molecule-repository:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/repository\/.*$'
               - '^roles\/repository\/.*$'
         - ansible-collection-commons-ansible-molecule-resolvconf:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/resolvconf\/.*$'
               - '^roles\/resolvconf\/.*$'
         - ansible-collection-commons-ansible-molecule-runc:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/runc\/.*$'
               - '^roles\/runc\/.*$'
         - ansible-collection-commons-ansible-molecule-services:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
         - ansible-collection-commons-ansible-molecule-sosreport:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sosreport\/.*$'
               - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-ansible-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sshconfig\/.*$'
               - '^roles\/sshconfig\/.*$'
         - ansible-collection-commons-ansible-molecule-state:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/state\/.*$'
               - '^roles\/state\/.*$'
         - ansible-collection-commons-ansible-molecule-sysctl:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sysctl\/.*$'
               - '^roles\/sysctl\/.*$'
         - ansible-collection-commons-ansible-molecule-systohc:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/systohc\/.*$'
               - '^roles\/systohc\/.*$'
         - ansible-collection-commons-ansible-molecule-timezone:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/timezone\/.*$'
               - '^roles\/timezone\/.*$'
         - ansible-collection-commons-ansible-molecule-trivy:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - build-sphinx-docs
@@ -384,156 +415,187 @@
         - ansible-collection-commons-ansible-molecule-certificates:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/certificates\/.*$'
               - '^roles\/certificates\/.*$'
         - ansible-collection-commons-ansible-molecule-cleanup:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/cleanup\/.*$'
               - '^roles\/cleanup\/.*$'
         - ansible-collection-commons-ansible-molecule-configfs:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/configfs\/.*$'
               - '^roles\/configfs\/.*$'
         - ansible-collection-commons-ansible-molecule-configuration:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/configuration\/.*$'
               - '^roles\/configuraion\/.*$'
         - ansible-collection-commons-ansible-molecule-docker_compose:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/docker_compose\/.*$'
               - '^roles\/docker_compose\/.*$'
         - ansible-collection-commons-ansible-molecule-facts:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/facts\/.*$'
               - '^roles\/facts\/.*$'
         - ansible-collection-commons-ansible-molecule-firewall:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/firewall\/.*$'
               - '^roles\/firewall\/.*$'
         - ansible-collection-commons-ansible-molecule-hostname:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/hostname\/.*$'
               - '^roles\/hostname\/.*$'
         - ansible-collection-commons-ansible-molecule-hosts:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/hosts\/.*$'
               - '^roles\/hosts\/.*$'
         - ansible-collection-commons-ansible-molecule-ipmitool:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/ipimtool\/.*$'
               - '^roles\/ipimtool\/.*$'
         - ansible-collection-commons-ansible-molecule-kernel_modules:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kernel_modules\/.*$'
               - '^roles\/kernel_modules\/.*$'
         - ansible-collection-commons-ansible-molecule-kompose:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kompose\/.*$'
               - '^roles\/kompose\/.*$'
         - ansible-collection-commons-ansible-molecule-kubectl:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/kubectl\/.*$'
               - '^roles\/kubectl\/.*$'
         - ansible-collection-commons-ansible-molecule-lynis:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/lynis\/.*$'
               - '^roles\/lynis\/.*$'
         - ansible-collection-commons-ansible-molecule-microcode:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/microcode\/.*$'
               - '^roles\/microcode\/.*$'
         - ansible-collection-commons-ansible-molecule-motd:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/motd\/.*$'
               - '^roles\/motd\/.*$'
         - ansible-collection-commons-ansible-molecule-operator:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/operator\/.*$'
               - '^roles\/operator\/.*$'
         - ansible-collection-commons-ansible-molecule-packages:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/packages\/.*$'
               - '^roles\/packages\/.*$'
         - ansible-collection-commons-ansible-molecule-podman:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/podman\/.*$'
               - '^roles\/podman\/.*$'
         - ansible-collection-commons-ansible-molecule-proxy:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/proxy\/.*$'
               - '^roles\/proxy\/.*$'
         - ansible-collection-commons-ansible-molecule-repository:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/repository\/.*$'
               - '^roles\/repository\/.*$'
         - ansible-collection-commons-ansible-molecule-resolvconf:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/resolvconf\/.*$'
               - '^roles\/resolvconf\/.*$'
         - ansible-collection-commons-ansible-molecule-runc:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/runc\/.*$'
               - '^roles\/runc\/.*$'
         - ansible-collection-commons-ansible-molecule-services:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
         - ansible-collection-commons-ansible-molecule-sosreport:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sosreport\/.*$'
               - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-ansible-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sshconfig\/.*$'
               - '^roles\/sshconfig\/.*$'
         - ansible-collection-commons-ansible-molecule-state:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/state\/.*$'
               - '^roles\/state\/.*$'
         - ansible-collection-commons-ansible-molecule-sysctl:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/sysctl\/.*$'
               - '^roles\/sysctl\/.*$'
         - ansible-collection-commons-ansible-molecule-systohc:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/systohc\/.*$'
               - '^roles\/systohc\/.*$'
         - ansible-collection-commons-ansible-molecule-timezone:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/timezone\/.*$'
               - '^roles\/timezone\/.*$'
         - ansible-collection-commons-ansible-molecule-trivy:
             files:
               - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - build-sphinx-docs
