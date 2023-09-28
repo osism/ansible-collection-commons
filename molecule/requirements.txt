@@ -1,1 +1,1 @@
-molecule==5.1.0
+molecule==6.0.2
