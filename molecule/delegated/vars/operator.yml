@@ -1,1 +1,4 @@
 ---
+operator_authorized_keys: ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAsus5/h/wwuUKr1c9/6UFZe7T0oh6Zsv8gSoQvpMaR test@test.test"]
+operator_authorized_github_accounts: ["lindenb1"]
+operator_password: "$6$w8oIwOSR/jOsNQNH$FcTjfn5mOeZkrgM8lo/w77MLuWp0EjQa9L.v4FolN.lCEvsTOVqJjixJDvqqUELTLaHJS9dlpH0Hj7uy6dAk.0"
