@@ -20,6 +20,11 @@ provisioner:
       all:
         ansible_python_interpreter: /usr/bin/python3
         molecule_role: "${ANSIBLE_ROLE}"
+verifier:
+  name: testinfra
+  additional_files_or_dirs:
+    - "${ANSIBLE_ROLE}.py"
+
 scenario:
   name: delegated
   test_sequence:
@@ -27,4 +32,5 @@ scenario:
     - create
     - prepare
     - converge
+    - verify
     - destroy
