@@ -5,3 +5,4 @@ operator_group: zuul
 configuration_git_port: 443
 configuration_git_protocol: https
 configuration_git_username: ""
+configuration_git_private_key: "PRIVATE_KEY"

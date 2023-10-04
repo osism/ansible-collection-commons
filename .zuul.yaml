@@ -365,12 +365,6 @@
               - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sosreport:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sosreport\/.*$'
-              - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
@@ -408,6 +402,8 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
+        - build-sphinx-docs
+        - flake8
         - yamllint
     gate:
       jobs:
@@ -555,12 +551,6 @@
               - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sosreport:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sosreport\/.*$'
-              - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
@@ -598,6 +588,8 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
+        - build-sphinx-docs
+        - flake8
         - yamllint
     periodic-daily:
       jobs:

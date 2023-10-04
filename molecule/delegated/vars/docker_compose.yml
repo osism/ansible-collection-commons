@@ -1,1 +1,3 @@
 ---
+docker_compose_service_user: "zuul"
+docker_compose_service_group: "zuul"
