@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    In osism.common.repository only check for the existence of key files in
+    the configuration repository when there is at least one manager. This way
+    it is possible to re-use the role outside of OSISM without annoying error
+    messages.
