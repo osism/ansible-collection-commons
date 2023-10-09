@@ -47,28 +47,28 @@
     vars:
       ansible_role: firewall
       ansible_molecule_ansible_version: "8.4.0"
-          
+
 - job:
     name: ansible-collection-commons-molecule-hostname
     parent: ansible-molecule
     vars:
       ansible_role: hostname
       ansible_molecule_ansible_version: "8.4.0"
-        
+
 - job:
     name: ansible-collection-commons-molecule-hosts
     parent: ansible-molecule
     vars:
       ansible_role: hosts
       ansible_molecule_ansible_version: "8.4.0"
-        
+
 - job:
     name: ansible-collection-commons-molecule-ipmitool
     parent: ansible-molecule
     vars:
       ansible_role: ipmitool
       ansible_molecule_ansible_version: "8.4.0"
-        
+
 - job:
     name: ansible-collection-commons-molecule-kernel_modules
     parent: ansible-molecule
@@ -110,14 +110,14 @@
     vars:
       ansible_role: motd
       ansible_molecule_ansible_version: "8.4.0"
-          
+
 - job:
     name: ansible-collection-commons-molecule-operator
     parent: ansible-molecule
     vars:
       ansible_role: operator
       ansible_molecule_ansible_version: "8.4.0"
-        
+
 - job:
     name: ansible-collection-commons-molecule-packages
     parent: ansible-molecule
