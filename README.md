@@ -4,13 +4,13 @@ Documentation: https://docs.osism.tech/ansible-collection-commons/
 
 The following Ansible roles are included in this collection.
 
-| Rolename             | Test                                                                                                                              |
+| Rolename             | Unitest with Molecule                                                                                                             |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| certificates         | ![Test role certificates](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20certificates/badge.svg)     |
-| cleanup              | ![Test role cleanup](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20cleanup/badge.svg)               |
-| configfs             | ![Test role configfs](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configfs/badge.svg)             |
-| configuration        | ![Test role configuration](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20configuration/badge.svg)   |
-| docker_compose       | ![Test role docker_compose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20docker_compose/badge.svg) |
+| certificates         | [certificates.py](https://github.com/osism/ansible-collection-commons/tree/main/molecule/delegated/tests/certificates.py)         |
+| cleanup              | [cleanup.py](molecule/delegated/tests/cleanup.py)                                                                                 |
+| configfs             | [configfs.py](molecule/delegated/tests/configfs.py)                                                                               |
+| configuration        | [configuration.py](molecule/delegated/tests/configuration.py)                                                                     |
+| docker_compose       | [docker_compose.py](molecule/delegated/tests/docker_compose.py)                                                                   |
 | docker_login         |                                                                                                                                   |
 | facts                | ![Test role facts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20facts/badge.svg)                   |
 | firewall             | ![Test role firewall](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20firewall/badge.svg)             |

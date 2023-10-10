@@ -22,9 +22,10 @@ provisioner:
         molecule_role: "${ANSIBLE_ROLE}"
 verifier:
   name: testinfra
+  options:
+    v: 2
   additional_files_or_dirs:
     - "${ANSIBLE_ROLE}.py"
-
 scenario:
   name: delegated
   test_sequence:

@@ -55,6 +55,7 @@
   delegate_to: "{{ groups['manager'][0] }}"
   ignore_errors: true
   run_once: true
+  when: "'manager' in groups"
 
 - name: Add repository keys via files with apt-key
   become: true
