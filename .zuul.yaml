@@ -4,218 +4,217 @@
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: certificates
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-cleanup
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: cleanup
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-configfs
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: configfs
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-configuration
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: configuration
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-docker_compose
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: docker_compose
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-facts
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: facts
-#      ansible_molecule_ansible_version: "8.4.0"
-
+#      ansible_molecule_ansible_version: "8.5.0"
+#
 #- job:
 #    name: ansible-collection-commons-molecule-firewall
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: firewall
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-hostname
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: hostname
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-hosts
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: hosts
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-ipmitool
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: ipmitool
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
-- job:
-    name: ansible-collection-commons-molecule-kernel_modules
-    parent: ansible-molecule
-    vars:
-      ansible_role: kernel_modules
-      ansible_molecule_ansible_version: "8.4.0"
+#- job:
+#    name: ansible-collection-commons-molecule-kernel_modules
+#    parent: ansible-molecule
+#    vars:
+#      ansible_role: kernel_modules
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-kompose
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: kompose
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-kubectl
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: kubectl
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-lynis
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: lynis
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-microcode
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: microcode
-#      ansible_molecule_ansible_version: "8.4.0"
-
+#      ansible_molecule_ansible_version: "8.5.0"
+#
 #- job:
 #    name: ansible-collection-commons-molecule-motd
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: motd
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-operator
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: operator
-#      ansible_molecule_ansible_version: "8.4.0"
-
-- job:
-    name: ansible-collection-commons-molecule-packages
-    parent: ansible-molecule
-    vars:
-      ansible_role: packages
-      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
+#
+#- job:
+#    name: ansible-collection-commons-molecule-packages
+#    parent: ansible-molecule
+#    vars:
+#      ansible_role: packages
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-podman
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: podman
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-proxy
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: proxy
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-repository
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: repository
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-resolvconf
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: resolvconf
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-runc
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: runc
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-services
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: services
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-sosreport
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: sosreport
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-sshconfig
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: sshconfig
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-state
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: state
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
-#- job:
-#    name: ansible-collection-commons-molecule-sysctl
-#    parent: ansible-molecule
-#    vars:
-#      ansible_role: sysctl
-#      ansible_molecule_ansible_version: "8.4.0"
+- job:
+    name: ansible-collection-commons-molecule-sysctl
+    parent: ansible-molecule
+    vars:
+      ansible_role: sysctl
+      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-systohc
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: systohc
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-timezone
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: timezone
-#      ansible_molecule_ansible_version: "8.4.0"
+#      ansible_molecule_ansible_version: "8.5.0"
 ##
 #- job:
 #    name: ansible-collection-commons-molecule-trivy
 #    parent: ansible-molecule
 #    vars:
 #      ansible_role: trivy
-#      ansible_molecule_ansible_version: "8.4.0"
-#
+#      ansible_molecule_ansible_version: "8.5.0"
 
 - project:
     merge-mode: squash-merge
@@ -282,12 +281,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/ipimtool\/.*$'
 #              - '^roles\/ipimtool\/.*$'
-        - ansible-collection-commons-molecule-kernel_modules:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kernel_modules\/.*$'
-              - '^roles\/kernel_modules\/.*$'
+#        - ansible-collection-commons-molecule-kernel_modules:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/kernel_modules\/.*$'
+#              - '^roles\/kernel_modules\/.*$'
 #        - ansible-collection-commons-molecule-kompose:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -324,12 +323,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/operator\/.*$'
 #              - '^roles\/operator\/.*$'
-        - ansible-collection-commons-molecule-packages:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/packages\/.*$'
-              - '^roles\/packages\/.*$'
+#        - ansible-collection-commons-molecule-packages:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/packages\/.*$'
+#              - '^roles\/packages\/.*$'
 #        - ansible-collection-commons-molecule-podman:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -384,12 +383,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/state\/.*$'
 #              - '^roles\/state\/.*$'
-#        - ansible-collection-commons-molecule-sysctl:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/sysctl\/.*$'
-#              - '^roles\/sysctl\/.*$'
+        - ansible-collection-commons-molecule-sysctl:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/sysctl\/.*$'
+              - '^roles\/sysctl\/.*$'
 #        - ansible-collection-commons-molecule-systohc:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -473,12 +472,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/ipimtool\/.*$'
 #              - '^roles\/ipimtool\/.*$'
-        - ansible-collection-commons-molecule-kernel_modules:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kernel_modules\/.*$'
-              - '^roles\/kernel_modules\/.*$'
+#        - ansible-collection-commons-molecule-kernel_modules:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/kernel_modules\/.*$'
+#              - '^roles\/kernel_modules\/.*$'
 #        - ansible-collection-commons-molecule-kompose:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -515,12 +514,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/operator\/.*$'
 #              - '^roles\/operator\/.*$'
-        - ansible-collection-commons-molecule-packages:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/packages\/.*$'
-              - '^roles\/packages\/.*$'
+#        - ansible-collection-commons-molecule-packages:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/packages\/.*$'
+#              - '^roles\/packages\/.*$'
 #        - ansible-collection-commons-molecule-podman:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -575,12 +574,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/state\/.*$'
 #              - '^roles\/state\/.*$'
-#        - ansible-collection-commons-molecule-sysctl:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/sysctl\/.*$'
-#              - '^roles\/sysctl\/.*$'
+        - ansible-collection-commons-molecule-sysctl:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/sysctl\/.*$'
+              - '^roles\/sysctl\/.*$'
 #        - ansible-collection-commons-molecule-systohc:
 #            files:
 #              - '^molecule\/delegated\/.*$'
