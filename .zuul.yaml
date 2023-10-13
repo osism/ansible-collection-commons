@@ -5,13 +5,13 @@
 #    vars:
 #      ansible_role: certificates
 #      ansible_molecule_ansible_version: "8.5.0"
-#
-#- job:
-#    name: ansible-collection-commons-molecule-cleanup
-#    parent: ansible-molecule
-#    vars:
-#      ansible_role: cleanup
-#      ansible_molecule_ansible_version: "8.5.0"
+
+- job:
+    name: ansible-collection-commons-molecule-cleanup
+    parent: ansible-molecule
+    vars:
+      ansible_role: cleanup
+      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-configfs
@@ -40,13 +40,13 @@
 #    vars:
 #      ansible_role: facts
 #      ansible_molecule_ansible_version: "8.5.0"
-#
-#- job:
-#    name: ansible-collection-commons-molecule-firewall
-#    parent: ansible-molecule
-#    vars:
-#      ansible_role: firewall
-#      ansible_molecule_ansible_version: "8.5.0"
+
+- job:
+    name: ansible-collection-commons-molecule-firewall
+    parent: ansible-molecule
+    vars:
+      ansible_role: firewall
+      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-hostname
@@ -76,12 +76,12 @@
 #      ansible_role: kernel_modules
 #      ansible_molecule_ansible_version: "8.5.0"
 #
-#- job:
-#    name: ansible-collection-commons-molecule-kompose
-#    parent: ansible-molecule
-#    vars:
-#      ansible_role: kompose
-#      ansible_molecule_ansible_version: "8.5.0"
+- job:
+    name: ansible-collection-commons-molecule-kompose
+    parent: ansible-molecule
+    vars:
+      ansible_role: kompose
+      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-kubectl
@@ -188,12 +188,12 @@
 #      ansible_role: state
 #      ansible_molecule_ansible_version: "8.5.0"
 #
-- job:
-    name: ansible-collection-commons-molecule-sysctl
-    parent: ansible-molecule
-    vars:
-      ansible_role: sysctl
-      ansible_molecule_ansible_version: "8.5.0"
+#- job:
+#    name: ansible-collection-commons-molecule-sysctl
+#    parent: ansible-molecule
+#    vars:
+#      ansible_role: sysctl
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-systohc
@@ -227,12 +227,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/certificates\/.*$'
 #              - '^roles\/certificates\/.*$'
-#        - ansible-collection-commons-molecule-cleanup:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/cleanup\/.*$'
-#              - '^roles\/cleanup\/.*$'
+        - ansible-collection-commons-molecule-cleanup:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/cleanup\/.*$'
+              - '^roles\/cleanup\/.*$'
 #        - ansible-collection-commons-molecule-configfs:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -257,12 +257,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/facts\/.*$'
 #              - '^roles\/facts\/.*$'
-#        - ansible-collection-commons-molecule-firewall:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/firewall\/.*$'
-#              - '^roles\/firewall\/.*$'
+        - ansible-collection-commons-molecule-firewall:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/firewall\/.*$'
+              - '^roles\/firewall\/.*$'
 #        - ansible-collection-commons-molecule-hostname:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -287,12 +287,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/kernel_modules\/.*$'
 #              - '^roles\/kernel_modules\/.*$'
-#        - ansible-collection-commons-molecule-kompose:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/kompose\/.*$'
-#              - '^roles\/kompose\/.*$'
+        - ansible-collection-commons-molecule-kompose:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/kompose\/.*$'
+              - '^roles\/kompose\/.*$'
 #        - ansible-collection-commons-molecule-kubectl:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -383,12 +383,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/state\/.*$'
 #              - '^roles\/state\/.*$'
-        - ansible-collection-commons-molecule-sysctl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sysctl\/.*$'
-              - '^roles\/sysctl\/.*$'
+#        - ansible-collection-commons-molecule-sysctl:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/sysctl\/.*$'
+#              - '^roles\/sysctl\/.*$'
 #        - ansible-collection-commons-molecule-systohc:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -418,12 +418,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/certificates\/.*$'
 #              - '^roles\/certificates\/.*$'
-#        - ansible-collection-commons-molecule-cleanup:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/cleanup\/.*$'
-#              - '^roles\/cleanup\/.*$'
+        - ansible-collection-commons-molecule-cleanup:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/cleanup\/.*$'
+              - '^roles\/cleanup\/.*$'
 #        - ansible-collection-commons-molecule-configfs:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -448,12 +448,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/facts\/.*$'
 #              - '^roles\/facts\/.*$'
-#        - ansible-collection-commons-molecule-firewall:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/firewall\/.*$'
-#              - '^roles\/firewall\/.*$'
+        - ansible-collection-commons-molecule-firewall:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/firewall\/.*$'
+              - '^roles\/firewall\/.*$'
 #        - ansible-collection-commons-molecule-hostname:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -478,12 +478,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/kernel_modules\/.*$'
 #              - '^roles\/kernel_modules\/.*$'
-#        - ansible-collection-commons-molecule-kompose:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/kompose\/.*$'
-#              - '^roles\/kompose\/.*$'
+        - ansible-collection-commons-molecule-kompose:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/kompose\/.*$'
+              - '^roles\/kompose\/.*$'
 #        - ansible-collection-commons-molecule-kubectl:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -574,12 +574,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/state\/.*$'
 #              - '^roles\/state\/.*$'
-        - ansible-collection-commons-molecule-sysctl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sysctl\/.*$'
-              - '^roles\/sysctl\/.*$'
+#        - ansible-collection-commons-molecule-sysctl:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/sysctl\/.*$'
+#              - '^roles\/sysctl\/.*$'
 #        - ansible-collection-commons-molecule-systohc:
 #            files:
 #              - '^molecule\/delegated\/.*$'

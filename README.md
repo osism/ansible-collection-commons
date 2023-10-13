@@ -4,41 +4,41 @@ Documentation: https://docs.osism.tech/ansible-collection-commons/
 
 The following Ansible roles are included in this collection.
 
-| Rolename             | Unitest with Molecule                                                                                                             |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| certificates         | [certificates.py](https://github.com/osism/ansible-collection-commons/tree/main/molecule/delegated/tests/certificates.py)         |
-| cleanup              | [cleanup.py](molecule/delegated/tests/cleanup.py)                                                                                 |
-| configfs             | [configfs.py](molecule/delegated/tests/configfs.py)                                                                               |
-| configuration        | [configuration.py](molecule/delegated/tests/configuration.py)                                                                     |
-| docker_compose       | [docker_compose.py](molecule/delegated/tests/docker_compose.py)                                                                   |
-| docker_login         |                                                                                                                                   |
-| facts                | ![Test role facts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20facts/badge.svg)                   |
-| firewall             | ![Test role firewall](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20firewall/badge.svg)             |
-| hostname             | ![Test role hostname](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hostname/badge.svg)             |
-| hosts                | ![Test role hosts](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20hosts/badge.svg)                   |
-| ipmitool             | ![Test role ipmitool](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20ipmitool/badge.svg)             |
-| kernel_modules       | ![Test role kernel_modules](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kernel_modules/badge.svg) |
-| known_hosts          |                                                                                                                                   |
-| kompose              | ![Test role kompose](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kompose/badge.svg)               |
-| kubectl              | ![Test role kubectl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20kubectl/badge.svg)               |
-| lynis                | ![Test role lynis](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20lynis/badge.svg)                   |
-| microcode            | ![Test role microcode](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20microcode/badge.svg)           |
-| motd                 | ![Test role motd](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20motd/badge.svg)                     |
-| network              |                                                                                                                                   |
-| operator             | ![Test role operator](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20operator/badge.svg)             |
-| packages             | ![Test role packages](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20packages/badge.svg)             |
-| podman               | ![Test role podman](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20podman/badge.svg)                 |
-| proxy                | ![Test role proxy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20proxy/badge.svg)                   |
-| repository           | ![Test role repository](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20repository/badge.svg)         |
-| resolvconf           | ![Test role resolvconf](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20resolvconf/badge.svg)         |
-| services             | ![Test role services](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20services/badge.svg)             |
-| sshconfig            | ![Test role sshconfig](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sshconfig/badge.svg)           |
-| state                | ![Test role state](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20state/badge.svg)                   |
-| sysctl               | ![Test role sysctl](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20sysctl/badge.svg)                 |
-| sysdig               |                                                                                                                                   |
-| systohc              | ![Test role systohc](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20systohc/badge.svg)               |
-| timezone             | ![Test role timezone](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20timezone/badge.svg)             |
-| trivy                | ![Test role trivy](https://github.com/osism/ansible-collection-commons/workflows/Test%20role%20trivy/badge.svg)                   |
-| vault_init           |                                                                                                                                   |
-| vault_seal           |                                                                                                                                   |
-| vault_unseal         |                                                                                                                                   |
+| Rolename             | Molecule Unit Test                                              |
+|----------------------|-----------------------------------------------------------------|
+| certificates         | [certificates.py](molecule/delegated/tests/certificates.py)     |
+| cleanup              | [cleanup.py](molecule/delegated/tests/cleanup.py)               |
+| configfs             | [configfs.py](molecule/delegated/tests/configfs.py)             |
+| configuration        | [configuration.py](molecule/delegated/tests/configuration.py)   |
+| docker_compose       | [docker_compose.py](molecule/delegated/tests/docker_compose.py) |
+| docker_login         |                                                                 |
+| facts                | [facts.py](molecule/delegated/tests/facts.py)                   |
+| firewall             | [firewall.py](molecule/delegated/tests/firewall.py)             |
+| hostname             | [hostname.py](molecule/delegated/tests/hostname.py)             |
+| hosts                | [hosts.py](molecule/delegated/tests/hosts.py)                   |
+| ipmitool             | [ipmitool.py](molecule/delegated/tests/ipmitool.py)             |
+| kernel_modules       | [kernel_modules.py](molecule/delegated/tests/kernel_modules.py) |
+| known_hosts          |                                                                 |
+| kompose              | [kompose.py](molecule/delegated/tests/kompose.py)               |
+| kubectl              | [kubectl.py](molecule/delegated/tests/kubectl.py)               |
+| lynis                | [lynis.py](molecule/delegated/tests/lynis.py)                   |
+| microcode            | [microcode.py](molecule/delegated/tests/microcode.py)           |
+| motd                 | [motd.py](molecule/delegated/tests/motd.py)                     |
+| network              | [network.py](molecule/delegated/tests/network.py)               |
+| operator             | [operator.py](molecule/delegated/tests/operator.py)             |
+| packages             | [packages.py](molecule/delegated/tests/packages.py)             |
+| podman               | [podman.py](molecule/delegated/tests/podman.py)                 |
+| proxy                | [proxy.py](molecule/delegated/tests/proxy.py)                   |
+| repository           | [repository.py](molecule/delegated/tests/repository.py)         |
+| resolvconf           | [resolvconf.py](molecule/delegated/tests/resolvconf.py)         |
+| services             | [services.py](molecule/delegated/tests/services.py)             |
+| sshconfig            | [sshconfig.py](molecule/delegated/tests/sshconfig.py)           |
+| state                | [state.py](molecule/delegated/tests/state.py)                   |
+| sysctl               | [sysctl.py](molecule/delegated/tests/sysctl.py)                 |
+| sysdig               | [sysdig.py](molecule/delegated/tests/sysdig.py)                 |
+| systohc              | [systohc.py](molecule/delegated/tests/systohc.py)               |
+| timezone             | [timezone.py](molecule/delegated/tests/timezone.py)             |
+| trivy                | [trivy.py](molecule/delegated/tests/trivy.py)                   |
+| vault_init           |                                                                 |
+| vault_seal           |                                                                 |
+| vault_unseal         |                                                                 |

@@ -21,11 +21,9 @@ def test_sysctl_settings(host):
     sysctl_defaults = get_variable(host, 'sysctl_defaults')
     sysctl_extra = get_variable(host, 'sysctl_extra')
 
-    # Combine defaults and extra settings
     sysctl_config = sysctl_defaults.copy()
     sysctl_config.update(sysctl_extra)
 
-    # Loop through each group to check sysctl settings
     for group in group_names:
         settings = sysctl_config.get(group, [])
         for setting in settings:

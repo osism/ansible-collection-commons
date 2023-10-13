@@ -18,7 +18,7 @@ def get_variable(host, name):
 
 
 def test_path():
-    assert os.path.exists("/etc/cloud") == False
+    assert not os.path.exists("/etc/cloud")
 
 
 def test_srv(host):
@@ -28,7 +28,7 @@ def test_srv(host):
     assert type(service_extra) is list
 
     for service in service_default and service_extra:
-        assert service.is_running == False
+        assert not service.is_running
 
 
 def test_pkg(host):
@@ -38,4 +38,4 @@ def test_pkg(host):
     assert type(package_extra) is list
 
     for package in package_default and package_extra:
-        assert package.is_running == False
+        assert not package.is_running
