@@ -1,0 +1,16 @@
+---
+- name: Fetch SSH key for user
+  ansible.builtin.uri:
+    url: "{{ item['key'] }}"
+    return_content: true
+  register: key
+  failed_when: "'ssh' not in key.content"
+
+- name: Append key to file
+  ansible.builtin.lineinfile:
+    path: "{{ user_manager_file }}"
+    line: "{{ sshkey }} {{ item['name'] }}"
+  when: sshkey | length > 0
+  loop: "{{ key.content.split('\n') }}"
+  loop_control:
+    loop_var: sshkey

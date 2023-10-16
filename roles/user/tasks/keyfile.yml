@@ -1,0 +1,5 @@
+---
+- name: Fetch SSH keys into keyfile
+  ansible.builtin.include_tasks: fetch_ssh_key.yml
+  with_items:
+    - "{{ user_list }}"

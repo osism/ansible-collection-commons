@@ -1,0 +1,3 @@
+---
+- name: Include the proper user managing subtask
+  ansible.builtin.include_tasks: "{{ user_manage_type }}.yml"
