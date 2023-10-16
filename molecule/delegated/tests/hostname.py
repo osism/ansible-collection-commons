@@ -1,48 +1,15 @@
-import os
-import pytest
-import testinfra.utils.ansible_runner
+from .util.util import get_ansible
 
-testinfra_runner = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE'])
-testinfra_hosts = testinfra_runner.get_hosts('all')
+testinfra_runner, testinfra_hosts = get_ansible()
 
+def test_hostname_settings(host):
+    # Fetch system's hostname using the 'hostname' command
+    system_hostname = host.check_output('hostname')
 
-# def get_variable(host, name):
-#     result = host.ansible('debug', f'var={name}')
-#     value = result[name]
-#     if value.startswith('VARIABLE IS NOT DEFINED!'):
-#         default_vars = host.ansible("include_vars", "../../roles/hostname/defaults/main.yml")["ansible_facts"]
-#         value = default_vars[name]
-#
-#     return value
-
-
-def test_ansible_vars(host):
-    result = host.ansible("setup")  # This runs the Ansible setup module, gathering facts.
-    return result["ansible_facts"]
-
-
-def get_variable(host, name, ansible_vars=None):
-    if ansible_vars and name in ansible_vars:
-        return ansible_vars[name]
-
-    result = host.ansible('debug', f'var={name}', check=False)
-    value = result.get('ansible_facts', {}).get(name, None)
-
-    print("DEBUG: " + str(result))
-    print("DEBUG: " + str(value))
-
-# def test_hostname_settings(host):
-#     # Retrieve the hostname_name variable from Ansible
-#     hostname_name = get_variable(host, "hostname")
-#
-#     # Verify that the hostname is correctly set
-#     assert hostname_name == host.check_output('hostname')
-#
-#     # Verify the /etc/hostname file
-#     etc_hostname = host.file('/etc/hostname')
-#     assert etc_hostname.exists
-#     assert etc_hostname.content_string.strip() == hostname_name
-#     assert etc_hostname.user == 'root'
-#     assert etc_hostname.group == 'root'
-#     assert oct(etc_hostname.mode) == '0o644'
+    # Verify the /etc/hostname file
+    etc_hostname = host.file('/etc/hostname')
+    assert etc_hostname.exists
+    assert etc_hostname.content_string.strip() == system_hostname
+    assert etc_hostname.user == 'root'
+    assert etc_hostname.group == 'root'
+    assert oct(etc_hostname.mode) == '0o644'

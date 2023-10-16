@@ -1,10 +1,8 @@
 import os
 import pytest
-import testinfra.utils.ansible_runner
+from .util.util import get_ansible
 
-testinfra_runner = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE'])
-testinfra_hosts = testinfra_runner.get_hosts('all')
+testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def get_variable(host, name, role_path='packages', default=None):

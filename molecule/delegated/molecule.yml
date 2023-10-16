@@ -26,6 +26,9 @@ verifier:
     v: 2
   additional_files_or_dirs:
     - "${ANSIBLE_ROLE}.py"
+    - "${ANSIBLE_ROLE}/*.py"
+  env:
+    ROLE_NAME: "${ANSIBLE_ROLE}"
 scenario:
   name: delegated
   test_sequence:

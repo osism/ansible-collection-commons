@@ -1,21 +1,8 @@
 import os
 import pytest
-import testinfra.utils.ansible_runner
+from .util.util import get_ansible, get_variable
 
-testinfra_runner = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE'])
-testinfra_hosts = testinfra_runner.get_hosts('all')
-
-
-def get_variable(host, name):
-    result = host.ansible('debug', f'var={name}')
-    value = result.get(name, "VARIABLE IS NOT DEFINED!")
-
-    if value.startswith('VARIABLE IS NOT DEFINED!'):
-        default_vars = host.ansible("include_vars", "../../roles/kernel_modules/defaults/main.yml")["ansible_facts"]
-        value = default_vars.get(name, "VARIABLE IS NOT DEFINED!")
-
-    return value
+testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_kernel_modules_in_etc_modules(host):

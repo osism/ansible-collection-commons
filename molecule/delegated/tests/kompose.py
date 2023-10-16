@@ -1,20 +1,8 @@
 import os
 import pytest
-import testinfra.utils.ansible_runner
+from .util.util import get_ansible, get_variable
 
-testinfra_runner = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE'])
-testinfra_hosts = testinfra_runner.get_hosts('all')
-
-
-def get_variable(host, name):
-    result = host.ansible('debug', f'var={name}', check=False)
-    value = result.get(name, None)
-    if value is None or value.startswith('VARIABLE IS NOT DEFINED!'):
-        default_vars = host.ansible("include_vars", "../../roles/kompose/defaults/main.yml")["ansible_facts"]
-        value = default_vars.get(name, None)
-    return value
-
+testinfra_runner, testinfra_hosts = get_ansible()
 
 def test_kompose_not_installed(host):
     package_name = "kompose"

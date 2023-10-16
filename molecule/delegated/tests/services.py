@@ -1,11 +1,9 @@
 import os
 import pytest
-import testinfra.utils.ansible_runner
+from .util.util import get_ansible, get_variable
 
-testinfra_runner = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']
-)
-testinfra_hosts = testinfra_runner.get_hosts('all')
+testinfra_runner, testinfra_hosts = get_ansible()
+
 services_warning_default = ["nscd"]
 services_warning_extra = []
 services_warning = services_warning_default + services_warning_extra
