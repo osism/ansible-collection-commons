@@ -125,13 +125,13 @@
 #      ansible_role: packages
 #      ansible_molecule_ansible_version: "8.5.0"
 
-#- job:
-#    name: ansible-collection-commons-molecule-podman
-#    parent: ansible-molecule
-#    vars:
-#      ansible_role: podman
-#      ansible_molecule_ansible_version: "8.5.0"
-#
+- job:
+    name: ansible-collection-commons-molecule-podman
+    parent: ansible-molecule
+    vars:
+      ansible_role: podman
+      ansible_molecule_ansible_version: "8.5.0"
+
 #- job:
 #    name: ansible-collection-commons-molecule-proxy
 #    parent: ansible-molecule
@@ -195,12 +195,12 @@
 #      ansible_role: sysctl
 #      ansible_molecule_ansible_version: "8.5.0"
 #
-- job:
-    name: ansible-collection-commons-molecule-systohc
-    parent: ansible-molecule
-    vars:
-      ansible_role: systohc
-      ansible_molecule_ansible_version: "8.5.0"
+#- job:
+#    name: ansible-collection-commons-molecule-systohc
+#    parent: ansible-molecule
+#    vars:
+#      ansible_role: systohc
+#      ansible_molecule_ansible_version: "8.5.0"
 #
 #- job:
 #    name: ansible-collection-commons-molecule-timezone
@@ -329,12 +329,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/packages\/.*$'
 #              - '^roles\/packages\/.*$'
-#        - ansible-collection-commons-molecule-podman:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/podman\/.*$'
-#              - '^roles\/podman\/.*$'
+        - ansible-collection-commons-molecule-podman:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/podman\/.*$'
+              - '^roles\/podman\/.*$'
 #        - ansible-collection-commons-molecule-proxy:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -389,12 +389,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/sysctl\/.*$'
 #              - '^roles\/sysctl\/.*$'
-        - ansible-collection-commons-molecule-systohc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/systohc\/.*$'
-              - '^roles\/systohc\/.*$'
+#        - ansible-collection-commons-molecule-systohc:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/systohc\/.*$'
+#              - '^roles\/systohc\/.*$'
 #        - ansible-collection-commons-molecule-timezone:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -520,12 +520,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/packages\/.*$'
 #              - '^roles\/packages\/.*$'
-#        - ansible-collection-commons-molecule-podman:
-#            files:
-#              - '^molecule\/delegated\/.*$'
-#              - '^molecule\/requirements\.txt$'
-#              - '^molecule\/podman\/.*$'
-#              - '^roles\/podman\/.*$'
+        - ansible-collection-commons-molecule-podman:
+            files:
+              - '^molecule\/delegated\/.*$'
+              - '^molecule\/requirements\.txt$'
+              - '^molecule\/podman\/.*$'
+              - '^roles\/podman\/.*$'
 #        - ansible-collection-commons-molecule-proxy:
 #            files:
 #              - '^molecule\/delegated\/.*$'
@@ -580,12 +580,12 @@
 #              - '^molecule\/requirements\.txt$'
 #              - '^molecule\/sysctl\/.*$'
 #              - '^roles\/sysctl\/.*$'
-        - ansible-collection-commons-molecule-systohc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/systohc\/.*$'
-              - '^roles\/systohc\/.*$'
+#        - ansible-collection-commons-molecule-systohc:
+#            files:
+#              - '^molecule\/delegated\/.*$'
+#              - '^molecule\/requirements\.txt$'
+#              - '^molecule\/systohc\/.*$'
+#              - '^roles\/systohc\/.*$'
 #        - ansible-collection-commons-molecule-timezone:
 #            files:
 #              - '^molecule\/delegated\/.*$'
