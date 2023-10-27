@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    For the Docker Compose systemd unit, the type simple is now used
+    instead of oneshot. This allows more logs to be retrieved.
