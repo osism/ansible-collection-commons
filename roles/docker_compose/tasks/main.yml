@@ -12,6 +12,21 @@
 - name: Include install type specific tasks
   ansible.builtin.include_tasks: install.yml
 
+- name: Copy osism.target systemd file
+  become: true
+  ansible.builtin.template:
+    src: osism.target.j2
+    dest: /etc/systemd/system/osism.target
+    mode: 0644
+  notify: Reload systemd daemon
+
+- name: Enable osism.target
+  become: true
+  ansible.builtin.service:
+    name: osism.target
+    enabled: true
+    daemon_reload: true
+
 - name: Copy docker-compose systemd unit file
   become: true
   ansible.builtin.template:

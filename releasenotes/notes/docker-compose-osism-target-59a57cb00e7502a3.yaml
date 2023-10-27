@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    All docker-compose services are now added to an osism target. So it
+    is possible to stop all OSISM service via this target.
