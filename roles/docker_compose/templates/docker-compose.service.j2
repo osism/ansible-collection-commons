@@ -1,5 +1,6 @@
 [Unit]
 Description=%i service managed by Docker Compose
+PartOf=osism.target
 Requires=docker.service
 After=docker.service
 
@@ -16,4 +17,4 @@ ExecStart=/usr/bin/docker compose up -d --remove-orphans
 ExecStop=/usr/bin/docker compose stop
 
 [Install]
-WantedBy=default.target
+WantedBy=osism.target
