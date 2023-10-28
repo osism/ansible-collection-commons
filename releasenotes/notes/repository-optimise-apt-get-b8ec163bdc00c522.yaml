@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Set Acquire::Languages to none and
+    Acquire::IndexTargets::deb::Contents-deb::DefaultEnabled to false
+    by default.

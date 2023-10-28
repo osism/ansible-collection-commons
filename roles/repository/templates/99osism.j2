@@ -4,3 +4,5 @@ Update-Manager::Never-Include-Phased-Updates;
 {% if repository_apt_acquire_forceipv4 | bool %}
 Acquire::ForceIPv4 "true";
 {% endif %}
+Acquire::Languages none;
+Acquire::IndexTargets::deb::Contents-deb::DefaultEnabled false;
