@@ -4,6 +4,10 @@ exclude_paths:
 mock_modules:
   - community.docker.docker_container_exec
   - community.docker.docker_login
+  - community.general.ini_file
+  - community.general.modprobe
+  - community.general.pam_limits
+  - community.general.timezone
   - hashivault_auth_method
   - hashivault_policy
   - hashivault_secret
@@ -16,7 +20,6 @@ skip_list:
   - galaxy[no-changelog]
   - var-naming[no-role-prefix]
   - package-latest
-# DO NOT DELETE THE WARNLIST! It is required for our custom rules!
-# If this isn't there our custom rules will only through a warning and wont generate a failure!:
+# DO NOT DELETE THE WARNLIST
 warn_list:
   - dummy

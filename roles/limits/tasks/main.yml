@@ -1,0 +1,4 @@
+---
+- name: Include limits tasks
+  ansible.builtin.include_tasks: limits.yml
+  loop: "{{ limits_defaults | combine(limits_extra) | dict2items }}"
