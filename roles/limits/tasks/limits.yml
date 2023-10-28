@@ -2,11 +2,10 @@
 - name: "Set limits on domain {{ item.key }}"
   become: true
   community.general.pam_limits:  # noqa osism-fqcn
-    domain: "{{ item_in_block.domain }}"
-    limit_type: "{{ item_in_block.limit_type }}"
-    limit_item: "{{ item_in_block.limit_item }}"
+    domain: "{{ item.key }}"
+    limit_type: "{{ item_in_block.type }}"
+    limit_item: "{{ item_in_block.item }}"
     value: "{{ item_in_block.value }}"
   loop: "{{ item.value }}"
   loop_control:
     loop_var: item_in_block
-  when: "item.key in group_names"
