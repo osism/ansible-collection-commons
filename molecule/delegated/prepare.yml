@@ -3,6 +3,16 @@
   hosts: all
 
   tasks:
+    - name: Include converge runtime vars also in prepare step
+      ansible.builtin.include_vars:
+        file: "vars/{{ molecule_role }}.yml"
+
+    - name: Ensure prepared vars directory
+      ansible.builtin.file:
+        path: "{{ prepared_vars_path }}"
+        state: directory
+        mode: '0755'
+
     - name: Include required prepare tasks
       ansible.builtin.include_tasks:
         file: "prepare/{{ molecule_role }}.yml"

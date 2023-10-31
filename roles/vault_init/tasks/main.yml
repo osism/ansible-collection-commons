@@ -1,6 +1,6 @@
 ---
 - name: Enable kv secrets engine
-  hashivault_secret_engine:
+  terryhowe.hashivault.hashivault_secret_engine:
     authtype: token
     url: "{{ vault_url }}"
     token: "{{ vault_token }}"
@@ -8,14 +8,14 @@
     backend: kv
 
 - name: Enable approle auth module
-  hashivault_auth_method:
+  terryhowe.hashivault.hashivault_auth_method:
     authtype: token
     url: "{{ vault_url }}"
     token: "{{ vault_token }}"
     method_type: approle
 
 - name: Create read policy
-  hashivault_policy:
+  terryhowe.hashivault.hashivault_policy:
     authtype: token
     url: "{{ vault_url }}"
     token: "{{ vault_token }}"
@@ -23,7 +23,7 @@
     rules: "{{ vault_rules_read }}"
 
 - name: Create write policy
-  hashivault_policy:
+  terryhowe.hashivault.hashivault_policy:
     authtype: token
     url: "{{ vault_url }}"
     token: "{{ vault_token }}"

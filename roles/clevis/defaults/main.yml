@@ -1,7 +1,0 @@
----
-clevis_service_name: clevis-luks-askpass.path
-clevis_tang_server: 127.0.0.1
-clevis_tang_server_protocol: 80
-clevis_tang_url: "http://{{ clevis_tang_server }}:{{ clevis_tang_server_protocol }}"
-clevis_initial_luks_password: password
-clevis_root_disk: /dev/sda1

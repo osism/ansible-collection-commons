@@ -1,6 +1,8 @@
 ---
 exclude_paths:
   - .github/
+  - ./roles/vault_import
+  - ./roles/vault_init
 mock_modules:
   - community.docker.docker_container_exec
   - community.docker.docker_login
@@ -8,10 +10,10 @@ mock_modules:
   - community.general.modprobe
   - community.general.pam_limits
   - community.general.timezone
-  - hashivault_auth_method
-  - hashivault_policy
-  - hashivault_secret
-  - hashivault_secret_engine
+  - terryhowe.hashivault.hashivault_auth_method
+  - terryhowe.hashivault.hashivault_policy
+  - terryhowe.hashivault.hashivault_secret
+  - terryhowe.hashivault.hashivault_secret_engine
   - scan_services
 use_default_rules: true
 rulesdir:

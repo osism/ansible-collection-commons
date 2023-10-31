@@ -1,0 +1,9 @@
+---
+vault:
+  image: vault:1.13.3
+  port: "8200"
+  config_path: "/opt/vault/config"
+  logs_path: "/opt/vault/logs"
+  file_path: "/opt/vault/file"
+  environment:
+    VAULT_ADDR: "http://0.0.0.0:8200"

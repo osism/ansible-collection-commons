@@ -1,0 +1,11 @@
+---
+##########################
+# operator user
+
+operator_user: zuul
+operator_group: zuul
+
+##########################
+# known_hosts
+known_hosts_list:
+  - localhost

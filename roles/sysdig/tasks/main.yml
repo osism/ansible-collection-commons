@@ -1,3 +1,0 @@
----
-- name: Include distribution specific install tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"

@@ -1,0 +1,8 @@
+---
+
+#  Preparing the vault and executing the role is the test
+
+- name: Include Docker and HashiCorp Vault deployment
+  ansible.builtin.include: vault_setup.yml
+
+#  After the prepare step the vault is unsealed by the role itself in the converge step
