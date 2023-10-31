@@ -1,0 +1,4 @@
+---
+python_venv_dir: /tmp
+zuul_work_dir: "{{ zuul.project.src_dir }}"
+black_excluded_dir: ""

@@ -1,0 +1,5 @@
+---
+- name: Install Black and format code
+  hosts: all
+  roles:
+    - black_python_formatter

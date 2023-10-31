@@ -1,0 +1,21 @@
+---
+- name: Install Python
+  ansible.builtin.include_role:
+    name: "{{ item }}"
+  loop:
+    - ensure-python
+    - ensure-pip
+
+- name: Install pip modules
+  ansible.builtin.pip:
+    name: black
+    state: latest
+    virtualenv: "{{ python_venv_dir }}"
+    virtualenv_command: 'python3 -m venv'
+    chdir: "{{ zuul_work_dir }}"
+
+- name: Format code with Black
+  ansible.builtin.command:
+    cmd: "{{ python_venv_dir }}/bin/python3 -m black --exclude {{ black_excluded_dir }} --check ."
+    chdir: "{{ zuul_work_dir }}"
+  changed_when: false
