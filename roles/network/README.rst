@@ -3,7 +3,7 @@ Ansible role for managing and configuring the internal network types.
 **Role Variables**
 
 .. zuul:rolevar:: network_type
-   :default: interfaces
+   :default: netplan
 
 Which type of network you want to install.
 Possible values are ``interfaces`` and ``netplan``.

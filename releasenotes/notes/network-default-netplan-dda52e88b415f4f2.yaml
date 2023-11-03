@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Default network type in the network role is now netplan.
