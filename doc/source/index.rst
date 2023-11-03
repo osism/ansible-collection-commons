@@ -58,11 +58,7 @@ https://github.com/osism/ansible-collection-commons/issues.
 
 .. zuul:autorole:: resolvconf
 
-.. zuul:autorole:: services
-
 .. zuul:autorole:: sosreport
-
-.. zuul:autorole:: sshconfig
 
 .. zuul:autorole:: state
 
