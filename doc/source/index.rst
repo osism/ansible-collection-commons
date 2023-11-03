@@ -48,8 +48,6 @@ https://github.com/osism/ansible-collection-commons/issues.
 
 .. zuul:autorole:: operator
 
-.. zuul:autorole:: packages
-
 .. zuul:autorole:: podman
 
 .. zuul:autorole:: proxy
@@ -67,8 +65,6 @@ https://github.com/osism/ansible-collection-commons/issues.
 .. zuul:autorole:: sysdig
 
 .. zuul:autorole:: systohc
-
-.. zuul:autorole:: timezone
 
 .. zuul:autorole:: trivy
 
