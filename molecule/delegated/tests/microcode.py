@@ -4,14 +4,13 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_microcode_packages(host):
-    microcode_packages_default = get_variable(
-        host, 'microcode_packages_default')
-    microcode_packages_extra = get_variable(host, 'microcode_packages_extra')
-    microcode_packages = get_variable(host, 'microcode_packages')
+    microcode_packages_default = get_variable(host, "microcode_packages_default")
+    microcode_packages_extra = get_variable(host, "microcode_packages_extra")
+    microcode_packages = get_variable(host, "microcode_packages")
 
     microcode_packages = jinja_list_concat(
-        microcode_packages,
-        [microcode_packages_default, microcode_packages_extra])
+        microcode_packages, [microcode_packages_default, microcode_packages_extra]
+    )
 
     assert type(microcode_packages) is list
     assert len(microcode_packages) > 0

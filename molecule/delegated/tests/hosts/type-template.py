@@ -39,7 +39,9 @@ def check_single_host(host, content):
     except Exception:
         pytest.skip(f"ansible_{hosts_interface} is not defined")
 
-    test_string = f"{ansible_interface['ipv4']['address']} {host_name} {host_name.split('.')[0]}"
+    test_string = (
+        f"{ansible_interface['ipv4']['address']} {host_name} {host_name.split('.')[0]}"
+    )
     assert test_string in content
 
 

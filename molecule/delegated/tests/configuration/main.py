@@ -7,13 +7,13 @@ def check_file_attributes(host, path):
     f = host.file(f"{path}")
     assert f.exists
     assert f.is_directory
-    assert f.user == get_variable(host, 'operator_user')
-    assert f.group == get_variable(host, 'operator_group')
+    assert f.user == get_variable(host, "operator_user")
+    assert f.group == get_variable(host, "operator_group")
     assert f.mode == 0o750
 
 
 def test_folders(host):
-    directories = get_variable(host, 'configuration_directory')
+    directories = get_variable(host, "configuration_directory")
 
     if type(directories) is list:
         for d in directories:

@@ -47,6 +47,6 @@ def test_kernel_modules_persisted(host):
         module_file = host.file(f"/etc/modules-load.d/{module}.conf")
         assert module_file.exists
         assert module_file.contains(module)
-        assert module_file.user == 'root'
-        assert module_file.group == 'root'
+        assert module_file.user == "root"
+        assert module_file.group == "root"
         assert module_file.mode == 0o644

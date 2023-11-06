@@ -16,11 +16,15 @@ def test_systohc_sync(host):
         pytest.skip("systohc is not True")
 
     # Get the current system time
-    system_time = datetime.datetime.strptime(host.check_output("date '+%Y-%m-%d %H:%M:%S'"), '%Y-%m-%d %H:%M:%S')
+    system_time = datetime.datetime.strptime(
+        host.check_output("date '+%Y-%m-%d %H:%M:%S'"), "%Y-%m-%d %H:%M:%S"
+    )
 
     # Get the current hardware clock time
     hwclock_time_with_tz = datetime.datetime.strptime(
-        host.check_output("sudo hwclock --show --date='%Y-%m-%d %H:%M:%S.%f%z'"), '%Y-%m-%d %H:%M:%S.%f%z')
+        host.check_output("sudo hwclock --show --date='%Y-%m-%d %H:%M:%S.%f%z'"),
+        "%Y-%m-%d %H:%M:%S.%f%z",
+    )
 
     # Convert the hardware clock time to an offset-naive datetime
     hwclock_time = hwclock_time_with_tz.replace(tzinfo=None)

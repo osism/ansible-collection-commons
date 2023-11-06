@@ -57,12 +57,18 @@ def test_trivy_repository_configured(host):
         pytest.skip("trivy_configure_repository not configured")
 
     trivy_repository_arch = get_variable(host, "trivy_debian_repository_arch")
-    ansible_distribution_release = get_variable(host, "ansible_distribution_release", True)
+    ansible_distribution_release = get_variable(
+        host, "ansible_distribution_release", True
+    )
 
     trivy_repository = get_variable(host, "trivy_debian_repository")
-    trivy_repository = jinja_replacement(trivy_repository,
-                                         {"trivy_debian_repository_arch": trivy_repository_arch,
-                                          "ansible_distribution_release": ansible_distribution_release})
+    trivy_repository = jinja_replacement(
+        trivy_repository,
+        {
+            "trivy_debian_repository_arch": trivy_repository_arch,
+            "ansible_distribution_release": ansible_distribution_release,
+        },
+    )
 
     # Validate the permissions and ownership and content of the repository file
     repo_file = host.file("/etc/apt/sources.list.d/trivy.list")

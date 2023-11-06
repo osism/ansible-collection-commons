@@ -75,11 +75,15 @@ def test_sshkeys(host):
     if len(expected_authorized_keys) <= 0:
         pytest.skip("No operator_authorized_keys defined")
 
-    authorized_keys_file = host.ansible("file", f"path={user.home}/.ssh/authorized_keys", become=True)
+    authorized_keys_file = host.ansible(
+        "file", f"path={user.home}/.ssh/authorized_keys", become=True
+    )
     assert authorized_keys_file["state"] == "file"
 
     with host.sudo(get_variable(host, "operator_user")):
-        authorized_keys_content = host.check_output(f"cat {user.home}/.ssh/authorized_keys")
+        authorized_keys_content = host.check_output(
+            f"cat {user.home}/.ssh/authorized_keys"
+        )
 
         for authorized_key in expected_authorized_keys:
             assert authorized_key in authorized_keys_content
@@ -94,14 +98,20 @@ def test_githubkeys(host):
     if len(expected_github_accounts) <= 0:
         pytest.skip("No operator_authorized_github_accounts defined")
 
-    authorized_keys_file = host.ansible("file", f"path={user.home}/.ssh/authorized_keys", become=True)
+    authorized_keys_file = host.ansible(
+        "file", f"path={user.home}/.ssh/authorized_keys", become=True
+    )
     assert authorized_keys_file["state"] == "file"
 
     with host.sudo(get_variable(host, "operator_user")):
-        authorized_keys_content = host.check_output(f"cat {user.home}/.ssh/authorized_keys")
+        authorized_keys_content = host.check_output(
+            f"cat {user.home}/.ssh/authorized_keys"
+        )
 
         for github_user in expected_github_accounts:
-            contents = get_from_url(f"https://github.com/{github_user}.keys").split("\n")
+            contents = get_from_url(f"https://github.com/{github_user}.keys").split(
+                "\n"
+            )
 
             for line in contents:
                 line = line.strip()

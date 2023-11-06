@@ -9,8 +9,8 @@ def test_required_services(host):
     services_required_extra = get_variable(host, "services_required_extra")
 
     services_required = jinja_list_concat(
-        services_required,
-        [services_required_default, services_required_extra])
+        services_required, [services_required_default, services_required_extra]
+    )
 
     service_facts = host.ansible("service_facts")["ansible_facts"]["services"]
 

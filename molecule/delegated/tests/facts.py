@@ -4,7 +4,7 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_custom_facts_directory(host):
-    facts_dir = host.file('/etc/ansible/facts.d')
+    facts_dir = host.file("/etc/ansible/facts.d")
 
     assert facts_dir.exists
     assert facts_dir.is_directory
@@ -14,12 +14,12 @@ def test_custom_facts_directory(host):
 
 
 def test_fact_files(host):
-    fact_files = get_variable(host, 'fact_files')
+    fact_files = get_variable(host, "fact_files")
 
     assert type(fact_files) is list
 
     for fact_file in fact_files:
-        f = host.file(f'/etc/ansible/facts.d/{fact_file}.fact')
+        f = host.file(f"/etc/ansible/facts.d/{fact_file}.fact")
 
         assert f.exists
         assert f.user == "root"
