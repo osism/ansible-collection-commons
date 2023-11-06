@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Change permission of the created netplan file from 644 to 600.
