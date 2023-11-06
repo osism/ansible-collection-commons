@@ -102,7 +102,7 @@ network_netplan_required_packages:
   - netplan.io
 network_netplan_path: "/etc/netplan"
 network_netplan_file: "01-osism.yaml"
-network_netplan_permissions: 0644
+network_netplan_permissions: 0600
 
 network_netplan_remove_unmanaged_files: true
 network_netplan_managed_files_defaults:
