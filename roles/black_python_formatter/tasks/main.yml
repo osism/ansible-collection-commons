@@ -6,7 +6,7 @@
     - ensure-python
     - ensure-pip
 
-- name: Install pip modules
+- name: Install pip module black
   ansible.builtin.pip:
     name: black
     state: latest
@@ -14,8 +14,16 @@
     virtualenv_command: 'python3 -m venv'
     chdir: "{{ zuul_work_dir }}"
 
-- name: Format code with Black
+- name: Format code with Black if there is nothing to exclude
   ansible.builtin.command:
-    cmd: "{{ python_venv_dir }}/bin/python3 -m black --exclude {{ black_excluded_dir }} --check ."
+    cmd: "{{ python_venv_dir }}/bin/python3 -m black --check ."
     chdir: "{{ zuul_work_dir }}"
+  when: black_excluded_dir == ""
+  changed_when: false
+
+- name: Format code with Black if there is an exclusion
+  ansible.builtin.command:
+    cmd: "{{ python_venv_dir }}/bin/python3 -m black --check . --exclude {{ black_excluded_dir }}"
+    chdir: "{{ zuul_work_dir }}"
+  when: black_excluded_dir != ""
   changed_when: false
