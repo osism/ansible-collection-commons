@@ -11,7 +11,7 @@ def test_firewall_config_file(host):
 
 
 def test_firewall_service(host):
-    service_name = get_variable(host, 'ufw_service_name')
+    service_name = get_variable(host, "ufw_service_name")
     service = host.service(service_name)
 
     assert service.is_running

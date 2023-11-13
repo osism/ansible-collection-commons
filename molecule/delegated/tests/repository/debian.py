@@ -1,6 +1,12 @@
 import pytest
 
-from ..util.util import get_ansible, get_variable, get_from_url, get_os_role_variable, jinja_replacement
+from ..util.util import (
+    get_ansible,
+    get_variable,
+    get_from_url,
+    get_os_role_variable,
+    jinja_replacement,
+)
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
@@ -80,11 +86,17 @@ def test_sources(host):
     assert len(repositories) > 0
 
     for repository in repositories:
-        ansible_distribution_release = get_variable(host, "ansible_distribution_release", True)
-        repository["name"] = jinja_replacement(repository["name"],
-                                               {"ansible_distribution_release": ansible_distribution_release})
-        repository["repository"] = jinja_replacement(repository["repository"],
-                                                     {"ansible_distribution_release": ansible_distribution_release})
+        ansible_distribution_release = get_variable(
+            host, "ansible_distribution_release", True
+        )
+        repository["name"] = jinja_replacement(
+            repository["name"],
+            {"ansible_distribution_release": ansible_distribution_release},
+        )
+        repository["repository"] = jinja_replacement(
+            repository["repository"],
+            {"ansible_distribution_release": ansible_distribution_release},
+        )
 
         assert repository["name"] in f.content_string
         assert repository["repository"] in f.content_string

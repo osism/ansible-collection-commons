@@ -27,13 +27,17 @@ def test_sshconfig_host_files(host):
     assert config_file.mode == 0o600
 
     with host.sudo(operator_user_name):
-        sshconfig_user = jinja_replacement(get_variable(host, 'sshconfig_user'),
-                                           {"operator_user": operator_user_name})
+        sshconfig_user = jinja_replacement(
+            get_variable(host, "sshconfig_user"), {"operator_user": operator_user_name}
+        )
         config_content = host.check_output(f"cat {config_file_path}")
         assert f"Host {inventory_hostname_short}" in config_content
         assert f"User {sshconfig_user}" in config_content
         assert f"Port {get_variable(host, 'sshconfig_port')}" in config_content
-        assert f"IdentityFile {get_variable(host, 'sshconfig_private_key_file')}" in config_content
+        assert (
+            f"IdentityFile {get_variable(host, 'sshconfig_private_key_file')}"
+            in config_content
+        )
 
 
 def test_sshconfig_assembled(host):

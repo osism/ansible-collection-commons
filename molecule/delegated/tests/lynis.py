@@ -1,15 +1,13 @@
 import pytest
 
-from .util.util import (get_ansible, get_variable, get_from_url,
-                        jinja_replacement)
+from .util.util import get_ansible, get_variable, get_from_url, jinja_replacement
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_apt_transport_https_installed(host):
     """Check if the apt-transport-https package is installed."""
-    lynis_configure_repository = get_variable(
-        host, "lynis_configure_repository")
+    lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
         pytest.skip("lynis_configure_repository is not defined")
@@ -21,14 +19,12 @@ def test_apt_transport_https_installed(host):
 def test_lynis_gpg_key_present(host):
     """Check if the GPG key for the lynis repository is correctly added."""
 
-    lynis_configure_repository = get_variable(
-        host, "lynis_configure_repository")
+    lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
         pytest.skip("lynis_configure_repository is not defined")
 
-    lynis_repository_key_url = get_variable(
-        host, "lynis_debian_repository_key")
+    lynis_repository_key_url = get_variable(host, "lynis_debian_repository_key")
 
     # Fetch the GPG key content from the URL
     key_content = get_from_url(f"{lynis_repository_key_url}")
@@ -45,20 +41,18 @@ def test_lynis_gpg_key_present(host):
 def test_lynis_repository_configured(host):
     """Check if the lynis repository is correctly configured."""
 
-    lynis_configure_repository = get_variable(
-        host, "lynis_configure_repository")
+    lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
         pytest.skip("lynis_configure_repository is not defined")
 
     # Fetch the necessary variables from Ansible
-    lynis_configure_repository = get_variable(
-        host, "lynis_configure_repository")
+    lynis_configure_repository = get_variable(host, "lynis_configure_repository")
     lynis_repository_arch = get_variable(host, "lynis_debian_repository_arch")
     lynis_repository = get_variable(host, "lynis_debian_repository")
     lynis_repository = jinja_replacement(
-        lynis_repository,
-        {"lynis_debian_repository_arch": lynis_repository_arch})
+        lynis_repository, {"lynis_debian_repository_arch": lynis_repository_arch}
+    )
 
     # Validate the permissions and ownership of the repository file
     repo_file = host.file("/etc/apt/sources.list.d/lynis.list")
@@ -69,8 +63,7 @@ def test_lynis_repository_configured(host):
 
     # Use sudo to read the content of the file
     with host.sudo("root"):
-        repo_file_content = host.check_output(
-            "cat /etc/apt/sources.list.d/lynis.list")
+        repo_file_content = host.check_output("cat /etc/apt/sources.list.d/lynis.list")
 
     # Validate the content of the file
     assert lynis_repository in repo_file_content

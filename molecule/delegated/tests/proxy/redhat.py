@@ -35,7 +35,7 @@ def test_yum_proxy_configuration(host):
     assert yum_conf_file.mode == 0o644
 
     # Check if the proxy configuration in the yum conf matches the expected values
-    if 'http' in proxy_proxies:
+    if "http" in proxy_proxies:
         assert f"proxy={proxy_proxies['http']}" in yum_conf_file.content_string
-    if 'https' in proxy_proxies:
+    if "https" in proxy_proxies:
         assert f"proxy={proxy_proxies['https']}" in yum_conf_file.content_string

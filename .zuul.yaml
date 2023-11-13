@@ -402,9 +402,9 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
-        - build-sphinx-docs
         - flake8
         - yamllint
+        - python-black
     gate:
       jobs:
         - ansible-collection-commons-molecule-certificates:
@@ -588,10 +588,11 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
-        - build-sphinx-docs
         - flake8
         - yamllint
+        - python-black
     periodic-daily:
       jobs:
         - yamllint
         - ansible-lint
+        - python-black
