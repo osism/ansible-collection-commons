@@ -25,7 +25,10 @@ def test_osism_target(host):
     assert f.is_file
     assert f.mode == 0o644
     assert host.service("osism.target").is_enabled
-    assert "OSISM target allowing to start/stop all OSISM service at once" in f.content_string
+    assert (
+        "OSISM target allowing to start/stop all OSISM service at once"
+        in f.content_string
+    )
 
 
 def test_apt_preference(host):
@@ -54,7 +57,9 @@ def test_wrapper_file(host):
     assert f.exists
     assert f.is_file
     assert f.mode == 0o755
-    assert f.content_string.strip() == """#!/usr/bin/env bash
+    assert (
+        f.content_string.strip()
+        == """#!/usr/bin/env bash
 
 # The docker-compose CLI has been removed in OSISM.
 # The Compose plugin for Docker is now used.
@@ -62,3 +67,4 @@ def test_wrapper_file(host):
 
 /usr/bin/docker compose "$@"
 """.strip()
+    )
