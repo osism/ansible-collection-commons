@@ -57,6 +57,11 @@
     state: directory
     mode: 0700
 
+- name: Check number of SSH authorized keys
+  ansible.builtin.fail:
+    msg: "At least {{ operator_authorized_keys_minimal }} SSH authorized keys must be set."
+  when: operator_authorized_keys|length < operator_authorized_keys_minimal
+
 - name: Set ssh authorized keys
   become: true
   ansible.posix.authorized_key:
