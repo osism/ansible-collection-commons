@@ -365,12 +365,6 @@
               - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sosreport:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sosreport\/.*$'
-              - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
@@ -408,7 +402,9 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
+        - flake8
         - yamllint
+        - python-black
     gate:
       jobs:
         - ansible-collection-commons-molecule-certificates:
@@ -555,12 +551,6 @@
               - '^molecule\/requirements\.txt$'
               - '^molecule\/services\/.*$'
               - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sosreport:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sosreport\/.*$'
-              - '^roles\/sosreport\/.*$'
         - ansible-collection-commons-molecule-sshconfig:
             files:
               - '^molecule\/delegated\/.*$'
@@ -598,8 +588,11 @@
               - '^molecule\/trivy\/.*$'
               - '^roles\/trivy\/.*$'
         - ansible-lint
+        - flake8
         - yamllint
+        - python-black
     periodic-daily:
       jobs:
         - yamllint
         - ansible-lint
+        - python-black
