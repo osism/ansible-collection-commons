@@ -70,6 +70,11 @@ class CallbackModule(Default):
         self.task_name = task.get_name().strip()
         super().v2_playbook_on_task_start(task, is_conditional)
 
+    def v2_playbook_on_handler_task_start(self, task):
+        self.last = time.time()
+        self.task_name = task.get_name().strip()
+        super().v2_playbook_on_handler_task_start(task)
+
     def v2_playbook_on_stats(self, stats):
         self.skip = True
         super().v2_playbook_on_stats(stats)
