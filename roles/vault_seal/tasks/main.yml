@@ -1,5 +1,6 @@
 ---
 - name: Seal vault
+  become: true
   community.docker.docker_container_exec:
     container: "{{ vault_container_name }}"
     command: sh -c 'VAULT_ADDR=http://localhost:8200 vault login {{ vault_token }}; VAULT_ADDR=http://localhost:8200 vault operator seal'

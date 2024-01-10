@@ -1,0 +1,121 @@
+---
+- name: Include vars of vault_setup.yml
+  ansible.builtin.include_vars:
+    file: ../vars/vault_setup.yml
+
+- name: Ensure docker
+  ansible.builtin.include_role:
+    name: osism.services.docker
+  vars:
+    docker_user: zuul
+    docker_group: zuul
+
+- name: Create Vault configuration directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ vault.config_path }}"
+    - "{{ vault.logs_path }}"
+    - "{{ vault.file_path }}"
+
+- name: Ensure Vault configuration file
+  become: true
+  copy:
+    dest: "{{ vault.config_path }}/vault.hcl"
+    content: |
+      ui = false
+      listener "tcp" {
+        address     = "0.0.0.0:8200"
+        tls_disable = 1
+      }
+      storage "file" {
+        path = "/vault/file"
+      }
+    mode: '0644'
+
+- name: Deploy HashiCorp Vault
+  become: true
+  community.docker.docker_container:
+    name: "{{ vault_container_name }}"
+    image: "{{ vault.image }}"
+    state: started
+    privileged: true
+    restart_policy: unless-stopped
+    published_ports:
+      - "{{ vault.port }}:8200"
+    env:
+      VAULT_ADDR: "{{ vault.environment.VAULT_ADDR }}"
+    volumes:
+      - "{{ vault.config_path }}:/vault/config"
+      - "{{ vault.logs_path }}:/vault/logs"
+      - "{{ vault.file_path }}:/vault/file"
+    command: "server"
+  register: vault_init_output
+
+- name: Wait for vault container to be ready
+  become: true
+  shell: |
+    sleep 30 && docker logs {{ vault_container_name }}
+  args:
+    executable: /bin/bash
+  ignore_errors: true
+
+- name: Initialize Vault within the Docker container and capture keys
+  become: true
+  shell: |
+    docker exec {{ vault_container_name }} vault operator init -key-shares=3 -key-threshold=3 > {{ vault.file_path }}/vault_init.log
+  args:
+    executable: /bin/bash
+  register: vault_init
+  when: vault_init_output.changed
+
+- name: Fetch Vault initialization keys and root token
+  become: true
+  shell: cat {{ vault.file_path }}/vault_init.log
+  register: vault_keys
+  changed_when: false
+  when: vault_init is defined and vault_init.rc == 0
+
+- name: Store initial Vault keys and root token securely
+  become: true
+  copy:
+    dest: "{{ vault.file_path }}/vault_initial_keys.txt"
+    content: "{{ vault_keys.stdout }}"
+    mode: '0600'
+  when: vault_keys is defined and vault_keys.stdout != ""
+
+- name: Extract and Store Vault Unseal Keys and Root Token
+  set_fact:
+    unseal_key_1: "{{ vault_keys.stdout | regex_findall('Unseal Key 1: ([\\S]+)') | map('regex_replace', '^(.*)$', '\\1') | first }}"
+    unseal_key_2: "{{ vault_keys.stdout | regex_findall('Unseal Key 2: ([\\S]+)') | map('regex_replace', '^(.*)$', '\\1') | first }}"
+    unseal_key_3: "{{ vault_keys.stdout | regex_findall('Unseal Key 3: ([\\S]+)') | map('regex_replace', '^(.*)$', '\\1') | first }}"
+    vault_token: "{{ vault_keys.stdout | regex_findall('Initial Root Token: ([\\S]+)') | map('regex_replace', '^(.*)$', '\\1') | first }}"
+  when: vault_keys is defined and vault_keys.stdout != ""
+
+- name: Debug print unseal keys and root token
+  debug:
+    msg:
+      - "Unseal Key 1: {{ unseal_key_1 }}"
+      - "Unseal Key 2: {{ unseal_key_2 }}"
+      - "Unseal Key 3: {{ unseal_key_3 }}"
+      - "Root Token: {{ vault_token }}"
+  when: unseal_key_1 is defined and unseal_key_1 != ""
+
+- name: Store secrets in yaml format
+  set_fact:
+    vault_yml: |
+      ---
+      vault_unseal_key_1: "{{ unseal_key_1 }}"
+      vault_unseal_key_2: "{{ unseal_key_2 }}"
+      vault_unseal_key_3: "{{ unseal_key_3 }}"
+      vault_token: "{{ vault_token }}"
+  when: unseal_key_1 is defined and unseal_key_1 != ""
+
+- name: Export prepared vars to converge step
+  ansible.builtin.copy:
+    dest: "{{ prepared_vars_path }}/{{ molecule_role }}.yml"
+    content: "{{ vault_yml }}"
+    mode: '0755'

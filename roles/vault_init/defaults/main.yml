@@ -5,7 +5,7 @@ vault_protocol: http
 vault_host: vault
 vault_port: 8200
 
-vault_url: "{{ vault_protocol }}://{{ vault_host }}:{{  vault_port }}"
+vault_url: "{{ vault_protocol }}://{{ vault_host }}:{{ vault_port }}"
 
 vault_rules_read: |
   path "kv/*" {

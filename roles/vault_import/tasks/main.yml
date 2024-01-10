@@ -6,7 +6,7 @@
 
 - name: Create secret
   no_log: true
-  hashivault_secret:
+  terryhowe.hashivault.hashivault_secret:
     authtype: token
     url: "{{ vault_url }}"
     token: "{{ vault_token }}"

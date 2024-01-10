@@ -1,0 +1,10 @@
+---
+limits_defaults:
+  '*':  # Test values - This applies to all users
+    - {type: 'soft', item: 'nofile', value: '1024'}  # soft limit on number of open files
+    - {type: 'hard', item: 'nofile', value: '2048'}  # hard limit on number of open files
+
+limits_extra:
+  'john':  # Test values - This applies only to user 'john'
+    - {type: 'soft', item: 'nproc', value: '1000'}  # soft limit on number of processes
+    - {type: 'hard', item: 'nproc', value: '2000'}  # hard limit on number of processes

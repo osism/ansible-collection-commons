@@ -7,6 +7,7 @@
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
 - name: Login to registry and force re-authorization
+  become: true
   community.docker.docker_login:
     registry: "{{ docker_login_registry }}"
     username: "{{ docker_login_username }}"

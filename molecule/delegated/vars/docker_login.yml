@@ -1,0 +1,4 @@
+---
+docker_login_registry: 127.0.0.1:5000
+docker_login_username: testuser123
+docker_login_password: dockerpassword123

@@ -1,6 +1,0 @@
----
-- name: Install clevis packages
-  become: true
-  ansible.builtin.dnf:
-    name: "{{ clevis_packages }}"
-    state: present

@@ -20,6 +20,7 @@ provisioner:
       all:
         ansible_python_interpreter: /usr/bin/python3
         molecule_role: "${ANSIBLE_ROLE}"
+        prepared_vars_path: "/tmp/ansible-molecule"
 verifier:
   name: testinfra
   options:

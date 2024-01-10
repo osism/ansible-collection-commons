@@ -5,6 +5,11 @@
     vars:
       ansible_role: certificates
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/certificates\/.*$'
+      - '^molecule\/delegated\/tests\/certificates.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-cleanup
@@ -12,6 +17,11 @@
     vars:
       ansible_role: cleanup
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/cleanup\/.*$'
+      - '^molecule\/delegated\/tests\/cleanup.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-configfs
@@ -19,6 +29,11 @@
     vars:
       ansible_role: configfs
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/configfs\/.*$'
+      - '^molecule\/delegated\/tests\/configfs.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-configuration
@@ -26,6 +41,11 @@
     vars:
       ansible_role: configuration
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/configuraion\/.*$'
+      - '^molecule\/delegated\/tests\/configuration.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-docker_compose
@@ -33,6 +53,23 @@
     vars:
       ansible_role: docker_compose
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/docker_compose\/.*$'
+      - '^molecule\/delegated\/tests\/docker_compose.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-docker_login
+    parent: ansible-molecule
+    vars:
+      ansible_role: docker_login
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/docker_login\/.*$'
+      - '^molecule\/delegated\/tests\/docker_login.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-facts
@@ -40,6 +77,11 @@
     vars:
       ansible_role: facts
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/facts\/.*$'
+      - '^molecule\/delegated\/tests\/facts.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-firewall
@@ -47,6 +89,11 @@
     vars:
       ansible_role: firewall
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/firewall\/.*$'
+      - '^molecule\/delegated\/tests\/firewall.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-hostname
@@ -54,6 +101,11 @@
     vars:
       ansible_role: hostname
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/hostname\/.*$'
+      - '^molecule\/delegated\/tests\/hostname.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-hosts
@@ -61,6 +113,11 @@
     vars:
       ansible_role: hosts
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/hosts\/.*$'
+      - '^molecule\/delegated\/tests\/hosts.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-ipmitool
@@ -68,6 +125,11 @@
     vars:
       ansible_role: ipmitool
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/ipimtool\/.*$'
+      - '^molecule\/delegated\/tests\/ipmitool.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-kernel_modules
@@ -75,6 +137,23 @@
     vars:
       ansible_role: kernel_modules
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/kernel_modules\/.*$'
+      - '^molecule\/delegated\/tests\/kernel_modules.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-known_hosts
+    parent: ansible-molecule
+    vars:
+      ansible_role: known_hosts
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/known_hosts\/.*$'
+      - '^molecule\/delegated\/tests\/known_hosts.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-kompose
@@ -82,6 +161,11 @@
     vars:
       ansible_role: kompose
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/kompose\/.*$'
+      - '^molecule\/delegated\/tests\/kompose.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-kubectl
@@ -89,6 +173,23 @@
     vars:
       ansible_role: kubectl
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/kubectl\/.*$'
+      - '^molecule\/delegated\/tests\/kubectl.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-limits
+    parent: ansible-molecule
+    vars:
+      ansible_role: limits
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/limits\/.*$'
+      - '^molecule\/delegated\/tests\/limits.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-lynis
@@ -96,6 +197,11 @@
     vars:
       ansible_role: lynis
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/lynis\/.*$'
+      - '^molecule\/delegated\/tests\/lynis.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-microcode
@@ -103,6 +209,11 @@
     vars:
       ansible_role: microcode
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/microcode\/.*$'
+      - '^molecule\/delegated\/tests\/microcode.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-motd
@@ -110,6 +221,11 @@
     vars:
       ansible_role: motd
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/motd\/.*$'
+      - '^molecule\/delegated\/tests\/motd.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-operator
@@ -117,6 +233,11 @@
     vars:
       ansible_role: operator
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/operator\/.*$'
+      - '^molecule\/delegated\/tests\/operator.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-packages
@@ -124,6 +245,11 @@
     vars:
       ansible_role: packages
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/packages\/.*$'
+      - '^molecule\/delegated\/tests\/packages.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-podman
@@ -131,6 +257,11 @@
     vars:
       ansible_role: podman
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/podman\/.*$'
+      - '^molecule\/delegated\/tests\/podman.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-proxy
@@ -138,6 +269,11 @@
     vars:
       ansible_role: proxy
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/proxy\/.*$'
+      - '^molecule\/delegated\/tests\/proxy.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-repository
@@ -145,6 +281,11 @@
     vars:
       ansible_role: repository
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/repository\/.*$'
+      - '^molecule\/delegated\/tests\/repository.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
@@ -152,6 +293,11 @@
     vars:
       ansible_role: resolvconf
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/resolvconf\/.*$'
+      - '^molecule\/delegated\/tests\/resolvconf.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-runc
@@ -159,6 +305,11 @@
     vars:
       ansible_role: runc
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/runc\/.*$'
+      - '^molecule\/delegated\/tests\/runc.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-services
@@ -166,6 +317,11 @@
     vars:
       ansible_role: services
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/services\/.*$'
+      - '^molecule\/delegated\/tests\/services.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-sosreport
@@ -173,6 +329,11 @@
     vars:
       ansible_role: sosreport
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/sosreport\/.*$'
+      - '^molecule\/delegated\/tests\/sosreport.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-sshconfig
@@ -180,6 +341,11 @@
     vars:
       ansible_role: sshconfig
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/sshconfig\/.*$'
+      - '^molecule\/delegated\/tests\/sshconfig.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-state
@@ -187,6 +353,11 @@
     vars:
       ansible_role: state
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/state\/.*$'
+      - '^molecule\/delegated\/tests\/state.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-sysctl
@@ -194,6 +365,11 @@
     vars:
       ansible_role: sysctl
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/sysctl\/.*$'
+      - '^molecule\/delegated\/tests\/sysctl.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-systohc
@@ -201,6 +377,11 @@
     vars:
       ansible_role: systohc
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/systohc\/.*$'
+      - '^molecule\/delegated\/tests\/systohc.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-timezone
@@ -208,6 +389,11 @@
     vars:
       ansible_role: timezone
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/timezone\/.*$'
+      - '^molecule\/delegated\/tests\/timezone.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-trivy
@@ -215,378 +401,147 @@
     vars:
       ansible_role: trivy
       ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/trivy\/.*$'
+      - '^molecule\/delegated\/tests\/trivy.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-vault_import
+    parent: ansible-molecule
+    vars:
+      ansible_role: vault_import
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/vault_import\/.*$'
+      - '^molecule\/delegated\/tests\/vault_import.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-vault_init
+    parent: ansible-molecule
+    vars:
+      ansible_role: vault_init
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/vault_init\/.*$'
+      - '^molecule\/delegated\/tests\/vault_init.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-vault_seal
+    parent: ansible-molecule
+    vars:
+      ansible_role: vault_seal
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/vault_seal\/.*$'
+      - '^molecule\/delegated\/tests\/vault_seal.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
+    name: ansible-collection-commons-molecule-vault_unseal
+    parent: ansible-molecule
+    vars:
+      ansible_role: vault_unseal
+      ansible_molecule_ansible_version: "8.7.0"
+    files:
+      - '^roles\/vault_unseal\/.*$'
+      - '^molecule\/delegated\/tests\/vault_unseal.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
 
 - project:
     merge-mode: squash-merge
     default-branch: main
     check:
       jobs:
-        - ansible-collection-commons-molecule-certificates:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/certificates\/.*$'
-              - '^roles\/certificates\/.*$'
-        - ansible-collection-commons-molecule-cleanup:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/cleanup\/.*$'
-              - '^roles\/cleanup\/.*$'
-        - ansible-collection-commons-molecule-configfs:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/configfs\/.*$'
-              - '^roles\/configfs\/.*$'
-        - ansible-collection-commons-molecule-configuration:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/configuration\/.*$'
-              - '^roles\/configuraion\/.*$'
-        - ansible-collection-commons-molecule-docker_compose:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/docker_compose\/.*$'
-              - '^roles\/docker_compose\/.*$'
-        - ansible-collection-commons-molecule-facts:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/facts\/.*$'
-              - '^roles\/facts\/.*$'
-        - ansible-collection-commons-molecule-firewall:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/firewall\/.*$'
-              - '^roles\/firewall\/.*$'
-        - ansible-collection-commons-molecule-hostname:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/hostname\/.*$'
-              - '^roles\/hostname\/.*$'
-        - ansible-collection-commons-molecule-hosts:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/hosts\/.*$'
-              - '^roles\/hosts\/.*$'
-        - ansible-collection-commons-molecule-ipmitool:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/ipimtool\/.*$'
-              - '^roles\/ipimtool\/.*$'
-        - ansible-collection-commons-molecule-kernel_modules:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kernel_modules\/.*$'
-              - '^roles\/kernel_modules\/.*$'
-        - ansible-collection-commons-molecule-kompose:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kompose\/.*$'
-              - '^roles\/kompose\/.*$'
-        - ansible-collection-commons-molecule-kubectl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kubectl\/.*$'
-              - '^roles\/kubectl\/.*$'
-        - ansible-collection-commons-molecule-lynis:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/lynis\/.*$'
-              - '^roles\/lynis\/.*$'
-        - ansible-collection-commons-molecule-microcode:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/microcode\/.*$'
-              - '^roles\/microcode\/.*$'
-        - ansible-collection-commons-molecule-motd:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/motd\/.*$'
-              - '^roles\/motd\/.*$'
-        - ansible-collection-commons-molecule-operator:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/operator\/.*$'
-              - '^roles\/operator\/.*$'
-        - ansible-collection-commons-molecule-packages:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/packages\/.*$'
-              - '^roles\/packages\/.*$'
-        - ansible-collection-commons-molecule-podman:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/podman\/.*$'
-              - '^roles\/podman\/.*$'
-        - ansible-collection-commons-molecule-proxy:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/proxy\/.*$'
-              - '^roles\/proxy\/.*$'
-        - ansible-collection-commons-molecule-repository:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/repository\/.*$'
-              - '^roles\/repository\/.*$'
-        - ansible-collection-commons-molecule-resolvconf:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/resolvconf\/.*$'
-              - '^roles\/resolvconf\/.*$'
-        - ansible-collection-commons-molecule-runc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/runc\/.*$'
-              - '^roles\/runc\/.*$'
-        - ansible-collection-commons-molecule-services:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/services\/.*$'
-              - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sshconfig:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sshconfig\/.*$'
-              - '^roles\/sshconfig\/.*$'
-        - ansible-collection-commons-molecule-state:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/state\/.*$'
-              - '^roles\/state\/.*$'
-        - ansible-collection-commons-molecule-sysctl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sysctl\/.*$'
-              - '^roles\/sysctl\/.*$'
-        - ansible-collection-commons-molecule-systohc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/systohc\/.*$'
-              - '^roles\/systohc\/.*$'
-        - ansible-collection-commons-molecule-timezone:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/timezone\/.*$'
-              - '^roles\/timezone\/.*$'
-        - ansible-collection-commons-molecule-trivy:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/trivy\/.*$'
-              - '^roles\/trivy\/.*$'
+        - ansible-collection-commons-molecule-certificates
+        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-configfs
+        - ansible-collection-commons-molecule-configuration
+        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_login
+        - ansible-collection-commons-molecule-facts
+        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-hostname
+        - ansible-collection-commons-molecule-hosts
+        - ansible-collection-commons-molecule-ipmitool
+        - ansible-collection-commons-molecule-kernel_modules
+        - ansible-collection-commons-molecule-known_hosts
+        - ansible-collection-commons-molecule-kompose
+        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-limits
+        - ansible-collection-commons-molecule-lynis
+        - ansible-collection-commons-molecule-microcode
+        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-operator
+        - ansible-collection-commons-molecule-packages
+        - ansible-collection-commons-molecule-podman
+        - ansible-collection-commons-molecule-proxy
+        - ansible-collection-commons-molecule-repository
+        - ansible-collection-commons-molecule-resolvconf
+        - ansible-collection-commons-molecule-runc
+        - ansible-collection-commons-molecule-services
+        - ansible-collection-commons-molecule-sosreport
+        - ansible-collection-commons-molecule-sshconfig
+        - ansible-collection-commons-molecule-state
+        - ansible-collection-commons-molecule-sysctl
+        - ansible-collection-commons-molecule-systohc
+        - ansible-collection-commons-molecule-timezone
+        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-vault_import
+        - ansible-collection-commons-molecule-vault_init
+        - ansible-collection-commons-molecule-vault_seal
+        - ansible-collection-commons-molecule-vault_unseal
         - ansible-lint
         - flake8
         - yamllint
         - python-black
     gate:
       jobs:
-        - ansible-collection-commons-molecule-certificates:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/certificates\/.*$'
-              - '^roles\/certificates\/.*$'
-        - ansible-collection-commons-molecule-cleanup:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/cleanup\/.*$'
-              - '^roles\/cleanup\/.*$'
-        - ansible-collection-commons-molecule-configfs:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/configfs\/.*$'
-              - '^roles\/configfs\/.*$'
-        - ansible-collection-commons-molecule-configuration:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/configuration\/.*$'
-              - '^roles\/configuraion\/.*$'
-        - ansible-collection-commons-molecule-docker_compose:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/docker_compose\/.*$'
-              - '^roles\/docker_compose\/.*$'
-        - ansible-collection-commons-molecule-facts:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/facts\/.*$'
-              - '^roles\/facts\/.*$'
-        - ansible-collection-commons-molecule-firewall:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/firewall\/.*$'
-              - '^roles\/firewall\/.*$'
-        - ansible-collection-commons-molecule-hostname:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/hostname\/.*$'
-              - '^roles\/hostname\/.*$'
-        - ansible-collection-commons-molecule-hosts:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/hosts\/.*$'
-              - '^roles\/hosts\/.*$'
-        - ansible-collection-commons-molecule-ipmitool:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/ipimtool\/.*$'
-              - '^roles\/ipimtool\/.*$'
-        - ansible-collection-commons-molecule-kernel_modules:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kernel_modules\/.*$'
-              - '^roles\/kernel_modules\/.*$'
-        - ansible-collection-commons-molecule-kompose:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kompose\/.*$'
-              - '^roles\/kompose\/.*$'
-        - ansible-collection-commons-molecule-kubectl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/kubectl\/.*$'
-              - '^roles\/kubectl\/.*$'
-        - ansible-collection-commons-molecule-lynis:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/lynis\/.*$'
-              - '^roles\/lynis\/.*$'
-        - ansible-collection-commons-molecule-microcode:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/microcode\/.*$'
-              - '^roles\/microcode\/.*$'
-        - ansible-collection-commons-molecule-motd:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/motd\/.*$'
-              - '^roles\/motd\/.*$'
-        - ansible-collection-commons-molecule-operator:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/operator\/.*$'
-              - '^roles\/operator\/.*$'
-        - ansible-collection-commons-molecule-packages:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/packages\/.*$'
-              - '^roles\/packages\/.*$'
-        - ansible-collection-commons-molecule-podman:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/podman\/.*$'
-              - '^roles\/podman\/.*$'
-        - ansible-collection-commons-molecule-proxy:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/proxy\/.*$'
-              - '^roles\/proxy\/.*$'
-        - ansible-collection-commons-molecule-repository:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/repository\/.*$'
-              - '^roles\/repository\/.*$'
-        - ansible-collection-commons-molecule-resolvconf:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/resolvconf\/.*$'
-              - '^roles\/resolvconf\/.*$'
-        - ansible-collection-commons-molecule-runc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/runc\/.*$'
-              - '^roles\/runc\/.*$'
-        - ansible-collection-commons-molecule-services:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/services\/.*$'
-              - '^roles\/services\/.*$'
-        - ansible-collection-commons-molecule-sshconfig:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sshconfig\/.*$'
-              - '^roles\/sshconfig\/.*$'
-        - ansible-collection-commons-molecule-state:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/state\/.*$'
-              - '^roles\/state\/.*$'
-        - ansible-collection-commons-molecule-sysctl:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/sysctl\/.*$'
-              - '^roles\/sysctl\/.*$'
-        - ansible-collection-commons-molecule-systohc:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/systohc\/.*$'
-              - '^roles\/systohc\/.*$'
-        - ansible-collection-commons-molecule-timezone:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/timezone\/.*$'
-              - '^roles\/timezone\/.*$'
-        - ansible-collection-commons-molecule-trivy:
-            files:
-              - '^molecule\/delegated\/.*$'
-              - '^molecule\/requirements\.txt$'
-              - '^molecule\/trivy\/.*$'
-              - '^roles\/trivy\/.*$'
+        - ansible-collection-commons-molecule-certificates
+        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-configfs
+        - ansible-collection-commons-molecule-configuration
+        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_login
+        - ansible-collection-commons-molecule-facts
+        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-hostname
+        - ansible-collection-commons-molecule-hosts
+        - ansible-collection-commons-molecule-ipmitool
+        - ansible-collection-commons-molecule-kernel_modules
+        - ansible-collection-commons-molecule-known_hosts
+        - ansible-collection-commons-molecule-kompose
+        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-limits
+        - ansible-collection-commons-molecule-lynis
+        - ansible-collection-commons-molecule-microcode
+        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-operator
+        - ansible-collection-commons-molecule-packages
+        - ansible-collection-commons-molecule-podman
+        - ansible-collection-commons-molecule-proxy
+        - ansible-collection-commons-molecule-repository
+        - ansible-collection-commons-molecule-resolvconf
+        - ansible-collection-commons-molecule-runc
+        - ansible-collection-commons-molecule-services
+        - ansible-collection-commons-molecule-sosreport
+        - ansible-collection-commons-molecule-sshconfig
+        - ansible-collection-commons-molecule-state
+        - ansible-collection-commons-molecule-sysctl
+        - ansible-collection-commons-molecule-systohc
+        - ansible-collection-commons-molecule-timezone
+        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-vault_import
+        - ansible-collection-commons-molecule-vault_init
+        - ansible-collection-commons-molecule-vault_seal
+        - ansible-collection-commons-molecule-vault_unseal
         - ansible-lint
         - flake8
         - yamllint

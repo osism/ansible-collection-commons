@@ -1,0 +1,59 @@
+---
+- name: Ensure docker
+  ansible.builtin.include_role:
+    name: osism.services.docker
+  vars:
+    docker_user: zuul
+    docker_group: zuul
+
+
+- name: Create necessary directories for Docker registry
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: zuul
+    group: zuul
+    mode: '0755'
+  loop:
+    - ./registry/data
+    - ./registry/auth
+
+- name: Create htpasswd file with specified user credentials
+  ansible.builtin.copy:
+    dest: "./registry/auth/htpasswd"
+    # In case you want to change the password, make sure to use bcrypt hashing function!
+    content: |
+      testuser123:$2a$10$R3tUYwfeny/cNkQgmBjx6.pPi6QKejq./O.yQIXUAmg9XGFWOt7Qu
+    owner: zuul
+    group: zuul
+    mode: '0644'
+
+- name: Deploy docker registry
+  become: true  # This ensures the task is run with elevated privileges
+  community.docker.docker_container:
+    name: "{{ registry.container_name }}"
+    image: "{{ registry.image }}"
+    state: started
+    restart_policy: "{{ registry.restart }}"
+    hostname: "{{ registry.hostname }}"
+    published_ports:
+      - "5000:5000"
+    env:
+      REGISTRY_AUTH: "{{ registry.environment.REGISTRY_AUTH }}"
+      REGISTRY_AUTH_HTPASSWD_PATH: "{{ registry.environment.REGISTRY_AUTH_HTPASSWD_PATH }}"
+      REGISTRY_AUTH_HTPASSWD_REALM: "{{ registry.environment.REGISTRY_AUTH_HTPASSWD_REALM }}"
+      REGISTRY_STORAGE_DELETE_ENABLED: "{{ registry.environment.REGISTRY_STORAGE_DELETE_ENABLED }}"
+    volumes:
+      - "./registry/data:/var/lib/registry"
+      - "./registry/auth:/auth"
+  vars:
+    registry:
+      restart: always
+      image: registry:2
+      hostname: registry
+      container_name: registry
+      environment:
+        REGISTRY_AUTH: htpasswd
+        REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+        REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
+        REGISTRY_STORAGE_DELETE_ENABLED: "true"
