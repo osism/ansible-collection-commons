@@ -9,5 +9,5 @@ operator_group: "{{ operator_user }}"
 # known_hosts
 
 known_hosts_group_name: all
-known_hosts_list: "{{ group[known_hosts_group_name] }}"
+known_hosts_list: "{{ groups[known_hosts_group_name] }}"
 known_hosts_destination: "/home/{{ operator_user }}/.ssh"
