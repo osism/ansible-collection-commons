@@ -1,6 +1,11 @@
 import pytest
 
-from .util.util import get_ansible, get_variable, get_from_url, jinja_replacement
+from .util.util import (
+    get_ansible,
+    get_variable,
+    get_from_url,
+    extract_url_from_variable,
+)
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
@@ -39,20 +44,15 @@ def test_lynis_gpg_key_present(host):
 
 
 def test_lynis_repository_configured(host):
-    """Check if the lynis repository is correctly configured."""
+    """Check if the Lynis repository is correctly configured."""
 
     lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
         pytest.skip("lynis_configure_repository is not defined")
 
-    # Fetch the necessary variables from Ansible
-    lynis_configure_repository = get_variable(host, "lynis_configure_repository")
-    lynis_repository_arch = get_variable(host, "lynis_debian_repository_arch")
-    lynis_repository = get_variable(host, "lynis_debian_repository")
-    lynis_repository = jinja_replacement(
-        lynis_repository, {"lynis_debian_repository_arch": lynis_repository_arch}
-    )
+    # Extract the URL from the configuration
+    extracted_url = extract_url_from_variable(host, "lynis_debian_repository")
 
     # Validate the permissions and ownership of the repository file
     repo_file = host.file("/etc/apt/sources.list.d/lynis.list")
@@ -66,7 +66,9 @@ def test_lynis_repository_configured(host):
         repo_file_content = host.check_output("cat /etc/apt/sources.list.d/lynis.list")
 
     # Validate the content of the file
-    assert lynis_repository in repo_file_content
+    assert (
+        extracted_url in repo_file_content
+    ), "The extracted URL is not present in the Lynis configuration file"
 
 
 def test_lynis_package_installed(host):

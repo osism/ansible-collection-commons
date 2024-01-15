@@ -9,6 +9,8 @@ trivy_package_name: trivy
 
 trivy_configure_repository: true
 
-trivy_debian_repository_arch: amd64
+# Use Ansible fact to dynamically set the architecture
+trivy_debian_repository_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+
 trivy_debian_repository_key: https://aquasecurity.github.io/trivy-repo/deb/public.key
 trivy_debian_repository: "deb [ arch={{ trivy_debian_repository_arch }} ] https://aquasecurity.github.io/trivy-repo/deb {{ ansible_distribution_release }} main"

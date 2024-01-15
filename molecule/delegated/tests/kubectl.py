@@ -1,6 +1,11 @@
 import pytest
 
-from .util.util import get_ansible, get_variable, get_from_url, jinja_replacement
+from .util.util import (
+    get_ansible,
+    get_variable,
+    get_from_url,
+    extract_url_from_variable,
+)
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
@@ -46,23 +51,23 @@ def test_kubectl_repository_configured(host):
     if not kubectl_configure_repository:
         pytest.skip("kubectl_configure_repository is not set")
 
-    kubectl_repository = get_variable(host, "kubectl_debian_repository")
-    kubectl_debian_repository_arch = get_variable(
-        host, "kubectl_debian_repository_arch"
-    )
-
-    repo_file = host.file("/etc/apt/sources.list.d/kubectl.list")
+    # Extract the URL from the configuration
+    extracted_url = extract_url_from_variable(host, "kubectl_debian_repository")
 
     # Ensure the repository file exists
+    repo_file = host.file("/etc/apt/sources.list.d/kubectl.list")
     assert repo_file.exists
 
-    # Ensure the content matches the expected repository configuration
-    formatted_kubectl_repository = jinja_replacement(
-        kubectl_repository,
-        {"kubectl_debian_repository_arch": kubectl_debian_repository_arch},
-    )
+    # Use sudo to read the content of the file
+    with host.sudo("root"):
+        repo_file_content = host.check_output(
+            "cat /etc/apt/sources.list.d/kubectl.list"
+        )
 
-    assert formatted_kubectl_repository in repo_file.content_string
+    # Ensure the content matches the expected repository configuration
+    assert (
+        extracted_url in repo_file_content
+    ), "The extracted URL is not present in the kubectl configuration file"
 
 
 def test_kubectl_package_installed(host):

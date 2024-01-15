@@ -1,6 +1,18 @@
 import os
+import re
 import urllib.request
 import testinfra.utils.ansible_runner
+
+
+def extract_url_from_variable(host, variable_name):
+    """Extracts a URL from a given Ansible configuration variable."""
+    config_value = get_variable(host, variable_name)
+    match = re.search(r"https?://[\w./-]+", config_value)
+    if not match:
+        raise ValueError(
+            f"No valid URL found in the configuration variable: '{variable_name}'"
+        )
+    return match.group(0)
 
 
 def get_ansible():
