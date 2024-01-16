@@ -4,7 +4,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: certificates
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/certificates\/.*$'
       - '^molecule\/delegated\/tests\/certificates.*$'
@@ -16,7 +16,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: cleanup
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/cleanup\/.*$'
       - '^molecule\/delegated\/tests\/cleanup.*$'
@@ -28,7 +28,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: configfs
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/configfs\/.*$'
       - '^molecule\/delegated\/tests\/configfs.*$'
@@ -40,7 +40,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: configuration
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/configuraion\/.*$'
       - '^molecule\/delegated\/tests\/configuration.*$'
@@ -52,7 +52,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: docker_compose
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/docker_compose\/.*$'
       - '^molecule\/delegated\/tests\/docker_compose.*$'
@@ -64,7 +64,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: docker_login
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/docker_login\/.*$'
       - '^molecule\/delegated\/tests\/docker_login.*$'
@@ -76,7 +76,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: facts
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/facts\/.*$'
       - '^molecule\/delegated\/tests\/facts.*$'
@@ -88,7 +88,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: firewall
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/firewall\/.*$'
       - '^molecule\/delegated\/tests\/firewall.*$'
@@ -100,7 +100,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: hostname
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/hostname\/.*$'
       - '^molecule\/delegated\/tests\/hostname.*$'
@@ -112,7 +112,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: hosts
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/hosts\/.*$'
       - '^molecule\/delegated\/tests\/hosts.*$'
@@ -124,7 +124,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: ipmitool
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/ipimtool\/.*$'
       - '^molecule\/delegated\/tests\/ipmitool.*$'
@@ -136,7 +136,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: kernel_modules
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/kernel_modules\/.*$'
       - '^molecule\/delegated\/tests\/kernel_modules.*$'
@@ -148,7 +148,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: known_hosts
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/known_hosts\/.*$'
       - '^molecule\/delegated\/tests\/known_hosts.*$'
@@ -160,7 +160,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: kompose
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/kompose\/.*$'
       - '^molecule\/delegated\/tests\/kompose.*$'
@@ -172,7 +172,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: kubectl
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/kubectl\/.*$'
       - '^molecule\/delegated\/tests\/kubectl.*$'
@@ -184,7 +184,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: limits
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/limits\/.*$'
       - '^molecule\/delegated\/tests\/limits.*$'
@@ -196,7 +196,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: lynis
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/lynis\/.*$'
       - '^molecule\/delegated\/tests\/lynis.*$'
@@ -208,7 +208,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: microcode
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/microcode\/.*$'
       - '^molecule\/delegated\/tests\/microcode.*$'
@@ -220,7 +220,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: motd
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/motd\/.*$'
       - '^molecule\/delegated\/tests\/motd.*$'
@@ -232,7 +232,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: operator
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/operator\/.*$'
       - '^molecule\/delegated\/tests\/operator.*$'
@@ -244,7 +244,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: packages
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/packages\/.*$'
       - '^molecule\/delegated\/tests\/packages.*$'
@@ -256,7 +256,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: podman
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/podman\/.*$'
       - '^molecule\/delegated\/tests\/podman.*$'
@@ -268,7 +268,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: proxy
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/proxy\/.*$'
       - '^molecule\/delegated\/tests\/proxy.*$'
@@ -280,7 +280,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: repository
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/repository\/.*$'
       - '^molecule\/delegated\/tests\/repository.*$'
@@ -292,7 +292,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: resolvconf
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/resolvconf\/.*$'
       - '^molecule\/delegated\/tests\/resolvconf.*$'
@@ -304,7 +304,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: runc
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/runc\/.*$'
       - '^molecule\/delegated\/tests\/runc.*$'
@@ -316,7 +316,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: services
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/services\/.*$'
       - '^molecule\/delegated\/tests\/services.*$'
@@ -328,7 +328,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: sosreport
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/sosreport\/.*$'
       - '^molecule\/delegated\/tests\/sosreport.*$'
@@ -340,7 +340,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: sshconfig
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/sshconfig\/.*$'
       - '^molecule\/delegated\/tests\/sshconfig.*$'
@@ -352,7 +352,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: state
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/state\/.*$'
       - '^molecule\/delegated\/tests\/state.*$'
@@ -364,7 +364,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: sysctl
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/sysctl\/.*$'
       - '^molecule\/delegated\/tests\/sysctl.*$'
@@ -376,7 +376,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: systohc
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/systohc\/.*$'
       - '^molecule\/delegated\/tests\/systohc.*$'
@@ -388,7 +388,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: timezone
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/timezone\/.*$'
       - '^molecule\/delegated\/tests\/timezone.*$'
@@ -400,7 +400,7 @@
     parent: ansible-molecule
     vars:
       ansible_role: trivy
-      ansible_molecule_ansible_version: "8.7.0"
+      ansible_molecule_ansible_version: "9.1.0"
     files:
       - '^roles\/trivy\/.*$'
       - '^molecule\/delegated\/tests\/trivy.*$'
