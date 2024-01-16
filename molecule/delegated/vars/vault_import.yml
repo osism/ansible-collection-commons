@@ -1,4 +1,0 @@
----
-vault_container_name: manager_vault_1
-vault_url: "http://localhost:8200"
-vault_secrets_path: /tmp/secrets.yml

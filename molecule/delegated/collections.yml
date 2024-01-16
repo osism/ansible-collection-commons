@@ -4,6 +4,3 @@ collections:
   - name: https://github.com/osism/ansible-collection-services.git
     type: git
     version: main
-  - name: https://github.com/TerryHowe/ansible-modules-hashivault.git
-    type: git
-    version: ansible-collection
