@@ -41,7 +41,3 @@ The following Ansible roles are included in this collection.
 | systohc        | [systohc.py](molecule/delegated/tests/systohc.py)                       |
 | timezone       | [timezone.py](molecule/delegated/tests/timezone.py)                     |
 | trivy          | [trivy](molecule/delegated/tests/trivy)                                 |
-| vault_import   | [prepare/vault_import.yml](molecule/delegated/prepare/vault_import.yml) |
-| vault_init     | [prepare/vault_init.yml](molecule/delegated/prepare/vault_init.yml)     |
-| vault_seal     | [prepare/vault_seal.yml](molecule/delegated/prepare/vault_seal.yml)     |
-| vault_unseal   | [prepare/vault_unseal.yml](molecule/delegated/prepare/vault_unseal.yml) |
