@@ -2,5 +2,12 @@
 kompose_install_type: url
 
 kompose_version: 1.22.0
-kompose_checksum: 6203d67263886bbd455168f59309496d486fc3a6df330b7ba37823b283bd9ea5
-kompose_url: "https://github.com/kubernetes/kompose/releases/download/v{{ kompose_version }}/kompose-linux-amd64"
+
+kompose_checksums:
+  amd64: 6203d67263886bbd455168f59309496d486fc3a6df330b7ba37823b283bd9ea5
+  arm64: 022a04becbf05ad3edac7ac9175d414007b409f2b4fd5190af2a90649ec64b94
+  arm: af9a549e07a546d37ee855b172136417388764afd44b901789d9b8e70d2de086
+
+kompose_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ('arm64' if ansible_architecture in ['aarch64', 'arm64'] else ('arm' if ansible_architecture in ['armv6l', 'armv7l'] else ansible_architecture)) }}"
+
+kompose_url: "https://github.com/kubernetes/kompose/releases/download/v{{ kompose_version }}/kompose-linux-{{ kompose_arch }}"
