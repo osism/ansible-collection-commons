@@ -5,10 +5,9 @@
 lynis_package_name: lynis
 
 ##########################
-# repository
+# repository (arch is selected automatically by the system, no manual placement required!)
 
 lynis_configure_repository: true
 
-lynis_debian_repository_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 lynis_debian_repository_key: https://packages.cisofy.com/keys/cisofy-software-public.key
-lynis_debian_repository: "deb [ arch={{ lynis_debian_repository_arch }} ] https://packages.cisofy.com/community/lynis/deb/ stable main"
+lynis_debian_repository: "deb https://packages.cisofy.com/community/lynis/deb/ stable main"

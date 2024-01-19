@@ -5,10 +5,9 @@
 kubectl_package_name: kubectl
 
 ##########################
-# repository
+# repository (arch is selected automatically by the system, no manual placement required!)
 
 kubectl_configure_repository: true
 
-kubectl_debian_repository_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
 kubectl_debian_repository_key: https://raw.githubusercontent.com/kubernetes/k8s.io/main/apt/doc/apt-key.gpg
-kubectl_debian_repository: "deb [ arch={{ kubectl_debian_repository_arch }} signed-by=/usr/share/keyrings/kubectl.gpg ] https://apt.kubernetes.io/ kubernetes-xenial main"
+kubectl_debian_repository: "deb [signed-by=/usr/share/keyrings/kubectl.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
