@@ -23,6 +23,8 @@
     owner: root
     group: root
   loop: "{{ repository_keys }}"
+  loop_control:
+    extended: true
   when: ansible_distribution_version is version('22.04', '>=')
 
 - name: Add repository keys via keyservers with apt-key
@@ -76,6 +78,8 @@
     owner: root
     group: root
   with_fileglob: "{{ repository_key_files_directory }}/*.gpg"
+  loop_control:
+    extended: true
   when:
     - result is defined and result.stat.isdir is defined and result.stat.isdir
     - ansible_distribution_version is version('22.04', '>=')
