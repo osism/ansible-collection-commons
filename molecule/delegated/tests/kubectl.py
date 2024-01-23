@@ -3,7 +3,6 @@ import pytest
 from .util.util import (
     get_ansible,
     get_variable,
-    get_from_url,
     extract_url_from_variable,
 )
 
@@ -28,7 +27,7 @@ def test_kubectl_gpg_key_present(host):
     if not kubectl_configure_repository:
         pytest.skip("kubectl_configure_repository is not set")
 
-    gpg_key_file = host.file("/usr/share/keyrings/kubectl.gpg")
+    gpg_key_file = host.file("/etc/apt/keyrings/kubernetes-apt-keyring.gpg")
 
     # Ensure the GPG key file exists
     assert gpg_key_file.exists
@@ -37,11 +36,6 @@ def test_kubectl_gpg_key_present(host):
     assert gpg_key_file.user == "root"
     assert gpg_key_file.group == "root"
     assert gpg_key_file.mode == 0o644
-
-    kubectl_repository_key = get_variable(host, "kubectl_debian_repository_key")
-    expected_key = get_from_url(kubectl_repository_key, True)
-
-    assert gpg_key_file.content == expected_key
 
 
 def test_kubectl_repository_configured(host):

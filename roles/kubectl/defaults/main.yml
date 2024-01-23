@@ -9,5 +9,5 @@ kubectl_package_name: kubectl
 
 kubectl_configure_repository: true
 
-kubectl_debian_repository_key: https://raw.githubusercontent.com/kubernetes/k8s.io/main/apt/doc/apt-key.gpg
-kubectl_debian_repository: "deb [signed-by=/usr/share/keyrings/kubectl.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
+kubectl_debian_repository_key: "https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key"
+kubectl_debian_repository: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
