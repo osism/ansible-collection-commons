@@ -1,6 +1,11 @@
 import pytest
 
-from ..util.util import get_ansible, get_variable, get_from_url, jinja_replacement
+from ..util.util import (
+    get_ansible,
+    get_variable,
+    get_from_url,
+    extract_url_from_variable,
+)
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
@@ -48,7 +53,7 @@ def test_trivy_gpg_key_present(host):
 
 
 def test_trivy_repository_configured(host):
-    """Check if the trivy repository is correctly configured."""
+    """Check if the Trivy repository is correctly configured."""
     check_ansible_os_family(host)
 
     trivy_configure_repository = get_variable(host, "trivy_configure_repository")
@@ -56,21 +61,8 @@ def test_trivy_repository_configured(host):
     if not trivy_configure_repository:
         pytest.skip("trivy_configure_repository not configured")
 
-    trivy_repository_arch = get_variable(host, "trivy_debian_repository_arch")
-    ansible_distribution_release = get_variable(
-        host, "ansible_distribution_release", True
-    )
+    extracted_url = extract_url_from_variable(host, "trivy_debian_repository")
 
-    trivy_repository = get_variable(host, "trivy_debian_repository")
-    trivy_repository = jinja_replacement(
-        trivy_repository,
-        {
-            "trivy_debian_repository_arch": trivy_repository_arch,
-            "ansible_distribution_release": ansible_distribution_release,
-        },
-    )
-
-    # Validate the permissions and ownership and content of the repository file
     repo_file = host.file("/etc/apt/sources.list.d/trivy.list")
     assert repo_file.exists
     assert repo_file.user == "root"
@@ -79,4 +71,6 @@ def test_trivy_repository_configured(host):
 
     with host.sudo("root"):
         repo_file_content = host.check_output("cat /etc/apt/sources.list.d/trivy.list")
-        assert trivy_repository in repo_file_content
+        assert (
+            extracted_url in repo_file_content
+        ), "The extracted URL is not present in the configuration file"

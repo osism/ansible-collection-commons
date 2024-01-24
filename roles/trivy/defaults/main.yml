@@ -5,10 +5,9 @@
 trivy_package_name: trivy
 
 ##########################
-# repository
+# repository (arch is selected automatically by the system, no manual placement required!)
 
 trivy_configure_repository: true
 
-trivy_debian_repository_arch: amd64
 trivy_debian_repository_key: https://aquasecurity.github.io/trivy-repo/deb/public.key
-trivy_debian_repository: "deb [ arch={{ trivy_debian_repository_arch }} ] https://aquasecurity.github.io/trivy-repo/deb {{ ansible_distribution_release }} main"
+trivy_debian_repository: "deb https://aquasecurity.github.io/trivy-repo/deb {{ ansible_distribution_release }} main"

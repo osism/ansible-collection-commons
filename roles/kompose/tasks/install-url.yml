@@ -31,8 +31,23 @@
     checksum_algorithm: sha256
   register: p
 
-- name: Check checksum of kompose binary
+- name: Check checksum of kompose binary for amd64
   ansible.builtin.fail:
     msg: "Expected checksum of kompose does not match"
   when:
-    - "p.stat.checksum != kompose_checksum"
+    - ansible_architecture == 'x86_64'
+    - p.stat.checksum != kompose_checksums.amd64
+
+- name: Check checksum of kompose binary for arm64
+  ansible.builtin.fail:
+    msg: "Expected checksum of kompose does not match"
+  when:
+    - ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+    - p.stat.checksum != kompose_checksums.arm64
+
+- name: Check checksum of kompose binary for arm
+  ansible.builtin.fail:
+    msg: "Expected checksum of kompose does not match"
+  when:
+    - ansible_architecture == 'armv6l' or ansible_architecture == 'armv7l'
+    - p.stat.checksum != kompose_checksums.arm
