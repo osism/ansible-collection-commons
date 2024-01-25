@@ -6,11 +6,11 @@
     dest: /etc/modules
     mode: 0644
     state: present
-  loop: "{{ kernel_modules }}"
+  loop: "{{ kernel_modules_all }}"
 
 - name: Load kernel module
   become: true
   community.general.modprobe:
     name: "{{ item }}"
     state: present
-  loop: "{{ kernel_modules }}"
+  loop: "{{ kernel_modules_all }}"

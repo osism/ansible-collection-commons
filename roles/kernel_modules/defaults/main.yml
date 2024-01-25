@@ -3,4 +3,4 @@ kernel_modules_default:
   - bonding
   - 8021q
 kernel_modules_extra: []
-kernel_modules: "{{ kernel_modules_default + kernel_modules_extra }}"
+kernel_modules_all: "{{ kernel_modules_default + kernel_modules_extra }}"
