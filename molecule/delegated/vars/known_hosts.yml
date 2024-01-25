@@ -2,8 +2,8 @@
 ##########################
 # operator user
 
-operator_user: zuul
-operator_group: zuul
+known_hosts_operator_user: zuul
+known_hosts_operator_group: zuul
 
 ##########################
 # known_hosts

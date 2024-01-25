@@ -4,8 +4,8 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_known_hosts_file_permissions(host):
-    operator_user = get_variable(host, "operator_user")
-    operator_group = get_variable(host, "operator_group")
+    operator_user = get_variable(host, "known_hosts_operator_user")
+    operator_group = get_variable(host, "known_hosts_operator_group")
 
     known_hosts_destination = get_variable(host, "known_hosts_destination")
     known_hosts_destination = jinja_replacement(
@@ -27,7 +27,7 @@ def test_known_hosts_file_permissions(host):
 
 
 def test_known_hosts_file_content(host):
-    operator_user = get_variable(host, "operator_user")
+    operator_user = get_variable(host, "known_hosts_operator_user")
 
     known_hosts_destination = get_variable(host, "known_hosts_destination")
     known_hosts_destination = jinja_replacement(

@@ -2,8 +2,8 @@
 ##########################
 # operator user
 
-operator_user: dragon
-operator_group: "{{ operator_user }}"
+known_hosts_operator_user: dragon
+known_hosts_operator_group: "{{ operator_user }}"
 
 ##########################
 # known_hosts
