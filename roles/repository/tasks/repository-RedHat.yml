@@ -9,7 +9,7 @@
     gpgcheck: true
     enabled: true
     file: "{{ item.file }}"
-  loop: "{{ repositories }}"
+  loop: "{{ repository_dictionary }}"
   when: item.mirrorlist is defined
 
 - name: Add metalink repositories
@@ -22,5 +22,5 @@
     gpgcheck: true
     enabled: true
     file: "{{ item.file }}"
-  loop: "{{ repositories }}"
+  loop: "{{ repository_dictionary }}"
   when: item.metalink is defined

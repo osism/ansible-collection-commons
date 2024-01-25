@@ -4,8 +4,8 @@
 
 - name: Set repositories to default
   ansible.builtin.set_fact:
-    repositories: "{{ repository_default }}"
-  when: repositories | length == 0
+    repository_dictionary: "{{ repository_default }}"
+  when: repository_dictionary | length == 0
 
 - name: Include distribution specific repository tasks
   ansible.builtin.include_tasks: "repository-{{ ansible_os_family }}.yml"

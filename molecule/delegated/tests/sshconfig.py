@@ -28,7 +28,8 @@ def test_sshconfig_host_files(host):
 
     with host.sudo(operator_user_name):
         sshconfig_user = jinja_replacement(
-            get_variable(host, "sshconfig_user"), {"sshconfig_operator_user": operator_user_name}
+            get_variable(host, "sshconfig_user"),
+            {"sshconfig_operator_user": operator_user_name},
         )
         config_content = host.check_output(f"cat {config_file_path}")
         assert f"Host {inventory_hostname_short}" in config_content
