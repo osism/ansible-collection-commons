@@ -12,4 +12,4 @@ sshconfig_groupname: all
 sshconfig_order: 20
 sshconfig_port: 22
 sshconfig_private_key_file: /opt/ansible/secrets/id_rsa.operator
-sshconfig_user: "{{ operator_user }}"
+sshconfig_user: "{{ sshconfig_operator_user }}"

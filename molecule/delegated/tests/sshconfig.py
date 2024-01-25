@@ -4,7 +4,7 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_sshconfig_directory(host):
-    operator_user_name = get_variable(host, "operator_user")
+    operator_user_name = get_variable(host, "sshconfig_operator_user")
     operator_user = host.user(operator_user_name)
 
     ssh_config_d = host.file(f"{operator_user.home}/.ssh/config.d")
@@ -15,7 +15,7 @@ def test_sshconfig_directory(host):
 
 
 def test_sshconfig_host_files(host):
-    operator_user_name = get_variable(host, "operator_user")
+    operator_user_name = get_variable(host, "sshconfig_operator_user")
     operator_user = host.user(operator_user_name)
     sshconfig_order = get_variable(host, "sshconfig_order")
     inventory_hostname_short = get_variable(host, "inventory_hostname").split(".")[0]
@@ -28,7 +28,7 @@ def test_sshconfig_host_files(host):
 
     with host.sudo(operator_user_name):
         sshconfig_user = jinja_replacement(
-            get_variable(host, "sshconfig_user"), {"operator_user": operator_user_name}
+            get_variable(host, "sshconfig_user"), {"sshconfig_operator_user": operator_user_name}
         )
         config_content = host.check_output(f"cat {config_file_path}")
         assert f"Host {inventory_hostname_short}" in config_content
@@ -41,7 +41,7 @@ def test_sshconfig_host_files(host):
 
 
 def test_sshconfig_assembled(host):
-    operator_user_name = get_variable(host, "operator_user")
+    operator_user_name = get_variable(host, "sshconfig_operator_user")
     operator_user = host.user(operator_user_name)
 
     assembled_config = host.file(f"{operator_user.home}/.ssh/config")
