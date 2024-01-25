@@ -1,4 +1,4 @@
 ---
-issue_path: /etc/issue
+motd_issue_path: /etc/issue
 motd_path: /etc/motd
 motd_content: ""

@@ -9,7 +9,7 @@ def test_known_hosts_file_permissions(host):
 
     known_hosts_destination = get_variable(host, "known_hosts_destination")
     known_hosts_destination = jinja_replacement(
-        known_hosts_destination, {"operator_user": operator_user}
+        known_hosts_destination, {"known_hosts_operator_user": operator_user}
     )
     known_hosts_destination += "/known_hosts"
 
@@ -31,7 +31,7 @@ def test_known_hosts_file_content(host):
 
     known_hosts_destination = get_variable(host, "known_hosts_destination")
     known_hosts_destination = jinja_replacement(
-        known_hosts_destination, {"operator_user": operator_user}
+        known_hosts_destination, {"known_hosts_operator_user": operator_user}
     )
     known_hosts_destination += "/known_hosts"
 
