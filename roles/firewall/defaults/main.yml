@@ -1,2 +1,2 @@
 ---
-ufw_service_name: ufw
+firewall_service_name: ufw
