@@ -33,5 +33,5 @@ sosreport_plugins:
   - udev
   - usb
   - xfs
-operator_user: dragon
-operator_group: "{{ operator_user }}"
+sosreport_operator_user: dragon
+sosreport_operator_group: "{{ sosreport_operator_user }}"

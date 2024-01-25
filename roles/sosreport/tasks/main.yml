@@ -16,8 +16,8 @@
   ansible.builtin.file:
     path: "{{ sosreport_tmpdir }}"
     state: directory
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ sosreport_operator_user }}"
+    group: "{{ sosreport_operator_group }}"
     mode: 0755
 
 - name: Create local required directories
@@ -25,8 +25,8 @@
   ansible.builtin.file:
     path: "{{ sosreport_archive_directory }}"
     state: directory
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ sosreport_operator_user }}"
+    group: "{{ sosreport_operator_group }}"
     mode: 0755
     recurse: true
   delegate_to: localhost
@@ -51,8 +51,8 @@
   ansible.builtin.file:
     path: "{{ sosreport_tmpdir }}"
     state: directory
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ sosreport_operator_user }}"
+    group: "{{ sosreport_operator_group }}"
     mode: 0755
     recurse: true
 
