@@ -10,7 +10,7 @@ def test_sshconfig_directory(host):
     ssh_config_d = host.file(f"{operator_user.home}/.ssh/config.d")
     assert ssh_config_d.is_directory
     assert ssh_config_d.user == operator_user_name
-    assert ssh_config_d.group == get_variable(host, "operator_group")
+    assert ssh_config_d.group == get_variable(host, "sshconfig_operator_group")
     assert ssh_config_d.mode == 0o700
 
 
@@ -46,6 +46,6 @@ def test_sshconfig_assembled(host):
 
     assembled_config = host.file(f"{operator_user.home}/.ssh/config")
     assert assembled_config.exists
-    assert assembled_config.user == get_variable(host, "operator_user")
-    assert assembled_config.group == get_variable(host, "operator_group")
+    assert assembled_config.user == get_variable(host, "sshconfig_operator_user")
+    assert assembled_config.group == get_variable(host, "sshconfig_operator_group")
     assert assembled_config.mode == 0o600

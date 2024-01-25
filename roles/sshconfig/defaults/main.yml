@@ -2,8 +2,8 @@
 ##########################
 # operator user
 
-operator_user: dragon
-operator_group: "{{ operator_user }}"
+sshconfig_operator_user: dragon
+sshconfig_operator_group: "{{ sshconfig_operator_user }}"
 
 ##########################
 # sshconfig

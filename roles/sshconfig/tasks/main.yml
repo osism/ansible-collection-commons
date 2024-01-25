@@ -13,8 +13,8 @@
   ansible.builtin.file:
     path: "{{ sshconfig_destination.stdout }}/.ssh/config.d"
     state: directory
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ sshconfig_operator_user }}"
+    group: "{{ sshconfig_operator_group }}"
     mode: 0700
     recurse: true
 
