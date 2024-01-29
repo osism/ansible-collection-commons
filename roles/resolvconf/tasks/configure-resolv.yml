@@ -1,12 +1,12 @@
 ---
-- name: Stop/disable resolvconf service
+- name: "Remove packages configuring {{ resolvconf_file }}"
   become: true
-  ansible.builtin.service:
-    name: resolvconf
-    state: stopped
-    enabled: false
-  register: result
-  failed_when: "result is failed and ('find' not in result.msg and 'found' not in result.msg)"
+  ansible.builtin.apt:
+    name:
+      - openresolv
+      - resolvconf
+    state: absent
+  when: ansible_os_family == "Debian"  # packages not available on EL8
 
 - name: "Retrieve file status of {{ resolvconf_file }}"
   ansible.builtin.stat:
@@ -15,40 +15,14 @@
 
 - name: "Archive existing file {{ resolvconf_file }}"
   become: true
-  ansible.posix.synchronize:
-    src: "/etc/resolv.conf"
-    dest: "/etc/resolv.conf.{{ ansible_date_time.date }}"
-    archive: true
-  delegate_to: "{{ inventory_hostname }}"
+  ansible.builtin.copy:
+    src: "{{ resolvconf_file }}"
+    dest: "{{ resolvconf_file }}.{{ ansible_date_time.date }}"
+    owner: "{{ stat_resolvconf_file.stat.pw_name }}"
+    group: "{{ stat_resolvconf_file.stat.gr_name }}"
+    mode: "{{ stat_resolvconf_file.stat.mode }}"
+    remote_src: true
   when: stat_resolvconf_file.stat.islnk is defined and not stat_resolvconf_file.stat.islnk
-
-- name: Copy configuration files
-  become: true
-  ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0644
-  loop:
-    - src: resolved.conf.j2
-      dest: /etc/systemd/resolved.conf
-  register: resolved_conf
-
-- name: Start/enable systemd-resolved service
-  become: true
-  ansible.builtin.systemd:
-    name: systemd-resolved
-    enabled: true
-    state: started
-
-- name: Restart systemd-resolved service  # noqa no-handler
-  become: true
-  ansible.builtin.systemd:
-    name: systemd-resolved
-    daemon_reload: true
-    state: restarted
-  when: resolved_conf.changed
 
 - name: "Link /run/systemd/resolve/stub-resolv.conf to {{ resolvconf_file }}"
   become: true
@@ -57,4 +31,28 @@
     dest: "{{ resolvconf_file }}"
     state: link
     force: true
-    mode: 0644
+    mode: '0644'
+
+- name: Copy configuration files
+  become: true
+  ansible.builtin.template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf
+    owner: root
+    group: root
+    mode: '0644'
+  register: resolved_conf
+
+- name: Start/enable systemd-resolved service
+  become: true
+  ansible.builtin.systemd:
+    name: systemd-resolved.service
+    enabled: true
+    state: started
+
+- name: Restart systemd-resolved service  # noqa no-handler
+  become: true
+  ansible.builtin.systemd_service:
+    name: systemd-resolved.service
+    state: restarted
+  when: resolved_conf.changed
