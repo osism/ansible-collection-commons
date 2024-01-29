@@ -1,0 +1,5 @@
+---
+user_manage_type: accounts
+user_ssh_file: "~/.ssh/authorized_keys"
+user_list: []
+user_delete: []
