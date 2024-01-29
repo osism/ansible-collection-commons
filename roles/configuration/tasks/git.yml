@@ -17,8 +17,8 @@
   ansible.builtin.template:
     src: config-git-private-key.j2
     dest: "{{ configuration_git_private_key_file }}"
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ configuration_operator_user }}"
+    group: "{{ configuration_operator_group }}"
     mode: 0600
   when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key | length)
   no_log: true

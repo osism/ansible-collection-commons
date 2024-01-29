@@ -5,6 +5,6 @@ clevis_packages:
   - clevis-initramfs
   - clevis-luks
 
-dropbear_packages:
+clevis_dropbear_packages:
   - dropbear-bin
   - dropbear-initramfs
