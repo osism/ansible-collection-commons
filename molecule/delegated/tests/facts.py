@@ -14,7 +14,7 @@ def test_custom_facts_directory(host):
 
 
 def test_fact_files(host):
-    fact_files = get_variable(host, "fact_files")
+    fact_files = get_variable(host, "facts_files")
 
     assert type(fact_files) is list
 

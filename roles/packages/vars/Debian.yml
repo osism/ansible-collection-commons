@@ -1,5 +1,5 @@
 ---
-apt_cache_valid_time: 3600
+packages_apt_cache_valid_time: 3600
 
 packages_required_distribution:
   - debsums
