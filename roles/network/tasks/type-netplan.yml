@@ -59,6 +59,12 @@
   #       changed_when is set to False here.
   changed_when: false
 
+# NOTE: On pure netplan systems, /etc/network as directory might just not exists
+- name: Check if path for interface file exists
+  ansible.builtin.stat:
+    path: "{{ network_interfaces_path }}"
+  register: network_interfaces_path_stat
+
 - name: Copy interfaces file
   become: true
   ansible.builtin.template:
@@ -67,6 +73,7 @@
     mode: 0644
     owner: root
     group: root
+  when: network_interfaces_path_stat.stat.isdir
 
 - name: Copy dispatcher scripts
   become: true
