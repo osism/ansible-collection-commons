@@ -4,6 +4,7 @@ upgrade_packages: true
 required_packages_default:
   - ethtool
   - jq
+  - rsync
   - rsyslog
 
 required_packages_extra: []
