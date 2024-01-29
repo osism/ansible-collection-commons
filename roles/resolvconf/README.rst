@@ -27,7 +27,7 @@ If this option is not set, a compiled-in list is used instead.
 This is the local domain.
 
 .. zuul:rolevar:: resolvconf_minimum_number_of_nameservers
-   :default: 2
+   :default: 1
 
 The minimum number of nameserver of name servers that must be configured.
 
