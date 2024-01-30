@@ -6,21 +6,18 @@
     state: absent
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
-- name: Stop motd-news timer
-  become: true
-  ansible.builtin.service:
-    name: motd-news.timer
-    state: stopped
-    enabled: false
-  when: "'motd-news.timer' in ansible_facts.services"
+- name: Check if /etc/default/motd-news exists
+  ansible.builtin.stat:
+    path: /etc/default/motd-news
+  register: default_motd_news_stat
 
-- name: Stop motd-news service
+- name: Disable the dynamic MOTD news service
   become: true
-  ansible.builtin.service:
-    name: motd-news.service
-    state: stopped
-    enabled: false
-  when: "'motd-news.service' in ansible_facts.services"
+  ansible.builtin.lineinfile:
+    path: /etc/default/motd-news
+    regexp: "^ENABLED="
+    line: "ENABLED=0"
+  when: default_motd_news_stat.stat.exists
 
 - name: Disable dynamic motd banner in pam configuration for ssh
   become: true
