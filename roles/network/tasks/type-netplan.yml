@@ -73,7 +73,7 @@
     mode: 0644
     owner: root
     group: root
-  when: network_interfaces_path_stat.stat.isdir
+  when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
 
 - name: Copy dispatcher scripts
   become: true
