@@ -17,7 +17,7 @@
     path: /etc/default/motd-news
     regexp: "^ENABLED="
     line: "ENABLED=0"
-  when: default_motd_news_stat.stat.exists
+  when: default_motd_news_stat.stat.exists is defined and default_motd_news_stat.stat.exists
 
 - name: Disable dynamic motd banner in pam configuration for ssh
   become: true
