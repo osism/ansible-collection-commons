@@ -11,7 +11,7 @@
     path: /etc/default/motd-news
   register: default_motd_news_stat
 
-- name: Disable the dynamic MOTD news service
+- name: Disable the dynamic motd-news service
   become: true
   ansible.builtin.lineinfile:
     path: /etc/default/motd-news
@@ -19,28 +19,20 @@
     line: "ENABLED=0"
   when: default_motd_news_stat.stat.exists is defined and default_motd_news_stat.stat.exists
 
-- name: Disable dynamic motd banner in pam configuration for ssh
-  become: true
-  ansible.builtin.replace:
-    path: /etc/pam.d/sshd
-    regexp: "{{ item.regex }}"
-    replace: "{{ item.replace }}"
-    mode: 0644
-  loop:
-    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
-      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+- name: Get all configuration files in /etc/pam.d
+  ansible.builtin.find:
+    paths: /etc/pam.d
+    file_type: file
+    contains: pam_motd.so
+    read_whole_file: true
+  register: etc_pam_motd
 
-    # NOTE: The ssh banner directive is used to output /etc/motd.
-    - regex: '^session.*optional.*pam_motd.so.*noupdate$'
-      replace: '# session  optional  pam_motd.so  noupdate'
-
-- name: Disable dynamic motd banner in pam configuration for login
+- name: Remove pam_motd.so rule
   become: true
-  ansible.builtin.replace:
-    path: /etc/pam.d/login
-    regexp: "{{ item.regex }}"
-    replace: "{{ item.replace }}"
-    mode: 0644
-  loop:
-    - regex: '^session.*optional.*pam_motd.so.*motd=/run/motd.dynamic$'
-      replace: '# session  optional  pam_motd.so  motd=/run/motd.dynamic'
+  community.general.pamd:
+    module_path: pam_motd.so
+    control: optional
+    type: session
+    state: absent
+    name: "{{ item.path | ansible.builtin.basename }}"
+  loop: "{{ etc_pam_motd.files }}"
