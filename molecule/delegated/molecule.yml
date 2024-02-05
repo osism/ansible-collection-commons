@@ -9,7 +9,8 @@ driver:
     ansible_connection_options:
       ansible_connection: local
 platforms:
-  - name: "molecule-${ANSIBLE_ROLE}"
+  - name: "molecule-${ANSIBLE_ROLE}-debian"
+  - name: "molecule-${ANSIBLE_ROLE}-redhat"
 provisioner:
   name: ansible
   env:
