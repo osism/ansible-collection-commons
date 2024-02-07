@@ -21,13 +21,23 @@
     - result.stat.exists
     - result.stat.checksum != "7cdca0fd4dab7f25814175000206e29a7d3b2b3c178ecc4979edcca7fd8d5a94"
 
-- name: Uninstall docker-compose package
+- name: Uninstall docker-compose package (Debian)
   become: true
   ansible.builtin.apt:
     name:
       - "{{ docker_compose_package_name }}"
     state: absent
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "'Ubuntu' in ansible_os_family"
+
+- name: Uninstall docker-compose package (RedHat)
+  become: true
+  ansible.builtin.yum:
+    name:
+      - "{{ docker_compose_package_name }}"
+    state: absent
+    lock_timeout: "{{ yum_lock_timeout | default(300) }}"
+  when: "'RedHat' in ansible_os_family"
 
 - name: Copy docker-compose script
   become: true
@@ -39,7 +49,7 @@
     - result.stat.exists
     - result.stat.checksum != "7cdca0fd4dab7f25814175000206e29a7d3b2b3c178ecc4979edcca7fd8d5a94"
 
-- name: Install docker-compose-plugin package
+- name: Install docker-compose-plugin package (Debian)
   become: true
   ansible.builtin.apt:
     name:
@@ -47,3 +57,14 @@
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
     install_recommends: false
+    when: "'Ubuntu' in ansible_os_family"
+
+- name: Install docker-compose-plugin package (Redhat)
+  become: true
+  ansible.builtin.yum:
+    name:
+      - "{{ docker_compose_plugin_package_name }}"
+    state: present
+    lock_timeout: "{{ yum_lock_timeout | default(300) }}"
+    install_recommends: false
+    when: "'RedHat' in ansible_os_family"
