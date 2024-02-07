@@ -1,10 +1,18 @@
 ---
-- name: Update package cache
+- name: Update package cache (Ubuntu)
   become: true
   ansible.builtin.apt:
     update_cache: true
+  when: "'Ubuntu' in ansible_os_family"
 
-- name: Install required packages
+- name: Update package cache (Red Hat)
+  become: true
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+  when: "'RedHat' in ansible_os_family"
+
+- name: Install required packages (Ubuntu)
   become: true
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -12,13 +20,26 @@
   loop:
     - apt-transport-https
     - gpg
+  when: "'Ubuntu' in ansible_os_family"
 
-- name: Add repository gpg key
+- name: Install required packages (Red Hat)
+  become: true
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+  when: "'RedHat' in ansible_os_family"
+
+- name: Add repository gpg key (Ubuntu)
   become: true
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
+  when: "'Ubuntu' in ansible_os_family"
 
-- name: Add repository
+- name: Add repository (Ubuntu)
   become: true
   ansible.builtin.apt_repository:
     repo: "deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
@@ -26,14 +47,29 @@
     filename: docker
     update_cache: true
     mode: 0644
+  when: "'Ubuntu' in ansible_os_family"
 
-- name: Update package cache
+- name: Add repository (Red Hat)
   become: true
-  ansible.builtin.apt:
-    update_cache: true
+  ansible.builtin.yum_repository:
+    name: docker-ce
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable #todo: arch=amd64
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+  when: "'RedHat' in ansible_os_family"
 
-- name: Remove moby-compose package
+- name: Remove moby-compose package (Ubuntu)
   become: true
   ansible.builtin.apt:
     name: moby-compose
     state: absent
+  when: "'Ubuntu' in ansible_os_family"
+
+- name: Remove moby-compose package (Red Hat)
+  become: true
+  ansible.builtin.yum:
+    name: moby-compose
+    state: absent
+  when: "'RedHat' in ansible_os_family"
