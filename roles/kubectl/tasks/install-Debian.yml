@@ -1,4 +1,12 @@
 ---
+- name: Remove old architecture-dependent repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [ arch=amd64 signed-by=/usr/share/keyrings/kubectl.gpg ] https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: absent
+    filename: kubectl
+  when: kubectl_configure_repository|bool
+
 - name: Install apt-transport-https package
   become: true
   ansible.builtin.apt:
