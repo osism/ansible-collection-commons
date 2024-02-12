@@ -99,6 +99,12 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_login
+    nodeset:
+      nodes:
+        - name: ubuntu-jammy-large
+          label: ubuntu-jammy-large
+        - name: centos-9-stream
+          label: centos-9-stream
     parent: ansible-molecule
     nodeset:
       nodes:
@@ -281,6 +287,12 @@
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
+    nodeset:
+      nodes:
+        - name: ubuntu-jammy-large
+          label: ubuntu-jammy-large
+        - name: centos-9-stream
+          label: centos-9-stream
     parent: ansible-molecule
     nodeset:
       nodes:
@@ -389,10 +401,10 @@
     check:
       jobs:
         - ansible-collection-commons-molecule-certificates
-#        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-docker_compose:
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
@@ -429,10 +441,10 @@
     gate:
       jobs:
         - ansible-collection-commons-molecule-certificates
-#        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-docker_compose:
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall

@@ -7,6 +7,6 @@
 
 - name: Update apt package cache on Debian
   become: true
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     update_cache: true
   when: "'Debian' in ansible_os_family"

@@ -1,1 +1,20 @@
 ---
+- name: Update package cache on CentOS
+  become: true
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  when: "'RedHat' in ansible_os_family"
+
+- name: Install Python 3 pip
+  become: true
+  ansible.builtin.package:
+    name: python3-pip
+    state: present
+  when: "'RedHat' in ansible_os_family"
+
+- name: Use pip3 to install wheel
+  become: true
+  ansible.builtin.command:
+    cmd: pip3 install wheel
+  when: "'RedHat' in ansible_os_family"
