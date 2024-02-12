@@ -15,7 +15,7 @@
   become: true
   ansible.builtin.template:
     src: motd.j2
-    dest: "{{ issue_path }}"
+    dest: "{{ motd_issue_path }}"
     owner: root
     group: root
     mode: 0644

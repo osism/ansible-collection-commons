@@ -6,7 +6,7 @@ prelogin message and identification (/etc/issue) file.
 .. zuul:rolevar:: motd_content
    :default: ""
 
-   Contents to be written to ``motd_path`` and ``issue_path``.
+   Contents to be written to ``motd_path`` and ``motd_issue_path``.
 
    Example:
 
@@ -25,7 +25,7 @@ prelogin message and identification (/etc/issue) file.
 
    The full path to the motd file.
 
-.. zuul:rolevar:: issue_path
+.. zuul:rolevar:: motd_issue_path
    :default: /etc/issue
 
    The full path to the issue file.

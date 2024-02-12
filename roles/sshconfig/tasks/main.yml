@@ -3,7 +3,7 @@
   become: true
   ansible.builtin.shell: |
     set -o pipefail
-    getent passwd {{ operator_user }} | cut -d: -f6
+    getent passwd {{ sshconfig_operator_user }} | cut -d: -f6
   args:
     executable: /bin/bash
   changed_when: false
@@ -13,8 +13,8 @@
   ansible.builtin.file:
     path: "{{ sshconfig_destination.stdout }}/.ssh/config.d"
     state: directory
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ sshconfig_operator_user }}"
+    group: "{{ sshconfig_operator_group }}"
     mode: 0700
     recurse: true
 

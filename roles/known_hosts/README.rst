@@ -3,13 +3,13 @@ to a known_hosts file.
 
 **Role Variables**
 
-.. zuul:rolevar:: operator_user
+.. zuul:rolevar:: known_hosts_operator_user
    :default: dragon
 
 The user that will own the known_hosts file.
 
-.. zuul:rolevar:: operator_group
-   :default: operator_user
+.. zuul:rolevar:: known_hosts_operator_group
+   :default: known_hosts_operator_user
 
 The group that will own the known_hosts file.
 
@@ -19,6 +19,6 @@ The group that will own the known_hosts file.
 Add hosts from this group to known_hosts.
 
 .. zuul:rolevar:: known_hosts_destination
-   :default: /home/{{ operator_user }}/.ssh
+   :default: /home/{{ known_hosts_operator_user }}/.ssh
 
 Destination where the known_hosts file is stored.

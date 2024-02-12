@@ -3,7 +3,7 @@
 - name: Remove dropbear ssh initramfs packages
   become: true
   ansible.builtin.apt:
-    name: "{{ dropbear_packages }}"
+    name: "{{ clevis_dropbear_packages }}"
     state: absent
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   notify:

@@ -9,7 +9,7 @@ testinfra_runner, testinfra_hosts = get_ansible()
 def test_systohc_sync(host):
     """Check if the system clock is synchronized with the hardware clock."""
     # Use the utility function to retrieve the systohc variable
-    systohc = get_variable(host, "systohc")
+    systohc = get_variable(host, "systohc_system")
 
     # If systohc is true, then verify synchronization
     if not systohc:

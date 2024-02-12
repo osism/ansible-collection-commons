@@ -3,4 +3,4 @@
   become: true
   ansible.builtin.command: hwclock --systohc
   changed_when: false
-  when: systohc | bool
+  when: systohc_system | bool

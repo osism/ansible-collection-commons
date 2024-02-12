@@ -11,10 +11,10 @@
   ansible.builtin.dnf:
     name: '*'
     state: latest
-  when: upgrade_packages | bool
+  when: packages_upgrade | bool
 
 - name: Install required packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ required_packages }}"
+    name: "{{ packages_required }}"
     state: present

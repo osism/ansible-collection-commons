@@ -1,4 +1,4 @@
 ---
-required_packages_distribution:
+packages_required_distribution:
   - libselinux-utils
   - openssh

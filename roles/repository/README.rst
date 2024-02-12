@@ -2,7 +2,7 @@ Ansible role to configure the default repository sources.
 
 **Role Variables**
 
-.. zuul:rolevar:: repositories
+.. zuul:rolevar:: repository_dictionary
    :default: {}
 
 A dict of ``name:repository`` pairs, these will be used as the
@@ -42,7 +42,7 @@ Only for Debian/Ubuntu:
 Dict of ``ID:keyserver`` pairs, each key ID is fetched from its
 keyserver and added to APT as trusted key.
 
-.. zuul:rolevar:: enable_phased_updates
+.. zuul:rolevar:: repository_enable_phased_updates
    :default: false
 
 Only for Debian/Ubuntu:

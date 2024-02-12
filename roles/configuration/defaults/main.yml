@@ -2,8 +2,8 @@
 ##########################
 # generic
 
-operator_user: dragon
-operator_group: "{{ operator_user }}"
+configuration_operator_user: dragon
+configuration_operator_group: "{{ configuration_operator_user }}"
 
 ##########################
 # generic

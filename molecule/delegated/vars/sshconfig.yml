@@ -1,3 +1,3 @@
 ---
-operator_user: zuul
-operator_group: zuul
+sshconfig_operator_user: zuul
+sshconfig_operator_group: zuul

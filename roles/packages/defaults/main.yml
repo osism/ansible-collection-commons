@@ -1,10 +1,10 @@
 ---
-upgrade_packages: true
+packages_upgrade: true
 
-required_packages_default:
+packages_required_default:
   - ethtool
   - jq
   - rsyslog
 
-required_packages_extra: []
-required_packages: "{{ required_packages_default + required_packages_extra + required_packages_distribution }}"
+packages_required_extra: []
+packages_required: "{{ packages_required_default + packages_required_extra + packages_required_distribution }}"

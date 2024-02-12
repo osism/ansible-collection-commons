@@ -17,7 +17,7 @@ def test_motd_content(host):
 
 
 def test_issue_content(host):
-    issue_path = get_variable(host, "issue_path")
+    issue_path = get_variable(host, "motd_issue_path")
     expected_issue_content = get_variable(host, "motd_content")
 
     issue_file = host.file(issue_path)

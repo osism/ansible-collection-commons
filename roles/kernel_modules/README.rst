@@ -14,7 +14,7 @@ Default list of kernel modules to install.
 
 List of extra modules to install.
 
-.. zuul:rolevar:: kernel_modules
+.. zuul:rolevar:: kernel_modules_all
    :default: kernel_modules_default + kernel_modules_extra
 
 All modules which you want to install.

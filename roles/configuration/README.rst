@@ -2,13 +2,13 @@ Install the configuration directory.
 
 **Generic Role Variables**
 
-.. zuul:rolevar:: operator_user
+.. zuul:rolevar:: configuration_operator_user
    :default: dragon
 
 The user that will own the configuration directory.
 
-.. zuul:rolevar:: operator_group
-   :default: "{{ operator_user }}"
+.. zuul:rolevar:: configuration_operator_group
+   :default: "{{ configuration_operator_user }}"
 
 The group that will own the configuration directory.
 

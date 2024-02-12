@@ -3,8 +3,8 @@
   become: true
   ansible.builtin.file:
     path: "{{ item }}"
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
+    owner: "{{ configuration_operator_user }}"
+    group: "{{ configuration_operator_group }}"
     state: directory
     mode: 0750
   with_items:

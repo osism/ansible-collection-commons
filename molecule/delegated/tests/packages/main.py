@@ -9,11 +9,11 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_required_packages_installed(host):
-    required_packages = get_variable(host, "required_packages")
-    required_packages_default = get_variable(host, "required_packages_default")
-    required_packages_extra = get_variable(host, "required_packages_extra")
+    required_packages = get_variable(host, "packages_required")
+    required_packages_default = get_variable(host, "packages_required_default")
+    required_packages_extra = get_variable(host, "packages_required_extra")
     required_packages_distribution = get_os_role_variable(
-        host, "required_packages_distribution"
+        host, "packages_required_distribution"
     )
 
     required_packages = jinja_list_concat(
