@@ -1,5 +1,6 @@
 ---
 - name: Update package cache
   become: true
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     update_cache: true
+  when: "'RedHat' in ansible_os_family"
