@@ -378,6 +378,11 @@
       - '^roles\/trivy\/.*$'
       - '^molecule\/delegated\/tests\/trivy.*$'
 
+# Testing centos-molecule
+- job:
+    name: centos-molecule
+    run: playbooks/centos-molecule/run.yml
+
 - project:
     merge-mode: squash-merge
     default-branch: main
