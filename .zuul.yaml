@@ -1,7 +1,14 @@
 ---
 - job:
     name: ansible-collection-commons-molecule-certificates
-    parent: ansible-molecule
+    # parent: ansible-molecule
+    parent: centos-molecule
+    nodeset:
+      nodes:
+        - name: ubuntu-jammy-large
+          label: ubuntu-jammy-large
+        - name: centos-9-stream
+          label: centos-9-stream
     vars:
       ansible_role: certificates
       ansible_molecule_ansible_version: "9.2.0"
@@ -406,6 +413,11 @@
       - '^molecule\/delegated\/tests\/trivy.*$'
       - '^molecule\/delegated\/[^\/]*yml$'
       - '^molecule\/requirements\.txt$'
+
+# Testing centos-molecule
+- job:
+    name: centos-molecule
+    run: playbooks/centos-molecule/run.yml
 
 - project:
     merge-mode: squash-merge

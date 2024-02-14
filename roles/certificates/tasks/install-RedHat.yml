@@ -1,0 +1,6 @@
+---
+- name: Install ca-certificates package on RHEL
+  become: true
+  ansible.builtin.yum:
+    name: "{{ certificates_ca_package_name }}"
+    state: present
