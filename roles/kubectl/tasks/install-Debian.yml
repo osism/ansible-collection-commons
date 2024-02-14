@@ -15,15 +15,15 @@
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   when: kubectl_configure_repository | bool
 
-- name: Download and install GPG key into /etc/apt/keyrings
+- name: Add repository gpg key
   become: true
   ansible.builtin.shell:
     cmd: |
       set -eo pipefail
-      curl -fsSL "{{ kubectl_debian_repository_key }}" | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+      curl -fsSL {{ kubectl_debian_repository_key }} | gpg --dearmor --batch --no-tty -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     executable: /bin/bash
+    creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   when: kubectl_configure_repository | bool
-  changed_when: false
 
 - name: Add repository
   become: true
