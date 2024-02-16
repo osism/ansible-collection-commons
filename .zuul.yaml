@@ -1,4 +1,38 @@
 ---
+- secret:
+    name: SECRET_ANSIBLE_COLLECTION_COMMONS
+    data:
+      DOCKER_USERNAME: !encrypted/pkcs1-oaep
+        - dvrY/5AA4L9zNJ4BWvPscJYLtlnWLIRo41oQdQNUaJGUWiF8mzMnHdeYG4Hg42cBAy+yk
+          SQLsAKJ6g24I43H80PRSCodYVJqqUnW1gIsOaCHAGkGtHnykBKKLZdKBC66qslABx/KMM
+          KSGLoUBl8VbimdNAS7uwzdNLrAXWBzUN2aPHe2aRtjCOdGIVa40/jHU+upxKjD+1x6cJ6
+          n3ws7YnovD1bf4DCuoOlSwSGwKxall+CRPib1tn/MpZ6RfrkyXZihaM07MFD9HAVSlrli
+          MH7pensjKX3/uZ+0OYkJjw2zGI4BJcEcq9NkiM1dRTXg9yEWGbiutG2I5VbFwVQ7tlkRU
+          2ji4MFOyOl7HGUiJqC0poQ4iR54a4/18IbNsgCzuLEMOQFTcmpHoi6e959JGWcFNi+AVx
+          GJmpgSg2sabFS5mg/NddHs8wy46WTZCTdMXE62YuSro/4DUwWGpFBTOMIc11akWI/Il5T
+          E4sWznyqOXMM7MSOWYe4wU0wiTGFoOJyqRst8nfZ8zHRlR0o5wj0DjCXXe5nxO1D7H5yZ
+          UJB39oWHc7UaRnY8qa7hWXzMUkoQydZILIMGjD0vEj6CQ9pH5pe2J8QFVfjErbT9wJ+PJ
+          V0lUJ1SeXMzwU4FRJHHtQEwUPlng0iTW02i9NUXkVIzcOBfbJxuhai1oubByck=
+      DOCKER_PASSWORD: !encrypted/pkcs1-oaep
+        - aLUSm9C+7QFwqcnHsWE+h9tOWgQ0XvlqfnMNKTAHagfalG3TGElPw3JLm17tdRAJLLgYZ
+          RFcUrjhs7cb1mstcKnpeZl2fKA5WvmhnHpvaK/kYvWZhz+aP/3ywNHYLF9PyLHRthoyp3
+          Kyjex6g2ENoyQlVky5wXnEJlvt1geKxrdCPIiaD0JLXZ9HD2OB729krkTNjXVeuQ0igTH
+          JCj0n35LOw18O5l7sDKA3pKOvvcNMzFx+JIt109ZwiW0tAgI7HydBsHezKyuw2rTjE+Aj
+          yYyeb6uLbKf+5fVVSnMGxVwpPSSXs9T8JY0Z6JqRzJjLddzxAAyzCfPUqY7PA8C9FEBCC
+          754WyFLrmxcPunaIlrwnyKK7L8rxicqI3S+5Dd/ZbjSbmpSXaTu6H7jfRRWID5qbnxtP1
+          lV55gRtS1W8+NS8I8IDTG8kWeO6qxGwR/xcuef0lUkLqFjQvXhaDeI2QlUs0PMZDbcj1M
+          BN/awy6t5V5/QX13bTdNZBj+qy9sF2JmlhJ5+CUXy3wSNLBK0QpsXBECmCjBN3YaVWxdz
+          PJdduJ0NPX9nRAjjDSWSx6YQJ87PPpwi+Tkk05ALknoG49uq/56mbvwEl8r/BlgqiAOTp
+          Eefjzo74VBq3iJwEwXn78AsbQ9qTwcJXZzatnC7+061H0tFZ3d12qZtva0qPfY=
+
+- job:
+    name: ansible-collection-commons-container-image-osism-ansible-push
+    parent: abstract-container-image-osism-ansible-push
+    secrets:
+      - name: secret
+        secret: SECRET_ANSIBLE_COLLECTION_COMMONS
+        pass-to-parent: true
+
 - job:
     name: ansible-collection-commons-molecule-certificates
     parent: ansible-molecule
@@ -495,3 +529,7 @@
         - yamllint
         - ansible-lint
         - python-black
+    post:
+      jobs:
+        - ansible-collection-commons-container-image-osism-ansible-push:
+            branches: main
