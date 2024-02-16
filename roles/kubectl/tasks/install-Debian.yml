@@ -41,3 +41,9 @@
     name: "{{ kubectl_package_name }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+
+- name: Remove kubectl symlink
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/bin/kubectl
+    state: absent
