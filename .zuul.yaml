@@ -20,13 +20,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-cleanup
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: cleanup
       ansible_molecule_ansible_version: "9.2.0"
@@ -38,13 +39,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-configfs
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: configfs
       ansible_molecule_ansible_version: "9.2.0"
@@ -56,13 +58,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-configuration
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: configuration
       ansible_molecule_ansible_version: "9.2.0"
@@ -74,13 +77,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_compose
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: docker_compose
       ansible_molecule_ansible_version: "9.2.0"
@@ -92,13 +96,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_login
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: docker_login
       ansible_molecule_ansible_version: "9.2.0"
@@ -110,13 +115,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-facts
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: facts
       ansible_molecule_ansible_version: "9.2.0"
@@ -128,13 +134,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-firewall
+    parent: ansible-molecule
+    # parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: firewall
       ansible_molecule_ansible_version: "9.2.0"
@@ -146,13 +153,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-hostname
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: hostname
       ansible_molecule_ansible_version: "9.2.0"
@@ -164,13 +172,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-hosts
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: hosts
       ansible_molecule_ansible_version: "9.2.0"
@@ -182,13 +191,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-ipmitool
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: ipmitool
       ansible_molecule_ansible_version: "9.2.0"
@@ -200,13 +210,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-kernel_modules
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: kernel_modules
       ansible_molecule_ansible_version: "9.2.0"
@@ -218,13 +229,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-known_hosts
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: known_hosts
       ansible_molecule_ansible_version: "9.2.0"
@@ -236,13 +248,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-kompose
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: kompose
       ansible_molecule_ansible_version: "9.2.0"
@@ -254,13 +267,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-kubectl
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: kubectl
       ansible_molecule_ansible_version: "9.2.0"
@@ -272,13 +286,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-limits
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: limits
       ansible_molecule_ansible_version: "9.2.0"
@@ -290,13 +305,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-lynis
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: lynis
       ansible_molecule_ansible_version: "9.2.0"
@@ -308,13 +324,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-microcode
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: microcode
       ansible_molecule_ansible_version: "9.2.0"
@@ -326,13 +343,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-motd
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: motd
       ansible_molecule_ansible_version: "9.2.0"
@@ -344,13 +362,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-operator
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: operator
       ansible_molecule_ansible_version: "9.2.0"
@@ -362,13 +381,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-packages
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: packages
       ansible_molecule_ansible_version: "9.2.0"
@@ -380,13 +400,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-podman
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: podman
       ansible_molecule_ansible_version: "9.2.0"
@@ -398,13 +419,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-proxy
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: proxy
       ansible_molecule_ansible_version: "9.2.0"
@@ -416,13 +438,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-repository
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: repository
       ansible_molecule_ansible_version: "9.2.0"
@@ -434,13 +457,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: resolvconf
       ansible_molecule_ansible_version: "9.2.0"
@@ -452,13 +476,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-runc
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: runc
       ansible_molecule_ansible_version: "9.2.0"
@@ -470,13 +495,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-services
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: services
       ansible_molecule_ansible_version: "9.2.0"
@@ -488,13 +514,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-sosreport
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: sosreport
       ansible_molecule_ansible_version: "9.2.0"
@@ -506,13 +533,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-sshconfig
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: sshconfig
       ansible_molecule_ansible_version: "9.2.0"
@@ -524,13 +552,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-state
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: state
       ansible_molecule_ansible_version: "9.2.0"
@@ -542,13 +571,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-sysctl
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: sysctl
       ansible_molecule_ansible_version: "9.2.0"
@@ -560,13 +590,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-systohc
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: systohc
       ansible_molecule_ansible_version: "9.2.0"
@@ -578,13 +609,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-timezone
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: timezone
       ansible_molecule_ansible_version: "9.2.0"
@@ -596,13 +628,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-trivy
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
     vars:
       ansible_role: trivy
       ansible_molecule_ansible_version: "9.2.0"
@@ -622,14 +655,14 @@
     default-branch: main
     check:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose:
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-#        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
 #        - ansible-collection-commons-molecule-ipmitool
@@ -662,14 +695,14 @@
         - python-black
     gate:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose:
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-#        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
 #        - ansible-collection-commons-molecule-ipmitool
