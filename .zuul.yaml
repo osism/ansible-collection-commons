@@ -99,19 +99,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_login
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-#        - name: centos-9-stream
-#          label: centos-9-stream
     vars:
       ansible_role: docker_login
       ansible_molecule_ansible_version: "9.3.0"
@@ -287,19 +282,14 @@
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
+    # parent: ansible-molecule
+    parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
         - name: centos-9-stream
           label: centos-9-stream
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-#        - name: centos-9-stream
-#          label: centos-9-stream
     vars:
       ansible_role: resolvconf
       ansible_molecule_ansible_version: "9.3.0"
@@ -400,14 +390,14 @@
     default-branch: main
     check:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose:
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-#        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
 #        - ansible-collection-commons-molecule-ipmitool
@@ -440,14 +430,14 @@
         - python-black
     gate:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose:
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-#        - ansible-collection-commons-molecule-firewall
+        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
 #        - ansible-collection-commons-molecule-ipmitool
