@@ -1,8 +1,7 @@
 ---
 - job:
     name: ansible-collection-commons-molecule-certificates
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -20,8 +19,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-cleanup
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -39,8 +37,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-configfs
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -58,8 +55,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-configuration
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -77,8 +73,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_compose
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -96,8 +91,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-docker_login
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -115,8 +109,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-facts
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -135,7 +128,6 @@
 - job:
     name: ansible-collection-commons-molecule-firewall
     parent: ansible-molecule
-    # parent: centos-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -153,8 +145,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-hostname
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -172,8 +163,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-hosts
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -191,8 +181,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-ipmitool
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -210,8 +199,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-kernel_modules
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -229,8 +217,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-known_hosts
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -248,8 +235,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-kompose
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -267,8 +253,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-kubectl
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -286,8 +271,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-limits
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -305,8 +289,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-lynis
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -324,8 +307,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-microcode
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -343,8 +325,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-motd
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -362,8 +343,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-operator
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -381,8 +361,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-packages
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -400,8 +379,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-podman
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -419,8 +397,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-proxy
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -438,8 +415,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-repository
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -457,8 +433,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -476,8 +451,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-runc
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -495,8 +469,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-services
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -514,8 +487,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-sosreport
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -533,8 +505,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-sshconfig
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -552,8 +523,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-state
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -571,8 +541,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-sysctl
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -590,8 +559,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-systohc
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -609,8 +577,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-timezone
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -628,8 +595,7 @@
 
 - job:
     name: ansible-collection-commons-molecule-trivy
-    # parent: ansible-molecule
-    parent: centos-molecule
+    parent: ansible-molecule
     nodeset:
       nodes:
         - name: ubuntu-jammy-large
@@ -645,20 +611,15 @@
       - '^molecule\/delegated\/[^\/]*yml$'
       - '^molecule\/requirements\.txt$'
 
-# Testing centos-molecule
-- job:
-    name: centos-molecule
-    run: playbooks/centos-molecule/run.yml
-
 - project:
     merge-mode: squash-merge
     default-branch: main
     check:
       jobs:
-#        - ansible-collection-commons-molecule-certificates
-#        - ansible-collection-commons-molecule-cleanup
-#        - ansible-collection-commons-molecule-configfs
-#        - ansible-collection-commons-molecule-configuration
+        - ansible-collection-commons-molecule-certificates
+        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-configfs
+        - ansible-collection-commons-molecule-configuration
 #        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
@@ -695,10 +656,10 @@
         - python-black
     gate:
       jobs:
-#        - ansible-collection-commons-molecule-certificates
-#        - ansible-collection-commons-molecule-cleanup
-#        - ansible-collection-commons-molecule-configfs
-#        - ansible-collection-commons-molecule-configuration
+        - ansible-collection-commons-molecule-certificates
+        - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-configfs
+        - ansible-collection-commons-molecule-configuration
 #        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts

@@ -1,61 +1,35 @@
 ---
-- name: Update package cache on Debian
-  become: true
-  ansible.builtin.apt:
-    update_cache: true
+- name: Debian specific tasks
+  block:
+    - name: Update package cache
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install ufw package
+      become: true
+      ansible.builtin.apt:
+        name: ufw
+        state: present
   when: "'Debian' in ansible_os_family"
 
-- name: Install ufw package on Debian
-  become: true
-  ansible.builtin.apt:
-    name: ufw
-    state: present
-  when: "'Debian' in ansible_os_family"
+- name: RedHat specific tasks
+  block:
+    - name: Update package cache
+      ansible.builtin.dnf:
+        update_cache: yes
+      become: true
 
-- name: Update package cache on RedHat
-  become: true
-  ansible.builtin.dnf:
-    update_cache: yes
-  when: "'RedHat' in ansible_os_family"
-#
-#- name: Enable EPEL repository and install ufw package on RedHat
-#  become: true
-#  ansible.builtin.dnf:
-#    name: epel-release
-#    state: present
-#  when: "'RedHat' in ansible_os_family"
-#
-#- name: Update package cache on RedHat
-#  become: true
-#  ansible.builtin.dnf:
-#    update_cache: yes
-#  when: "'RedHat' in ansible_os_family"
-#
-#- name: Enable EPEL repository and install ufw package on RedHat
-#  become: true
-#  ansible.builtin.dnf:
-#    name: ufw
-#    state: present
-#  when: "'RedHat' in ansible_os_family"
+    - name: Install epel-release
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+      become: true
 
-#- name: Update CentOS 9 system packages
-#  ansible.builtin.dnf:
-#    name: '*'
-#    state: latest
-#  become: true
-#  when: "'RedHat' in ansible_os_family"
-
-- name: Install epel-release on RedHat
-  ansible.builtin.dnf:
-    name: epel-release
-    state: present
-  become: true
-  when: "'RedHat' in ansible_os_family"
-
-- name: Install ufw package on RedHat
-  ansible.builtin.dnf:
-    name: ufw
-    state: present
-    enablerepo: epel
-  become: true
+    - name: Install ufw package
+      ansible.builtin.dnf:
+        name: ufw
+        state: present
+        enablerepo: epel
+      become: true
   when: "'RedHat' in ansible_os_family"
