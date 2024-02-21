@@ -1,7 +1,7 @@
 ---
-- name: Install ca-certificates package on RHEL
+- name: Install required packages
   become: true
   ansible.builtin.dnf:
-    name: "{{ certificates_ca_package_name }}"
+    name: "{{ podman_package_name }}"
     state: present
     lock_timeout: "{{ lock_timeout | default(300) }}"
