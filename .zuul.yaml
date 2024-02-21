@@ -390,10 +390,10 @@
 #        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-        - ansible-collection-commons-molecule-firewall
+#        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
-        - ansible-collection-commons-molecule-ipmitool
+#        - ansible-collection-commons-molecule-ipmitool
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
@@ -410,7 +410,7 @@
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
-#        - ansible-collection-commons-molecule-sosreport
+        - ansible-collection-commons-molecule-sosreport
 #        - ansible-collection-commons-molecule-sshconfig
 #        - ansible-collection-commons-molecule-state
 #        - ansible-collection-commons-molecule-sysctl
@@ -430,10 +430,10 @@
 #        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
-        - ansible-collection-commons-molecule-firewall
+#        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
 #        - ansible-collection-commons-molecule-hosts
-        - ansible-collection-commons-molecule-ipmitool
+#        - ansible-collection-commons-molecule-ipmitool
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
@@ -450,7 +450,7 @@
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
-#        - ansible-collection-commons-molecule-sosreport
+        - ansible-collection-commons-molecule-sosreport
 #        - ansible-collection-commons-molecule-sshconfig
 #        - ansible-collection-commons-molecule-state
 #        - ansible-collection-commons-molecule-sysctl
