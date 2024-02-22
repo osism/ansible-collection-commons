@@ -410,7 +410,7 @@
 #        - ansible-collection-commons-molecule-resolvconf
         - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
-        - ansible-collection-commons-molecule-sosreport
+#        - ansible-collection-commons-molecule-sosreport
 #        - ansible-collection-commons-molecule-sshconfig
 #        - ansible-collection-commons-molecule-state
 #        - ansible-collection-commons-molecule-sysctl
@@ -450,7 +450,7 @@
 #        - ansible-collection-commons-molecule-resolvconf
         - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
-        - ansible-collection-commons-molecule-sosreport
+#        - ansible-collection-commons-molecule-sosreport
 #        - ansible-collection-commons-molecule-sshconfig
 #        - ansible-collection-commons-molecule-state
 #        - ansible-collection-commons-molecule-sysctl
