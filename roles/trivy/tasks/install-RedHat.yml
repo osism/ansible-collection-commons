@@ -1,0 +1,47 @@
+---
+- name: Install yum-utils package
+  become: true
+  ansible.builtin.yum:
+    name: yum-utils
+    state: present
+  when: trivy_configure_repository | bool
+  changed_when: false
+
+- name: Import gpg key
+  become: true
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ trivy_redhat_repository_key }}"
+  when: trivy_configure_repository | bool
+  changed_when: false
+
+- name: Add trivy repository file
+  become: true
+  community.general.ini_file:
+    path: /etc/yum.repos.d/trivy.repo
+    owner: root
+    group: root
+    mode: '0600'
+    section: trivy
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop:
+    - {key: 'name', value: 'Trivy repository'}
+    - {key: 'baseurl', value: '{{ trivy_redhat_repository }}'}
+    - {key: 'gpgcheck', value: '1'}
+    - {key: 'enabled', value: '1'}
+    - {key: 'gpgkey', value: '{{ trivy_redhat_repository_key }}'}
+
+- name: Update package cache
+  become: true
+  ansible.builtin.command:
+    cmd: "dnf makecache"
+  changed_when: false
+
+- name: Install trivy package
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ trivy_package_name }}"
+    state: present
+    enablerepo: trivy
+    lock_timeout: "{{ lock_timeout | default(300) }}"

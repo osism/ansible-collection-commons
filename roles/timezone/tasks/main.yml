@@ -17,9 +17,10 @@
 
 - name: Create /etc/adjtime file if not exists
   become: true
-  ansible.builtin.touch:
+  ansible.builtin.file:
     path: /etc/adjtime
-    state: file
+    state: touch
+    mode: '0644'
 
 - name: Ensure UTC in /etc/adjtime
   become: true
