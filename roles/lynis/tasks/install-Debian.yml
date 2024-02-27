@@ -2,7 +2,7 @@
 - name: Remove old architecture-dependent repository
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb [ arch=amd64 ] https://packages.cisofy.com/community/lynis/deb/ stable main"
+    repo: "deb [arch=amd64] https://packages.cisofy.com/community/lynis/deb/ stable main"
     state: absent
     filename: lynis
   when: lynis_configure_repository|bool

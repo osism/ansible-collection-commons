@@ -1,6 +1,6 @@
 import pytest
 
-from .util.util import (
+from ..util.util import (
     get_ansible,
     get_variable,
     get_from_url,
@@ -10,8 +10,15 @@ from .util.util import (
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
+def check_ansible_os_family(host):
+    if get_variable(host, "ansible_os_family", True) != "Debian":
+        pytest.skip("ansible_os_family mismatch")
+
+
 def test_apt_transport_https_installed(host):
     """Check if the apt-transport-https package is installed."""
+
+    check_ansible_os_family(host)
     lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
@@ -24,6 +31,7 @@ def test_apt_transport_https_installed(host):
 def test_lynis_gpg_key_present(host):
     """Check if the GPG key for the lynis repository is correctly added."""
 
+    check_ansible_os_family(host)
     lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
@@ -46,6 +54,7 @@ def test_lynis_gpg_key_present(host):
 def test_lynis_repository_configured(host):
     """Check if the Lynis repository is correctly configured."""
 
+    check_ansible_os_family(host)
     lynis_configure_repository = get_variable(host, "lynis_configure_repository")
 
     if not lynis_configure_repository:
@@ -73,6 +82,8 @@ def test_lynis_repository_configured(host):
 
 def test_lynis_package_installed(host):
     """Check if the lynis package is installed."""
+
+    check_ansible_os_family(host)
     lynis_pkg_name = get_variable(host, "lynis_package_name")
     lynis_pkg = host.package(lynis_pkg_name)
     assert lynis_pkg.is_installed
