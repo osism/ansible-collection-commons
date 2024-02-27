@@ -22,11 +22,6 @@
       ansible.builtin.dnf:
         update_cache: yes
 
-#    - name: Install epel-release
-#      ansible.builtin.dnf:
-#        name: epel-release
-#        state: present
-
     - name: Install required packages
       become: true
       ansible.builtin.dnf:

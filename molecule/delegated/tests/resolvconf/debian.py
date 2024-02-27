@@ -1,4 +1,17 @@
-from .util.util import get_variable, jinja_list_concat
+import pytest
+
+from ..util.util import (
+    get_ansible,
+    get_variable,
+    jinja_list_concat,
+)
+
+testinfra_runner, testinfra_hosts = get_ansible()
+
+
+def check_ansible_os_family(host):
+    if get_variable(host, "ansible_os_family", True) != "Debian":
+        pytest.skip("ansible_os_family mismatch")
 
 
 def test_resolvconf_minimum_number_of_nameservers(host):
