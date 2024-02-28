@@ -26,7 +26,8 @@ def test_user(host):
 
 
 def test_sudoersfile(host):
-    user = get_variable(host, "operator_user")
+    # user = get_variable(host, "operator_user")
+    user = host.user(get_variable(host, "operator_user"))
     sudoers_file = host.file(f"/etc/sudoers.d/{user}-sudoers")
     assert sudoers_file.exists
     assert sudoers_file.user == "root"
