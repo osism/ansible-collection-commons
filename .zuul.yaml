@@ -388,7 +388,7 @@
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
 #        - ansible-collection-commons-molecule-docker_compose
-        - ansible-collection-commons-molecule-docker_login
+#        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
@@ -400,7 +400,7 @@
 #        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
-#        - ansible-collection-commons-molecule-microcode
+        - ansible-collection-commons-molecule-microcode
 #        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
@@ -428,7 +428,7 @@
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
 #        - ansible-collection-commons-molecule-docker_compose
-        - ansible-collection-commons-molecule-docker_login
+#        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
@@ -440,7 +440,7 @@
 #        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
-#        - ansible-collection-commons-molecule-microcode
+        - ansible-collection-commons-molecule-microcode
 #        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
