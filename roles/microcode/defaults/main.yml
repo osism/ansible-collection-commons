@@ -2,5 +2,9 @@
 microcode_packages_default:
   - amd64-microcode
   - intel-microcode
+microcode_packages_centos:
+  - linux-firmware
+  - microcode_ctl
 microcode_packages_extra: []
-microcode_packages: "{{ microcode_packages_default + microcode_packages_extra }}"
+microcode_packages_debian: "{{ microcode_packages_default + microcode_packages_extra }}"
+microcode_packages_redhat: "{{ microcode_packages_centos + microcode_packages_extra }}"
