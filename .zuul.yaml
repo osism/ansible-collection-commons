@@ -620,8 +620,8 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
-#        - ansible-collection-commons-molecule-docker_login
+#        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
@@ -660,8 +660,8 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
-#        - ansible-collection-commons-molecule-docker_login
+#        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
 #        - ansible-collection-commons-molecule-hostname
