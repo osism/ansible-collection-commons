@@ -26,13 +26,15 @@ def test_user(host):
 
 
 def test_sudoersfile(host):
-    # user = get_variable(host, "operator_user")
-    user = host.user(get_variable(host, "operator_user"))
-    sudoers_file = host.file(f"/etc/sudoers.d/{user}-sudoers")
-    assert sudoers_file.exists
-    assert sudoers_file.user == "root"
-    assert sudoers_file.group == "root"
-    assert sudoers_file.mode == 0o440
+    user = get_variable(host, "operator_user")
+
+    with host.sudo("root"):
+        sudoers_file = host.file(f"/etc/sudoers.d/{user}-sudoers")
+
+        assert sudoers_file.exists
+        assert sudoers_file.user == "root"
+        assert sudoers_file.group == "root"
+        assert sudoers_file.mode == 0o440
 
 
 def test_bashrc(host):

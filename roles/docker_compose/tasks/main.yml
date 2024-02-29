@@ -4,13 +4,8 @@
     msg: "The install type {{ docker_compose_install_type }} is no longer supported. Use package."
   when: docker_compose_install_type != "package"
 
-- name: This family is not supported
-  ansible.builtin.fail:
-    msg: "This family, {{ ansible_os_family }}, is not supported yet."
-  when: ansible_os_family != "Debian"
-
-- name: Include install type specific tasks
-  ansible.builtin.include_tasks: install.yml
+- name: Include distribution specific install tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Copy osism.target systemd file
   become: true

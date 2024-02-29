@@ -5,7 +5,7 @@ from .util.util import get_ansible, get_variable
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
-def test_var(host):
+def test_install_type(host):
     assert get_variable(host, "docker_compose_install_type") == "package"
 
 

@@ -1,75 +1,68 @@
 ---
-- name: Update package cache (Ubuntu)
+- name: Debian specific tasks
   become: true
-  ansible.builtin.apt:
-    update_cache: true
-  when: "'Ubuntu' in ansible_os_family"
+  block:
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: true
 
-- name: Update package cache (Red Hat)
-  become: true
-  ansible.builtin.yum:
-    name: '*'
-    state: latest
-  when: "'RedHat' in ansible_os_family"
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apt-transport-https
+        - gpg
 
-- name: Install required packages (Ubuntu)
-  become: true
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - apt-transport-https
-    - gpg
-  when: "'Ubuntu' in ansible_os_family"
+    - name: Add repository gpg key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
 
-- name: Install required packages (Red Hat)
-  become: true
-  ansible.builtin.yum:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - yum-utils
-    - device-mapper-persistent-data
-    - lvm2
-  when: "'RedHat' in ansible_os_family"
+    - name: Add repository
+      ansible.builtin.apt_repository:
+        repo: "deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+        filename: docker
+        update_cache: true
+        mode: 0644
 
-- name: Add repository gpg key (Ubuntu)
-  become: true
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-  when: "'Ubuntu' in ansible_os_family"
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: true
 
-- name: Add repository (Ubuntu)
-  become: true
-  ansible.builtin.apt_repository:
-    repo: "deb [ arch=amd64 ] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    state: present
-    filename: docker
-    update_cache: true
-    mode: 0644
-  when: "'Ubuntu' in ansible_os_family"
+    - name: Remove moby-compose package
+      ansible.builtin.apt:
+        name: moby-compose
+        state: absent
+  when: "'Debian' in ansible_os_family"
 
-- name: Add repository (Red Hat)
+- name: RedHat specific tasks
   become: true
-  ansible.builtin.yum_repository:
-    name: docker-ce
-    description: Docker CE Stable - $basearch
-    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable #todo: arch=amd64
-    gpgcheck: yes
-    enabled: yes
-    gpgkey: https://download.docker.com/linux/centos/gpg
-  when: "'RedHat' in ansible_os_family"
+  block:
+    - name: Update package cache
+      ansible.builtin.dnf:
+        update_cache: yes
 
-- name: Remove moby-compose package (Ubuntu)
-  become: true
-  ansible.builtin.apt:
-    name: moby-compose
-    state: absent
-  when: "'Ubuntu' in ansible_os_family"
+    - name: Install required packages
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
 
-- name: Remove moby-compose package (Red Hat)
-  become: true
-  ansible.builtin.yum:
-    name: moby-compose
-    state: absent
+    - name: Add repository
+      ansible.builtin.yum_repository:
+        name: docker-ce
+        description: Docker CE Stable - $basearch
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+        gpgcheck: yes
+        enabled: yes
+        gpgkey: https://download.docker.com/linux/centos/gpg
+
+    - name: Remove moby-compose package
+      ansible.builtin.yum:
+        name: moby-compose
+        state: absent
   when: "'RedHat' in ansible_os_family"
