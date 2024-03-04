@@ -634,7 +634,7 @@
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
         - ansible-collection-commons-molecule-microcode
-#        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
@@ -674,7 +674,7 @@
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
         - ansible-collection-commons-molecule-microcode
-#        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
