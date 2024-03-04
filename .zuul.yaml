@@ -629,12 +629,12 @@
 #        - ansible-collection-commons-molecule-ipmitool
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
-#        - ansible-collection-commons-molecule-kompose
-#        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-kompose
+        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
         - ansible-collection-commons-molecule-microcode
-        - ansible-collection-commons-molecule-motd
+#        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
@@ -669,12 +669,12 @@
 #        - ansible-collection-commons-molecule-ipmitool
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
-#        - ansible-collection-commons-molecule-kompose
-#        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-kompose
+        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
         - ansible-collection-commons-molecule-microcode
-        - ansible-collection-commons-molecule-motd
+#        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
