@@ -3,10 +3,17 @@
   become: true
   ansible.builtin.apt:
     update_cache: true
+  when: "'Debian' in ansible_os_family"
+
+- name: Update package cache
+  become: true
+  ansible.builtin.dnf:
+    update_cache: true
+  when: "'RedHat' in ansible_os_family"
 
 - name: Install required packages
   become: true
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   loop:

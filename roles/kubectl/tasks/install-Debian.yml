@@ -25,7 +25,7 @@
   when: kubectl_configure_repository | bool
   changed_when: false
 
-- name: Add repository
+- name: Add repository Debian
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ kubectl_debian_repository }}"

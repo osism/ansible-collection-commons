@@ -33,7 +33,6 @@ def test_package(host):
 def test_trivy_gpg_key_present(host):
     """Check if the GPG key for the trivy repository is correctly added."""
     check_ansible_os_family(host)
-
     trivy_configure_repository = get_variable(host, "trivy_configure_repository")
 
     if not trivy_configure_repository:
@@ -53,7 +52,6 @@ def test_trivy_gpg_key_present(host):
 def test_trivy_repository_configured(host):
     """Check if the Trivy repository is correctly configured."""
     check_ansible_os_family(host)
-
     trivy_configure_repository = get_variable(host, "trivy_configure_repository")
 
     if not trivy_configure_repository:
