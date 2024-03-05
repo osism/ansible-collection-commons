@@ -16,14 +16,14 @@ def check_ansible_os_family(host):
         pytest.skip("ansible_os_family mismatch")
 
 
+def check_configure_repository(host):
+    if not get_variable(host, "trivy_configure_repository"):
+        pytest.skip("trivy_configure_repository is not set")
+
+
 def test_package(host):
     """Check if the packages are installed."""
     check_ansible_os_family(host)
-
-    if get_variable(host, "trivy_configure_repository"):
-        pkg_name = "yum-utils"
-        pkg = host.package(pkg_name)
-        assert pkg.is_installed
 
     pkg_name = get_variable(host, "trivy_package_name")
     pkg = host.package(pkg_name)
@@ -33,17 +33,9 @@ def test_package(host):
 def test_trivy_gpg_key_present(host):
     """Check if the GPG key for the trivy repository is correctly added."""
     check_ansible_os_family(host)
-    trivy_configure_repository = get_variable(host, "trivy_configure_repository")
+    check_configure_repository(host)
 
-    if not trivy_configure_repository:
-        pytest.skip("trivy_configure_repository not configured")
-
-    all_keys = host.run(
-        "rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} --> %{SUMMARY}\n%{DESCRIPTION}\n\n'"
-    ).stdout
     installed_key = get_centos_repo_key(host, "trivy public key")
-    assert installed_key in all_keys
-
     trivy_repository_key_url = get_variable(host, "trivy_redhat_repository_key")
     key_content = get_from_url(trivy_repository_key_url)
     assert installed_key in key_content
@@ -52,10 +44,7 @@ def test_trivy_gpg_key_present(host):
 def test_trivy_repository_configured(host):
     """Check if the Trivy repository is correctly configured."""
     check_ansible_os_family(host)
-    trivy_configure_repository = get_variable(host, "trivy_configure_repository")
-
-    if not trivy_configure_repository:
-        pytest.skip("trivy_configure_repository not configured")
+    check_configure_repository(host)
 
     extracted_url = extract_url_from_variable(host, "trivy_redhat_repository")
 

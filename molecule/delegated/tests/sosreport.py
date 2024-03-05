@@ -1,10 +1,16 @@
-from .util.util import get_ansible, get_variable, jinja_replacement
+from .util.util import (
+    get_ansible,
+    get_variable,
+    jinja_replacement,
+    get_os_role_variable,
+)
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_required_packages_installed(host):
-    required_packages = get_variable(host, "sosreport_required_packages")
+    required_packages = get_os_role_variable(host, "sosreport_required_packages")
+
     for package_name in required_packages:
         package = host.package(package_name)
         assert package.is_installed, f"Package {package_name} should be installed"

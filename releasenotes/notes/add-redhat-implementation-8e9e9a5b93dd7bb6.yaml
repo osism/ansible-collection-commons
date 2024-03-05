@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    Added CentOS Stream 9 compatibility to Ansible roles and Molecule tests

@@ -15,15 +15,17 @@
     hwclock: "{{ timezone_hwclock }}"
     name: "{{ timezone_name }}"
 
-- name: Create /etc/adjtime file if not exists
+- name: Create /etc/adjtime file
   become: true
   ansible.builtin.file:
     path: /etc/adjtime
     state: touch
     mode: '0644'
+  when: "'RedHat' in ansible_os_family"
 
 - name: Ensure UTC in /etc/adjtime
   become: true
   ansible.builtin.lineinfile:
     path: /etc/adjtime
     line: "{{ timezone_hwclock }}"
+  when: "'RedHat' in ansible_os_family"

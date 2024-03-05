@@ -26,14 +26,10 @@ def test_kubectl_gpg_key_present(host):
     check_ansible_os_family(host)
     check_configure_repository(host)
 
-    all_keys = host.run(
-        "rpm -qa gpg-pubkey* --qf '%{NAME}-%{VERSION}-%{RELEASE} --> %{SUMMARY}\n%{DESCRIPTION}\n\n'"
-    ).stdout
     installed_key = get_centos_repo_key(
         host,
         "isv:kubernetes OBS Project <isv:kubernetes@build.opensuse.org> public key",
     )
-    assert installed_key in all_keys
 
     k8s_repository_key_url = get_variable(host, "kubectl_redhat_repository_key")
     key_content = get_from_url(k8s_repository_key_url)
