@@ -3,6 +3,4 @@ collections:
   - community.general
   - name: https://github.com/osism/ansible-collection-services.git
     type: git
-    # version: main
-    # testing docker_login
-    version: support_centos_based_distro
+    version: main
