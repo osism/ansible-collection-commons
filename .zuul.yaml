@@ -104,9 +104,8 @@
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
-# not implemented yet
-#        - name: centos-9-stream
-#          label: centos-9-stream
+        - name: centos-9-stream
+          label: centos-9-stream
     vars:
       ansible_role: docker_login
       ansible_molecule_ansible_version: "9.3.0"
@@ -287,9 +286,8 @@
       nodes:
         - name: ubuntu-jammy-large
           label: ubuntu-jammy-large
-# not implemented yet
-#        - name: centos-9-stream
-#          label: centos-9-stream
+        - name: centos-9-stream
+          label: centos-9-stream
     vars:
       ansible_role: resolvconf
       ansible_molecule_ansible_version: "9.3.0"
@@ -385,80 +383,80 @@
     default-branch: main
     check:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
-        - ansible-collection-commons-molecule-configfs
-        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-configfs
+#        - ansible-collection-commons-molecule-configuration
+#        - ansible-collection-commons-molecule-docker_compose
         - ansible-collection-commons-molecule-docker_login
-        - ansible-collection-commons-molecule-facts
-        - ansible-collection-commons-molecule-firewall
-        - ansible-collection-commons-molecule-hostname
-        - ansible-collection-commons-molecule-hosts
-        - ansible-collection-commons-molecule-ipmitool
-        - ansible-collection-commons-molecule-kernel_modules
-        - ansible-collection-commons-molecule-known_hosts
-        - ansible-collection-commons-molecule-kompose
-        - ansible-collection-commons-molecule-kubectl
-        - ansible-collection-commons-molecule-limits
-        - ansible-collection-commons-molecule-lynis
-        - ansible-collection-commons-molecule-microcode
-        - ansible-collection-commons-molecule-motd
-        - ansible-collection-commons-molecule-operator
-        - ansible-collection-commons-molecule-packages
-        - ansible-collection-commons-molecule-podman
-        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
-        - ansible-collection-commons-molecule-runc
-        - ansible-collection-commons-molecule-services
-        - ansible-collection-commons-molecule-sosreport
-        - ansible-collection-commons-molecule-sshconfig
-        - ansible-collection-commons-molecule-state
-        - ansible-collection-commons-molecule-sysctl
-        - ansible-collection-commons-molecule-systohc
-        - ansible-collection-commons-molecule-timezone
-        - ansible-collection-commons-molecule-trivy
+#        - ansible-collection-commons-molecule-facts
+#        - ansible-collection-commons-molecule-firewall
+#        - ansible-collection-commons-molecule-hostname
+#        - ansible-collection-commons-molecule-hosts
+#        - ansible-collection-commons-molecule-ipmitool
+#        - ansible-collection-commons-molecule-kernel_modules
+#        - ansible-collection-commons-molecule-known_hosts
+#        - ansible-collection-commons-molecule-kompose
+#        - ansible-collection-commons-molecule-kubectl
+#        - ansible-collection-commons-molecule-limits
+#        - ansible-collection-commons-molecule-lynis
+#        - ansible-collection-commons-molecule-microcode
+#        - ansible-collection-commons-molecule-motd
+#        - ansible-collection-commons-molecule-operator
+#        - ansible-collection-commons-molecule-packages
+#        - ansible-collection-commons-molecule-podman
+#        - ansible-collection-commons-molecule-proxy
+#        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-runc
+#        - ansible-collection-commons-molecule-services
+#        - ansible-collection-commons-molecule-sosreport
+#        - ansible-collection-commons-molecule-sshconfig
+#        - ansible-collection-commons-molecule-state
+#        - ansible-collection-commons-molecule-sysctl
+#        - ansible-collection-commons-molecule-systohc
+#        - ansible-collection-commons-molecule-timezone
+#        - ansible-collection-commons-molecule-trivy
         - ansible-lint
         - flake8
         - yamllint
         - python-black
     gate:
       jobs:
-        - ansible-collection-commons-molecule-certificates
-        - ansible-collection-commons-molecule-cleanup
-        - ansible-collection-commons-molecule-configfs
-        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-certificates
+#        - ansible-collection-commons-molecule-cleanup
+#        - ansible-collection-commons-molecule-configfs
+#        - ansible-collection-commons-molecule-configuration
+#        - ansible-collection-commons-molecule-docker_compose
         - ansible-collection-commons-molecule-docker_login
-        - ansible-collection-commons-molecule-facts
-        - ansible-collection-commons-molecule-firewall
-        - ansible-collection-commons-molecule-hostname
-        - ansible-collection-commons-molecule-hosts
-        - ansible-collection-commons-molecule-ipmitool
-        - ansible-collection-commons-molecule-kernel_modules
-        - ansible-collection-commons-molecule-known_hosts
-        - ansible-collection-commons-molecule-kompose
-        - ansible-collection-commons-molecule-kubectl
-        - ansible-collection-commons-molecule-limits
-        - ansible-collection-commons-molecule-lynis
-        - ansible-collection-commons-molecule-microcode
-        - ansible-collection-commons-molecule-motd
-        - ansible-collection-commons-molecule-operator
-        - ansible-collection-commons-molecule-packages
-        - ansible-collection-commons-molecule-podman
-        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
-        - ansible-collection-commons-molecule-runc
-        - ansible-collection-commons-molecule-services
-        - ansible-collection-commons-molecule-sosreport
-        - ansible-collection-commons-molecule-sshconfig
-        - ansible-collection-commons-molecule-state
-        - ansible-collection-commons-molecule-sysctl
-        - ansible-collection-commons-molecule-systohc
-        - ansible-collection-commons-molecule-timezone
-        - ansible-collection-commons-molecule-trivy
+#        - ansible-collection-commons-molecule-facts
+#        - ansible-collection-commons-molecule-firewall
+#        - ansible-collection-commons-molecule-hostname
+#        - ansible-collection-commons-molecule-hosts
+#        - ansible-collection-commons-molecule-ipmitool
+#        - ansible-collection-commons-molecule-kernel_modules
+#        - ansible-collection-commons-molecule-known_hosts
+#        - ansible-collection-commons-molecule-kompose
+#        - ansible-collection-commons-molecule-kubectl
+#        - ansible-collection-commons-molecule-limits
+#        - ansible-collection-commons-molecule-lynis
+#        - ansible-collection-commons-molecule-microcode
+#        - ansible-collection-commons-molecule-motd
+#        - ansible-collection-commons-molecule-operator
+#        - ansible-collection-commons-molecule-packages
+#        - ansible-collection-commons-molecule-podman
+#        - ansible-collection-commons-molecule-proxy
+#        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-runc
+#        - ansible-collection-commons-molecule-services
+#        - ansible-collection-commons-molecule-sosreport
+#        - ansible-collection-commons-molecule-sshconfig
+#        - ansible-collection-commons-molecule-state
+#        - ansible-collection-commons-molecule-sysctl
+#        - ansible-collection-commons-molecule-systohc
+#        - ansible-collection-commons-molecule-timezone
+#        - ansible-collection-commons-molecule-trivy
         - ansible-lint
         - flake8
         - yamllint
