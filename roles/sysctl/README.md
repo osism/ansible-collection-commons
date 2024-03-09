@@ -1,1 +1,1 @@
-https://osism.github.io/docs/guides/configuration-guides/commons/sysctl
+https://osism.github.io/docs/guides/configuration-guide/commons/sysctl
