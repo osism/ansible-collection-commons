@@ -1,6 +1,6 @@
 # Ansible collection osism.commons
 
-Documentation: https://osism.github.io/docs/guides/configuration-guides/commons/
+Documentation: https://osism.github.io/docs/guides/configuration-guide/commons/
 
 The following Ansible roles are included in this collection.
 
