@@ -1,33 +1,21 @@
 ---
-- name: Debian specific tasks
+- name: Install required packages on Debian
   become: true
-  block:
-    - name: Update package cache
-      ansible.builtin.apt:
-        update_cache: true
-
-    - name: Install required packages
-      ansible.builtin.apt:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - libpam-modules
-        - openssh-server
-        - update-motd
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - libpam-modules
+    - openssh-server
+    - update-motd
   when: "'Debian' in ansible_os_family"
 
-- name: RedHat specific tasks
+- name: Install required packages on RedHat
   become: true
-  block:
-    - name: Update package cache
-      ansible.builtin.yum:
-        update_cache: true
-
-    - name: Install required packages
-      ansible.builtin.yum:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - pam
-        - openssh-server
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - pam
+    - openssh-server
   when: "'RedHat' in ansible_os_family"

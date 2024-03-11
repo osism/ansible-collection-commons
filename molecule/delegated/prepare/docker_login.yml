@@ -6,7 +6,6 @@
     docker_user: zuul
     docker_group: zuul
 
-
 - name: Create necessary directories for Docker registry
   ansible.builtin.file:
     path: "{{ item }}"
