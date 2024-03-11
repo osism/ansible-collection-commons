@@ -1,0 +1,6 @@
+---
+- name: Install package systemd-resolved
+  become: true
+  ansible.builtin.dnf:
+    name: systemd-resolved
+    state: present
