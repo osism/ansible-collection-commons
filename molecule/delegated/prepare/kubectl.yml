@@ -1,8 +1,8 @@
 ---
-- name: Install required packages
-  become: true
-  ansible.builtin.package:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - gpg
+#- name: Install required packages
+#  become: true
+#  ansible.builtin.package:
+#    name: "{{ item }}"
+#    state: present
+#  loop:
+#    - gpg

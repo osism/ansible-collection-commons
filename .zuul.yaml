@@ -611,6 +611,24 @@
       - '^molecule\/delegated\/[^\/]*yml$'
       - '^molecule\/requirements\.txt$'
 
+- job:
+    name: ansible-collection-commons-molecule-user
+    parent: ansible-molecule
+    nodeset:
+      nodes:
+        - name: ubuntu-jammy-large
+          label: ubuntu-jammy-large
+        - name: centos-9-stream
+          label: centos-9-stream
+    vars:
+      ansible_role: user
+      ansible_molecule_ansible_version: "9.2.0"
+    files:
+      - '^roles\/user\/.*$'
+      - '^molecule\/delegated\/tests\/user.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
 - project:
     merge-mode: squash-merge
     default-branch: main
@@ -630,7 +648,7 @@
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
-#        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
 #        - ansible-collection-commons-molecule-microcode
@@ -640,7 +658,7 @@
 #        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
 #        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
 #        - ansible-collection-commons-molecule-sosreport
@@ -650,6 +668,7 @@
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
 #        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint
@@ -670,7 +689,7 @@
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
-#        - ansible-collection-commons-molecule-kubectl
+        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
 #        - ansible-collection-commons-molecule-microcode
@@ -680,7 +699,7 @@
 #        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
 #        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
 #        - ansible-collection-commons-molecule-sosreport
@@ -690,6 +709,7 @@
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
 #        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint
