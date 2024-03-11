@@ -1,0 +1,8 @@
+---
+- name: "Remove packages configuring {{ resolvconf_file }}"
+  become: true
+  ansible.builtin.apt:
+    name:
+      - openresolv
+      - resolvconf
+    state: absent

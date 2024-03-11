@@ -1,12 +1,6 @@
 ---
-- name: "Remove packages configuring {{ resolvconf_file }}"
-  become: true
-  ansible.builtin.apt:
-    name:
-      - openresolv
-      - resolvconf
-    state: absent
-  when: ansible_os_family == "Debian"  # packages not available on EL8
+- name: Include distribution specific installation tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: "Retrieve file status of {{ resolvconf_file }}"
   ansible.builtin.stat:
@@ -50,9 +44,5 @@
     enabled: true
     state: started
 
-- name: Restart systemd-resolved service  # noqa no-handler
-  become: true
-  ansible.builtin.systemd_service:
-    name: systemd-resolved.service
-    state: restarted
-  when: resolved_conf.changed
+- name: Include distribution specific configuration tasks
+  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}.yml"
