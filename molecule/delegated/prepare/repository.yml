@@ -1,32 +1,8 @@
 ---
-- name: Debian specific tasks
+- name: Install required packages
   become: true
-  block:
-    - name: Update package cache
-      ansible.builtin.apt:
-        update_cache: true
-
-    - name: Install required packages
-      become: true
-      ansible.builtin.apt:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - gpg
-  when: "'Debian' in ansible_os_family"
-
-- name: RedHat specific tasks
-  become: true
-  block:
-    - name: Update package cache
-      ansible.builtin.dnf:
-        update_cache: yes
-
-    - name: Install required packages
-      become: true
-      ansible.builtin.dnf:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - gpg
-  when: "'RedHat' in ansible_os_family"
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gpg
