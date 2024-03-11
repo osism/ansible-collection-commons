@@ -1,6 +1,1 @@
 ---
-- name: Install gpg package
-  become: true
-  ansible.builtin.package:
-    name: gpg
-    state: present

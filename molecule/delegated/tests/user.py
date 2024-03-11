@@ -4,4 +4,4 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test():
-    assert True
+    assert False, "Unittest not implemented"
