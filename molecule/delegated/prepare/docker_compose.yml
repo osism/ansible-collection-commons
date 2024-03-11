@@ -32,7 +32,7 @@
   become: true
   block:
     - name: Install required packages
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       loop:
@@ -50,7 +50,7 @@
         gpgkey: https://download.docker.com/linux/centos/gpg
 
     - name: Remove moby-compose package
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: moby-compose
         state: absent
   when: "'RedHat' in ansible_os_family"
