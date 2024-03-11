@@ -1,7 +1,7 @@
 ---
 - name: Install yum-utils package
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: yum-utils
     state: present
   when: trivy_configure_repository | bool

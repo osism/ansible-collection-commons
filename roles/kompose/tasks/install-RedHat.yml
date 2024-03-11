@@ -1,7 +1,7 @@
 ---
 - name: Ensure kompose is not installed
   become: true
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: kompose
     state: absent
 
