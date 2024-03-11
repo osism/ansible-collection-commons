@@ -405,7 +405,7 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
@@ -422,9 +422,9 @@
 #        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
-#        - ansible-collection-commons-molecule-podman
+        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-#        - ansible-collection-commons-molecule-repository
+        - ansible-collection-commons-molecule-repository
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
@@ -434,7 +434,7 @@
 #        - ansible-collection-commons-molecule-sysctl
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
-#        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-trivy
         - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
@@ -446,7 +446,7 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-#        - ansible-collection-commons-molecule-docker_compose
+        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
@@ -463,9 +463,9 @@
 #        - ansible-collection-commons-molecule-motd
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
-#        - ansible-collection-commons-molecule-podman
+        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-#        - ansible-collection-commons-molecule-repository
+        - ansible-collection-commons-molecule-repository
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
@@ -475,7 +475,7 @@
 #        - ansible-collection-commons-molecule-sysctl
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
-#        - ansible-collection-commons-molecule-trivy
+        - ansible-collection-commons-molecule-trivy
         - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8

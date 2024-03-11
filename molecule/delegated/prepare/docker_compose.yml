@@ -8,7 +8,6 @@
         state: present
       loop:
         - apt-transport-https
-        - gpg
 
     - name: Add repository gpg key
       ansible.builtin.apt_key:
