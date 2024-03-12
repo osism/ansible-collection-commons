@@ -1,1 +1,9 @@
 ---
+user_list:
+  - name: "dummy"
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRNBtqe57VKv+jnV2ABavKSW6IBuRnAp21V3u+z6UQq"
+  - name: "dummy2"
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIvJBGUXtl6H3Yyaoofba0borZnR/MN1iZNtffsfBWST"
+
+user_delete:
+  - "dummy3"
