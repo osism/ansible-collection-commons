@@ -342,6 +342,24 @@
       - '^molecule\/requirements\.txt$'
 
 - job:
+    name: ansible-collection-commons-molecule-network
+    parent: ansible-molecule
+    nodeset:
+      nodes:
+        - name: ubuntu-jammy-large
+          label: ubuntu-jammy-large
+        - name: centos-9-stream
+          label: centos-9-stream
+    vars:
+      ansible_role: network
+      ansible_molecule_ansible_version: "9.2.0"
+    files:
+      - '^roles\/network\/.*$'
+      - '^molecule\/delegated\/tests\/network.*$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
+
+- job:
     name: ansible-collection-commons-molecule-operator
     parent: ansible-molecule
     nodeset:
@@ -638,7 +656,7 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
@@ -648,16 +666,17 @@
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
-        - ansible-collection-commons-molecule-kubectl
+#        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
 #        - ansible-collection-commons-molecule-microcode
 #        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-network
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
-        - ansible-collection-commons-molecule-podman
+#        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-repository
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
@@ -667,8 +686,8 @@
 #        - ansible-collection-commons-molecule-sysctl
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
-        - ansible-collection-commons-molecule-trivy
-        - ansible-collection-commons-molecule-user
+#        - ansible-collection-commons-molecule-trivy
+#       - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint
@@ -679,7 +698,7 @@
 #        - ansible-collection-commons-molecule-cleanup
 #        - ansible-collection-commons-molecule-configfs
 #        - ansible-collection-commons-molecule-configuration
-        - ansible-collection-commons-molecule-docker_compose
+#        - ansible-collection-commons-molecule-docker_compose
 #        - ansible-collection-commons-molecule-docker_login
 #        - ansible-collection-commons-molecule-facts
 #        - ansible-collection-commons-molecule-firewall
@@ -689,16 +708,17 @@
 #        - ansible-collection-commons-molecule-kernel_modules
 #        - ansible-collection-commons-molecule-known_hosts
 #        - ansible-collection-commons-molecule-kompose
-        - ansible-collection-commons-molecule-kubectl
+#        - ansible-collection-commons-molecule-kubectl
 #        - ansible-collection-commons-molecule-limits
 #        - ansible-collection-commons-molecule-lynis
 #        - ansible-collection-commons-molecule-microcode
 #        - ansible-collection-commons-molecule-motd
+        - ansible-collection-commons-molecule-network
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
-        - ansible-collection-commons-molecule-podman
+#        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-repository
 #        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
@@ -708,8 +728,8 @@
 #        - ansible-collection-commons-molecule-sysctl
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
-        - ansible-collection-commons-molecule-trivy
-        - ansible-collection-commons-molecule-user
+#        - ansible-collection-commons-molecule-trivy
+#       - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint

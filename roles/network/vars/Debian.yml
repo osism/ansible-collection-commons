@@ -1,0 +1,12 @@
+network_interface_required_packages:
+  - bridge-utils
+  - ifenslave
+  - ifmetric
+  - ifupdown
+  - vlan
+
+network_netplan_required_packages:
+  - netplan.io
+
+network_dispatcher_package_name: networkd-dispatcher
+network_dispatcher_service_name: networkd-dispatcher
