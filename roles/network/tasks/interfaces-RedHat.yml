@@ -1,0 +1,99 @@
+---
+- name: Get existing netplan configuration files
+  ansible.builtin.find:
+    paths: "{{ network_netplan_path }}"
+    patterns: "*.yml,*.yaml"
+  register: netplan_configuration_files
+
+- name: Backup existing netplan configuration files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item['path'] }}"
+    dest: "{{ item['path'] }}.unused"
+    remote_src: true
+    mode: 0644
+  with_items: "{{ netplan_configuration_files['files'] }}"
+
+- name: Remove existing netplan configuration files
+  become: true
+  ansible.builtin.file:
+    path: "{{ item['path'] }}"
+    state: absent
+  with_items: "{{ netplan_configuration_files['files'] }}"
+
+- name: Gather variables for each operating system
+  ansible.builtin.include_vars: "{{ item }}"
+  with_first_found:
+    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "interfaces/{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "interfaces/{{ ansible_distribution | lower }}.yml"
+    - "interfaces/{{ ansible_os_family | lower }}.yml"
+  tags:
+    - always
+
+- name: Install epel-release package
+  become: true
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+
+- name: Enable EPEL repository
+  become: true
+  ansible.builtin.command:
+    cmd: dnf config-manager --set-enabled epel
+  changed_when: true
+
+- name: Update package cache
+  become: true
+  ansible.builtin.command:
+    cmd: "dnf makecache"
+  changed_when: false
+
+- name: Install required packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ network_interface_required_packages }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+  when: network_interfaces | length > 0
+
+- name: Create required directories
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - "{{ network_interface_path }}"
+  when: network_interfaces | length > 0
+
+- name: Copy interfaces file
+  become: true
+  ansible.builtin.template:
+    src: interfaces/interfaces.j2
+    dest: "{{ network_interfaces_path }}"
+    mode: 0644
+  notify:
+    - Interfaces file changed
+  when: network_interfaces | length > 0
+
+- name: Copy device configuration files
+  become: true
+  ansible.builtin.template:
+    src: interfaces/device.j2
+    dest: "{{ network_interface_path }}/device-{{ item.0 }}"
+    mode: "{{ network_interface_permissions }}"
+  with_items:
+    - "{{ network_interfaces | default([]) | groupby('device') }}"
+  register: network_configuration_result
+  notify:
+    - Restart network service
+    - Restart network command
+
+- name: Include cleanup tasks
+  ansible.builtin.include_tasks: cleanup-interfaces.yml
+  when:
+    - network_manage_devices
+    - network_interfaces | length > 0
