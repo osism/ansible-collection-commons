@@ -43,7 +43,23 @@
     name: "{{ network_interface_required_packages }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
-  when: network_interfaces | length > 0
+  when:
+    - network_interfaces | length > 0
+    - "'Debian' in ansible_os_family"
+
+- name: Install required packages on CentOS
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+  loop:
+    - bridge-utils
+    - teamd
+    - vlan
+  when:
+    - network_interfaces | length > 0
+    - "'RedHat' in ansible_os_family"
 
 - name: Create required directories
   become: true

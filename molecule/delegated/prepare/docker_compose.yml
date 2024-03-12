@@ -4,10 +4,8 @@
   block:
     - name: Install required packages
       ansible.builtin.apt:
-        name: "{{ item }}"
+        name: apt-transport-https
         state: present
-      loop:
-        - apt-transport-https
 
     - name: Add repository gpg key
       ansible.builtin.apt_key:

@@ -5,6 +5,19 @@
     name: "{{ network_netplan_required_packages }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "'Debian' in ansible_os_family"
+
+- name: Install required packages on CentOS
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+  loop:
+    - epel
+    - netplan
+    - systemd-networkd
+  when: "'RedHat' in ansible_os_family"
 
 - name: Remove ifupdown package
   become: true
@@ -12,6 +25,7 @@
     name: ifupdown
     state: absent
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "'Debian' in ansible_os_family"
 
 - name: Create required directories
   become: true
@@ -91,6 +105,7 @@
     name: "{{ network_dispatcher_package_name }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "'Debian' in ansible_os_family"
 
 - name: "Enable service {{ network_dispatcher_service_name }}"
   become: true
