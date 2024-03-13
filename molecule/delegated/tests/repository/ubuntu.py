@@ -12,8 +12,8 @@ testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def check_ansible_os_family(host):
-    if get_variable(host, "ansible_os_family", True) != "Debian":
-        pytest.skip("ansible_os_family mismatch")
+    if get_variable(host, "ansible_distribution", True) != "Ubuntu":
+        pytest.skip("ansible_distribution mismatch")
 
 
 def test_99osism(host):
