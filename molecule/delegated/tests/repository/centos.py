@@ -4,7 +4,7 @@ from ..util.util import (
     get_ansible,
     get_variable,
     get_os_role_variable,
-    jinja_replacement
+    jinja_replacement,
 )
 
 testinfra_runner, testinfra_hosts = get_ansible()
