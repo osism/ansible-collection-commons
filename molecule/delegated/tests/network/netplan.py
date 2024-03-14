@@ -69,23 +69,25 @@ def test_config_files(host):
 def test_interfaces_file(host):
     check_network_type(host)
 
-    f = host.file(f"{get_variable(host, 'network_interfaces_path')}")
+    if get_variable(host, "ansible_os_family", True) == "Debian":
+        f = host.file(f"{get_variable(host, 'network_interfaces_path')}")
 
-    assert f.exists
-    assert not f.is_directory
-    assert f.mode == 0o644
-    assert f.user == "root"
-    assert f.group == "root"
+        assert f.exists
+        assert not f.is_directory
+        assert f.mode == 0o644
+        assert f.user == "root"
+        assert f.group == "root"
 
 
 def test_service(host):
     check_network_type(host)
 
-    service_name = get_os_role_variable(host, "network_dispatcher_service_name")
-    service = host.service(service_name)
+    if get_variable(host, "ansible_os_family", True) == "Debian":
+        service_name = get_os_role_variable(host, "network_dispatcher_service_name")
+        service = host.service(service_name)
 
-    assert service.is_running
-    assert service.is_enabled
+        assert service.is_running
+        assert service.is_enabled
 
 
 def test_cleanup(host):

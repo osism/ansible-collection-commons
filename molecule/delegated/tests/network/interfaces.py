@@ -56,20 +56,16 @@ def test_interfaces_file(host):
         assert "iface lo inet loopback" in f.content_string
 
 
-def test_config_files(host):
+def test_config_file(host):
     check_network_type(host)
 
-    # ?!
-    # f = host.file(f"{get_variable(host, 'network_interface_path')}/device-{item}")
-    #
-    # assert f.exists
-    # assert not f.is_directory
-    # assert f.mode == 0o644
-    # assert f.user == "root"
-    # assert f.group == "root"
-    #
-    # with host.sudo():
-    #     assert "# hook scripts" in f.content_string
+    f = host.file(f"{get_variable(host, 'network_interface_path')}/device-eth0")
+
+    assert f.exists
+    assert not f.is_directory
+    assert f.mode == 0o644
+    assert f.user == "root"
+    assert f.group == "root"
 
 
 def test_cleanup(host):
