@@ -25,77 +25,77 @@
     state: present
     lock_timeout: "{{ lock_timeout | default(300) }}"
 
-- name: Create required directories
-  become: true
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: 0755
-    owner: root
-    group: root
-  with_items:
-    - "{{ network_netplan_path }}"
+#- name: Create required directories
+#  become: true
+#  ansible.builtin.file:
+#    path: "{{ item }}"
+#    state: directory
+#    mode: 0755
+#    owner: root
+#    group: root
+#  with_items:
+#    - "{{ network_netplan_path }}"
 
 # NOTE: The use of the local actions are a workaround to allow
 #       the use of variables as keys in the dictionaries.
 
-- name: Prepare netplan configuration template
-  ansible.builtin.template:
-    src: netplan/01-osism.yaml.j2
-    dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    mode: 0644
-  delegate_to: localhost
-  # NOTE: This task does not change anything on the target host and always
-  #       changes. Regardless of whether changes really take place. Therefore
-  #       changed_when is set to False here.
-  changed_when: false
+#- name: Prepare netplan configuration template
+#  ansible.builtin.template:
+#    src: netplan/01-osism.yaml.j2
+#    dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+#    mode: 0644
+#  delegate_to: localhost
+#  # NOTE: This task does not change anything on the target host and always
+#  #       changes. Regardless of whether changes really take place. Therefore
+#  #       changed_when is set to False here.
+#  changed_when: false
 
-- name: Copy netplan configuration
-  become: true
-  ansible.builtin.template:
-    src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
-    mode: 0600
-    owner: root
-    group: root
-  notify:
-    - Netplan configuration changed
+#- name: Copy netplan configuration
+#  become: true
+#  ansible.builtin.template:
+#    src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+#    dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
+#    mode: 0600
+#    owner: root
+#    group: root
+#  notify:
+#    - Netplan configuration changed
 
-- name: Remove netplan configuration template
-  ansible.builtin.file:
-    path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    state: absent
-  delegate_to: localhost
-  # NOTE: This task does not change anything on the target host and always
-  #       changes. Regardless of whether changes really take place. Therefore
-  #       changed_when is set to False here.
-  changed_when: false
+#- name: Remove netplan configuration template
+#  ansible.builtin.file:
+#    path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+#    state: absent
+#  delegate_to: localhost
+#  # NOTE: This task does not change anything on the target host and always
+#  #       changes. Regardless of whether changes really take place. Therefore
+#  #       changed_when is set to False here.
+#  changed_when: false
 
 # NOTE: On pure netplan systems, /etc/network as directory might just not exists
-- name: Check if path for interface file exists
-  ansible.builtin.stat:
-    path: "{{ network_interfaces_path }}"
-  register: network_interfaces_path_stat
+#- name: Check if path for interface file exists
+#  ansible.builtin.stat:
+#    path: "{{ network_interfaces_path }}"
+#  register: network_interfaces_path_stat
 
-- name: Copy interfaces file
-  become: true
-  ansible.builtin.template:
-    src: netplan/interfaces.j2
-    dest: "{{ network_interfaces_path }}"
-    mode: 0644
-    owner: root
-    group: root
-  when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
+#- name: Copy interfaces file
+#  become: true
+#  ansible.builtin.template:
+#    src: netplan/interfaces.j2
+#    dest: "{{ network_interfaces_path }}"
+#    mode: 0644
+#    owner: root
+#    group: root
+#  when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
 
-- name: Copy dispatcher scripts
-  become: true
-  ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ network_dispatcher_scripts }}"
+#- name: Copy dispatcher scripts
+#  become: true
+#  ansible.builtin.template:
+#    src: "{{ item.src }}"
+#    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
+#    mode: 0755
+#    owner: root
+#    group: root
+#  loop: "{{ network_dispatcher_scripts }}"
 
 - name: "Enable service {{ network_dispatcher_service_name }}"
   become: true
@@ -105,7 +105,7 @@
     state: started
   register: network_service
 
-- name: Include cleanup tasks
-  ansible.builtin.include_tasks: cleanup-netplan.yml
-  when:
-    - network_netplan_remove_unmanaged_files | bool
+#- name: Include cleanup tasks
+#  ansible.builtin.include_tasks: cleanup-netplan.yml
+#  when:
+#    - network_netplan_remove_unmanaged_files | bool

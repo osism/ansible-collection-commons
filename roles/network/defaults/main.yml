@@ -1,6 +1,6 @@
 ---
 # possible values: [interfaces, netplan]
-network_type: interfaces
+network_type: netplan
 
 # Flag whether all network devices are controlled by this role
 #

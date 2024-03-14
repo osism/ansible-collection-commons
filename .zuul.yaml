@@ -676,8 +676,8 @@
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
 #        - ansible-collection-commons-molecule-sosreport
@@ -687,7 +687,7 @@
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
 #        - ansible-collection-commons-molecule-trivy
-        - ansible-collection-commons-molecule-user
+#        - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint
@@ -718,8 +718,8 @@
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
-        - ansible-collection-commons-molecule-repository
-        - ansible-collection-commons-molecule-resolvconf
+#        - ansible-collection-commons-molecule-repository
+#        - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
 #        - ansible-collection-commons-molecule-sosreport
@@ -729,7 +729,7 @@
 #        - ansible-collection-commons-molecule-systohc
 #        - ansible-collection-commons-molecule-timezone
 #        - ansible-collection-commons-molecule-trivy
-        - ansible-collection-commons-molecule-user
+#        - ansible-collection-commons-molecule-user
         - ansible-lint
         - flake8
         - yamllint
