@@ -12,5 +12,4 @@ def check_ansible_os_family(host):
 
 def test_pkg(host):
     check_ansible_os_family(host)
-
     assert not host.package("update-motd").is_installed

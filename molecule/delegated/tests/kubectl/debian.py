@@ -1,6 +1,6 @@
 import pytest
 
-from .util.util import (
+from ..util.util import (
     get_ansible,
     get_variable,
     extract_url_from_variable,
@@ -9,12 +9,20 @@ from .util.util import (
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
+def check_ansible_os_family(host):
+    if get_variable(host, "ansible_os_family", True) != "Debian":
+        pytest.skip("ansible_os_family mismatch")
+
+
+def check_configure_repository(host):
+    if not get_variable(host, "kubectl_configure_repository"):
+        pytest.skip("kubectl_configure_repository is not set")
+
+
 def test_apt_transport_https_installed(host):
     """Check if the apt-transport-https package is installed."""
-    kubectl_configure_repository = get_variable(host, "kubectl_configure_repository")
-
-    if not kubectl_configure_repository:
-        pytest.skip("kubectl_configure_repository is not set")
+    check_ansible_os_family(host)
+    check_configure_repository(host)
 
     pkg = host.package("apt-transport-https")
     assert pkg.is_installed
@@ -22,17 +30,11 @@ def test_apt_transport_https_installed(host):
 
 def test_kubectl_gpg_key_present(host):
     """Check if the GPG key for the kubectl repository is correctly added."""
-    kubectl_configure_repository = get_variable(host, "kubectl_configure_repository")
-
-    if not kubectl_configure_repository:
-        pytest.skip("kubectl_configure_repository is not set")
+    check_ansible_os_family(host)
+    check_configure_repository(host)
 
     gpg_key_file = host.file("/etc/apt/keyrings/kubernetes-apt-keyring.gpg")
-
-    # Ensure the GPG key file exists
     assert gpg_key_file.exists
-
-    # Ensure the correct permissions are set
     assert gpg_key_file.user == "root"
     assert gpg_key_file.group == "root"
     assert gpg_key_file.mode == 0o644
@@ -40,28 +42,22 @@ def test_kubectl_gpg_key_present(host):
 
 def test_kubectl_repository_configured(host):
     """Check if the kubectl repository is correctly configured."""
-    kubectl_configure_repository = get_variable(host, "kubectl_configure_repository")
+    check_ansible_os_family(host)
+    check_configure_repository(host)
 
-    if not kubectl_configure_repository:
-        pytest.skip("kubectl_configure_repository is not set")
-
-    # Extract the URL from the configuration
-    extracted_url = extract_url_from_variable(host, "kubectl_debian_repository")
-
-    # Ensure the repository file exists
     repo_file = host.file("/etc/apt/sources.list.d/kubectl.list")
     assert repo_file.exists
+    assert repo_file.user == "root"
+    assert repo_file.group == "root"
 
-    # Use sudo to read the content of the file
     with host.sudo("root"):
         repo_file_content = host.check_output(
             "cat /etc/apt/sources.list.d/kubectl.list"
         )
-
-    # Ensure the content matches the expected repository configuration
-    assert (
-        extracted_url in repo_file_content
-    ), "The extracted URL is not present in the kubectl configuration file"
+        extracted_url = extract_url_from_variable(host, "kubectl_debian_repository")
+        assert (
+            extracted_url in repo_file_content
+        ), "The extracted URL is not present in the kubectl configuration file"
 
 
 def test_kubectl_package_installed(host):

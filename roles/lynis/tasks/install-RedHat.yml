@@ -1,0 +1,18 @@
+---
+- name: Update package cache
+  become: true
+  ansible.builtin.dnf:
+    update_cache: yes
+
+- name: Install epel-release
+  become: true
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+
+- name: Install lynis package
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ lynis_package_name }}"
+    state: present
+    enablerepo: epel

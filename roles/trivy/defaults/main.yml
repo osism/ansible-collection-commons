@@ -11,3 +11,6 @@ trivy_configure_repository: true
 
 trivy_debian_repository_key: https://aquasecurity.github.io/trivy-repo/deb/public.key
 trivy_debian_repository: "deb https://aquasecurity.github.io/trivy-repo/deb {{ ansible_distribution_release }} main"
+
+trivy_redhat_repository_key: https://aquasecurity.github.io/trivy-repo/rpm/public.key
+trivy_redhat_repository: "https://aquasecurity.github.io/trivy-repo/rpm/releases/$basearch/"

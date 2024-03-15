@@ -1,0 +1,7 @@
+---
+- name: Install ipmitool package
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ ipmitool_package_name }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"

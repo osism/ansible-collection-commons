@@ -1,4 +1,17 @@
-from .util.util import get_variable, jinja_list_concat
+import pytest
+
+from ..util.util import (
+    get_ansible,
+    get_variable,
+    jinja_list_concat,
+)
+
+testinfra_runner, testinfra_hosts = get_ansible()
+
+
+def check_ansible_os_family(host):
+    if get_variable(host, "ansible_os_family", True) != "Debian":
+        pytest.skip("ansible_os_family mismatch")
 
 
 def test_resolvconf_minimum_number_of_nameservers(host):
@@ -17,6 +30,8 @@ def test_resolvconf_service_disabled(host):
 
 def test_resolved_conf_file(host):
     """Check if the resolved.conf file exists and its permissions."""
+    check_ansible_os_family(host)
+
     resolved_file = host.file("/etc/systemd/resolved.conf")
     assert resolved_file.exists
     assert resolved_file.user == "root"
@@ -27,6 +42,8 @@ def test_resolved_conf_file(host):
 
 def test_resolvconf_content(host):
     """Check content of /etc/systemd/resolved.conf."""
+    check_ansible_os_family(host)
+
     file_content = host.file("/etc/systemd/resolved.conf").content_string
 
     assert f"Domains={get_variable(host, 'resolvconf_search')}" in file_content
@@ -75,6 +92,8 @@ def test_resolvconf_content(host):
 
 def test_systemd_resolved_service_enabled(host):
     """Check if the systemd-resolved service is enabled and running."""
+    check_ansible_os_family(host)
+
     service = host.service("systemd-resolved")
     assert service.is_enabled
     assert service.is_running
@@ -82,6 +101,8 @@ def test_systemd_resolved_service_enabled(host):
 
 def test_resolvconf_file_is_symlink(host):
     """Check if /etc/resolv.conf is a symlink."""
+    check_ansible_os_family(host)
+
     resolvconf_file = get_variable(host, "resolvconf_file")
     f = host.file(resolvconf_file)
     assert f.is_symlink

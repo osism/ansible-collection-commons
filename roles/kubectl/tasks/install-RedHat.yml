@@ -1,0 +1,19 @@
+---
+- name: Add repository RedHat
+  become: true
+  ansible.builtin.yum_repository:
+    name: kubectl
+    description: "K8s repository"
+    baseurl: "{{ kubectl_redhat_repository }}"
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: "{{ kubectl_redhat_repository_key }}"
+    file: /etc/yum.repos.d/kubernetes
+    mode: 0644
+  when: kubectl_configure_repository | bool
+
+- name: "Install package {{ kubectl_package_name }}"
+  become: true
+  ansible.builtin.yum:
+    name: "{{ kubectl_package_name }}"
+    state: present

@@ -1,0 +1,7 @@
+---
+- name: Install required packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ podman_package_name }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"

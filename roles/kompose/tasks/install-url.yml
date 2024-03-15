@@ -1,20 +1,6 @@
 ---
-- name: Ensure kompose is not installed
-  become: true
-  ansible.builtin.apt:
-    name: kompose
-    state: absent
-    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
-
-- name: Block installation of kompose package
-  become: true
-  ansible.builtin.copy:
-    content: |
-      Package: kompose
-      Pin: version *
-      Pin-Priority: -1
-    mode: 0644
-    dest: /etc/apt/preferences.d/kompose
+- name: Include distribution specific install tasks
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Download kompose binary
   become: true

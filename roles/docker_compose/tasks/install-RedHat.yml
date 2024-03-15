@@ -1,0 +1,42 @@
+---
+- name: Get checksum of docker-compose file
+  ansible.builtin.stat:
+    path: /usr/local/bin/docker-compose
+    checksum_algorithm: sha256
+    get_checksum: true
+  register: result
+
+- name: Remove docker-compose binary
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/bin/docker-compose
+    state: absent
+  when:
+    - result.stat.exists
+    - result.stat.checksum != "7cdca0fd4dab7f25814175000206e29a7d3b2b3c178ecc4979edcca7fd8d5a94"
+
+- name: Uninstall docker-compose package
+  become: true
+  ansible.builtin.yum:
+    name:
+      - "{{ docker_compose_package_name }}"
+    state: absent
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+
+- name: Copy docker-compose script
+  become: true
+  ansible.builtin.copy:
+    src: docker-compose
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+  when:
+    - result.stat.exists
+    - result.stat.checksum != "7cdca0fd4dab7f25814175000206e29a7d3b2b3c178ecc4979edcca7fd8d5a94"
+
+- name: Install docker-compose-plugin package
+  become: true
+  ansible.builtin.yum:
+    name:
+      - "{{ docker_compose_plugin_package_name }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"

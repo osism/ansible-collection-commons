@@ -2,6 +2,15 @@
 - name: Install microcode packages
   become: true
   ansible.builtin.apt:
-    name: "{{ microcode_packages }}"
+    name: "{{ microcode_packages_debian }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "'Debian' in ansible_os_family"
+
+- name: Install microcode packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ microcode_packages_redhat }}"
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+  when: "'RedHat' in ansible_os_family"

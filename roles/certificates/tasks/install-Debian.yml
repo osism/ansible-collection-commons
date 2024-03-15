@@ -1,5 +1,5 @@
 ---
-- name: Install ca-certificates package
+- name: Install ca-certificates package on Debian
   become: true
   ansible.builtin.apt:
     name: "{{ certificates_ca_package_name }}"

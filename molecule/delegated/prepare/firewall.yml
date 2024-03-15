@@ -1,11 +1,32 @@
 ---
-- name: Update package cache
+- name: Debian specific tasks
   become: true
-  ansible.builtin.apt:
-    update_cache: true
+  block:
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: true
 
-- name: Install ufw package
+    - name: Install ufw package
+      ansible.builtin.apt:
+        name: ufw
+        state: present
+  when: "'Debian' in ansible_os_family"
+
+- name: RedHat specific tasks
   become: true
-  ansible.builtin.apt:
-    name: ufw
-    state: present
+  block:
+    - name: Update package cache
+      ansible.builtin.dnf:
+        update_cache: yes
+
+    - name: Install epel-release
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+
+    - name: Install ufw package
+      ansible.builtin.dnf:
+        name: ufw
+        state: present
+        enablerepo: epel
+  when: "'RedHat' in ansible_os_family"

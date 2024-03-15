@@ -1,0 +1,7 @@
+---
+- name: Install required packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ sosreport_required_packages }}"

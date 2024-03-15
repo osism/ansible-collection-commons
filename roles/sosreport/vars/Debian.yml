@@ -1,0 +1,29 @@
+---
+sosreport_required_packages:
+  - sosreport
+sosreport_plugins:
+  - apt
+  - auditd
+  - block
+  - devices
+  - docker
+  - dpkg
+  - filesys
+  - hardware
+  - kernel
+  - kvm
+  - md
+  - memory
+  - networking
+  - pci
+  - process
+  - processor
+  - python
+  - services
+  - ssh
+  - system
+  - systemd
+  - ubuntu
+  - udev
+  - usb
+  - xfs

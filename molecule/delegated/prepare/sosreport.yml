@@ -1,5 +1,12 @@
 ---
-- name: Update package cache
+- name: Update dnf package cache on RedHat
+  become: true
+  ansible.builtin.dnf:
+    update_cache: true
+  when: "'RedHat' in ansible_os_family"
+
+- name: Update apt package cache on Debian
   become: true
   ansible.builtin.apt:
     update_cache: true
+  when: "'Debian' in ansible_os_family"
