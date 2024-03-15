@@ -26,6 +26,17 @@
   when: item != "localhost" and item != "127.0.0.1"
   loop: "{{ groups[sshconfig_groupname] }}"
 
+- name: Add extra config
+  ansible.builtin.copy:
+    content: |
+      ####################
+      # extra config
+
+      {{ sshconfig_extra }}
+    dest: "{{ sshconfig_destination.stdout }}/.ssh/config.d/999-extra"
+    mode: 0600
+  when: sshconfig_extra | length > 0
+
 - name: Assemble ssh config
   ansible.builtin.assemble:
     src: "{{ sshconfig_destination.stdout }}/.ssh/config.d"
