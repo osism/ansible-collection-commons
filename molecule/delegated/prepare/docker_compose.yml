@@ -2,17 +2,10 @@
 - name: Debian specific tasks
   become: true
   block:
-    - name: Update package cache
-      ansible.builtin.apt:
-        update_cache: true
-
     - name: Install required packages
       ansible.builtin.apt:
-        name: "{{ item }}"
+        name: apt-transport-https
         state: present
-      loop:
-        - apt-transport-https
-        - gpg
 
     - name: Add repository gpg key
       ansible.builtin.apt_key:
@@ -26,10 +19,6 @@
         update_cache: true
         mode: 0644
 
-    - name: Update package cache
-      ansible.builtin.apt:
-        update_cache: true
-
     - name: Remove moby-compose package
       ansible.builtin.apt:
         name: moby-compose
@@ -39,12 +28,8 @@
 - name: RedHat specific tasks
   become: true
   block:
-    - name: Update package cache
-      ansible.builtin.dnf:
-        update_cache: yes
-
     - name: Install required packages
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: present
       loop:
@@ -62,7 +47,7 @@
         gpgkey: https://download.docker.com/linux/centos/gpg
 
     - name: Remove moby-compose package
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: moby-compose
         state: absent
   when: "'RedHat' in ansible_os_family"

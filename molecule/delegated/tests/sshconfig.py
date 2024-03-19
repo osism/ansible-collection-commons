@@ -40,7 +40,7 @@ def test_sshconfig_host_files(host):
         )
 
 
-def test_sshconfig_assembled(host):
+def test_sshconfig_files(host):
     operator_user_name = get_variable(host, "operator_user")
     operator_user = host.user(operator_user_name)
 
@@ -49,3 +49,15 @@ def test_sshconfig_assembled(host):
     assert assembled_config.user == get_variable(host, "operator_user")
     assert assembled_config.group == get_variable(host, "operator_group")
     assert assembled_config.mode == 0o600
+
+    sshconfig_extra = get_variable(host, "sshconfig_extra")
+
+    if sshconfig_extra != "":
+        test_sshconfig_extra = host.file(
+            f"{operator_user.home}/.ssh/config.d/999-extra"
+        )
+        assert test_sshconfig_extra.exists
+        assert test_sshconfig_extra.user == get_variable(host, "operator_user")
+        assert test_sshconfig_extra.group == get_variable(host, "operator_group")
+        assert test_sshconfig_extra.mode == 0o600
+        assert "# test content" in test_sshconfig_extra.content_string

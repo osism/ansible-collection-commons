@@ -1,6 +1,4 @@
-import pytest
-
-from ..util.util import (
+from .util.util import (
     get_ansible,
     get_variable,
     jinja_list_concat,
@@ -9,13 +7,9 @@ from ..util.util import (
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
-def check_ansible_os_family(host):
-    if get_variable(host, "ansible_os_family", True) != "Debian":
-        pytest.skip("ansible_os_family mismatch")
-
-
 def test_resolvconf_minimum_number_of_nameservers(host):
     """Check the minimum number of nameservers."""
+
     nameservers = get_variable(host, "resolvconf_nameserver")
     minimum_ns = get_variable(host, "resolvconf_minimum_number_of_nameservers")
     assert len(nameservers) >= minimum_ns
@@ -23,6 +17,7 @@ def test_resolvconf_minimum_number_of_nameservers(host):
 
 def test_resolvconf_service_disabled(host):
     """Check if the resolvconf service is disabled."""
+
     service = host.service("resolvconf")
     assert not service.is_enabled
     assert not service.is_running
@@ -30,7 +25,6 @@ def test_resolvconf_service_disabled(host):
 
 def test_resolved_conf_file(host):
     """Check if the resolved.conf file exists and its permissions."""
-    check_ansible_os_family(host)
 
     resolved_file = host.file("/etc/systemd/resolved.conf")
     assert resolved_file.exists
@@ -42,7 +36,6 @@ def test_resolved_conf_file(host):
 
 def test_resolvconf_content(host):
     """Check content of /etc/systemd/resolved.conf."""
-    check_ansible_os_family(host)
 
     file_content = host.file("/etc/systemd/resolved.conf").content_string
 
@@ -92,7 +85,6 @@ def test_resolvconf_content(host):
 
 def test_systemd_resolved_service_enabled(host):
     """Check if the systemd-resolved service is enabled and running."""
-    check_ansible_os_family(host)
 
     service = host.service("systemd-resolved")
     assert service.is_enabled
@@ -101,7 +93,6 @@ def test_systemd_resolved_service_enabled(host):
 
 def test_resolvconf_file_is_symlink(host):
     """Check if /etc/resolv.conf is a symlink."""
-    check_ansible_os_family(host)
 
     resolvconf_file = get_variable(host, "resolvconf_file")
     f = host.file(resolvconf_file)

@@ -47,7 +47,6 @@ def test_trivy_repository_configured(host):
     check_configure_repository(host)
 
     extracted_url = extract_url_from_variable(host, "trivy_redhat_repository")
-
     repo_file = host.file("/etc/yum.repos.d/trivy.repo")
     assert repo_file.exists
     assert repo_file.user == "root"
