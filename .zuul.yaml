@@ -95,25 +95,14 @@
       - '^roles\/docker_compose\/.*$'
       - '^molecule\/delegated\/tests\/docker_compose.*$'
 
-# TODO: use abstract job & enable CentOS 9 Stream
-
 - job:
     name: ansible-collection-commons-molecule-docker_login
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-        - name: centos-9-stream
-          label: centos-9-stream
+    parent: abstract-ansible-collection-commons-molecule
     vars:
       ansible_role: docker_login
-      ansible_molecule_ansible_version: "9.3.0"
     files:
       - '^roles\/docker_login\/.*$'
       - '^molecule\/delegated\/tests\/docker_login.*$'
-      - '^molecule\/delegated\/[^\/]*yml$'
-      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-facts
@@ -234,21 +223,12 @@
 
 - job:
     name: ansible-collection-commons-molecule-network
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-        - name: centos-9-stream
-          label: centos-9-stream
+    parent: abstract-ansible-collection-commons-molecule
     vars:
       ansible_role: network
-      ansible_molecule_ansible_version: "9.2.0"
     files:
       - '^roles\/network\/.*$'
       - '^molecule\/delegated\/tests\/network.*$'
-      - '^molecule\/delegated\/[^\/]*yml$'
-      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-operator
@@ -295,25 +275,14 @@
       - '^roles\/repository\/.*$'
       - '^molecule\/delegated\/tests\/repository.*$'
 
-# TODO: use abstract job & enable CentOS 9 Stream
-
 - job:
     name: ansible-collection-commons-molecule-resolvconf
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-        - name: centos-9-stream
-          label: centos-9-stream
+    parent: abstract-ansible-collection-commons-molecule
     vars:
       ansible_role: resolvconf
-      ansible_molecule_ansible_version: "9.3.0"
     files:
       - '^roles\/resolvconf\/.*$'
       - '^molecule\/delegated\/tests\/resolvconf.*$'
-      - '^molecule\/delegated\/[^\/]*yml$'
-      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-runc
@@ -398,21 +367,12 @@
 
 - job:
     name: ansible-collection-commons-molecule-user
-    parent: ansible-molecule
-    nodeset:
-      nodes:
-        - name: ubuntu-jammy-large
-          label: ubuntu-jammy-large
-        - name: centos-9-stream
-          label: centos-9-stream
+    parent: abstract-ansible-collection-commons-molecule
     vars:
       ansible_role: user
-      ansible_molecule_ansible_version: "9.2.0"
     files:
       - '^roles\/user\/.*$'
       - '^molecule\/delegated\/tests\/user.*$'
-      - '^molecule\/delegated\/[^\/]*yml$'
-      - '^molecule\/requirements\.txt$'
 
 - project:
     merge-mode: squash-merge
