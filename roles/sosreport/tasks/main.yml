@@ -1,6 +1,6 @@
 ---
 - name: Gather variables for each operating system
-  ansible.builtin.include_vars: "{{ ansible_os_family }}-family.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-dist.yml"
 
 - name: Include distribution specific install tasks
   ansible.builtin.include_tasks: "install-{{ ansible_os_family }}-family.yml"
@@ -32,13 +32,30 @@
 
 - name: Generate report
   become: true
-  ansible.builtin.command: "sosreport --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins | join(',') }}"
+  ansible.builtin.command: "sos report --batch --tmp-dir {{ sosreport_tmpdir }} -z gzip --name {{ inventory_hostname_short }} -o {{ sosreport_plugins | join(',') }}"
   changed_when: true
+
+- name: Check if sha256 file exists
+  ansible.builtin.stat:
+    path: "/path/to/files/*.sha256"
+  register: file_sha256
 
 - name: Rename sha256 file
   become: true
   ansible.builtin.shell: "mv -f {{ sosreport_tmpdir }}/*.sha256 {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.sha256"
   changed_when: true
+  when: file_sha256.stat.exists
+
+- name: Check if md5 file exists
+  ansible.builtin.stat:
+    path: "/path/to/files/*.md5"
+  register: file_md5
+
+- name: Rename md5 file
+  become: true
+  ansible.builtin.shell: "mv -f {{ sosreport_tmpdir }}/*.md5 {{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
+  changed_when: true
+  when: file_md5.stat.exists
 
 - name: Rename archive
   become: true
@@ -61,6 +78,15 @@
     dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.sha256"
     flat: true
     change: true
+  when: file_sha256.stat.exists
+
+- name: Fetch md5 file
+  ansible.builtin.fetch:
+    src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
+    dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.md5"
+    flat: true
+    change: true
+  when: file_md5.stat.exists
 
 - name: Fetch archive
   ansible.builtin.fetch:

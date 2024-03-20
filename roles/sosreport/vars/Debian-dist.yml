@@ -1,12 +1,13 @@
 ---
 sosreport_required_packages:
-  - sos
+  - sosreport
+
 sosreport_plugins:
-  - dnf
+  - apt
   - auditd
   - block
   - devices
-  - docker
+  - dpkg
   - filesys
   - hardware
   - kernel
@@ -18,7 +19,6 @@ sosreport_plugins:
   - process
   - processor
   - python
-  - selinux
   - services
   - ssh
   - system
