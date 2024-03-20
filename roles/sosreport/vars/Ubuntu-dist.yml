@@ -1,6 +1,7 @@
 ---
 sosreport_required_packages:
   - sosreport
+
 sosreport_plugins:
   - apt
   - auditd
