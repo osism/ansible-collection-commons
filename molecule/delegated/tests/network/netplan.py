@@ -4,7 +4,7 @@ import os
 from ..util.util import (
     get_ansible,
     get_variable,
-    get_os_role_variable,
+    get_family_role_variable,
 )
 
 testinfra_runner, testinfra_hosts = get_ansible()
@@ -18,7 +18,9 @@ def check_network_type(host):
 def test_packages(host):
     check_network_type(host)
 
-    required_packages = get_os_role_variable(host, "network_netplan_required_packages")
+    required_packages = get_family_role_variable(
+        host, "network_netplan_required_packages"
+    )
     assert type(required_packages) is list
 
     for package_name in required_packages:
@@ -29,7 +31,7 @@ def test_packages(host):
     assert not removed_package.is_installed
 
     if get_variable(host, "ansible_os_family", True) == "Debian":
-        network_dispatcher = get_os_role_variable(
+        network_dispatcher = get_family_role_variable(
             host, "network_dispatcher_package_name"
         )
         package = host.package(network_dispatcher)
@@ -83,7 +85,7 @@ def test_service(host):
     check_network_type(host)
 
     if get_variable(host, "ansible_os_family", True) == "Debian":
-        service_name = get_os_role_variable(host, "network_dispatcher_service_name")
+        service_name = get_family_role_variable(host, "network_dispatcher_service_name")
         service = host.service(service_name)
 
         assert service.is_running
