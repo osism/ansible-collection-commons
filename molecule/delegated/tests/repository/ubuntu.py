@@ -4,7 +4,7 @@ from ..util.util import (
     get_ansible,
     get_variable,
     get_from_url,
-    get_os_role_variable,
+    get_dist_role_variable,
     jinja_replacement,
 )
 
@@ -81,7 +81,7 @@ def test_sources(host):
     repositories = get_variable(host, "repositories")
 
     if len(repositories) <= 0:
-        repositories = get_os_role_variable(host, "repository_default", "Ubuntu.yml")
+        repositories = get_dist_role_variable(host, "repository_default")
 
     assert len(repositories) > 0
 

@@ -1,7 +1,7 @@
 from ..util.util import (
     get_ansible,
     get_variable,
-    get_os_role_variable,
+    get_family_role_variable,
     jinja_list_concat,
 )
 
@@ -12,7 +12,7 @@ def test_required_packages_installed(host):
     required_packages = get_variable(host, "required_packages")
     required_packages_default = get_variable(host, "required_packages_default")
     required_packages_extra = get_variable(host, "required_packages_extra")
-    required_packages_distribution = get_os_role_variable(
+    required_packages_distribution = get_family_role_variable(
         host, "required_packages_distribution"
     )
 

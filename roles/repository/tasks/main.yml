@@ -1,6 +1,6 @@
 ---
 - name: Gather variables for each operating system
-  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-dist.yml"
 
 - name: Set repositories to default
   ansible.builtin.set_fact:
@@ -8,4 +8,4 @@
   when: repositories | length == 0
 
 - name: Include distribution specific repository tasks
-  ansible.builtin.include_tasks: "repository-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "repository-{{ ansible_os_family }}-family.yml"
