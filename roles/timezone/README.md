@@ -1,1 +1,1 @@
-https://osism.github.io/docs/guides/configuration-guide/commons/timezone
+https://osism.tech/docs/guides/configuration-guide/commons/timezone

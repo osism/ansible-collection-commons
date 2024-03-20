@@ -1,1 +1,1 @@
-https://osism.github.io/docs/guides/configuration-guide/commons/packages
+https://osism.tech/docs/guides/configuration-guide/commons/packages
