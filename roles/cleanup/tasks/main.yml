@@ -3,13 +3,13 @@
   ansible.builtin.service_facts:
 
 - name: Include distribution specific timer tasks
-  ansible.builtin.include_tasks: "timers-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "timers-{{ ansible_os_family }}-family.yml"
 
 - name: Include service tasks
-  ansible.builtin.include_tasks: services-{{ ansible_os_family }}.yml
+  ansible.builtin.include_tasks: "services-{{ ansible_os_family }}-family.yml"
 
 - name: Include packages tasks
-  ansible.builtin.include_tasks: "packages-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "packages-{{ ansible_os_family }}-family.yml"
 
 - name: Include cloudinit tasks
   ansible.builtin.include_tasks: cloudinit.yml

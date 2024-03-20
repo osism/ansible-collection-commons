@@ -5,7 +5,7 @@
   when: docker_compose_install_type != "package"
 
 - name: Include distribution specific install tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}-family.yml"
 
 - name: Copy osism.target systemd file
   become: true

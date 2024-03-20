@@ -1,6 +1,6 @@
 ---
 - name: Include distribution specific installation tasks
-  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "install-{{ ansible_os_family }}-family.yml"
 
 - name: "Retrieve file status of {{ resolvconf_file }}"
   ansible.builtin.stat:
@@ -45,4 +45,4 @@
     state: started
 
 - name: Include distribution specific configuration tasks
-  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}-family.yml"

@@ -4,7 +4,7 @@ import os
 from ..util.util import (
     get_ansible,
     get_variable,
-    get_os_role_variable,
+    get_family_role_variable,
 )
 
 testinfra_runner, testinfra_hosts = get_ansible()
@@ -18,7 +18,7 @@ def check_network_type(host):
 def test_packages(host):
     check_network_type(host)
 
-    required_packages = get_os_role_variable(
+    required_packages = get_family_role_variable(
         host, "network_interface_required_packages"
     )
     assert type(required_packages) is list

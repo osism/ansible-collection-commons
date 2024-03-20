@@ -1,11 +1,11 @@
-from .util.util import get_ansible, get_variable, get_os_role_variable
+from .util.util import get_ansible, get_variable, get_family_role_variable
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
 def test_files(host):
     certificates = get_variable(host, "certificates_ca")
-    path = get_os_role_variable(host, "certificates_ca_path")
+    path = get_family_role_variable(host, "certificates_ca_path")
 
     assert type(certificates) is list
     assert path != ""
