@@ -1,1 +1,1 @@
-https://osism.github.io/docs/guides/configuration-guide/commons/network
+https://osism.tech/docs/guides/configuration-guide/commons/network

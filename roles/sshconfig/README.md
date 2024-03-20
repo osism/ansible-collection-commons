@@ -1,1 +1,1 @@
-https://osism.github.io/docs/guides/configuration-guide/commons#sshconfig
+https://osism.tech/docs/guides/configuration-guide/commons#sshconfig
