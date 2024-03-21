@@ -75,6 +75,13 @@
     group: root
   when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
 
+- name: "Install package {{ network_dispatcher_package_name }}"
+  become: true
+  ansible.builtin.apt:
+    name: "{{ network_dispatcher_package_name }}"
+    state: present
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+
 - name: Copy dispatcher scripts
   become: true
   ansible.builtin.template:
@@ -85,21 +92,9 @@
     group: root
   loop: "{{ network_dispatcher_scripts }}"
 
-- name: "Install package {{ network_dispatcher_package_name }}"
-  become: true
-  ansible.builtin.apt:
-    name: "{{ network_dispatcher_package_name }}"
-    state: present
-    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
-
 - name: "Enable service {{ network_dispatcher_service_name }}"
   become: true
   ansible.builtin.service:
     name: "{{ network_dispatcher_service_name }}"
     enabled: true
     state: started
-
-- name: Include cleanup tasks
-  ansible.builtin.include_tasks: cleanup-netplan.yml
-  when:
-    - network_netplan_remove_unmanaged_files | bool
