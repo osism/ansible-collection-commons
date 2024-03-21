@@ -1,1 +1,8 @@
 ---
+- name: Write test script
+  become: true
+  ansible.builtin.lineinfile:
+    path: /tmp/test_network.sh
+    line: "#!/bin/bash"
+    create: true
+    mode: 0644
