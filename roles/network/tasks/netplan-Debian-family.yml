@@ -98,8 +98,3 @@
     name: "{{ network_dispatcher_service_name }}"
     enabled: true
     state: started
-
-- name: Include cleanup tasks
-  ansible.builtin.include_tasks: cleanup-netplan.yml
-  when:
-    - network_netplan_remove_unmanaged_files | bool

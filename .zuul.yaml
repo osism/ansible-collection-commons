@@ -442,7 +442,7 @@
 #        - ansible-collection-commons-molecule-lynis
 #        - ansible-collection-commons-molecule-microcode
 #        - ansible-collection-commons-molecule-motd
-#        - ansible-collection-commons-molecule-network
+#       - ansible-collection-commons-molecule-network
 #        - ansible-collection-commons-molecule-operator
 #        - ansible-collection-commons-molecule-packages
 #        - ansible-collection-commons-molecule-podman
