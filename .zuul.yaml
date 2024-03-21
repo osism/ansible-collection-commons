@@ -448,7 +448,7 @@
 #        - ansible-collection-commons-molecule-podman
 #        - ansible-collection-commons-molecule-proxy
 #        - ansible-collection-commons-molecule-repository
-#        - ansible-collection-commons-molecule-resolvconf
+#       - ansible-collection-commons-molecule-resolvconf
 #        - ansible-collection-commons-molecule-runc
 #        - ansible-collection-commons-molecule-services
 #        - ansible-collection-commons-molecule-sosreport
