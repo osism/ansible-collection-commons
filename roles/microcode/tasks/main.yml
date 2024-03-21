@@ -1,9 +1,33 @@
 ---
+- name: Check for non-free-firmware repository on Debian
+  ansible.builtin.lineinfile:
+    dest: /etc/apt/sources.list.d/default.list
+    regexp: '(.*)\s+non-free-firmware\s*(.*)$'
+    state: absent
+  check_mode: yes
+  register: debian_repo_existing
+  when: "ansible_distribution == 'Debian'"
+
+- name: Add non-free-firmware repository on Debian
+  become: true
+  ansible.builtin.replace:
+    path: "{{ item }}"
+    regexp: '(.*)\s+main\s*(.*)$'
+    replace: '\1 main non-free-firmware\2'
+  with_items:
+    - "/etc/apt/sources.list.d/default.list"
+    - "/etc/apt/sources.list.d/security.list"
+    - "/etc/apt/sources.list.d/updates.list"
+  when:
+    - "ansible_distribution == 'Debian'"
+    - "debian_repo_existing.found == 0"
+
 - name: Install microcode packages
   become: true
   ansible.builtin.apt:
     name: "{{ microcode_packages_debian }}"
     state: present
+    update_cache: true
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   when: "'Debian' in ansible_os_family"
 
