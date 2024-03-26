@@ -12,5 +12,7 @@ kubectl_configure_repository: true
 kubectl_debian_repository_key: https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
 kubectl_debian_repository: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
 
+kubectl_debian_repository_debian: "deb [trusted=yes] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
+
 kubectl_redhat_repository_key: https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
 kubectl_redhat_repository: "https://pkgs.k8s.io/core:/stable:/v1.28/rpm/"

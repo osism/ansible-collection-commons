@@ -25,7 +25,19 @@
     creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   when: kubectl_configure_repository | bool
 
-- name: Add repository Debian
+- name: Add repository Debian only
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ kubectl_debian_repository_debian }}"
+    state: present
+    filename: kubectl
+    update_cache: true
+    mode: 0644
+  when:
+    - kubectl_configure_repository | bool
+    - ansible_distribution == "Debian"
+
+- name: Add repository
   become: true
   ansible.builtin.apt_repository:
     repo: "{{ kubectl_debian_repository }}"
@@ -33,7 +45,10 @@
     filename: kubectl
     update_cache: true
     mode: 0644
-  when: kubectl_configure_repository | bool
+  when:
+    - kubectl_configure_repository | bool
+    - ansible_distribution != "Debian"
+
 
 - name: "Install package {{ kubectl_package_name }}"
   become: true
