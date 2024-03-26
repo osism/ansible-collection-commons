@@ -1,0 +1,12 @@
+---
+- name: Write scanned known_hosts entries
+  ansible.builtin.known_hosts:
+    path: "{{ known_hosts_destination }}/known_hosts"
+    name: "{{ inner_item.split(' ') | first }}"
+    key: "{{ inner_item }}"
+  loop: "{{ item['stdout_lines'] }}"
+  loop_control:
+    loop_var: inner_item
+  when:
+    - item['stdout_lines'] is defined
+    - item['stdout_lines'] | length
