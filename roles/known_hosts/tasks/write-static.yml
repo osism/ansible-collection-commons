@@ -1,0 +1,18 @@
+---
+- name: Write static known_hosts entries with hostname
+  ansible.builtin.known_hosts:
+    path: "{{ known_hosts_destination }}/known_hosts"
+    name: "{{ item }}"
+    key: "{{ item }} {{ inner_item }}"
+  loop_control:
+    loop_var: inner_item
+  loop: "{{ hostvars[item]['known_hosts'] }}"
+
+- name: Write static known_hosts entries with ansible_host
+  ansible.builtin.known_hosts:
+    path: "{{ known_hosts_destination }}/known_hosts"
+    name: "{{ hostvars[item]['ansible_host'] }}"
+    key: "{{ hostvars[item]['ansible_host'] }} {{ inner_item }}"
+  loop_control:
+    loop_var: inner_item
+  loop: "{{ hostvars[item]['known_hosts'] }}"

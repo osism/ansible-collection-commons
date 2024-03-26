@@ -1,14 +1,56 @@
 ---
-- name: Run ssh-keyscan for all hosts (hostname)
-  ansible.builtin.shell: "ssh-keyscan {{ item }}  >> {{ known_hosts_destination }}/known_hosts"
+- name: Run ssh-keyscan for all hosts with hostname
+  ansible.builtin.command: "ssh-keyscan {{ item }}"
   loop: "{{ known_hosts_list }}"
   changed_when: false
+  when:
+    - hostvars[item]['known_hosts'] is not defined
+  register: result
 
-- name: Run ssh-keyscan for all hosts (ansible_host)
-  ansible.builtin.shell: "ssh-keyscan {{ hostvars[item]['ansible_host'] }}  >> {{ known_hosts_destination }}/known_hosts"
+- name: Write scanned known_hosts entries for all hosts with hostname
+  ansible.builtin.include_tasks:
+    file: write-scanned.yml
+  loop: "{{ result['results'] }}"
+  loop_control:
+    label: "Scanned entries of {{ item['item'] }}"
+  when:
+    - result is defined
+
+- name: Run ssh-keyscan for all hosts with ansible_host
+  ansible.builtin.command: "ssh-keyscan {{ hostvars[item]['ansible_host'] }}"
   loop: "{{ known_hosts_list }}"
   changed_when: false
-  when: hostvars[item]['ansible_host'] is defined
+  when:
+    - hostvars[item]['ansible_host'] is defined
+    - hostvars[item]['known_hosts'] is not defined
+  register: result
+
+- name: Write scanned known_hosts entries for all hosts with ansible_host
+  ansible.builtin.include_tasks:
+    file: write-scanned.yml
+  loop: "{{ result['results'] }}"
+  loop_control:
+    label: "Scanned entries of {{ item['item'] }}"
+  when:
+    - result is defined
+
+- name: Write static known_hosts entries
+  ansible.builtin.include_tasks:
+    file: write-static.yml
+  loop: "{{ known_hosts_list }}"
+  when:
+    - hostvars[item]['known_hosts'] is defined
+    - hostvars[item]['known_hosts'] | length
+
+- name: Write extra known_hosts entries
+  ansible.builtin.known_hosts:
+    path: "{{ known_hosts_destination }}/known_hosts"
+    name: "{{ item.split(' ') | first }}"
+    key: "{{ item }}"
+  loop: "{{ known_hosts_extra }}"
+  when:
+    - known_hosts_extra is defined
+    - known_hosts_extra | length
 
 - name: Set file permissions
   ansible.builtin.file:
