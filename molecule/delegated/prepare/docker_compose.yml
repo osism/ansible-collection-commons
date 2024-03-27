@@ -1,5 +1,5 @@
 ---
-- name: Debian specific tasks
+- name: Ubuntu specific tasks
   become: true
   block:
     - name: Install required packages
@@ -23,7 +23,33 @@
       ansible.builtin.apt:
         name: moby-compose
         state: absent
-  when: "'Debian' in ansible_os_family"
+  when: "'Ubuntu' in ansible_distribution"
+
+- name: Debian specific tasks
+  become: true
+  block:
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: apt-transport-https
+        state: present
+
+    - name: Add repository gpg key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+
+    - name: Add repository
+      ansible.builtin.apt_repository:
+        repo: "deb [ arch=amd64 ] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+        state: present
+        filename: docker
+        update_cache: true
+        mode: 0644
+
+    - name: Remove moby-compose package
+      ansible.builtin.apt:
+        name: moby-compose
+        state: absent
+  when: "'Debian' in ansible_distribution"
 
 - name: RedHat specific tasks
   become: true
@@ -41,7 +67,7 @@
       ansible.builtin.yum_repository:
         name: docker-ce
         description: Docker CE Stable - $basearch
-        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+        baseurl: https://download.docker.com/linux/centos/9/x86_64/stable
         gpgcheck: yes
         enabled: yes
         gpgkey: https://download.docker.com/linux/centos/gpg
