@@ -44,7 +44,7 @@
         - name: centos-9-stream
           label: centos-9-stream
     vars:
-      ansible_molecule_ansible_version: "9.3.0"
+      ansible_molecule_ansible_version: "9.4.0"
     files:
       - '^.zuul.yaml$'
       - '^molecule\/delegated\/[^\/]*yml$'
