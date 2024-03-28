@@ -1,0 +1,29 @@
+---
+sosreport_required_packages:
+  - sos
+
+sosreport_plugins:
+  - dnf
+  - auditd
+  - block
+  - devices
+  - docker
+  - filesys
+  - hardware
+  - kernel
+  - kvm
+  - md
+  - memory
+  - networking
+  - pci
+  - process
+  - processor
+  - python
+  - selinux
+  - services
+  - ssh
+  - system
+  - systemd
+  - udev
+  - usb
+  - xfs

@@ -6,3 +6,10 @@
       - openresolv
       - resolvconf
     state: absent
+
+- name: Install package systemd-resolved
+  become: true
+  ansible.builtin.apt:
+    name: systemd-resolved
+    state: present
+  when: ansible_distribution == "Debian"

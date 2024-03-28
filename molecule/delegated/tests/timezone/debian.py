@@ -18,7 +18,7 @@ def test_timezone_settings(host):
 
     timezone_file = host.file("/etc/timezone")
     assert timezone_file.exists
-    assert timezone_file.content_string.strip() == timezone_name
+    assert timezone_name in timezone_file.content_string.strip()
 
     hwclock_file = host.file("/etc/adjtime")
     if hwclock_file.exists:

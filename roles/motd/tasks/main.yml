@@ -1,6 +1,6 @@
 ---
 - name: Include distribution specific configure tasks
-  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}.yml"
+  ansible.builtin.include_tasks: "configure-{{ ansible_os_family }}-family.yml"
 
 - name: Copy motd file
   become: true

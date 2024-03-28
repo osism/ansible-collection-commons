@@ -25,6 +25,15 @@
     creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   when: kubectl_configure_repository | bool
 
+- name: Set permissions of gpg key
+  become: true
+  ansible.builtin.file:
+    path: "/etc/apt/keyrings/kubernetes-apt-keyring.gpg"
+    owner: root
+    group: root
+    mode: 0644
+  when: kubectl_configure_repository | bool
+
 - name: Add repository Debian
   become: true
   ansible.builtin.apt_repository:

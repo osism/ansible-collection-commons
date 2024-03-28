@@ -1,17 +1,29 @@
 ---
-- name: Install required packages
+- name: Install epel-release on CentOS
   become: true
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
+    name: epel-release
+    state: present
+    lock_timeout: "{{ lock_timeout | default(300) }}"
+
+- name: Enable EPEL repository
+  become: true
+  ansible.builtin.command:
+    cmd: dnf config-manager --set-enabled epel
+  changed_when: true
+
+- name: Update package cache
+  become: true
+  ansible.builtin.command:
+    cmd: "dnf makecache"
+  changed_when: false
+
+- name: Install required packages on CentOS
+  become: true
+  ansible.builtin.dnf:
     name: "{{ network_netplan_required_packages }}"
     state: present
-    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
-
-- name: Remove ifupdown package
-  become: true
-  ansible.builtin.apt:
-    name: ifupdown
-    state: absent
-    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+    lock_timeout: "{{ lock_timeout | default(300) }}"
 
 - name: Create required directories
   become: true
@@ -75,29 +87,24 @@
     group: root
   when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
 
-- name: Copy dispatcher scripts
-  become: true
-  ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
-    mode: 0755
-    owner: root
-    group: root
-  loop: "{{ network_dispatcher_scripts }}"
+# networkd-dispatcher is currently not being installed on CentOS
+#- name: Copy dispatcher scripts
+#  become: true
+#  ansible.builtin.template:
+#    src: "{{ item.src }}"
+#    dest: "/etc/networkd-dispatcher/{{ item.dest }}"
+#    mode: 0755
+#    owner: root
+#    group: root
+#  loop: "{{ network_dispatcher_scripts }}"
 
-- name: "Install package {{ network_dispatcher_package_name }}"
-  become: true
-  ansible.builtin.apt:
-    name: "{{ network_dispatcher_package_name }}"
-    state: present
-    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
-
-- name: "Enable service {{ network_dispatcher_service_name }}"
-  become: true
-  ansible.builtin.service:
-    name: "{{ network_dispatcher_service_name }}"
-    enabled: true
-    state: started
+#- name: "Enable service {{ network_dispatcher_service_name }}"
+#  become: true
+#  ansible.builtin.service:
+#    name: "{{ network_dispatcher_service_name }}"
+#    enabled: true
+#    state: started
+#  register: network_service
 
 - name: Include cleanup tasks
   ansible.builtin.include_tasks: cleanup-netplan.yml

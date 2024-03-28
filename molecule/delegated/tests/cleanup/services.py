@@ -1,7 +1,7 @@
 from ..util.util import (
     get_ansible,
     get_variable,
-    get_os_role_variable,
+    get_family_role_variable,
     jinja_list_concat,
 )
 
@@ -13,7 +13,9 @@ def test_cleanup_service(host):
     services_default = get_variable(host, "cleanup_services_default")
     services_extra = get_variable(host, "cleanup_services_extra")
 
-    services_distribution = get_os_role_variable(host, "cleanup_services_distribution")
+    services_distribution = get_family_role_variable(
+        host, "cleanup_services_distribution"
+    )
 
     services = jinja_list_concat(
         services, [services_default, services_extra, services_distribution]

@@ -21,14 +21,8 @@
     state: absent
   with_items: "{{ netplan_configuration_files['files'] }}"
 
-- name: Gather variables for each operating system
-  ansible.builtin.include_vars: "{{ item }}"
-  with_first_found:
-    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
-    - "interfaces/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "interfaces/{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
-    - "interfaces/{{ ansible_distribution | lower }}.yml"
-    - "interfaces/{{ ansible_os_family | lower }}.yml"
+- name: Gather interfaces variables
+  ansible.builtin.include_vars: "interfaces.yml"
   tags:
     - always
 
