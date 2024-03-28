@@ -6,14 +6,6 @@
     dest: /etc/apt/apt.conf.d/99osism
     mode: 0644
 
-- name: Add repository keys via URLs with apt-key
-  become: true
-  ansible.builtin.apt_key:
-    url: "{{ item }}"
-    state: present
-  loop: "{{ repository_keys }}"
-  when: ansible_distribution_version is version('22.04', '<')
-
 - name: Add repository keys via URLs
   become: true
   ansible.builtin.get_url:
@@ -25,26 +17,15 @@
   loop: "{{ repository_keys }}"
   loop_control:
     extended: true
-  when: ansible_distribution_version is version('22.04', '>=')
-
-- name: Add repository keys via keyservers with apt-key
-  become: true
-  ansible.builtin.apt_key:
-    id: "{{ item.key }}"
-    keyserver: "{{ item.value }}"
-    state: present
-  loop: "{{ repository_key_ids | dict2items }}"
-  when: ansible_distribution_version is version('22.04', '<')
 
 - name: Add repository keys via keyservers
   ansible.builtin.fail:
     msg: |
-      Adding repository keys via a keyserver is currently not supported
-      on Ubuntu 22.04. Please store the corresponding keys in the configuration
+      Adding repository keys via a keyserver is currently not supported.
+      Please store the corresponding keys in the configuration
       repository as files and set the repository_key_files_directory parameter
       (e.g. /opt/configuration/files/repository_keys).
   when:
-    - ansible_distribution_version is version('22.04', '>=')
     - repository_key_ids
 
 # NOTE: We ignore errors that can occur during the seeding of the
@@ -59,16 +40,6 @@
   run_once: true
   when: "'manager' in groups"
 
-- name: Add repository keys via files with apt-key
-  become: true
-  ansible.builtin.apt_key:
-    data: "{{ lookup('file', item) }}"
-    state: present
-  with_fileglob: "{{ repository_key_files_directory }}/*.gpg"
-  when:
-    - result is defined and result.stat.isdir is defined and result.stat.isdir
-    - ansible_distribution_version is version('22.04', '<')
-
 - name: Add repository keys via files
   become: true
   ansible.builtin.copy:
@@ -82,7 +53,6 @@
     extended: true
   when:
     - result is defined and result.stat.isdir is defined and result.stat.isdir
-    - ansible_distribution_version is version('22.04', '>=')
 
 # NOTE: Not using apt_repository here because it requires python-apt.
 
