@@ -47,10 +47,6 @@
           label: ubuntu-jammy-large
     vars:
       ansible_molecule_ansible_version: "9.4.0"
-    files:
-      - '^.zuul.yaml$'
-      - '^molecule\/delegated\/[^\/]*yml$'
-      - '^molecule\/requirements\.txt$'
 
 - job:
     name: ansible-collection-commons-molecule-certificates
@@ -58,8 +54,11 @@
     vars:
       ansible_role: certificates
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/certificates\/.*$'
-      - '^molecule\/delegated\/tests\/certificates.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/certificates.*$'
 
 - job:
     name: ansible-collection-commons-molecule-cleanup
@@ -67,8 +66,11 @@
     vars:
       ansible_role: cleanup
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/cleanup\/.*$'
-      - '^molecule\/delegated\/tests\/cleanup.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/cleanup.*$'
 
 - job:
     name: ansible-collection-commons-molecule-configfs
@@ -76,8 +78,11 @@
     vars:
       ansible_role: configfs
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/configfs\/.*$'
-      - '^molecule\/delegated\/tests\/configfs.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/configfs.*$'
 
 - job:
     name: ansible-collection-commons-molecule-configuration
@@ -85,8 +90,11 @@
     vars:
       ansible_role: configuration
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/configuration\/.*$'
-      - '^molecule\/delegated\/tests\/configuration.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/configuration.*$'
 
 - job:
     name: ansible-collection-commons-molecule-docker_compose
@@ -94,8 +102,11 @@
     vars:
       ansible_role: docker_compose
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/docker_compose\/.*$'
-      - '^molecule\/delegated\/tests\/docker_compose.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/docker_compose.*$'
 
 - job:
     name: ansible-collection-commons-molecule-docker_login
@@ -103,8 +114,11 @@
     vars:
       ansible_role: docker_login
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/docker_login\/.*$'
-      - '^molecule\/delegated\/tests\/docker_login.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/docker_login.*$'
 
 - job:
     name: ansible-collection-commons-molecule-facts
@@ -112,8 +126,11 @@
     vars:
       ansible_role: facts
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/facts\/.*$'
-      - '^molecule\/delegated\/tests\/facts.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/facts.*$'
 
 - job:
     name: ansible-collection-commons-molecule-firewall
@@ -121,8 +138,11 @@
     vars:
       ansible_role: firewall
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/firewall\/.*$'
-      - '^molecule\/delegated\/tests\/firewall.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/firewall.*$'
 
 - job:
     name: ansible-collection-commons-molecule-hostname
@@ -130,8 +150,11 @@
     vars:
       ansible_role: hostname
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/hostname\/.*$'
-      - '^molecule\/delegated\/tests\/hostname.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/hostname.*$'
 
 - job:
     name: ansible-collection-commons-molecule-hosts
@@ -139,8 +162,11 @@
     vars:
       ansible_role: hosts
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/hosts\/.*$'
-      - '^molecule\/delegated\/tests\/hosts.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/hosts.*$'
 
 - job:
     name: ansible-collection-commons-molecule-ipmitool
@@ -148,8 +174,11 @@
     vars:
       ansible_role: ipmitool
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/ipimtool\/.*$'
-      - '^molecule\/delegated\/tests\/ipmitool.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/ipmitool.*$'
 
 - job:
     name: ansible-collection-commons-molecule-kernel_modules
@@ -157,8 +186,11 @@
     vars:
       ansible_role: kernel_modules
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/kernel_modules\/.*$'
-      - '^molecule\/delegated\/tests\/kernel_modules.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/kernel_modules.*$'
 
 - job:
     name: ansible-collection-commons-molecule-known_hosts
@@ -166,8 +198,11 @@
     vars:
       ansible_role: known_hosts
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/known_hosts\/.*$'
-      - '^molecule\/delegated\/tests\/known_hosts.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/known_hosts.*$'
 
 - job:
     name: ansible-collection-commons-molecule-kompose
@@ -175,8 +210,11 @@
     vars:
       ansible_role: kompose
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/kompose\/.*$'
-      - '^molecule\/delegated\/tests\/kompose.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/kompose.*$'
 
 - job:
     name: ansible-collection-commons-molecule-kubectl
@@ -184,8 +222,11 @@
     vars:
       ansible_role: kubectl
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/kubectl\/.*$'
-      - '^molecule\/delegated\/tests\/kubectl.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/kubectl.*$'
 
 - job:
     name: ansible-collection-commons-molecule-limits
@@ -193,8 +234,11 @@
     vars:
       ansible_role: limits
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/limits\/.*$'
-      - '^molecule\/delegated\/tests\/limits.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/limits.*$'
 
 - job:
     name: ansible-collection-commons-molecule-lynis
@@ -202,8 +246,11 @@
     vars:
       ansible_role: lynis
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/lynis\/.*$'
-      - '^molecule\/delegated\/tests\/lynis.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/lynis.*$'
 
 - job:
     name: ansible-collection-commons-molecule-microcode
@@ -211,8 +258,11 @@
     vars:
       ansible_role: microcode
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/microcode\/.*$'
-      - '^molecule\/delegated\/tests\/microcode.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/microcode.*$'
 
 - job:
     name: ansible-collection-commons-molecule-motd
@@ -220,8 +270,11 @@
     vars:
       ansible_role: motd
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/motd\/.*$'
-      - '^molecule\/delegated\/tests\/motd.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/motd.*$'
 
 - job:
     name: ansible-collection-commons-molecule-network
@@ -229,8 +282,11 @@
     vars:
       ansible_role: network
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/network\/.*$'
-      - '^molecule\/delegated\/tests\/network.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/network.*$'
 
 - job:
     name: ansible-collection-commons-molecule-operator
@@ -238,8 +294,11 @@
     vars:
       ansible_role: operator
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/operator\/.*$'
-      - '^molecule\/delegated\/tests\/operator.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/operator.*$'
 
 - job:
     name: ansible-collection-commons-molecule-packages
@@ -247,8 +306,11 @@
     vars:
       ansible_role: packages
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/packages\/.*$'
-      - '^molecule\/delegated\/tests\/packages.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/packages.*$'
 
 - job:
     name: ansible-collection-commons-molecule-podman
@@ -256,8 +318,11 @@
     vars:
       ansible_role: podman
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/podman\/.*$'
-      - '^molecule\/delegated\/tests\/podman.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/podman.*$'
 
 - job:
     name: ansible-collection-commons-molecule-proxy
@@ -265,8 +330,11 @@
     vars:
       ansible_role: proxy
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/proxy\/.*$'
-      - '^molecule\/delegated\/tests\/proxy.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/proxy.*$'
 
 - job:
     name: ansible-collection-commons-molecule-repository
@@ -274,8 +342,11 @@
     vars:
       ansible_role: repository
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/repository\/.*$'
-      - '^molecule\/delegated\/tests\/repository.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/repository.*$'
 
 - job:
     name: ansible-collection-commons-molecule-resolvconf
@@ -283,8 +354,11 @@
     vars:
       ansible_role: resolvconf
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/resolvconf\/.*$'
-      - '^molecule\/delegated\/tests\/resolvconf.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/resolvconf.*$'
 
 - job:
     name: ansible-collection-commons-molecule-runc
@@ -292,8 +366,11 @@
     vars:
       ansible_role: runc
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/runc\/.*$'
-      - '^molecule\/delegated\/tests\/runc.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/runc.*$'
 
 - job:
     name: ansible-collection-commons-molecule-services
@@ -301,8 +378,11 @@
     vars:
       ansible_role: services
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/services\/.*$'
-      - '^molecule\/delegated\/tests\/services.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/services.*$'
 
 - job:
     name: ansible-collection-commons-molecule-sosreport
@@ -310,8 +390,11 @@
     vars:
       ansible_role: sosreport
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/sosreport\/.*$'
-      - '^molecule\/delegated\/tests\/sosreport.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/sosreport.*$'
 
 - job:
     name: ansible-collection-commons-molecule-sshconfig
@@ -319,8 +402,11 @@
     vars:
       ansible_role: sshconfig
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/sshconfig\/.*$'
-      - '^molecule\/delegated\/tests\/sshconfig.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/sshconfig.*$'
 
 - job:
     name: ansible-collection-commons-molecule-state
@@ -328,8 +414,11 @@
     vars:
       ansible_role: state
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/state\/.*$'
-      - '^molecule\/delegated\/tests\/state.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/state.*$'
 
 - job:
     name: ansible-collection-commons-molecule-sysctl
@@ -337,8 +426,11 @@
     vars:
       ansible_role: sysctl
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/sysctl\/.*$'
-      - '^molecule\/delegated\/tests\/sysctl.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/sysctl.*$'
 
 - job:
     name: ansible-collection-commons-molecule-systohc
@@ -346,8 +438,11 @@
     vars:
       ansible_role: systohc
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/systohc\/.*$'
-      - '^molecule\/delegated\/tests\/systohc.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/systohc.*$'
 
 - job:
     name: ansible-collection-commons-molecule-timezone
@@ -355,8 +450,11 @@
     vars:
       ansible_role: timezone
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/timezone\/.*$'
-      - '^molecule\/delegated\/tests\/timezone.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/timezone.*$'
 
 - job:
     name: ansible-collection-commons-molecule-trivy
@@ -364,8 +462,11 @@
     vars:
       ansible_role: trivy
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/trivy\/.*$'
-      - '^molecule\/delegated\/tests\/trivy.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/trivy.*$'
 
 - job:
     name: ansible-collection-commons-molecule-user
@@ -373,8 +474,11 @@
     vars:
       ansible_role: user
     files:
+      - '^\.zuul\.yaml$'
+      - '^molecule\/delegated\/[^\/]*yml$'
+      - '^molecule\/requirements\.txt$'
       - '^roles\/user\/.*$'
-      - '^molecule\/delegated\/tests\/user.*$'
+      - '^molecule\/delegated\/[a-zA-Z0-9_-]+\/user.*$'
 
 - project:
     merge-mode: squash-merge
