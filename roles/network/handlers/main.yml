@@ -1,5 +1,11 @@
 ---
-- name: Netplan configuration changed
+- name: Test netplan configuration
+  become: true
+  ansible.builtin.command: netplan generate
+  changed_when: true
+  notify: Apply netplan configuration
+
+- name: Apply netplan configuration
   become: true
   ansible.builtin.command: netplan apply
   when: network_allow_service_restart
