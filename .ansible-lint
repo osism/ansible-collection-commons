@@ -2,12 +2,6 @@
 exclude_paths:
   - .github/
 mock_modules:
-  - community.docker.docker_container_exec
-  - community.docker.docker_login
-  - community.general.ini_file
-  - community.general.modprobe
-  - community.general.pam_limits
-  - community.general.timezone
   - scan_services
 use_default_rules: true
 rulesdir:
