@@ -29,7 +29,7 @@ def test_sources(host):
     repositories = get_variable(host, "repositories")
 
     if len(repositories) <= 0:
-        repositories = get_dist_role_variable(host, "repository_default")
+        repositories = get_dist_role_variable(host, "__repository_default")
 
     assert len(repositories) > 0
 

@@ -1,5 +1,5 @@
 ---
-repository_default:
+__repository_default:
   - name: "{{ ansible_distribution_release }}"
     repository: "deb [arch=amd64] http://de.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} main restricted universe multiverse"
   - name: "{{ ansible_distribution_release }}-backports"

@@ -1,5 +1,5 @@
 ---
-repository_default:
+__repository_default:
   - name: "{{ ansible_distribution_release }}"
     repository: "deb http://deb.debian.org/debian {{ ansible_distribution_release }} main contrib"
   - name: "{{ ansible_distribution_release }}-security"
