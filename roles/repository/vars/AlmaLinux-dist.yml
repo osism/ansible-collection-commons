@@ -1,5 +1,5 @@
 ---
-repository_default:
+__repository_default:
   - name: "appstream"
     description: "{{ ansible_distribution }} $releasever - AppStream"
     mirrorlist: "http://mirrors.almalinux.org/mirrorlist/$releasever/appstream"
