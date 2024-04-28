@@ -20,7 +20,7 @@ def test_user(host):
     assert user.uid == get_variable(host, "operator_user_id")
     assert user.group == get_variable(host, "operator_group")
 
-    additional_groups = get_family_role_variable(host, "operator_groups")
+    additional_groups = get_family_role_variable(host, "__operator_groups")
     for additional_group in additional_groups:
         assert additional_group in user.groups
 
