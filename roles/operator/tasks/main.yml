@@ -2,6 +2,11 @@
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ ansible_os_family }}-family.yml"
 
+- name: Set operator_groups variable to default value
+  ansible.builtin.set_fact:
+    operator_groups: "{{ __operator_groups }}"
+  when: operator_groups|default(None) == None
+
 - name: Create operator group
   become: true
   ansible.builtin.group:

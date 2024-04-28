@@ -1,4 +1,4 @@
 ---
-operator_groups:
+__operator_groups:
   - adm
   - wheel
