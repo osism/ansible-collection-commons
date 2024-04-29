@@ -2,6 +2,15 @@
 apt_cache_valid_time: 3600
 
 required_packages_distribution:
+  - command-not-found
+  - debconf
   - debsums
+  - htop
+  - iftop
+  - iperf
+  - multitail
+  - ncdu
+  - pv
+  - python-is-python3
   - selinux-utils
   - ssh
