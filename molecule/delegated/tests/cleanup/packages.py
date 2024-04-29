@@ -16,7 +16,7 @@ def test_cleanup_pkg(host):
     packages_extra = get_variable(host, "cleanup_packages_extra")
 
     packages_distribution = get_family_role_variable(
-        host, "cleanup_packages_distribution"
+        host, "__cleanup_packages_distribution"
     )
 
     packages = jinja_list_concat(

@@ -1,4 +1,17 @@
 ---
+- name: Gather variables for each operating system
+  ansible.builtin.include_vars: "{{ ansible_os_family }}-family.yml"
+
+- name: Set cleanup_packages_distribution variable to default value
+  ansible.builtin.set_fact:
+    cleanup_packages_distribution: "{{ __cleanup_packages_distribution }}"
+  when: cleanup_packages_distribution|default(None) == None
+
+- name: Set cleanup_services_distribution variable to default value
+  ansible.builtin.set_fact:
+    cleanup_services_distribution: "{{ __cleanup_services_distribution }}"
+  when: cleanup_services_distribution|default(None) == None
+
 - name: Populate service facts
   ansible.builtin.service_facts:
 

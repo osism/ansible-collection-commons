@@ -14,7 +14,7 @@ def test_cleanup_service(host):
     services_extra = get_variable(host, "cleanup_services_extra")
 
     services_distribution = get_family_role_variable(
-        host, "cleanup_services_distribution"
+        host, "__cleanup_services_distribution"
     )
 
     services = jinja_list_concat(
