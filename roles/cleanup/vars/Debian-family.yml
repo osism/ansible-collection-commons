@@ -1,6 +1,6 @@
 ---
-cleanup_services_distribution: []
-cleanup_packages_distribution:
+__cleanup_services_distribution: []
+__cleanup_packages_distribution:
   - libvirt-bin
   - lxd
   - open-iscsi
