@@ -2,9 +2,22 @@
 upgrade_packages: true
 
 required_packages_default:
+  - curl
+  - dmidecode
   - ethtool
+  - iotop
   - jq
+  - lsscsi
+  - ltrace
+  - mtr
+  - nvme-cli
+  - pciutils
   - rsyslog
+  - socat
+  - sysstat
+  - tmux
+  - tree
+  - whois
 
 required_packages_extra: []
 required_packages: "{{ required_packages_default + required_packages_extra + required_packages_distribution }}"
