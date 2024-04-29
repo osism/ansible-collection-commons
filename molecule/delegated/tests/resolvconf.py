@@ -1,3 +1,5 @@
+import pytest
+
 from .util.util import (
     get_ansible,
     get_variable,
@@ -19,8 +21,14 @@ def test_resolvconf_service_disabled(host):
     """Check if the resolvconf service is disabled."""
 
     service = host.service("resolvconf")
-    assert not service.is_enabled
-    assert not service.is_running
+    cmd = host.run(
+        f'systemctl list-units --all | grep -q "^[[:space:]]*{service.name}"'
+    )
+    if cmd.rc == 0:
+        assert not service.is_enabled
+        assert not service.is_running
+    else:
+        pytest.skip("The resolvconf service does not exist")
 
 
 def test_resolved_conf_file(host):
