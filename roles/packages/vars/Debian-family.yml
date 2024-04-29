@@ -1,7 +1,7 @@
 ---
-apt_cache_valid_time: 3600
+__apt_cache_valid_time: 3600
 
-required_packages_distribution:
+__required_packages_distribution:
   - command-not-found
   - debconf
   - debsums
