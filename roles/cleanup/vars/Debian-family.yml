@@ -1,8 +1,14 @@
 ---
-__cleanup_services_distribution: []
+__cleanup_services_distribution:
+  - ModemManager.service
+
 __cleanup_packages_distribution:
   - libvirt-bin
+  - lxc
   - lxd
+  - lxd-agent-loader
   - open-iscsi
+  - pastebinit
+  - telnet
 
 cleanup_cloudinit_package_name: cloud-init

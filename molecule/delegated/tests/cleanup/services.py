@@ -1,3 +1,5 @@
+import pytest
+
 from ..util.util import (
     get_ansible,
     get_variable,
@@ -23,5 +25,17 @@ def test_cleanup_service(host):
 
     for service_name in services:
         service = host.service(service_name)
-        assert not service.is_enabled
-        assert not service.is_running
+
+        # service.exists is not working because of:
+        # b'systemctl list-unit-files | grep -q"^ModemManager.service"', _stdout=b'',
+        # _stderr=b"grep: invalid option -- '^'\nUsage: grep [OPTION]... PATTERNS [FILE]...\n
+        # Try 'grep --help' for more information.\n"
+        cmd = host.run(
+            f'systemctl list-units --all | grep -q "^[[:space:]]*{service_name}"'
+        )
+
+        if cmd.rc == 0:
+            assert not service.is_enabled, f"{service_name} should not be enabled"
+            assert not service.is_running, f"{service_name} should not be running"
+        else:
+            pytest.skip(f"The {service_name} service does not exist")
