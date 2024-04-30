@@ -1,4 +1,6 @@
 ---
+# The .crt extension is important. Otherwise the certificates are not imported.
+#
 # certificates_ca:
 #   - name: sample.crt
 #     certificate: |
