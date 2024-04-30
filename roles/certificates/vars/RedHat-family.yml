@@ -1,3 +1,4 @@
 ---
 certificates_ca_path: /etc/pki/ca-trust/extracted/pem
 certificates_ca_update_command: /usr/bin/update-ca-trust
+certificates_ca_package_name: ca-certificates

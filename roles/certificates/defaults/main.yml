@@ -7,4 +7,3 @@
 #       -----END CERTIFICATE-----
 
 certificates_ca: []
-certificates_ca_package_name: ca-certificates

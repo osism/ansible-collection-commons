@@ -20,7 +20,7 @@ def test_files(host):
 
 
 def test_pkg(host):
-    package_name = get_variable(host, "certificates_ca_package_name")
+    package_name = get_family_role_variable(host, "certificates_ca_package_name")
     package = host.package(package_name)
 
     assert package_name != ""
