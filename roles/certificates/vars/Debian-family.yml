@@ -1,3 +1,4 @@
 ---
 certificates_ca_path: /usr/local/share/ca-certificates
 certificates_ca_update_command: /usr/sbin/update-ca-certificates
+certificates_ca_package_name: ca-certificates
