@@ -1,4 +1,14 @@
 ---
+- name: Install util-linux-extra package
+  ansible.builtin.apt:
+    name: util-linux-extra
+    state: present
+    update_cache: true
+  become: true
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version == '24.04'
+
 - name: Sync hardware clock
   become: true
   ansible.builtin.command: hwclock --systohc
