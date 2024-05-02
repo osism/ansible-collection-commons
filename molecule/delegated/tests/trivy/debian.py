@@ -10,6 +10,17 @@ from ..util.util import (
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
+def check_ansible_distribution(host):
+    """Test on Ubuntu 24.04 skipped, because the repository
+    'https://aquasecurity.github.io/trivy-repo/deb noble Release'
+    does not have a release file yet."""
+    if (
+        get_variable(host, "ansible_distribution", True) == "Ubuntu"
+        and get_variable(host, "ansible_distribution_version", True) == "24.04"
+    ):
+        pytest.skip("Skipping this test on Ubuntu 24.04")
+
+
 def check_ansible_os_family(host):
     if get_variable(host, "ansible_os_family", True) != "Debian":
         pytest.skip("ansible_os_family mismatch")
@@ -22,6 +33,7 @@ def check_configure_repository(host):
 
 def test_package(host):
     """Check if the packages are installed."""
+    check_ansible_distribution(host)
     check_ansible_os_family(host)
 
     if get_variable(host, "trivy_configure_repository"):
@@ -36,6 +48,7 @@ def test_package(host):
 
 def test_trivy_gpg_key_present(host):
     """Check if the GPG key for the trivy repository is correctly added."""
+    check_ansible_distribution(host)
     check_ansible_os_family(host)
     check_configure_repository(host)
 
@@ -55,6 +68,7 @@ def test_trivy_gpg_key_present(host):
 
 def test_trivy_repository_configured(host):
     """Check if the Trivy repository is correctly configured."""
+    check_ansible_distribution(host)
     check_ansible_os_family(host)
     check_configure_repository(host)
 
