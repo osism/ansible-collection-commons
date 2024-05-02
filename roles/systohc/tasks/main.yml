@@ -3,8 +3,8 @@
   ansible.builtin.apt:
     name: util-linux-extra
     state: present
-    update_cache: yes
-  become: yes
+    update_cache: true
+  become: true
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version == '24.04'

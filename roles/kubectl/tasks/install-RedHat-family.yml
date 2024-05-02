@@ -5,8 +5,8 @@
     name: kubectl
     description: "K8s repository"
     baseurl: "{{ kubectl_redhat_repository }}"
-    gpgcheck: yes
-    enabled: yes
+    gpgcheck: true
+    enabled: true
     gpgkey: "{{ kubectl_redhat_repository_key }}"
     file: /etc/yum.repos.d/kubernetes
     mode: 0644

@@ -4,7 +4,7 @@
     dest: /etc/apt/sources.list.d/default.list
     regexp: '(.*)\s+non-free-firmware\s*(.*)$'
     state: absent
-  check_mode: yes
+  check_mode: true
   register: debian_repo_existing
   when: "ansible_distribution == 'Debian'"
 

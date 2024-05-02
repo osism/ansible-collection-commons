@@ -2,7 +2,7 @@
 - name: Update package cache
   become: true
   ansible.builtin.dnf:
-    update_cache: yes
+    update_cache: true
 
 - name: Install epel-release
   become: true
