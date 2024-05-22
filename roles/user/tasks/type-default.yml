@@ -4,6 +4,7 @@
   ansible.builtin.group:
     name: "{{ item.name }}"
     state: present
+  when: user_primary_group is not defined or (user_primary_group is defined and user_primary_group | length > 0)
   loop: "{{ user_list }}"
   loop_control:
     label: "{{ item.name }}"
@@ -14,7 +15,7 @@
     name: "{{ item.name }}"
     createhome: true
     shell: /usr/bin/bash
-    group: "{{ item.name }}"
+    group: "{{ item.primary_group | default(user_primary_group | default(item.name)) }}"
     groups: "{{ item.groups | default(user_groups) }}"
     state: present
   loop: "{{ user_list }}"
