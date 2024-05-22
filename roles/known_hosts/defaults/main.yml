@@ -14,3 +14,4 @@ known_hosts_destination: "/home/{{ operator_user }}/.ssh"
 
 known_hosts: []
 known_hosts_extra: []
+known_hosts_delete: []
