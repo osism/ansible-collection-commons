@@ -52,6 +52,17 @@
     - known_hosts_extra is defined
     - known_hosts_extra | length
 
+- name: Delete known_hosts entries
+  ansible.builtin.known_hosts:
+    path: "{{ known_hosts_destination }}/known_hosts"
+    name: "{{ item.split(' ') | first }}"
+    key: "{{ item }}"
+    state: absent
+  loop: "{{ known_hosts_delete }}"
+  when:
+    - known_hosts_delete is defined
+    - known_hosts_delete | length
+
 - name: Set file permissions
   ansible.builtin.file:
     path: "{{ known_hosts_destination }}/known_hosts"
