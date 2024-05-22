@@ -1,18 +1,11 @@
 import pytest
 
-from ..util.util import get_ansible, get_variable
+from .util.util import get_ansible, get_variable
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
-def check_user_manage_type(host):
-    if get_variable(host, "user_manage_type") != "accounts":
-        pytest.skip("user_manage_type mismatch")
-
-
-def test_accounts_present(host):
-    check_user_manage_type(host)
-
+def test_user_accounts_present(host):
     user_list = get_variable(host, "user_list")
     assert type(user_list) is list
 
@@ -40,9 +33,7 @@ def test_accounts_present(host):
             assert user_entry["key"] in keyfile.content_string
 
 
-def test_sudo(host):
-    check_user_manage_type(host)
-
+def test_user_sudo(host):
     assert host.package("sudo").is_installed
 
     user_list = get_variable(host, "user_list")
@@ -64,9 +55,7 @@ def test_sudo(host):
             assert "NOPASSWD: ALL" in f.content_string
 
 
-def test_accounts_absent(host):
-    check_user_manage_type(host)
-
+def test_user_accounts_absent(host):
     user_list = get_variable(host, "user_delete")
     assert type(user_list) is list
 

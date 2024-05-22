@@ -1,0 +1,35 @@
+---
+- name: Get and set remote SSH authorized keys
+  when: item.key.startswith('https')
+  block:  # noqa: osism-fqcn
+    - name: Fetch SSH authorized key
+      ansible.builtin.uri:
+        url: "{{ item.key }}"
+        return_content: true
+      register: result
+      failed_when: "'ssh' not in result.content"
+
+    - name: Set SSH authorized key
+      become: true
+      ansible.posix.authorized_key:
+        user: "{{ item.name }}"
+        key: "{{ item.key }}"
+      when:
+        - user_type == 'default'
+        - sshkey.startswith('ssh')
+      loop: "{{ result.content.split('\n') }}"
+      loop_control:
+        loop_var: sshkey
+        label: "{{ item.name }}"
+
+    - name: Write SSH authorized key into keyfile
+      ansible.builtin.lineinfile:
+        path: "{{ user_keyfile }}"
+        line: "{{ sshkey }} {{ item.name }}"
+      when:
+        - user_type == 'keyfile'
+        - sshkey.startswith('ssh')
+      loop: "{{ key.content.split('\n') }}"
+      loop_control:
+        loop_var: sshkey
+        label: "{{ item.name }}"

@@ -1,5 +1,17 @@
 ---
-user_manage_type: accounts
-user_ssh_file: "~/.ssh/authorized_keys"
+user_type: default
+
+# user_list:
+#   - name: testing
+#     key: ssh-rsa AAAAB...
+#     groups:  # default for groups is user_groups
+#       - dragon
+#       - docker
+#   - name: testing_github
+#     key: https://github.com/testing.keys
 user_list: []
+
 user_delete: []
+user_groups: []
+
+user_keyfile: "~/.ssh/authorized_keys"
