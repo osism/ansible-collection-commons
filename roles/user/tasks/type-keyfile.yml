@@ -1,0 +1,6 @@
+---
+- name: Write SSH authorized keys into a keyfile
+  ansible.builtin.include_tasks: remote-key.yml
+  loop: "{{ user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
