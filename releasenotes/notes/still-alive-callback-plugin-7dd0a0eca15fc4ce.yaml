@@ -1,7 +1,0 @@
----
-features:
-  - |
-    The `still_alive` callback stdout plugin displays a banner every
-    30 seconds when a task is running more than 120 seconds. This way
-    a user can be informed about long running tasks without touching
-    existing tasks.

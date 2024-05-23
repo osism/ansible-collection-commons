@@ -1,7 +1,0 @@
----
-features:
-  - |
-    In the operator role, it is now possible to check the minimum number
-    of SSH authorized keys set with `operator_authorized_keys_minimal`. If
-    fewer are set, the role fails. In order not to change the default
-    behaviour, `operator_authorized_keys_minimal` is set to `0` by default.
