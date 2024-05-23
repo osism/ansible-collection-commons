@@ -1,6 +1,6 @@
 ---
 - name: Get and set remote SSH authorized keys
-  when: item.key.startswith('https')
+  when: item.key.startswith('https') or item.key == "github"
   block:  # noqa: osism-fqcn
     - name: Fetch SSH authorized key
       ansible.builtin.uri:
@@ -8,6 +8,15 @@
         return_content: true
       register: result
       failed_when: "'ssh' not in result.content"
+      when: item.key.startswith('https')
+
+    - name: Fetch SSH authorized key from GitHub
+      ansible.builtin.uri:
+        url: "https://github.com/{{ item.key }}.keys"
+        return_content: true
+      register: result
+      failed_when: "'ssh' not in result.content"
+      when: item.key == "github"
 
     - name: Set SSH authorized key
       become: true
