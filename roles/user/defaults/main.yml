@@ -4,14 +4,19 @@ user_type: default
 # user_list:
 #   - name: testing
 #     key: ssh-rsa AAAAB...
-#     groups:  # default for groups is user_groups
-#       - dragon
-#       - docker
+#     # default for groups is user_groups
+#     # groups:
+#     #   - docker
+#     # default is a group with the name of the user
+#     # or user_primary_group if set
+#     # primary_group: dragon
 #   - name: testing_github
 #     key: https://github.com/testing.keys
 user_list: []
 
 user_delete: []
+
+# user_primary_group:
 user_groups: []
 
 user_keyfile: "~/.ssh/authorized_keys"
