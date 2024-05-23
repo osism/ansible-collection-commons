@@ -6,27 +6,41 @@
       ansible.builtin.uri:
         url: "{{ item.key }}"
         return_content: true
-      register: result
-      failed_when: "'ssh' not in result.content"
+      register: result1
+      failed_when: "'ssh' not in result1.content"
       when: item.key.startswith('https')
 
     - name: Fetch SSH authorized key from GitHub
       ansible.builtin.uri:
-        url: "https://github.com/{{ item.key }}.keys"
+        url: "https://github.com/{{ item.name }}.keys"
         return_content: true
-      register: result
-      failed_when: "'ssh' not in result.content"
+      register: result2
+      failed_when: "'ssh' not in result2.content"
       when: item.key == "github"
+
+    - name: Set user_keys fact when keys are not from GitHub
+      ansible.builtin.set_fact:
+        user_keys: "{{ result1.content.split('\n') }}"
+      when:
+        - result2 is skipped
+        - result1.content is defined
+
+    - name: Set user_keys fact when keys are from GitHub
+      ansible.builtin.set_fact:
+        user_keys: "{{ result2.content.split('\n') }}"
+      when:
+        - result1 is skipped
+        - result2.content is defined
 
     - name: Set SSH authorized key
       become: true
       ansible.posix.authorized_key:
         user: "{{ item.name }}"
-        key: "{{ item.key }}"
+        key: "{{ sshkey }}"
       when:
         - user_type == 'default'
         - sshkey.startswith('ssh')
-      loop: "{{ result.content.split('\n') }}"
+      loop: "{{ user_keys }}"
       loop_control:
         loop_var: sshkey
         label: "{{ item.name }}"
@@ -38,7 +52,7 @@
       when:
         - user_type == 'keyfile'
         - sshkey.startswith('ssh')
-      loop: "{{ key.content.split('\n') }}"
+      loop: "{{ user_keys }}"
       loop_control:
         loop_var: sshkey
         label: "{{ item.name }}"
