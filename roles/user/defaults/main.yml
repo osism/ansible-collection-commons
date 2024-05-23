@@ -1,6 +1,9 @@
 ---
 user_type: default
 
+# possible values: user, group
+user_sudoers_type: user
+
 # user_list:
 #   - name: testing
 #     key: ssh-rsa AAAAB...

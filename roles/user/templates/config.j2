@@ -1,1 +1,5 @@
-%{{ item.name }} {{ user_sudoers }}
+{% if user_sudoers_type == "group" %}
+%{{ item.primary_group | default(user_primary_group | default(item.name)) }} {{ user_sudoers }}
+{% elif user_sudoers_type == "user" %}
+{{ item.name }} {{ user_sudoers }}
+{% endif %}
