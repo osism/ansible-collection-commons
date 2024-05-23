@@ -1,6 +1,0 @@
----
-fixes:
-  - |
-    Reduce permission on `/etc/netplan/01-osism.yaml` to avoid
-    `Permissions for /etc/netplan/01-osism.yaml are too open. Netplan
-    configuration should NOT be accessible by others.` warnings.
