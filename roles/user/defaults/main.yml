@@ -20,3 +20,5 @@ user_delete: []
 user_groups: []
 
 user_keyfile: "~/.ssh/authorized_keys"
+
+user_sudoers: "ALL=(ALL:ALL) NOPASSWD: ALL"
