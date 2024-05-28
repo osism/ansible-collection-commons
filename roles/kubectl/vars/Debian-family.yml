@@ -1,6 +1,4 @@
 ---
-##########################
-# packages
-
 kubectl_required_packages:
   - kubectl
+  - python3-kubernetes
