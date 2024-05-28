@@ -44,10 +44,10 @@
     mode: 0644
   when: kubectl_configure_repository | bool
 
-- name: "Install package {{ kubectl_package_name }}"
+- name: Install required packages
   become: true
   ansible.builtin.apt:
-    name: "{{ kubectl_package_name }}"
+    name: "{{ kubectl_required_packages }}"
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
 
