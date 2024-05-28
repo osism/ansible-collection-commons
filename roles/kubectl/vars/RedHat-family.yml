@@ -1,0 +1,6 @@
+---
+##########################
+# packages
+
+kubectl_required_packages:
+  - kubectl

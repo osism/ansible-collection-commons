@@ -2,9 +2,6 @@ This ansible role will install kubectl
 
 **Role Variables**
 
-.. zuul:rolevar:: kubectl_package_name
-   :default: kubectl
-
 Name of the kubctl package.
 
 .. zuul:rolevar:: kubectl_configure_repository
