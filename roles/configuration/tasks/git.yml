@@ -72,9 +72,9 @@
   no_log: true
   tags: update-configuration
 
-- name: Set permissions and owner for checkout
+- name: Git - set permissions of configuration directory
   ansible.builtin.file:
     path: "{{ configuration_directory }}"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
-    mode: '0770'
+    mode: 0770
