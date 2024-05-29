@@ -36,3 +36,11 @@
     state: absent
     name: "{{ item.path | ansible.builtin.basename }}"
   loop: "{{ etc_pam_motd.files }}"
+
+- name: Configure SSH to print the motd
+  copy:
+    dest: /etc/ssh/sshd_config.d/60-motd.conf
+    content: |
+       PrintMotd yes
+  notify: Reload sshd to make motd changes effective
+
