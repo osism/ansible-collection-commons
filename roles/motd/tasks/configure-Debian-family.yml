@@ -44,7 +44,7 @@
     content: |
        PrintMotd yes
   notify: Reload sshd to make motd changes effective
-  when: motd_show_ssh == true
+  when: motd_show_ssh | bool
 
 - name: Configure SSH to not print the motd
   become: true
@@ -52,5 +52,5 @@
     path: /etc/ssh/sshd_config.d/60-motd.conf
     state: absent
   notify: Reload sshd to make motd changes effective
-  when: motd_show_ssh != true
+  when: not motd_show_ssh | bool
 
