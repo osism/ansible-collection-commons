@@ -38,9 +38,19 @@
   loop: "{{ etc_pam_motd.files }}"
 
 - name: Configure SSH to print the motd
+  become: true
   copy:
     dest: /etc/ssh/sshd_config.d/60-motd.conf
     content: |
        PrintMotd yes
   notify: Reload sshd to make motd changes effective
+  when: motd_show_ssh == true
+
+- name: Configure SSH to not print the motd
+  become: true
+  file:
+    path: /etc/ssh/sshd_config.d/60-motd.conf
+    state: absent
+  notify: Reload sshd to make motd changes effective
+  when: motd_show_ssh != true
 
