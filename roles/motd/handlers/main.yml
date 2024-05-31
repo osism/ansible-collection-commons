@@ -1,6 +1,6 @@
 ---
 # handlers file for motd
-- name: Reload sshd to make motd changes effective
+- name: Reload ssh service to make motd changes effective
   become: true
   ansible.builtin.service:
     name: "ssh"
