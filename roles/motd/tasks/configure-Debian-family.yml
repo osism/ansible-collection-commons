@@ -36,24 +36,3 @@
     state: absent
     name: "{{ item.path | ansible.builtin.basename }}"
   loop: "{{ etc_pam_motd.files }}"
-
-- name: Configure SSH to print the motd
-  become: true
-  ansible.builtin.copy:
-    dest: /etc/ssh/sshd_config.d/60-motd.conf
-    content: |
-       # Shows the motd on every ssh login
-       PrintMotd yes
-    group: root
-    owner: root
-    mode: 0644
-  notify: Reload ssh service to make motd changes effective
-  when: motd_show_ssh | bool
-
-- name: Configure SSH to not print the motd
-  become: true
-  ansible.builtin.file:
-    path: /etc/ssh/sshd_config.d/60-motd.conf
-    state: absent
-  notify: Reload ssh service to make motd changes effective
-  when: not motd_show_ssh | bool
