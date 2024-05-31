@@ -42,10 +42,11 @@
   ansible.builtin.copy:
     dest: /etc/ssh/sshd_config.d/60-motd.conf
     content: |
+       # Shows the motd on every ssh login
        PrintMotd yes
     group: root
     owner: root
-    mode: 0644
+    mode: "0644"
   notify: Reload sshd to make motd changes effective
   when: motd_show_ssh | bool
 
