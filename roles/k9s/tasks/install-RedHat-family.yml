@@ -1,0 +1,7 @@
+---
+- name: Install k9s package
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ k9s_base_url }}/{{ k9s_version }}/{{ k9s_package_file }}"
+    disable_gpg_check: true
+    state: present

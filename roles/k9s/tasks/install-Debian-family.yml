@@ -1,0 +1,6 @@
+---
+- name: Install k9s packages
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ k9s_base_url }}/{{ k9s_version }}/{{ k9s_package_file }}"
+    state: present
