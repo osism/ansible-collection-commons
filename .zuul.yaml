@@ -154,6 +154,15 @@
       - '^molecule\/delegated\/tests\/ipmitool.*$'
 
 - job:
+    name: ansible-collection-commons-molecule-k9s
+    parent: abstract-ansible-collection-commons-molecule
+    vars:
+      ansible_role: k9s
+    files:
+      - '^roles\/k9s\/.*$'
+      - '^molecule\/delegated\/tests\/k9s.*$'
+
+- job:
     name: ansible-collection-commons-molecule-kernel_modules
     parent: abstract-ansible-collection-commons-molecule
     vars:
@@ -394,6 +403,7 @@
         - ansible-collection-commons-molecule-hostname
         - ansible-collection-commons-molecule-hosts
         - ansible-collection-commons-molecule-ipmitool
+        - ansible-collection-commons-molecule-k9s
         - ansible-collection-commons-molecule-kernel_modules
         - ansible-collection-commons-molecule-known_hosts
         - ansible-collection-commons-molecule-kompose
@@ -436,6 +446,7 @@
         - ansible-collection-commons-molecule-hostname
         - ansible-collection-commons-molecule-hosts
         - ansible-collection-commons-molecule-ipmitool
+        - ansible-collection-commons-molecule-k9s
         - ansible-collection-commons-molecule-kernel_modules
         - ansible-collection-commons-molecule-known_hosts
         - ansible-collection-commons-molecule-kompose
