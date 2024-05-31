@@ -45,7 +45,7 @@
        PrintMotd yes
     group: root
     owner: root
-    mode: 644
+    mode: 0644
   notify: Reload sshd to make motd changes effective
   when: motd_show_ssh | bool
 
