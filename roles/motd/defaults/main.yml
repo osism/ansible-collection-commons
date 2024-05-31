@@ -2,3 +2,4 @@
 issue_path: /etc/issue
 motd_path: /etc/motd
 motd_content: ""
+motd_show_ssh: false
