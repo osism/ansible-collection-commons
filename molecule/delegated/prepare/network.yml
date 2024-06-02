@@ -7,7 +7,7 @@
       ansible.builtin.dnf:
         name: epel-release
         state: present
-        lock_timeout: "{{ dnf_lock_timeout | default(60) }}"
+        lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
 
     - name: Enable EPEL repository
       become: true
@@ -18,7 +18,7 @@
       become: true
       ansible.builtin.dnf:
         update_cache: true
-        lock_timeout: "{{ dnf_lock_timeout | default(60) }}"
+        lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
 
 - name: Write test script
   become: true
