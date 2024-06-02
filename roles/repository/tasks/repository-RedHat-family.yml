@@ -47,3 +47,9 @@
   when:
     - item.metalink is defined
     - item.metalink | length > 0
+
+- name: Update package cache
+  become: true
+  ansible.builtin.dnf:
+    update_cache: true
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
