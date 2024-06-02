@@ -29,7 +29,9 @@
     enabled: true
     file: "{{ item.file }}"
   loop: "{{ repositories }}"
-  when: item.mirrorlist is defined
+  when:
+    - item.mirrorlist is defined
+    - item.mirrorlist | length > 0
 
 - name: Add metalink repositories
   become: true
@@ -42,4 +44,6 @@
     enabled: true
     file: "{{ item.file }}"
   loop: "{{ repositories }}"
-  when: item.metalink is defined
+  when:
+    - item.metalink is defined
+    - item.metalink | length > 0
