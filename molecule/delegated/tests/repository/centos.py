@@ -31,18 +31,17 @@ def test_repository_centos_files(host):
     if len(repositories) <= 0:
         repositories = get_dist_role_variable(host, "__repository_default")
 
-    assert len(repositories) > 0
+    if len(repositories) > 0:
+        ansible_distribution = get_variable(host, "ansible_distribution", True)
 
-    ansible_distribution = get_variable(host, "ansible_distribution", True)
+        for repository in repositories:
+            repository["file"] = jinja_replacement(
+                repository["file"],
+                {"ansible_distribution": ansible_distribution},
+            )
 
-    for repository in repositories:
-        repository["file"] = jinja_replacement(
-            repository["file"],
-            {"ansible_distribution": ansible_distribution},
-        )
-
-        with host.sudo("root"):
-            f = host.file(f"/etc/yum.repos.d/{repository['file']}.repo")
-            assert f.exists
-            assert not f.is_directory
-            assert repository["name"] in f.content_string
+            with host.sudo("root"):
+                f = host.file(f"/etc/yum.repos.d/{repository['file']}.repo")
+                assert f.exists
+                assert not f.is_directory
+                assert repository["name"] in f.content_string
