@@ -15,7 +15,7 @@ def check_ansible_distribution(host):
         pytest.skip("ansible_distribution mismatch")
 
 
-def test_keys(host):
+def test_repository_centos_keys(host):
     check_ansible_distribution(host)
 
     key_file = host.file("/etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial")
@@ -23,7 +23,7 @@ def test_keys(host):
     assert not key_file.is_directory
 
 
-def test_sources(host):
+def test_repository_centos_files(host):
     check_ansible_distribution(host)
 
     repositories = get_variable(host, "repositories")

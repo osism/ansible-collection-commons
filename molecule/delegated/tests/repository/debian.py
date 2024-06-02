@@ -16,7 +16,7 @@ def check_ansible_os_family(host):
         pytest.skip("ansible_distribution mismatch")
 
 
-def test_99osism(host):
+def test_repository_debian_files(host):
     check_ansible_os_family(host)
 
     f = host.file("/etc/apt/apt.conf.d/99osism")
@@ -24,7 +24,7 @@ def test_99osism(host):
     assert f.mode == 0o644
 
 
-def test_keys(host):
+def test_repository_debian_keys(host):
     check_ansible_os_family(host)
 
     repository_keys = get_variable(host, "repository_keys")
@@ -41,15 +41,15 @@ def test_keys(host):
         assert content == f.content_string
 
 
-def test_keydir(host):
+def test_repository_debian_key_files_dir(host):
     check_ansible_os_family(host)
 
-    key_dir = get_variable(host, "repository_key_files_directory")
+    key_files_dir = get_variable(host, "repository_key_files_directory")
 
-    if key_dir == "":
-        pytest.skip("key_dir is empty")
+    if key_files_dir == "":
+        pytest.skip("repository_key_files_directory is empty")
 
-    d = host.file(key_dir)
+    d = host.file(key_files_dir)
     assert d.exists
     assert d.is_directory
 
@@ -68,7 +68,7 @@ def test_keydir(host):
         assert f.mode == 0o644
 
 
-def test_sources(host):
+def test_repository_debian_sources_list_file(host):
     check_ansible_os_family(host)
 
     f = host.file("/etc/apt/sources.list")
