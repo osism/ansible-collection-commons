@@ -26,25 +26,6 @@
   tags:
     - always
 
-- name: Install epel-release package
-  become: true
-  ansible.builtin.dnf:
-    name: epel-release
-    state: present
-    lock_timeout: "{{ lock_timeout | default(300) }}"
-
-- name: Enable EPEL repository
-  become: true
-  ansible.builtin.command:
-    cmd: dnf config-manager --set-enabled epel
-  changed_when: true
-
-- name: Update package cache
-  become: true
-  ansible.builtin.command:
-    cmd: "dnf makecache"
-  changed_when: false
-
 - name: Install required packages
   become: true
   ansible.builtin.dnf:

@@ -5,7 +5,7 @@
 - name: Set repository_default variable to default value
   ansible.builtin.set_fact:
     repository_default: "{{ __repository_default }}"
-  when: repository_default|default(None) == None
+  when: repository_default | default(None) == None
 
 - name: Set repositories to default
   ansible.builtin.set_fact:
