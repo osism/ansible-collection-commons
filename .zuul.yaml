@@ -181,15 +181,6 @@
       - '^molecule\/delegated\/tests\/known_hosts.*$'
 
 - job:
-    name: ansible-collection-commons-molecule-kompose
-    parent: abstract-ansible-collection-commons-molecule
-    vars:
-      ansible_role: kompose
-    files:
-      - '^roles\/kompose\/.*$'
-      - '^molecule\/delegated\/tests\/kompose.*$'
-
-- job:
     name: ansible-collection-commons-molecule-kubectl
     parent: abstract-ansible-collection-commons-molecule
     vars:
@@ -406,7 +397,6 @@
         - ansible-collection-commons-molecule-k9s
         - ansible-collection-commons-molecule-kernel_modules
         - ansible-collection-commons-molecule-known_hosts
-        - ansible-collection-commons-molecule-kompose
         - ansible-collection-commons-molecule-kubectl
         - ansible-collection-commons-molecule-limits
         - ansible-collection-commons-molecule-lynis
@@ -449,7 +439,6 @@
         - ansible-collection-commons-molecule-k9s
         - ansible-collection-commons-molecule-kernel_modules
         - ansible-collection-commons-molecule-known_hosts
-        - ansible-collection-commons-molecule-kompose
         - ansible-collection-commons-molecule-kubectl
         - ansible-collection-commons-molecule-limits
         - ansible-collection-commons-molecule-lynis
