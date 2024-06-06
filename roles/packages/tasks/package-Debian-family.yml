@@ -1,4 +1,9 @@
 ---
+- name: Set apt_cache_valid_time variable to default value
+  ansible.builtin.set_fact:
+    apt_cache_valid_time: "{{ __apt_cache_valid_time }}"
+  when: apt_cache_valid_time|default(None) == None
+
 - name: Update package cache
   become: true
   ansible.builtin.apt:
