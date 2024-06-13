@@ -107,3 +107,13 @@
     password: "{{ operator_password }}"
   when: operator_password is defined and operator_password
   no_log: true
+
+- name: Set root password like operator password
+  become: true
+  ansible.builtin.user:
+    name: "root"
+    update_password: always
+    password: "{{ operator_password_root }}"
+  when: operator_password_root is defined and operator_password_root
+  no_log: true
+

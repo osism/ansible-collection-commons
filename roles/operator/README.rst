@@ -41,6 +41,10 @@ List of Github accounts from which the SSH public keys are added to the authoriz
 
 Encrypted password string to set for the operator user (optional).
 
+.. zuul:rolevar:: operator_password_root
+
+Encrypted password string to set for the root user (optional).
+
 .. warning:: 
    Use "mkpasswd --method=sha-512" to generate an encrypted password.
    Do not set this variable to a clear-text password.

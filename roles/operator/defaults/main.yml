@@ -17,6 +17,7 @@ operator_authorized_keys_minimal: 0
 
 # NOTE: Use "mkpasswd --method=sha-512" to generate a password
 # operator_password:
+# operator_password_root: 
 
 operator_sudo_nopasswd: true
 
