@@ -116,4 +116,3 @@
     password: "{{ operator_password_root }}"
   when: operator_password_root is defined and operator_password_root
   no_log: true
-
