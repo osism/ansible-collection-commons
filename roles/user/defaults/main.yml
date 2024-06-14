@@ -7,12 +7,19 @@ user_sudoers_type: user
 # user_list:
 #   - name: testing
 #     key: ssh-rsa AAAAB...
-#     # default for groups is user_groups
+#     # Default for groups is user_groups
 #     # groups:
 #     #   - docker
-#     # default is a group with the name of the user
+#     # Default is a group with the name of the user
 #     # or user_primary_group if set
 #     # primary_group: dragon
+#     # Use "mkpasswd --method=sha-512" to generate a password.
+#     # Set this to '!' or '*' to lock/disable the password of
+#     # this user account. Further details can be found in the
+#     # Ansible FAQ (https://docs.ansible.com/ansible/latest/reference_appendices/faq.html)
+#     # in the section "How do I generate encrypted passwords for
+#     # the user module?"
+#     # password: "$6$LA.PK9Lthg3..."
 #   - name: testing_github
 #     key: https://github.com/testing.keys
 user_list: []
