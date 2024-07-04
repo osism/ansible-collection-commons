@@ -12,6 +12,10 @@ resolvconf_fallback_nameserver: []
 resolvconf_search: osism.test
 
 resolvconf_minimum_number_of_nameservers: 1
+# Kubernetes/K3s dislikes to many dns server: https://github.com/canonical/microk8s/issues/3786
+# If you specify to many nameserver, you are getting messages like:
+# "Nameserver limits exceeded" err="Nameserver limits were exceeded, some nameservers have been omitted, the applied nameserver line is: 10.10.21.10 10.10.21.11 8.8.8.8"
+resolvconf_maximum_number_of_nameservers: 3
 
 resolvconf_cache: true
 resolvconf_cache_from_localhost: false

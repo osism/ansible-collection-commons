@@ -5,7 +5,8 @@
       {{ resolvconf_minimum_number_of_nameservers }} or more name servers
       must be configured. Currently only {{ resolvconf_nameserver | length }}
       name server(s) are configured.
-  when: resolvconf_nameserver | length < resolvconf_minimum_number_of_nameservers | int
+  when: ( resolvconf_nameserver | length < resolvconf_minimum_number_of_nameservers | int) or
+        ( resolvconf_nameserver | length > resolvconf_maximum_number_of_nameservers | int)
 
 - name: Include resolvconf tasks
   ansible.builtin.include_tasks: "configure-resolv.yml"
