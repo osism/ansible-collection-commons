@@ -1,7 +1,7 @@
 ---
 - name: Check minimum and maximum number of name servers
   ansible.builtin.fail:
-    msg: |
+    msg: >
       a minimum {{ resolvconf_minimum_number_of_nameservers }} and a maxiumum
       of {{ resolvconf_maximum_number_of_nameservers }} of servers must be configured.
       Currently {{ resolvconf_nameserver | length }} name server(s) are configured.
