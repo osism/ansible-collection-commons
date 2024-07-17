@@ -107,6 +107,7 @@
     files:
       - '^roles\/docker_login\/.*$'
       - '^molecule\/delegated\/tests\/docker_login.*$'
+      - '^molecule\/delegated\/prepare\/docker_login.*$'
 
 - job:
     name: ansible-collection-commons-molecule-facts
