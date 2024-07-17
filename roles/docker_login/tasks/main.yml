@@ -1,12 +1,23 @@
 ---
-- name: Install packages required by docker login
+- name: Install required packages
   become: true
-  ansible.builtin.package:
+  ansible.builtin.dnf:
     name:
       - gnupg2
       - pass
     state: present
     lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
+  when: ansible_os_family == "RedHat"
+
+- name: Install required packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - gnupg2
+      - pass
+    state: present
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: ansible_os_family == "Debian"
 
 - name: Login to registry and force re-authorization
   become: true
