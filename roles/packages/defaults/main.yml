@@ -8,6 +8,7 @@ required_packages_default:
   - iotop
   - jq
   - lsscsi
+  - lvm2
   - ltrace
   - mtr
   - nvme-cli
