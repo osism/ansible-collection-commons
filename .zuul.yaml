@@ -419,6 +419,7 @@
         - ansible-collection-commons-molecule-timezone
         - ansible-collection-commons-molecule-trivy
         - ansible-collection-commons-molecule-user
+        - ansible-collection-ensure-readme
         - ansible-lint
         - flake8
         - yamllint
@@ -461,6 +462,7 @@
         - ansible-collection-commons-molecule-timezone
         - ansible-collection-commons-molecule-trivy
         - ansible-collection-commons-molecule-user
+        - ansible-collection-ensure-readme
         - ansible-lint
         - flake8
         - yamllint
