@@ -105,6 +105,7 @@ network_renderer: networkd
 
 network_bonds: {}
 network_bridges: {}
+network_dummy_devices: {}
 network_ethernets: {}
 network_tunnels: {}
 network_vlans: {}
