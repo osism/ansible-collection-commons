@@ -1,4 +1,6 @@
 ---
+packages_needrestart_mode: l
+
 upgrade_packages: true
 
 required_packages_default:
