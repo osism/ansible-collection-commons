@@ -1,4 +1,18 @@
 ---
+- name: Install needrestart package
+  become: true
+  ansible.builtin.apt:
+    name: needrestart
+    state: present
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+
+- name: Set needrestart mode
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/needrestart/needrestart.conf
+    regexp: "^#$nrconf{restart} = 'i';"
+    line: "$nrconf{restart} = '{{ packages_needrestart_mode }}';"
+
 - name: Set apt_cache_valid_time variable to default value
   ansible.builtin.set_fact:
     apt_cache_valid_time: "{{ __apt_cache_valid_time }}"

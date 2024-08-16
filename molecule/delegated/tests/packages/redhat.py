@@ -10,7 +10,7 @@ def check_ansible_os_family(host):
         pytest.skip("ansible_os_family mismatch")
 
 
-def test_package_upgrade(host):
+def test_packages_upgrade(host):
     check_ansible_os_family(host)
 
     upgrade_packages = get_variable(host, "upgrade_packages")

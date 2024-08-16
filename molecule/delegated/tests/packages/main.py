@@ -8,7 +8,7 @@ from ..util.util import (
 testinfra_runner, testinfra_hosts = get_ansible()
 
 
-def test_required_packages_installed(host):
+def test_packages_required(host):
     required_packages = get_variable(host, "required_packages")
     required_packages_default = get_variable(host, "required_packages_default")
     required_packages_extra = get_variable(host, "required_packages_extra")
