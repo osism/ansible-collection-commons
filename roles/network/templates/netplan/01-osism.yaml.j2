@@ -11,8 +11,10 @@ network:
   bridges:
     {{ network_bridges|to_nice_yaml(indent=4)|indent(4) }}
 
+{% if ansible_distribution == "Ubuntu" and ansible_distribution_version is version('24.04', '>=') %}
   dummy-devices:
     {{ network_dummy_devices|to_nice_yaml(indent=4)|indent(4) }}
+{% endif %}
 
   ethernets:
     {{ network_ethernets|to_nice_yaml(indent=4)|indent(4) }}
