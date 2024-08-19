@@ -8,6 +8,7 @@ __required_packages_distribution:
   - htop
   - iftop
   - iperf
+  - isc-dhcp-client
   - multitail
   - ncdu
   - pv
