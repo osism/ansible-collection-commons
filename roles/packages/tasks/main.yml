@@ -9,3 +9,5 @@
 
 - name: Include distribution specific package tasks
   ansible.builtin.include_tasks: "package-{{ ansible_os_family }}-family.yml"
+  tags:
+    - needrestart
