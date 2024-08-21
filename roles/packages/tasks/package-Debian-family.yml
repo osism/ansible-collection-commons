@@ -5,6 +5,8 @@
     name: needrestart
     state: present
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  tags:
+    - needrestart
 
 - name: Set needrestart mode
   become: true
@@ -12,6 +14,8 @@
     path: /etc/needrestart/needrestart.conf
     regexp: "^#$nrconf{restart} = 'i';"
     line: "$nrconf{restart} = '{{ packages_needrestart_mode }}';"
+  tags:
+    - needrestart
 
 - name: Set apt_cache_valid_time variable to default value
   ansible.builtin.set_fact:
