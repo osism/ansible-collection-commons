@@ -5,6 +5,7 @@
     name: '*'
     update_cache: true
     state: latest
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   tags:
     - download
     - upgrade
@@ -15,6 +16,7 @@
     name: '*'
     state: latest
     download_only: true
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   when: upgrade_packages | bool
   tags:
     - download
@@ -24,6 +26,7 @@
   ansible.builtin.dnf:
     name: '*'
     state: latest
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   when: upgrade_packages | bool
   tags:
     - upgrade
@@ -34,6 +37,7 @@
     name: "{{ required_packages }}"
     state: present
     download_only: true
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   tags:
     - download
 
@@ -42,3 +46,4 @@
   ansible.builtin.dnf:
     name: "{{ required_packages }}"
     state: present
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
