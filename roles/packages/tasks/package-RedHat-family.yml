@@ -5,6 +5,19 @@
     name: '*'
     update_cache: true
     state: latest
+  tags:
+    - download
+    - upgrade
+
+- name: Download upgrade packages
+  become: true
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+    download_only: true
+  when: upgrade_packages | bool
+  tags:
+    - download
 
 - name: Upgrade packages
   become: true
@@ -12,6 +25,17 @@
     name: '*'
     state: latest
   when: upgrade_packages | bool
+  tags:
+    - upgrade
+
+- name: Download required packages
+  become: true
+  ansible.builtin.dnf:
+    name: "{{ required_packages }}"
+    state: present
+    download_only: true
+  tags:
+    - download
 
 - name: Install required packages
   become: true

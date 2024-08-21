@@ -1,13 +1,21 @@
 ---
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ ansible_os_family }}-family.yml"
+  tags:
+    - download
+    - upgrade
 
 - name: Set required_packages_distribution variable to default value
   ansible.builtin.set_fact:
     required_packages_distribution: "{{ __required_packages_distribution }}"
   when: required_packages_distribution|default(None) == None
+  tags:
+    - download
+    - upgrade
 
 - name: Include distribution specific package tasks
   ansible.builtin.include_tasks: "package-{{ ansible_os_family }}-family.yml"
   tags:
+    - download
     - needrestart
+    - upgrade
