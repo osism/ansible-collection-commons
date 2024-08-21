@@ -21,6 +21,9 @@
   ansible.builtin.set_fact:
     apt_cache_valid_time: "{{ __apt_cache_valid_time }}"
   when: apt_cache_valid_time|default(None) == None
+  tags:
+    - download
+    - upgrade
 
 - name: Update package cache
   become: true
@@ -28,6 +31,23 @@
     update_cache: true
     cache_valid_time: "{{ apt_cache_valid_time }}"
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  tags:
+    - download
+    - upgrade
+
+# NOTE Download only not possible with ansible.builtin.apt.
+- name: Download upgrade packages  # noqa command-instead-of-module
+  become: true
+  ansible.builtin.command:
+    apt-get dist-upgrade --yes --download-only
+  register: result_download
+  changed_when:
+    - result_download.rc == 0
+    - "'Get' not in result_download.stdout"
+  failed_when:
+    - result_download.rc != 0
+  tags:
+    - download
 
 - name: Upgrade packages
   become: true
@@ -35,6 +55,22 @@
     upgrade: dist
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   when: upgrade_packages | bool
+  tags:
+    - upgrade
+
+# NOTE Download only not possible with ansible.builtin.apt.
+- name: Download required eackages  # noqa command-instead-of-module
+  become: true
+  ansible.builtin.command:
+    apt-get install {{ required_packages | join(" ") }} --yes --download-only
+  register: result_download
+  changed_when:
+    - result_download.rc == 0
+    - "'Get' not in result_download.stdout"
+  failed_when:
+    - result_download.rc != 0
+  tags:
+    - download
 
 - name: Install required packages
   become: true
