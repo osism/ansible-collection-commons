@@ -4,6 +4,7 @@
   ansible.builtin.dnf:
     name: '*'
     update_cache: true
+    update_only: true
     state: latest
     lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   tags:
