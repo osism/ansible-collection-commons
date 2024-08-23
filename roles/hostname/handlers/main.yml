@@ -1,0 +1,6 @@
+---
+- name: Gathers facts about hosts
+  ansible.builtin.setup:
+    filter: "{{ osism_setup_filter | default('') }}"
+    gather_subset: "{{ osism_setup_gather_subset | default('all') }}"
+  run_once: true
