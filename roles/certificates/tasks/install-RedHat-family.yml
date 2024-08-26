@@ -1,5 +1,5 @@
 ---
-- name: Install ca-certificates package on RHEL
+- name: Install ca-certificates package on CentOS
   become: true
   ansible.builtin.dnf:
     name: "{{ certificates_ca_package_name }}"
