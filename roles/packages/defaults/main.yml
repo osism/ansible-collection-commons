@@ -7,11 +7,12 @@ required_packages_default:
   - curl
   - dmidecode
   - ethtool
+  - git
   - iotop
   - jq
   - lsscsi
-  - lvm2
   - ltrace
+  - lvm2
   - mtr
   - nvme-cli
   - pciutils
