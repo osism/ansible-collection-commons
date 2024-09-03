@@ -10,15 +10,22 @@
     name: "{{ clevis_service_name }}"
     enabled: true
 
-- name: Chain tang pin
+- name: Chain Tang pin
   become: true
-  ansible.builtin.command: |-
-     clevis luks bind -s 2 -f -d {{ clevis_root_disk }} tang '{ "url": "{{ clevis_tang_url }}", "adv": "{{ tmp_clevis_env.path }}/adv.jws" }' {{ clevis_initial_luks_password }}
+  ansible.builtin.command: >-
+    clevis luks bind -s {{ clevis_luks_slot }} -d {{ clevis_root_disk }}
+    tang '{ "url": "{{ clevis_tang_url }}", "adv": "{{ tmp_clevis_env.path }}/adv.jws" }'
   environment:
     KEY: "{{ tmp_clevis_env.path }}/pass"
-  changed_when: true
+  register: clevis_bind_result
+  changed_when:
+    - clevis_bind_result.rc == 0
+    - '"already bound" not in clevis_bind_result.stderr'
+  failed_when:
+    - clevis_bind_result.rc != 0
+    - '"already bound" not in clevis_bind_result.stderr'
 
-- name: Enable tang boot environment
+- name: Enable Tang boot environment
   become: true
   ansible.builtin.command: "dracut -fv --regenerate-all"
   changed_when: true

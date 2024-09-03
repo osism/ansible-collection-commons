@@ -1,5 +1,4 @@
 ---
-
 - name: Remove dropbear ssh initramfs packages
   become: true
   ansible.builtin.apt:
@@ -8,18 +7,19 @@
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   notify:
     - Update initramfs
+  when: ansible_os_family == "Debian"
 
 - name: Remove dropbear artefacts
   ansible.builtin.file:
     dest: /etc/initramfs-tools/conf.d/dropbear.conf
     state: absent
 
-- name: "Check if disk already bind to tang"
+- name: Check if disk already bind to Tang
   become: true
-  ansible.builtin.command: "clevis luks list -d {{ clevis_root_disk }} -s 2"
+  ansible.builtin.command: "clevis luks list -d {{ clevis_root_disk }} -s {{ clevis_luks_slot }}"
   register: result_clevis_luks_list
-  ignore_errors: true
   changed_when: false
+  failed_when: false
 
 - name: Prepare clevis environment
   ansible.builtin.tempfile:
@@ -27,7 +27,7 @@
     suffix: clevis
   register: tmp_clevis_env
 
-- name: Get adv handshake from tang server
+- name: Get adv handshake from Tang server
   become: true
   ansible.builtin.uri:
     url: "{{ clevis_tang_url }}/adv"
@@ -48,7 +48,7 @@
     mode: 0400
   when: "result_clevis_luks_list.rc == 1"
   notify:
-    - Chain tang pin
-    - Enable tang boot environment
+    - Chain Tang pin
+    - Enable Tang boot environment
     - "Enable service {{ clevis_service_name }}"
     - Delete clevis environment

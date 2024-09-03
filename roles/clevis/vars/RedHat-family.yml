@@ -1,6 +1,6 @@
 ---
 clevis_packages:
-  - clevis-15-1
-  - clevis-dracut-15-1
-  - clevis-luks-15-1
-  - clevis-systemd-15-1
+  - clevis-20
+  - clevis-dracut-20
+  - clevis-luks-20
+  - clevis-systemd-20

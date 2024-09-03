@@ -1,0 +1,48 @@
+---
+- name: OSISM Services Tang
+  ansible.builtin.include_role:
+    name: osism.services.tang
+
+- name: Create Clevis testing block device file (1GB)
+  block:
+    - name: Create a 1GB block device file using dd
+      ansible.builtin.command: "dd if=/dev/zero of=/tmp/clevis_test_block_device bs=1M count=1024"
+      args:
+        creates: /tmp/clevis_test_block_device
+
+    - name: Prepare the file for LUKS encryption without formatting
+      ansible.builtin.command: "losetup -fP /tmp/clevis_test_block_device"
+
+    - name: Find loop device associated with the file
+      ansible.builtin.command: "losetup -j /tmp/clevis_test_block_device"
+      register: loop_device_result
+      changed_when: false
+
+    - name: Extract loop device from losetup output
+      ansible.builtin.set_fact:
+        loop_device: "{{ loop_device_result.stdout.split(':')[0] | trim }}"
+
+    - name: Install cryptsetup
+      ansible.builtin.package:
+        name: cryptsetup
+        state: present
+        update_cache: true
+
+    - name: Initialize LUKS encryption on the loop device
+      ansible.builtin.command: "cryptsetup luksFormat --type luks2 --force-password {{ loop_device }}"
+      args:
+        stdin: "password"
+
+    - name: Store loop_device in yaml format
+      set_fact:
+        loop_device_result_yml: |
+          ---
+          clevis_root_disk: "{{ loop_device }}"
+
+    - name: Export prepared vars to converge step
+      ansible.builtin.copy:
+        dest: "{{ prepared_vars_path }}/{{ molecule_role }}.yml"
+        content: "{{ loop_device_result_yml }}"
+        mode: '0755'
+
+  become: true
