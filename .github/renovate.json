@@ -3,5 +3,15 @@
     "github>osism/renovate-config",
     "github>osism/renovate-config:ansibleCollection",
     "github>osism/renovate-config:python"
+  ],
+  "regexManagers":[
+    {
+      "fileMatch":[
+        "^roles\\/k9s\\/defaults\\/main.yml$"
+      ],
+      "matchStrings":[
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)\n.*?_version: '(?<currentValue>.*?)'"
+     ]
+    }
   ]
 }
