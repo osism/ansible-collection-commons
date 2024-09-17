@@ -3,3 +3,4 @@ operator_user: zuul
 operator_group: zuul
 
 sshconfig_extra: "# test content"
+sshconfig_private_key_file: ~/.ssh/test_id_ed25519

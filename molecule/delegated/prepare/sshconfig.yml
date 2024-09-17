@@ -10,3 +10,28 @@
   ansible.builtin.user:
     name: runner
     group: docker
+
+- name: Add local hostname entry to /etc/hosts
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "127.0.0.1 {{ inventory_hostname | split('.') | first }}"
+    state: present
+
+- name: Generate Ed25519 SSH key pair for testing
+  ansible.builtin.command:
+    cmd: "ssh-keygen -t ed25519 -f {{ sshconfig_private_key_file }}"
+    creates: "{{ sshconfig_private_key_file }}"
+
+- name: Set correct permissions for private key
+  ansible.builtin.file:
+    path: "{{ sshconfig_private_key_file }}"
+    mode: "0600"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: "{{ operator_user }}"
+    state: present
+    key: "{{ lookup('file', sshconfig_private_key_file + '.pub') }}"
