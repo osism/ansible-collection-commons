@@ -84,6 +84,15 @@
       - '^molecule\/delegated\/tests\/cleanup.*$'
 
 - job:
+    name: ansible-collection-commons-molecule-clevis
+    parent: abstract-ansible-collection-commons-molecule
+    vars:
+      ansible_role: clevis
+    files:
+      - '^roles\/clevis\/.*$'
+      - '^molecule\/delegated\/tests\/clevis.*$'
+
+- job:
     name: ansible-collection-commons-molecule-configfs
     parent: abstract-ansible-collection-commons-molecule
     vars:
@@ -396,6 +405,7 @@
       jobs:
         - ansible-collection-commons-molecule-certificates
         - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-clevis
         - ansible-collection-commons-molecule-configfs
         - ansible-collection-commons-molecule-configuration
         - ansible-collection-commons-molecule-docker_compose
@@ -439,6 +449,7 @@
       jobs:
         - ansible-collection-commons-molecule-certificates
         - ansible-collection-commons-molecule-cleanup
+        - ansible-collection-commons-molecule-clevis
         - ansible-collection-commons-molecule-configfs
         - ansible-collection-commons-molecule-configuration
         - ansible-collection-commons-molecule-docker_compose
