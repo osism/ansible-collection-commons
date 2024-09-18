@@ -1,4 +1,5 @@
 import pytest
+import socket
 
 from .util.util import (
     get_ansible,
@@ -7,6 +8,18 @@ from .util.util import (
 )
 
 testinfra_runner, testinfra_hosts = get_ansible()
+
+
+def get_expected_nameservers(host):
+    """Get the list of expected nameservers by resolving Jinja2 templates and combining lists."""
+
+    expected_nameservers = get_variable(host, "resolvconf_nameserver")
+    expected_nameservers_default = get_variable(host, "resolvconf_nameserver_default")
+    expected_nameservers_extra = get_variable(host, "resolvconf_nameserver_extra")
+
+    return jinja_list_concat(
+        expected_nameservers, [expected_nameservers_default, expected_nameservers_extra]
+    )
 
 
 def test_resolvconf_minimum_number_of_nameservers(host):
@@ -78,13 +91,7 @@ def test_resolvconf_content(host):
     etchosts = get_variable(host, "resolvconf_read_etc_hosts")
     assert f"ReadEtcHosts={'yes' if etchosts == True else 'no'}" in file_content
 
-    expected_nameservers = get_variable(host, "resolvconf_nameserver")
-    expected_nameservers_default = get_variable(host, "resolvconf_nameserver_default")
-    expected_nameservers_extra = get_variable(host, "resolvconf_nameserver_extra")
-
-    expected_nameservers = jinja_list_concat(
-        expected_nameservers, [expected_nameservers_default, expected_nameservers_extra]
-    )
+    expected_nameservers = get_expected_nameservers(host)
     assert type(expected_nameservers) is list
 
     for expected in expected_nameservers:
@@ -105,3 +112,26 @@ def test_resolvconf_file_is_symlink(host):
     resolvconf_file = get_variable(host, "resolvconf_file")
     f = host.file(resolvconf_file)
     assert f.is_symlink
+
+
+def test_dns_resolution(host):
+    """Check if DNS resolution is working correctly."""
+
+    expected_nameservers = get_expected_nameservers(host)
+
+    for nameserver in expected_nameservers:
+        cmd = host.run(f"dig @{nameserver} osism.tech +short")
+        assert cmd.rc == 0
+        assert cmd.stdout.strip() != ""
+
+
+def test_dns_reverse_lookup(host):
+    """Check if reverse DNS lookup is working."""
+
+    expected_nameservers = get_expected_nameservers(host)
+
+    for nameserver in expected_nameservers:
+        ip = socket.gethostbyname("osism.tech")
+        cmd = host.run(f"dig @{nameserver} -x {ip} +short")
+        assert cmd.rc == 0
+        assert cmd.stdout.strip() != ""
