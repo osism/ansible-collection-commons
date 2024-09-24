@@ -74,3 +74,19 @@ def test_wrapper_file(host):
 /usr/bin/docker compose "$@"
 """.strip()
     )
+
+
+def test_docker_compose_installation(host):
+    docker_compose_version = host.run("docker compose --version")
+    assert docker_compose_version.rc == 0
+    assert "compose version" in docker_compose_version.stdout.lower()
+
+    # Note: On CentOS, sudo is typically required for Docker commands due to SELinux.
+
+    # Run a deployment
+    with host.sudo():
+        deployment = host.run(
+            "docker compose -f /tmp/docker_compose_test/compose.yaml up"
+        )
+    assert deployment.rc == 0
+    assert "Hello from Docker!" in deployment.stdout

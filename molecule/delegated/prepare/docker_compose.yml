@@ -51,3 +51,49 @@
         name: moby-compose
         state: absent
   when: "'RedHat' in ansible_os_family"
+
+- name: Install docker package (for testing)
+  become: true
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - docker-ce
+    - docker-ce-cli
+
+- name: Reload systemd daemon
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Manage service (for testing)
+  become: true
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Manage docker socket service (for testing)
+  become: true
+  ansible.builtin.service:
+    name: docker.socket
+    state: started
+    enabled: true
+
+- name: Create runtime test directory
+  ansible.builtin.file:
+    path: /tmp/docker_compose_test
+    state: directory
+    owner: "{{ docker_compose_service_user }}"
+    group: "{{ docker_compose_service_group }}"
+
+- name: Create runtime test file
+  ansible.builtin.copy:
+    content: |
+      services:
+        hello_world:
+          image: hello-world
+    dest: /tmp/docker_compose_test/compose.yaml
+    owner: "{{ docker_compose_service_user }}"
+    group: "{{ docker_compose_service_group }}"
+    mode: '0755'
