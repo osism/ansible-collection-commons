@@ -1,9 +1,5 @@
 ---
-# Installation on Ubuntu 24.04 skipped, because the repository
-# 'https://aquasecurity.github.io/trivy-repo/deb noble Release'
-# does not have a release file yet.
 - name: Trivy installation
-  when: not ansible_distribution_version == '24.04'
   block:  # noqa osism-fqcn
     - name: Remove old architecture-dependent repository
       become: true
