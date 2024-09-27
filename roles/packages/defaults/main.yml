@@ -1,5 +1,6 @@
 ---
 packages_needrestart_mode: l
+packages_cleanup: true
 
 upgrade_packages: true
 

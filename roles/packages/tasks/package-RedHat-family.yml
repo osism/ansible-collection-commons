@@ -48,3 +48,17 @@
     name: "{{ required_packages }}"
     state: present
     lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
+
+- name: Remove useless packages from the cache
+  become: true
+  ansible.builtin.command:
+    cmd: "dnf clean all"
+  changed_when: false
+  when: packages_cleanup | bool
+
+- name: Remove dependencies that are no longer required
+  become: true
+  ansible.builtin.dnf:
+    autoremove: true
+    lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
+  when: packages_cleanup | bool
