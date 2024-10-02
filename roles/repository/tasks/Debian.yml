@@ -28,9 +28,9 @@
   when:
     - repository_key_ids
 
-# NOTE: We ignore errors that can occur during the seeding of the
-#       environment in constellations where the repository keys are
-#       still missing.
+# We ignore errors that can occur during the seeding of the
+# environment in constellations where the repository keys are
+# still missing.
 - name: Check if the keys directory exists
   ansible.builtin.stat:
     path: "{{ repository_key_files_directory }}"
@@ -54,8 +54,7 @@
   when:
     - result is defined and result.stat.isdir is defined and result.stat.isdir
 
-# NOTE: Not using apt_repository here because it requires python-apt.
-
+# Not using apt_repository here because it requires python-apt.
 - name: Copy source.list file
   become: true
   ansible.builtin.template:

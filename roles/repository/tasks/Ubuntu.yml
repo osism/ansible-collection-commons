@@ -1,0 +1,47 @@
+---
+- name: Create /etc/apt/sources.list.d directory
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Include tasks for Ubuntu < 24.04
+  ansible.builtin.include_tasks: Debian.yml
+  when: "ansible_distribution_version is version('24.04', '<')"
+
+- name: Copy 99osism apt configuration
+  become: true
+  ansible.builtin.template:
+    src: 99osism.j2
+    dest: /etc/apt/apt.conf.d/99osism
+    mode: 0644
+  when: "ansible_distribution_version is version('24.04', '>=')"
+
+- name: Remove sources.list file
+  become: true
+  ansible.builtin.file:
+    path: /etc/apt/source.list
+    state: absent
+  when: "ansible_distribution_version is version('24.04', '>=')"
+
+- name: Copy ubuntu.sources file
+  become: true
+  ansible.builtin.template:
+    src: ubuntu.sources.j2
+    dest: /etc/apt/sources.list.d/ubuntu.sources
+    owner: root
+    group: root
+    mode: 0644
+    backup: true
+  notify: Force update of package cache
+  when: "ansible_distribution_version is version('24.04', '>=')"
+
+- name: Update package cache
+  become: true
+  ansible.builtin.apt:
+    cache_valid_time: "{{ repository_cache_valid_time }}"
+    lock_timeout: "{{ apt_lock_timeout | default(300) }}"
+  when: "ansible_distribution_version is version('24.04', '>=')"

@@ -84,6 +84,17 @@ def get_dist_role_variable(host, name):
     )
 
 
+def get_dist_arch_role_variable(host, name):
+    return get_role_variable(
+        host,
+        name,
+        get_variable(host, "ansible_distribution", True)
+        + "-"
+        + get_variable(host, "ansible_architecture", True)
+        + ".yml",
+    )
+
+
 def get_from_url(url, binary=False):
     # Create a request object with a faked User-Agent header.
     # Some websites like https://pkg.osquery.io/rpm/GPG need this, otherwise they will return http 403 forbidden.
