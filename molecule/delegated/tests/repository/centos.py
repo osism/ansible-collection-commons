@@ -3,7 +3,7 @@ import pytest
 from ..util.util import (
     get_ansible,
     get_variable,
-    get_dist_role_variable,
+    get_dist_arch_role_variable,
     jinja_replacement,
 )
 
@@ -29,7 +29,7 @@ def test_repository_centos_files(host):
     repositories = get_variable(host, "repositories")
 
     if len(repositories) <= 0:
-        repositories = get_dist_role_variable(host, "__repository_default")
+        repositories = get_dist_arch_role_variable(host, "__repository_default")
 
     if len(repositories) > 0:
         ansible_distribution = get_variable(host, "ansible_distribution", True)

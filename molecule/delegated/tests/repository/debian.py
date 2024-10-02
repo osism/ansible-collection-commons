@@ -4,7 +4,7 @@ from ..util.util import (
     get_ansible,
     get_variable,
     get_from_url,
-    get_dist_role_variable,
+    get_dist_arch_role_variable,
     jinja_replacement,
 )
 
@@ -68,10 +68,17 @@ def test_repository_debian_key_files_dir(host):
         assert f.mode == 0o644
 
 
-def test_repository_debian_sources_list_file(host):
+def test_repository_debian_sources_file(host):
     check_ansible_os_family(host)
 
-    f = host.file("/etc/apt/sources.list")
+    ansible_distribution_release = get_variable(
+        host, "ansible_distribution_release", True
+    )
+
+    if ansible_distribution_release in ["noble"]:
+        f = host.file("/etc/apt/sources.list.d/ubuntu.sources")
+    else:
+        f = host.file("/etc/apt/sources.list")
     assert f.exists
     assert f.user == "root"
     assert f.group == "root"
@@ -81,22 +88,14 @@ def test_repository_debian_sources_list_file(host):
     repositories = get_variable(host, "repositories")
 
     if len(repositories) <= 0:
-        repositories = get_dist_role_variable(host, "__repository_default")
+        repositories = get_dist_arch_role_variable(host, "__repository_default")
 
     assert len(repositories) > 0
 
     for repository in repositories:
-        ansible_distribution_release = get_variable(
-            host, "ansible_distribution_release", True
-        )
         repository["name"] = jinja_replacement(
             repository["name"],
             {"ansible_distribution_release": ansible_distribution_release},
         )
-        repository["repository"] = jinja_replacement(
-            repository["repository"],
-            {"ansible_distribution_release": ansible_distribution_release},
-        )
 
         assert repository["name"] in f.content_string
-        assert repository["repository"] in f.content_string
