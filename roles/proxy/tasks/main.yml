@@ -2,6 +2,7 @@
 - name: Include distribution specific tasks
   ansible.builtin.include_tasks: "{{ ansible_os_family }}-family.yml"
   when:
+    - proxy_enable | bool
     - proxy_package_manager | bool
     - proxy_proxies
 
@@ -25,7 +26,9 @@
 
       no_proxy={{ proxy_no_proxy | join(',') }}
       NO_PROXY={{ proxy_no_proxy | join(',') }}
-  when: proxy_proxies
+  when:
+    - proxy_enable | bool
+    - proxy_proxies
 
 - name: Remove system wide settings in environment file
   become: true
@@ -33,4 +36,6 @@
     dest: /etc/environment
     marker: "# {mark} ANSIBLE MANAGED BLOCK (osism.proxy)"
     state: absent
-  when: not proxy_proxies
+  when:
+    - proxy_enable | bool
+    - not proxy_proxies
