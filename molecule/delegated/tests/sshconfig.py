@@ -61,3 +61,27 @@ def test_sshconfig_files(host):
         assert test_sshconfig_extra.group == get_variable(host, "operator_group")
         assert test_sshconfig_extra.mode == 0o600
         assert "# test content" in test_sshconfig_extra.content_string
+
+
+def test_sshconfig_syntax(host):
+    operator_user_name = get_variable(host, "operator_user")
+    operator_user = host.user(operator_user_name)
+    ssh_config = host.file(f"{operator_user.home}/.ssh/config")
+    inventory_hostname = get_variable(host, "inventory_hostname")
+
+    syntax_check = host.run(f"ssh -F {ssh_config.path} -G {inventory_hostname}")
+    assert syntax_check.rc == 0
+
+
+def test_ssh_connection(host):
+    inventory_hostname_short = get_variable(host, "inventory_hostname").split(".")[0]
+    sshconfig_user = get_variable(host, "operator_user")
+    sshconfig_port = get_variable(host, "sshconfig_port")
+
+    result = host.run(
+        f"ssh -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -vvv "
+        f"-p {sshconfig_port} {sshconfig_user}@{inventory_hostname_short} exit"
+    )
+
+    assert result.rc == 0
+    assert "Server accepts key:" in result.stderr
