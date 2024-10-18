@@ -1,5 +1,5 @@
 ---
-- name: Git - set configuration_git_repository_url fact (with username or personal access token)
+- name: Set configuration_git_repository_url fact (with username or personal access token)
   ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_username }}@{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"
   when: configuration_git_username is defined and configuration_git_username | length
@@ -7,13 +7,13 @@
   no_log: true
   tags: update-configuration
 
-- name: Git - set configuration_git_repository_url fact (without username)
+- name: Set configuration_git_repository_url fact (without username)
   ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"
   when: configuration_git_username is not defined or not configuration_git_username | length
   tags: update-configuration
 
-- name: Git - copy private ssh key
+- name: Copy private ssh key
   ansible.builtin.template:
     src: config-git-private-key.j2
     dest: "{{ configuration_git_private_key_file }}"
@@ -23,7 +23,7 @@
   when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key | length)
   no_log: true
 
-- name: Git - install required packages on Debian
+- name: Install required packages on Debian
   become: true
   ansible.builtin.apt:
     name: "{{ configuration_git_package_name }}"
@@ -31,7 +31,7 @@
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   when: "'Debian' in ansible_os_family"
 
-- name: Git - install required packages on RedHat
+- name: Install required packages on RedHat
   become: true
   ansible.builtin.dnf:
     name: "{{ configuration_git_package_name }}"
@@ -39,42 +39,14 @@
     lock_timeout: "{{ dnf_lock_timeout | default(300) }}"
   when: "'RedHat' in ansible_os_family"
 
-- name: Git - set proxy configuration
+- name: Set proxy configuration
   community.general.git_config:
     name: http.proxy
     scope: global
     value: "{{ configuration_git_proxy }}"
   when: configuration_git_proxy is defined and configuration_git_proxy | length
 
-- name: Git - clone configuration repository (ssh / with auth) with branch {{ configuration_git_version }}
-  ansible.builtin.git:
-    repo: "{{ configuration_git_repository_url }}"
-    dest: "{{ configuration_directory }}"
-    version: "{{ configuration_git_version }}"
-    key_file: "{{ configuration_git_private_key_file }}"
-    accept_hostkey: true
-    umask: "0007"
-    force: true
-  when: configuration_git_protocol == 'ssh'
-  tags: update-configuration
-
-- name: Git - clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
-  ansible.builtin.git:
-    repo: "{{ configuration_git_repository_url }}"
-    dest: "{{ configuration_directory }}"
-    version: "{{ configuration_git_version }}"
-    accept_hostkey: true
-    force: true
-    umask: "0007"
-  when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
-        configuration_git_protocol != 'ssh'
-  # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
-  no_log: true
-  tags: update-configuration
-
-- name: Git - set permissions of configuration directory
-  ansible.builtin.file:
-    path: "{{ configuration_directory }}"
-    owner: "{{ operator_user }}"
-    group: "{{ operator_group }}"
-    mode: 0770
+- name: Include update tasks
+  ansible.builtin.include_tasks: update.yml
+  tags:
+    - update
