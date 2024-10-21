@@ -59,7 +59,7 @@
     - upgrade
 
 # NOTE Download only not possible with ansible.builtin.apt.
-- name: Download required eackages  # noqa command-instead-of-module
+- name: Download required packages  # noqa command-instead-of-module
   become: true
   ansible.builtin.command:
     apt-get install {{ required_packages | join(" ") }} --yes --download-only
