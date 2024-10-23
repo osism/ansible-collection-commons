@@ -13,7 +13,7 @@
     name: "{{ operator_group }}"
     gid: "{{ operator_group_id }}"
 
-- name: Create operator user
+- name: Create user
   become: true
   ansible.builtin.user:
     name: "{{ operator_user }}"
@@ -23,7 +23,7 @@
     group: "{{ operator_group }}"
   register: result_create_operator_user
 
-- name: Add operator user to additional groups
+- name: Add user to additional groups
   become: true
   ansible.builtin.user:
     name: "{{ operator_user }}"
@@ -31,7 +31,7 @@
     append: true
   loop: "{{ operator_groups }}"
 
-- name: Copy operator user sudoers file
+- name: Copy user sudoers file
   become: true
   ansible.builtin.template:
     src: operator-sudoers.j2
@@ -84,14 +84,14 @@
   loop: "{{ operator_authorized_keys_delete }}"
   no_log: true
 
-- name: Set authorized github accounts
+- name: Set authorized GitHub accounts
   become: true
   ansible.posix.authorized_key:
     key: "{{ lookup('url', 'https://github.com/' + item + '.keys', split_lines=False) }}"
     user: "{{ operator_user }}"
   loop: "{{ operator_authorized_github_accounts }}"
 
-- name: Delete authorized github accounts
+- name: Delete authorized GitHub accounts
   become: true
   ansible.posix.authorized_key:
     key: "{{ lookup('url', 'https://github.com/' + item + '.keys', split_lines=False) }}"
@@ -99,7 +99,7 @@
     state: absent
   loop: "{{ operator_authorized_github_accounts_delete }}"
 
-- name: Set password of operator user
+- name: Set password
   become: true
   ansible.builtin.user:
     name: "{{ operator_user }}"
@@ -107,3 +107,13 @@
     password: "{{ operator_password }}"
   when: operator_password is defined and operator_password
   no_log: true
+
+- name: Unset & lock password
+  become: true
+  ansible.builtin.user:
+    name: "{{ operator_user }}"
+    update_password: always
+    password: "!"
+    password_lock: true
+  when: ((operator_password is defined and not operator_password | length) or
+         operator_password is not defined)
