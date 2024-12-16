@@ -1,14 +1,12 @@
 ---
-##########################
-# repository (arch is selected automatically by the system, no manual placement required!)
+kubectl_version: "1.32"
 
 kubectl_configure_repository: true
 
 # Review the following url for the current installation instructions
 # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management
-# (Update key and release if changed)
-kubectl_debian_repository_key: https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key
-kubectl_debian_repository: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /"
+kubectl_debian_repository_key: "https://pkgs.k8s.io/core:/stable:/v{{ kubectl_version }}/deb/Release.key"
+kubectl_debian_repository: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ kubectl_version }}/deb/ /"
 
-kubectl_redhat_repository_key: https://pkgs.k8s.io/core:/stable:/v1.32/rpm/repodata/repomd.xml.key
-kubectl_redhat_repository: "https://pkgs.k8s.io/core:/stable:/v1.32/rpm/"
+kubectl_redhat_repository_key: "https://pkgs.k8s.io/core:/stable:/v{{ kubectl_version }}/rpm/repodata/repomd.xml.key"
+kubectl_redhat_repository: "https://pkgs.k8s.io/core:/stable:/v{{ kubectl_version }}/rpm/"

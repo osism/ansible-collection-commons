@@ -1,11 +1,12 @@
 import pytest
 
 from ..util.util import (
-    get_ansible,
-    get_variable,
-    get_from_url,
     extract_url_from_variable,
+    get_ansible,
     get_centos_repo_key,
+    get_from_url,
+    get_variable,
+    jinja_replacement,
 )
 
 testinfra_runner, testinfra_hosts = get_ansible()
@@ -32,7 +33,10 @@ def test_kubectl_gpg_key_present(host):
     )
 
     k8s_repository_key_url = get_variable(host, "kubectl_redhat_repository_key")
-    key_content = get_from_url(k8s_repository_key_url)
+    k8s_version = get_variable(host, "kubectl_version")
+    key_content = get_from_url(
+        jinja_replacement(k8s_repository_key_url, {"kubectl_version": k8s_version})
+    )
     assert installed_key in key_content
 
 
