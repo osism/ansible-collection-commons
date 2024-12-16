@@ -20,7 +20,8 @@
   ansible.builtin.shell:
     cmd: |
       set -eo pipefail
-      curl -fsSL {{ kubectl_debian_repository_key }} | gpg --dearmor --batch --no-tty -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+      curl -fsSL {{ kubectl_debian_repository_key }} | gpg --dearmor --batch --no-tty -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg-new
+      mv /etc/apt/keyrings/kubernetes-apt-keyring.gpg-new /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     executable: /bin/bash
     creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   when: kubectl_configure_repository | bool
