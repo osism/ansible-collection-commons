@@ -1,5 +1,7 @@
 ---
+issue_net_path: /etc/issue.net
 issue_path: /etc/issue
 motd_path: /etc/motd
+
 motd_content: ""
 motd_show_ssh: false
