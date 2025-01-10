@@ -1,0 +1,11 @@
+[Match]
+Name={{ item.1.name }}
+
+[Network]
+IPv6AcceptRA=no
+{% for dest in item.1.dests %}
+
+[BridgeFDB]
+MACAddress=00:00:00:00:00:00
+Destination={{ dest }}
+{% endfor %}
