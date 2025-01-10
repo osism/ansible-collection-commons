@@ -66,7 +66,7 @@ def test_resolvconf_content(host):
     if type(dnssec) is str:
         assert f"DNSSEC={dnssec}" in file_content
     else:
-        assert f"DNSSEC={'yes' if dnssec == True else 'no'}" in file_content
+        assert f"DNSSEC={'yes' if dnssec is True else 'no'}" in file_content
 
     fallback_dns_servers = get_variable(host, "resolvconf_fallback_nameserver")
     if len(fallback_dns_servers) > 0:
@@ -77,19 +77,19 @@ def test_resolvconf_content(host):
     if type(dnstls) is str:
         assert f"DNSOverTLS={dnstls}" in file_content
     else:
-        assert f"DNSOverTLS={'yes' if dnstls == True else 'no'}" in file_content
+        assert f"DNSOverTLS={'yes' if dnstls is True else 'no'}" in file_content
 
     resolvecache = get_variable(host, "resolvconf_cache")
     if type(resolvecache) is str:
         assert f"Cache={resolvecache}" in file_content
     else:
-        assert f"Cache={'yes' if resolvecache == True else 'no'}" in file_content
+        assert f"Cache={'yes' if resolvecache is True else 'no'}" in file_content
 
     cachelocal = get_variable(host, "resolvconf_cache_from_localhost")
-    assert f"CacheFromLocalhost={'yes' if cachelocal == True else 'no'}" in file_content
+    assert f"CacheFromLocalhost={'yes' if cachelocal is True else 'no'}" in file_content
 
     etchosts = get_variable(host, "resolvconf_read_etc_hosts")
-    assert f"ReadEtcHosts={'yes' if etchosts == True else 'no'}" in file_content
+    assert f"ReadEtcHosts={'yes' if etchosts is True else 'no'}" in file_content
 
     expected_nameservers = get_expected_nameservers(host)
     assert type(expected_nameservers) is list
