@@ -20,6 +20,15 @@
     group: root
     mode: 0644
 
+- name: Copy issue.net file
+  become: true
+  ansible.builtin.template:
+    src: motd.j2
+    dest: "{{ issue_net_path }}"
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Configure SSH to print the motd
   become: true
   ansible.builtin.copy:
