@@ -119,10 +119,17 @@ network_dispatcher_scripts: []
 #   - src: /opt/configuration/network/iptables.sh
 #     dest: routable.d/iptables.sh
 
-# dummy
-
 ## network_dummy_interfaces:
 ##   - lo-bgp
 ##   - lo-vxlan
 network_dummy_interfaces: []
 network_dummy_interface_mtu: 9000
+
+## network_vxlan_interfaces:
+##   - name: vxlan123
+##     vni: 123
+##     local_ip: 10.10.0.1
+##     dests:
+##       - 10.10.0.2
+##       - 10.10.0.3
+network_vxlan_interfaces: []

@@ -1,0 +1,19 @@
+---
+- name: Create systemd networkd netdev files
+  become: true
+  ansible.builtin.template:
+    src: vxlan.netdev.j2
+    dest: "/etc/systemd/network/3{{ item.0 }}-{{ item.1 }}.netdev"
+    mode: 0644
+    owner: root
+    group: root
+  with_indexed_items: "{{ network_vxlan_interfaces }}"
+- name: Create systemd networkd network files
+  become: true
+  ansible.builtin.template:
+    src: vxlan.network.j2
+    dest: "/etc/systemd/network/3{{ item.0 }}-{{ item.1 }}.network"
+    mode: 0644
+    owner: root
+    group: root
+  with_indexed_items: "{{ network_vxlan_interfaces }}"
