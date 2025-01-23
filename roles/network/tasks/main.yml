@@ -8,3 +8,7 @@
 - name: Include dummy interfaces
   ansible.builtin.include_tasks: dummy-interfaces.yml
   when: network_dummy_interfaces | length > 0
+
+- name: Include vxlan interfaces
+  ansible.builtin.include_tasks: vxlan-interfaces.yml
+  when: network_vxlan_interfaces | length > 0
