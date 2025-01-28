@@ -132,4 +132,6 @@ network_dummy_interface_mtu: 9000
 ##     dests:
 ##       - 10.10.0.2
 ##       - 10.10.0.3
+##     addresses:  # optional list of interface addresses
+##       - 192.168.1.1/24
 network_vxlan_interfaces: []

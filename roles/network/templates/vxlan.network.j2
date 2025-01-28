@@ -3,6 +3,11 @@ Name={{ item.1.name }}
 
 [Network]
 IPv6AcceptRA=no
+{% if 'addresses' in item.1 -%}
+{%  for address in item.1.addresses %}
+Address={{ address }}
+{% endfor %}
+{% endif %}
 {% for dest in item.1.dests %}
 
 [BridgeFDB]
