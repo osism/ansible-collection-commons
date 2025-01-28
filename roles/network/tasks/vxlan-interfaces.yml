@@ -8,6 +8,7 @@
     owner: root
     group: root
   with_indexed_items: "{{ network_vxlan_interfaces }}"
+  notify: Reload systemd-networkd
 - name: Create systemd networkd network files
   become: true
   ansible.builtin.template:
@@ -17,3 +18,4 @@
     owner: root
     group: root
   with_indexed_items: "{{ network_vxlan_interfaces }}"
+  notify: Reload systemd-networkd

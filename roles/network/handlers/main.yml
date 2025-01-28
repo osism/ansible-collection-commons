@@ -1,4 +1,11 @@
 ---
+- name: Reload systemd-networkd
+  become: true
+  ansible.builtin.service:
+    name: systemd-networkd
+    state: reloaded
+  when: network_allow_service_restart
+
 - name: Netplan configuration changed
   become: true
   ansible.builtin.command: netplan apply
