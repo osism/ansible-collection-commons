@@ -8,6 +8,7 @@
     owner: root
     group: root
   with_indexed_items: "{{ network_vxlan_interfaces }}"
+  register: network_vxlan_interfaces_netdev_files
   notify: Reload systemd-networkd
 - name: Create systemd networkd network files
   become: true
@@ -19,3 +20,4 @@
     group: root
   with_indexed_items: "{{ network_vxlan_interfaces }}"
   notify: Reload systemd-networkd
+  register: network_vxlan_interfaces_network_files

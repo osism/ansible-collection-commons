@@ -119,6 +119,9 @@ network_dispatcher_scripts: []
 #   - src: /opt/configuration/network/iptables.sh
 #     dest: routable.d/iptables.sh
 
+network_networkd_remove_unmanaged_files: true
+network_networkd_managed_files_extra: []
+
 ## network_dummy_interfaces:
 ##   - lo-bgp
 ##   - lo-vxlan

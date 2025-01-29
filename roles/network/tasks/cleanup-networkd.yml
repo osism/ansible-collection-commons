@@ -1,0 +1,25 @@
+---
+- name: List existing configuration files
+  ansible.builtin.command: "find /etc/systemd/network -type f"
+  changed_when: false
+  register: network_networkd_existing_files
+
+- name: Remove unused configuration files
+  become: true
+  vars:
+    network_networkd_configured_files: >-
+      {{
+        (
+          network_dummy_interfaces_netdev_files.results | default([])
+          +
+          network_vxlan_interfaces_netdev_files.results | default([])
+          +
+          network_vxlan_interfaces_network_files.results | default([])
+        ) | map(attribute='dest') | list
+      }}
+  ansible.builtin.file:
+    dest: "{{ item }}"
+    state: absent
+  when: item not in network_networkd_configured_files + (['/etc/systemd/network'] | product(network_networkd_managed_files_extra) | map('join', '/') | list )
+  with_items: "{{ network_networkd_existing_files.stdout_lines | default([]) }}"
+  notify: Reload systemd-networkd
