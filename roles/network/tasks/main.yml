@@ -12,3 +12,8 @@
 - name: Include vxlan interfaces
   ansible.builtin.include_tasks: vxlan-interfaces.yml
   when: network_vxlan_interfaces | length > 0
+
+- name: Include networkd cleanup tasks
+  ansible.builtin.include_tasks: cleanup-networkd.yml
+  when:
+    - network_networkd_remove_unmanaged_files | bool

@@ -8,4 +8,5 @@
     owner: root
     group: root
   with_indexed_items: "{{ network_dummy_interfaces }}"
+  register: network_dummy_interfaces_netdev_files
   notify: Reload systemd-networkd
