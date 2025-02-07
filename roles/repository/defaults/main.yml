@@ -6,6 +6,5 @@ repository_key_files_directory: ""
 repository_keys: []
 repository_key_ids: {}
 
-enable_phased_updates: false
-
+repository_apt_phased_updates: false
 repository_apt_acquire_forceipv4: false
