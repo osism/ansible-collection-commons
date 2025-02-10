@@ -4,3 +4,9 @@ Update-Manager::Never-Include-Phased-Updates;
 {% if repository_apt_acquire_forceipv4 | bool %}
 Acquire::ForceIPv4 "true";
 {% endif %}
+{% if not repository_apt_install_recommends | bool %}
+APT::Install-Recommends "0";
+{% endif %}
+{% if not repository_apt_install_suggests | bool %}
+APT::Install-Suggests "0";
+{% endif %}
