@@ -1,11 +1,11 @@
 [NetDev]
-Name={{ item.1.name }}
+Name={{ item.key }}
 Kind=vxlan
 MTUBytes=1500
 
 [VXLAN]
-VNI={{ item.1.vni }}
-Local={{ item.1.local_ip }}
+VNI={{ item.value.vni }}
+Local={{ item.value.local_ip }}
 MacLearning=true
 DestinationPort=4789
 Independent=yes

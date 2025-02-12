@@ -1,14 +1,14 @@
 [Match]
-Name={{ item.1.name }}
+Name={{ item.key }}
 
 [Network]
 IPv6AcceptRA=no
-{% if 'addresses' in item.1 -%}
-{%  for address in item.1.addresses %}
+{% if 'addresses' in item.value -%}
+{%  for address in item.value.addresses %}
 Address={{ address }}
 {% endfor %}
 {% endif %}
-{% for dest in item.1.dests %}
+{% for dest in item.value.dests %}
 
 [BridgeFDB]
 MACAddress=00:00:00:00:00:00
