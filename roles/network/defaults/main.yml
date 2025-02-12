@@ -129,7 +129,7 @@ network_dummy_interfaces: []
 network_dummy_interface_mtu: 9000
 
 ## network_vxlan_interfaces:
-##   - name: vxlan123
+##   vxlan123:
 ##     vni: 123
 ##     local_ip: 10.10.0.1
 ##     dests:
@@ -137,4 +137,4 @@ network_dummy_interface_mtu: 9000
 ##       - 10.10.0.3
 ##     addresses:  # optional list of interface addresses
 ##       - 192.168.1.1/24
-network_vxlan_interfaces: []
+network_vxlan_interfaces: {}

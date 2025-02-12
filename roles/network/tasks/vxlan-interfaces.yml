@@ -3,21 +3,21 @@
   become: true
   ansible.builtin.template:
     src: vxlan.netdev.j2
-    dest: "/etc/systemd/network/3{{ item.0 }}-{{ item.1.name }}.netdev"
+    dest: "/etc/systemd/network/30-{{ item.key }}.netdev"
     mode: 0644
     owner: root
     group: root
-  with_indexed_items: "{{ network_vxlan_interfaces }}"
+  loop: "{{ network_vxlan_interfaces | dict2items }}"
   register: network_vxlan_interfaces_netdev_files
   notify: Reload systemd-networkd
 - name: Create systemd networkd network files
   become: true
   ansible.builtin.template:
     src: vxlan.network.j2
-    dest: "/etc/systemd/network/3{{ item.0 }}-{{ item.1.name }}.network"
+    dest: "/etc/systemd/network/30-{{ item.key }}.network"
     mode: 0644
     owner: root
     group: root
-  with_indexed_items: "{{ network_vxlan_interfaces }}"
+  loop: "{{ network_vxlan_interfaces | dict2items }}"
   notify: Reload systemd-networkd
   register: network_vxlan_interfaces_network_files
