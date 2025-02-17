@@ -1,4 +1,4 @@
 ---
 # renovate: datasource=github-releases depName=derailed/k9s
-k9s_version: 'v0.40.0'
+k9s_version: 'v0.40.3'
 k9s_base_url: https://github.com/derailed/k9s/releases/download
