@@ -8,9 +8,11 @@ IPv6AcceptRA=no
 Address={{ address }}
 {% endfor %}
 {% endif %}
+{% if 'dests' in item.value -%}
 {% for dest in item.value.dests %}
 
 [BridgeFDB]
 MACAddress=00:00:00:00:00:00
 Destination={{ dest }}
 {% endfor %}
+{% endif %}

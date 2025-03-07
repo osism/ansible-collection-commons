@@ -9,4 +9,6 @@ Local={{ item.value.local_ip }}
 MacLearning=true
 DestinationPort=4789
 Independent=yes
-Group={{ item.value.group | default('239.1.1.1') }}
+{% if 'group' in item.value -%}
+Group={{ item.value.group }}
+{% endif %}
