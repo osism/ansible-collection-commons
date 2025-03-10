@@ -1,7 +1,7 @@
 [NetDev]
 Name={{ item.key }}
 Kind=vxlan
-MTUBytes=1500
+MTUBytes={{ item.value.mtu | default(1500) }}
 
 [VXLAN]
 VNI={{ item.value.vni }}
