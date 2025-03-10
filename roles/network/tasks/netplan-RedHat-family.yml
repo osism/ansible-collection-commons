@@ -68,24 +68,33 @@
     group: root
   when: network_interfaces_path_stat.stat.isdir is defined and network_interfaces_path_stat.stat.isdir
 
-# networkd-dispatcher is currently not being installed on CentOS
-# - name: Copy dispatcher scripts
-#   become: true
-#   ansible.builtin.template:
-#     src: "{{ item.src }}"
-#     dest: "/etc/networkd-dispatcher/{{ item.dest }}"
-#     mode: 0755
-#     owner: root
-#     group: root
-#   loop: "{{ network_dispatcher_scripts }}"
+- name: Create dispatcher directories
+  become: true
+  ansible.builtin.file:
+    path: "/etc/NetworkManager/dispatcher.d/{{ item.dest | ansible.builtin.dirname }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ network_dispatcher_scripts }}"
 
-# - name: "Manage service {{ network_dispatcher_service_name }}"
-#   become: true
-#   ansible.builtin.service:
-#     name: "{{ network_dispatcher_service_name }}"
-#     enabled: true
-#     state: started
-#   register: network_service
+- name: Copy dispatcher scripts
+  become: true
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "/etc/NetworkManager/dispatcher.d/{{ item.dest }}"
+    mode: 0755
+    owner: root
+    group: root
+  loop: "{{ network_dispatcher_scripts }}"
+
+- name: "Manage service {{ network_dispatcher_service_name }}"
+  become: true
+  ansible.builtin.service:
+    name: "{{ network_dispatcher_service_name }}"
+    enabled: true
+    state: started
+  register: network_service
 
 - name: Include cleanup tasks
   ansible.builtin.include_tasks: cleanup-netplan.yml
