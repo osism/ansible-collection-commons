@@ -11,6 +11,8 @@ operator_group: "{{ operator_user }}"
 # possible values: git
 configuration_type: git
 
+configuration_no_log: true
+
 ##########################
 # directories
 
