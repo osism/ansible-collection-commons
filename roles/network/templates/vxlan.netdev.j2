@@ -2,6 +2,7 @@
 Name={{ item.key }}
 Kind=vxlan
 MTUBytes={{ item.value.mtu | default(1500) }}
+MACAddress={{ item.value.macaddress | default('none') }}
 
 [VXLAN]
 VNI={{ item.value.vni }}
