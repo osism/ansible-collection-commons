@@ -21,7 +21,7 @@
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
         configuration_git_protocol != 'ssh'
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
-  no_log: true
+  no_log: "{{ configuration_no_log }}"
 
 - name: Set permissions of configuration directory
   ansible.builtin.file:
