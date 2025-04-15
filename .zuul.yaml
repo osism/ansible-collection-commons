@@ -45,6 +45,14 @@
         pass-to-parent: true
 
 - job:
+    name: ansible-collection-commons-osism-kubernetes-push
+    parent: abstract-osism-kubernetes-push
+    secrets:
+      - name: secret
+        secret: SECRET_ANSIBLE_COLLECTION_COMMONS
+        pass-to-parent: true
+
+- job:
     name: abstract-ansible-collection-commons-molecule
     parent: ansible-molecule
     abstract: true
@@ -464,4 +472,6 @@
     post:
       jobs:
         - ansible-collection-commons-container-image-osism-ansible-push:
+            branches: main
+        - ansible-collection-commons-osism-kubernetes-push:
             branches: main
