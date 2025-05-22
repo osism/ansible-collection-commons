@@ -1,1 +1,6 @@
 ---
+motd_content: |
+  ****************************************
+  * Welcome to OSISM Test Environment    *
+  * This is a test MOTD message          *
+  ****************************************
