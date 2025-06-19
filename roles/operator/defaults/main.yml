@@ -22,3 +22,5 @@ operator_sudo_nopasswd: true
 
 operator_sudo_cmd_list:
   - ALL
+
+operator_environment: {}
