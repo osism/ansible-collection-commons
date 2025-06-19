@@ -53,6 +53,16 @@
     - "export LANG=C.UTF-8"
     - "export LC_ALL=C.UTF-8"
 
+- name: Set custom environment variables in .bashrc configuration file
+  become: true
+  ansible.builtin.lineinfile:
+    dest: "{{ result_create_operator_user.home }}/.bashrc"
+    line: "export {{ item.key }}={{ item.value }}"
+    create: true
+    mode: 0640
+  loop: "{{ operator_environment | dict2items }}"
+  when: operator_environment is defined and operator_environment
+
 - name: Create .ssh directory
   become: true
   ansible.builtin.file:
