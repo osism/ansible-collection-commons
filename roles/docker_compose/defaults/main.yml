@@ -1,10 +1,25 @@
 ---
+# Installation method for Docker Compose (only 'package' is supported)
+# Other install types are deprecated and will cause the role to fail
 docker_compose_install_type: package
 
+# Legacy docker-compose package name (will be uninstalled)
+# This standalone package is being replaced by the Docker plugin
 docker_compose_package_name: docker-compose
+
+# Docker Compose plugin package name (preferred installation method)
+# Provides 'docker compose' command as a Docker plugin
 docker_compose_plugin_package_name: docker-compose-plugin
 
+# User account that will run Docker Compose services
+# Services created by this role will run under this user account
 docker_compose_service_user: "{{ operator_user | default('dragon') }}"
+
+# Group that will run Docker Compose services
+# Services created by this role will run under this group
 docker_compose_service_group: "{{ operator_group | default('dragon') }}"
 
+# Whether to pull latest images before starting services
+# When true: Adds 'docker compose pull' as ExecStartPre in systemd service
+# When false: Uses existing local images without pulling updates
 docker_compose_pull: true
