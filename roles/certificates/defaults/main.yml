@@ -1,11 +1,17 @@
 ---
-# The .crt extension is important. Otherwise the certificates are not imported.
+# List of custom CA certificates to install on the system
+# Each certificate entry requires:
+#   - name: Filename for the certificate (must have .crt extension for proper import)
+#   - certificate: The PEM-formatted certificate content
 #
+# Example:
 # certificates_ca:
 #   - name: sample.crt
 #     certificate: |
 #       -----BEGIN CERTIFICATE-----
 #       [...]
 #       -----END CERTIFICATE-----
-
+#
+# The .crt extension is mandatory - certificates without this extension will not be imported
+# by the system's update-ca-certificates command
 certificates_ca: []
