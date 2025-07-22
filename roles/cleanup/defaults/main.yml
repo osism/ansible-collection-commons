@@ -1,11 +1,30 @@
 ---
+# Default packages to remove from all systems
+# These are packages commonly installed but not needed for production systems
 cleanup_packages_default:
   - lxc
+
+# Additional packages to remove (user-defined list)
+# Add any extra packages you want to remove beyond the defaults and distribution-specific ones
 cleanup_packages_extra: []
+
+# Combined list of all packages to remove
+# Merges default packages, extra packages, and distribution-specific packages
 cleanup_packages: "{{ cleanup_packages_default + cleanup_packages_extra + cleanup_packages_distribution }}"
 
+# Default services to stop and disable (currently empty)
+# Services in this list will be stopped and disabled on all systems
 cleanup_services_default: []
+
+# Additional services to stop and disable (user-defined list)
+# Add any extra services you want to stop and disable beyond the defaults and distribution-specific ones
 cleanup_services_extra: []
+
+# Combined list of all services to stop and disable
+# Merges default services, extra services, and distribution-specific services
 cleanup_services: "{{ cleanup_services_default + cleanup_services_extra + cleanup_services_distribution }}"
 
+# Whether to remove cloud-init package and configuration
+# When true: Removes cloud-init package and deletes /etc/cloud directory
+# When false: Leaves cloud-init untouched
 cleanup_cloudinit: true
