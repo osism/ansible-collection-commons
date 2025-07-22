@@ -1,7 +1,18 @@
 ---
+# Path to the issue.net file displayed on remote logins before authentication
 issue_net_path: /etc/issue.net
+
+# Path to the issue file displayed on local logins before authentication
 issue_path: /etc/issue
+
+# Path to the motd (Message of the Day) file displayed after successful login
 motd_path: /etc/motd
 
+# Content to display in the motd, issue and issue.net files
+# Can contain plain text, system information variables, or Jinja2 template syntax
 motd_content: ""
+
+# Whether to configure SSH to display the motd on SSH login
+# When true: Creates /etc/ssh/sshd_config.d/60-motd.conf with "PrintMotd yes"
+# When false: Removes the configuration file to use system defaults
 motd_show_ssh: false
