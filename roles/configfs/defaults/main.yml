@@ -1,0 +1,15 @@
+---
+# ConfigFS role manages the sys-kernel-config.mount systemd unit
+#
+# ConfigFS (Configuration Filesystem) provides a kernel interface for userspace
+# applications to configure kernel objects dynamically. It is mounted at /sys/kernel/config
+# and is commonly used by:
+# - Target framework (SCSI target subsystem)
+# - Network configuration tools
+# - Various kernel subsystems that need runtime configuration
+#
+# The sys-kernel-config.mount unit ensures the configfs filesystem is properly
+# mounted and available for applications that require it.
+#
+# This role has no configurable parameters - it simply ensures the
+# sys-kernel-config.mount service is started and enabled.
