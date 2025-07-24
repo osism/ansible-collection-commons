@@ -1,4 +1,18 @@
 ---
+# Docker registry URL for authentication
+# Default: Docker Hub (index.docker.io)
+# Examples: registry.example.com, quay.io, ghcr.io
 docker_login_registry: index.docker.io
+
+# Username for Docker registry authentication
+# For Docker Hub: your Docker Hub username
+# For other registries: the appropriate username for that registry
+# Required: This parameter must be set for authentication to work
 docker_login_username:
+
+# Password for Docker registry authentication
+# For Docker Hub: your Docker Hub password or personal access token
+# For other registries: the appropriate password/token for that registry
+# Required: This parameter must be set for authentication to work
+# Security: Store this value securely (e.g., in Ansible Vault)
 docker_login_password:
