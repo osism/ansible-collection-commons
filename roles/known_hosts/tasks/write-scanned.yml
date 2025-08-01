@@ -9,4 +9,4 @@
     loop_var: inner_item
   when:
     - item['stdout_lines'] is defined
-    - item['stdout_lines'] | length
+    - item['stdout_lines'] | length > 0

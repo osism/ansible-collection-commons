@@ -40,7 +40,7 @@
   loop: "{{ known_hosts_list }}"
   when:
     - hostvars[item]['known_hosts'] is defined
-    - hostvars[item]['known_hosts'] | length
+    - hostvars[item]['known_hosts'] | length > 0
 
 - name: Write extra known_hosts entries
   ansible.builtin.known_hosts:
@@ -50,7 +50,7 @@
   loop: "{{ known_hosts_extra }}"
   when:
     - known_hosts_extra is defined
-    - known_hosts_extra | length
+    - known_hosts_extra | length > 0
 
 - name: Delete known_hosts entries
   ansible.builtin.known_hosts:
@@ -61,7 +61,7 @@
   loop: "{{ known_hosts_delete }}"
   when:
     - known_hosts_delete is defined
-    - known_hosts_delete | length
+    - known_hosts_delete | length > 0
 
 - name: Set file permissions
   ansible.builtin.file:
