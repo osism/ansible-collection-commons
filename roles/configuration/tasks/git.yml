@@ -2,7 +2,7 @@
 - name: Set configuration_git_repository_url fact (with username or personal access token)
   ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_username }}@{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"
-  when: configuration_git_username is defined and configuration_git_username | length
+  when: configuration_git_username is defined and configuration_git_username | length > 0
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
   no_log: "{{ configuration_no_log }}"
   tags: update-configuration
@@ -10,7 +10,7 @@
 - name: Set configuration_git_repository_url fact (without username)
   ansible.builtin.set_fact:
     configuration_git_repository_url: "{{ configuration_git_protocol }}://{{ configuration_git_host }}:{{ configuration_git_port }}/{{ configuration_git_repository }}"
-  when: configuration_git_username is not defined or not configuration_git_username | length
+  when: configuration_git_username is not defined or not configuration_git_username | length > 0
   tags: update-configuration
 
 - name: Copy private ssh key
@@ -20,7 +20,7 @@
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
     mode: 0600
-  when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key | length)
+  when: (configuration_git_protocol == 'ssh' and configuration_git_private_key is defined and configuration_git_private_key | length > 0)
   no_log: "{{ configuration_no_log }}"
 
 - name: Install required packages on Debian
@@ -44,7 +44,7 @@
     name: http.proxy
     scope: global
     value: "{{ configuration_git_proxy }}"
-  when: configuration_git_proxy is defined and configuration_git_proxy | length
+  when: configuration_git_proxy is defined and configuration_git_proxy | length > 0
 
 - name: Include update tasks
   ansible.builtin.include_tasks: update.yml
