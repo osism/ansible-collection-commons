@@ -6,5 +6,8 @@ URIs: {{ item.deb822_uris }}
 Suites: {{ item.name }}
 Components: {{ item.deb822_components }}
 Signed-By: {{ item.deb822_signed_by }}
+{% if "deb822_trusted" in item %}
+Trusted: {{ item.deb822_trusted }}
+{% endif %}
 {{ '' if loop.last else '\n' }}
 {% endfor %}
