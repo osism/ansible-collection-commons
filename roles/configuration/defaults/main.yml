@@ -70,3 +70,19 @@ configuration_git_protocol: ssh
 # For SSH: typically 'git'
 # For HTTPS with PAT: use the personal access token as username
 configuration_git_username: git
+
+##########################
+# parameters for netbox submodule management
+
+# Whether to manage netbox submodule in the git repository
+# Set to true to enable submodule update for netbox/
+configuration_git_netbox: false
+
+# SSH private key content for netbox submodule authentication
+# Should contain the full private key including headers/footers
+# Only used when configuration_git_netbox is true
+configuration_git_private_key_netbox: ""
+
+# File path where the netbox submodule private key will be stored
+# Used for SSH authentication to netbox submodule repository
+configuration_git_private_key_file_netbox: ~/.ssh/id_rsa.netbox

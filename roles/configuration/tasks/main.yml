@@ -13,3 +13,8 @@
 - name: Include tasks required by the specific configuration type
   ansible.builtin.include_tasks: "{{ configuration_type }}.yml"
   tags: update-configuration
+
+- name: Include netbox submodule tasks
+  ansible.builtin.include_tasks: netbox.yml
+  when: configuration_git_netbox | bool
+  tags: update-configuration
