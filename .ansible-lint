@@ -1,9 +1,6 @@
 ---
-exclude_paths:
-  - .github/
 mock_modules:
   - scan_services
 skip_list:
-  - galaxy[no-changelog]
   - var-naming[no-role-prefix]
   - package-latest
