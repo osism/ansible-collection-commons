@@ -31,6 +31,9 @@ sysctl_defaults:
   compute:
     - name: net.netfilter.nf_conntrack_max
       value: 1048576
+  network:
+    - name: net.netfilter.nf_conntrack_max
+      value: 1048576
   # https://gitlab.com/yaook/operator/-/commit/1e42eda64fac8045baeae1d88e865c5db70cc25b
   k3s_node:
     - name: fs.inotify.max_user_instances
