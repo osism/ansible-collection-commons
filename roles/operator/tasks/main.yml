@@ -115,7 +115,7 @@
     name: "{{ operator_user }}"
     update_password: always
     password: "{{ operator_password }}"
-  when: operator_password is defined and operator_password
+  when: operator_password is defined and operator_password | length
   no_log: true
 
 - name: Unset & lock password
