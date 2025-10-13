@@ -10,6 +10,7 @@
   loop: "{{ network_vxlan_interfaces | dict2items }}"
   register: network_vxlan_interfaces_netdev_files
   notify: Reload systemd-networkd
+
 - name: Create systemd networkd network files
   become: true
   ansible.builtin.template:

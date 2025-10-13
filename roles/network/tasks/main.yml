@@ -8,12 +8,18 @@
 - name: Include dummy interfaces
   ansible.builtin.include_tasks: dummy-interfaces.yml
   when: network_dummy_interfaces | length > 0
+  tags:
+    - dummy
 
 - name: Include vxlan interfaces
   ansible.builtin.include_tasks: vxlan-interfaces.yml
   when: network_vxlan_interfaces | length > 0
+  tags:
+    - vxlan
 
 - name: Include networkd cleanup tasks
   ansible.builtin.include_tasks: cleanup-networkd.yml
   when:
     - network_networkd_remove_unmanaged_files | bool
+  tags:
+    - cleanup
