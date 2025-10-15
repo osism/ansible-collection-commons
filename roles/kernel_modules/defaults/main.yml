@@ -3,4 +3,8 @@ kernel_modules_default:
   - bonding
   - 8021q
 kernel_modules_extra: []
+
+# vfio-pci module configuration
+kernel_modules_vfio_pci_ids: []
+
 kernel_modules: "{{ kernel_modules_default + kernel_modules_extra }}"
