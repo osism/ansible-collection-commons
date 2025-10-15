@@ -1,4 +1,5 @@
 ---
+certificates_manager_group: all
 certificates_ca:
   - name: sample.crt
     certificate: |
