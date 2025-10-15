@@ -22,3 +22,7 @@ certificates_ca: []
 # If {{ certificates_configuration_directory }}/certificates/ca exists and contains .crt files,
 # they will be automatically copied as CA certificates
 certificates_configuration_directory: "{{ configuration_directory | default('/opt/configuration') }}"
+
+# Manager group name used for delegation when reading certificates from configuration directory
+# This allows customization of which inventory group is used as the source for certificate files
+certificates_manager_group: "manager"

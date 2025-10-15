@@ -20,6 +20,8 @@
   ansible.builtin.stat:
     path: "{{ certificates_configuration_directory }}/certificates/ca"
   register: certificates_ca_directory_stat
+  delegate_to: "{{ groups[certificates_manager_group][0] }}"
+  run_once: true
 
 - name: Find .crt files in configuration directory
   ansible.builtin.find:
@@ -27,22 +29,35 @@
     patterns: "*.crt"
     file_type: file
   register: certificates_ca_files
+  delegate_to: "{{ groups[certificates_manager_group][0] }}"
+  run_once: true
   when:
     - certificates_ca_directory_stat.stat.exists
     - certificates_ca_directory_stat.stat.isdir
 
-- name: Copy CA certificates from configuration directory
-  become: true
-  ansible.builtin.copy:
+- name: Read CA certificate content from manager
+  ansible.builtin.slurp:
     src: "{{ item.path }}"
-    dest: "{{ certificates_ca_path }}/{{ item.path | basename }}"
-    owner: root
-    group: root
-    mode: 0644
-    remote_src: true
+  register: certificates_ca_content
+  delegate_to: "{{ groups[certificates_manager_group][0] }}"
   loop: "{{ certificates_ca_files.files }}"
   when:
     - certificates_ca_directory_stat.stat.exists
     - certificates_ca_directory_stat.stat.isdir
     - certificates_ca_files.files | length > 0
+
+- name: Copy CA certificates from configuration directory to all nodes
+  become: true
+  ansible.builtin.copy:
+    content: "{{ item.content | b64decode }}"
+    dest: "{{ certificates_ca_path }}/{{ item.item.path | basename }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop: "{{ certificates_ca_content.results }}"
+  when:
+    - certificates_ca_directory_stat.stat.exists
+    - certificates_ca_directory_stat.stat.isdir
+    - certificates_ca_files.files | length > 0
+    - not item.skipped | default(false)
   notify: Update CA certificates
