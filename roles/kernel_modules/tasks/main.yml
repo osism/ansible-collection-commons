@@ -1,4 +1,21 @@
 ---
+- name: Remove vfio-pci module configuration
+  become: true
+  ansible.builtin.file:
+    path: /etc/modprobe.d/vfio-pci.conf
+    state: absent
+  when: kernel_modules_vfio_pci_ids | length == 0
+
+- name: Configure vfio-pci module options
+  become: true
+  ansible.builtin.copy:
+    content: "options vfio-pci ids={{ kernel_modules_vfio_pci_ids | join(',') }}\n"
+    dest: /etc/modprobe.d/vfio-pci.conf
+    mode: "0644"
+    owner: root
+    group: root
+  when: kernel_modules_vfio_pci_ids | length > 0
+
 - name: Enable kernel modules
   become: true
   ansible.builtin.lineinfile:
@@ -13,4 +30,5 @@
   community.general.modprobe:
     name: "{{ item }}"
     state: present
+    persistent: present
   loop: "{{ kernel_modules }}"
