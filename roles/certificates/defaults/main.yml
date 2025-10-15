@@ -1,4 +1,6 @@
 ---
+configuration_directory: /opt/configuration
+
 # List of custom CA certificates to install on the system
 # Each certificate entry requires:
 #   - name: Filename for the certificate (must have .crt extension for proper import)
@@ -15,3 +17,8 @@
 # The .crt extension is mandatory - certificates without this extension will not be imported
 # by the system's update-ca-certificates command
 certificates_ca: []
+
+# Configuration directory for automatic certificate discovery
+# If {{ certificates_configuration_directory }}/certificates/ca exists and contains .crt files,
+# they will be automatically copied as CA certificates
+certificates_configuration_directory: "{{ configuration_directory | default('/opt/configuration') }}"
