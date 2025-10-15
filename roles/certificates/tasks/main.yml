@@ -15,3 +15,34 @@
     mode: 0644
   loop: "{{ certificates_ca }}"
   notify: Update CA certificates
+
+- name: Check if configuration directory CA certificates path exists
+  ansible.builtin.stat:
+    path: "{{ certificates_configuration_directory }}/certificates/ca"
+  register: certificates_ca_directory_stat
+
+- name: Find .crt files in configuration directory
+  ansible.builtin.find:
+    paths: "{{ certificates_configuration_directory }}/certificates/ca"
+    patterns: "*.crt"
+    file_type: file
+  register: certificates_ca_files
+  when:
+    - certificates_ca_directory_stat.stat.exists
+    - certificates_ca_directory_stat.stat.isdir
+
+- name: Copy CA certificates from configuration directory
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item.path }}"
+    dest: "{{ certificates_ca_path }}/{{ item.path | basename }}"
+    owner: root
+    group: root
+    mode: 0644
+    remote_src: true
+  loop: "{{ certificates_ca_files.files }}"
+  when:
+    - certificates_ca_directory_stat.stat.exists
+    - certificates_ca_directory_stat.stat.isdir
+    - certificates_ca_files.files | length > 0
+  notify: Update CA certificates
