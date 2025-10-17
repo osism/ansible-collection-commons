@@ -3,18 +3,18 @@
 ---
 __repository_default:
   - name: "{{ ansible_distribution_release }}"
-    deb822_uris: http://ports.ubuntu.com/ubuntu-ports/
+    deb822_uris: https://ports.ubuntu.com/ubuntu-ports/
     deb822_components: main restricted universe multiverse
     deb822_signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
   - name: "{{ ansible_distribution_release }}-backports"
-    deb822_uris: http://ports.ubuntu.com/ubuntu-ports/
+    deb822_uris: https://ports.ubuntu.com/ubuntu-ports/
     deb822_components: main restricted universe multiverse
     deb822_signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
   - name: "{{ ansible_distribution_release }}-security"
-    deb822_uris: http://ports.ubuntu.com/ubuntu-ports/
+    deb822_uris: https://ports.ubuntu.com/ubuntu-ports/
     deb822_components: main restricted universe multiverse
     deb822_signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
   - name: "{{ ansible_distribution_release }}-updates"
-    deb822_uris: http://ports.ubuntu.com/ubuntu-ports/
+    deb822_uris: https://ports.ubuntu.com/ubuntu-ports/
     deb822_components: main restricted universe multiverse
     deb822_signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
