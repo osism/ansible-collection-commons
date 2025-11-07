@@ -24,3 +24,8 @@ operator_sudo_cmd_list:
   - ALL
 
 operator_environment: {}
+
+# Custom PS1 prompt configuration
+# operator_ps1_custom: "[CLOUDPOD-BB]"
+# operator_ps1_mode: prepend  # Options: prepend, replace
+operator_ps1_mode: prepend
