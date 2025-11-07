@@ -1,9 +1,36 @@
 ---
+##########################
+# User Role Configuration
+##########################
+
+# User management type for this role execution
+# Defines the operational mode of the user role
+# Possible values: default, keyfile
+# default: Full user lifecycle management (create, delete, groups, sudo)
+# keyfile: SSH key management only
 user_type: default
 
-# possible values: user, group
+# Type of sudo configuration to create
+# Determines whether sudoers entries are created per user or per group
+# Possible values: user, group
+# user: Creates individual sudoers files in /etc/sudoers.d/ for each user
+# group: Creates group-based sudoers files in /etc/sudoers.d/
 user_sudoers_type: user
 
+# List of users to create and manage
+# Each user entry is a dictionary with the following optional keys:
+#   - name: (required) Username for the Linux user account
+#   - key: (optional) SSH public key (static key string or remote URL)
+#          Static: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB...
+#          Remote: https://github.com/username.keys
+#   - groups: (optional) List of supplementary groups (overrides user_groups)
+#   - primary_group: (optional) Primary group name (overrides user_primary_group or defaults to username)
+#   - password: (optional) Encrypted password hash
+#          Generate with: mkpasswd --method=sha-512
+#          Set to '!' or '*' to lock/disable password login
+#          See: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html
+# Type: list of dictionaries
+# Default: [] (empty list, no users managed)
 # user_list:
 #   - name: testing
 #     key: ssh-rsa AAAAB...
@@ -24,11 +51,39 @@ user_sudoers_type: user
 #     key: https://github.com/testing.keys
 user_list: []
 
+# List of users to remove from the system
+# Each entry is a username (string) of a user to delete
+# Removes user account, home directory, sudoers file, and associated group
+# Type: list of strings
+# Default: [] (empty list, no users removed)
+# Example: ['olduser', 'tempuser']
 user_delete: []
 
+# Default primary group for all users in user_list
+# If set, all users will be assigned this primary group unless overridden
+# by individual user's primary_group setting
+# If not set, each user gets a group with the same name as the username
+# Type: string
+# Default: undefined (users get username-based groups)
 # user_primary_group:
+
+# Default supplementary groups for all users in user_list
+# These groups are assigned to all users unless overridden by individual
+# user's groups setting
+# Type: list of strings
+# Default: [] (empty list, no supplementary groups)
+# Example: ['docker', 'sudo', 'wheel']
 user_groups: []
 
+# Path to the SSH authorized_keys file for user authentication
+# Specifies where SSH public keys will be installed for each user
+# Type: string
+# Default: ~/.ssh/authorized_keys (relative to each user's home directory)
 user_keyfile: "~/.ssh/authorized_keys"
 
+# Default sudo permissions rule for all managed users
+# Defines the privilege escalation permissions in sudoers files
+# Type: string
+# Default: ALL=(ALL:ALL) NOPASSWD: ALL (full sudo access without password)
+# Example: ALL=(ALL:ALL) ALL (full sudo access with password required)
 user_sudoers: "ALL=(ALL:ALL) NOPASSWD: ALL"
