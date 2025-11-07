@@ -63,6 +63,18 @@
   loop: "{{ operator_environment | dict2items }}"
   when: operator_environment is defined and operator_environment
 
+- name: Set custom PS1 prompt in .bashrc configuration file
+  become: true
+  ansible.builtin.lineinfile:
+    dest: "{{ result_create_operator_user.home }}/.bashrc"
+    regexp: '^export PS1='
+    line: "{{ 'export PS1=\"' + operator_ps1_custom + ' $PS1\"' if operator_ps1_mode == 'prepend' else 'export PS1=\"' + operator_ps1_custom + '\"' }}"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    create: true
+    mode: 0640
+  when: operator_ps1_custom is defined and operator_ps1_custom | length > 0
+
 - name: Create .ssh directory
   become: true
   ansible.builtin.file:
