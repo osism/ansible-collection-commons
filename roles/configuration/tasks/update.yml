@@ -8,6 +8,7 @@
     accept_hostkey: true
     umask: "0007"
     force: true
+    recursive: false
   when: configuration_git_protocol == 'ssh'
 
 - name: Clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
@@ -16,8 +17,9 @@
     dest: "{{ configuration_directory }}"
     version: "{{ configuration_git_version }}"
     accept_hostkey: true
-    force: true
     umask: "0007"
+    force: true
+    recursive: false
   when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
         configuration_git_protocol != 'ssh'
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
