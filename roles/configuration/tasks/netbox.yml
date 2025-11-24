@@ -1,7 +1,7 @@
 ---
 - name: Copy private ssh key for netbox submodule
   ansible.builtin.template:
-    src: config-git-private-key.j2
+    src: config-git-netbox-private-key.j2
     dest: "{{ configuration_git_private_key_file_netbox }}"
     owner: "{{ operator_user }}"
     group: "{{ operator_group }}"
