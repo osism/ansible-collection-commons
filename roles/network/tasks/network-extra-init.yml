@@ -1,0 +1,62 @@
+---
+- name: Install required packages for network-extra-init
+  become: true
+  ansible.builtin.package:
+    name: "{{ network_extra_init_required_packages }}"
+    state: present
+  when: network_extra_init_enable | bool
+
+- name: Deploy network-extra-init script
+  become: true
+  ansible.builtin.template:
+    src: network-extra-init.sh.j2
+    dest: /usr/local/sbin/network-extra-init
+    mode: "0755"
+    owner: root
+    group: root
+  notify: Restart network-extra-init service
+  when: network_extra_init_enable | bool
+
+- name: Deploy network-extra-init systemd service
+  become: true
+  ansible.builtin.template:
+    src: network-extra-init.service.j2
+    dest: /etc/systemd/system/network-extra-init.service
+    mode: "0644"
+    owner: root
+    group: root
+  notify: Restart network-extra-init service
+  when: network_extra_init_enable | bool
+
+- name: Enable and start network-extra-init service
+  become: true
+  ansible.builtin.systemd_service:
+    name: network-extra-init
+    enabled: true
+    state: started
+    daemon_reload: true
+  when: network_extra_init_enable | bool
+
+- name: Disable and stop network-extra-init service
+  become: true
+  ansible.builtin.systemd_service:
+    name: network-extra-init
+    enabled: false
+    state: stopped
+    daemon_reload: true
+  when: not (network_extra_init_enable | bool)
+  failed_when: false
+
+- name: Remove network-extra-init systemd service
+  become: true
+  ansible.builtin.file:
+    path: /etc/systemd/system/network-extra-init.service
+    state: absent
+  when: not (network_extra_init_enable | bool)
+
+- name: Remove network-extra-init script
+  become: true
+  ansible.builtin.file:
+    path: /usr/local/sbin/network-extra-init
+    state: absent
+  when: not (network_extra_init_enable | bool)

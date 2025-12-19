@@ -52,3 +52,10 @@
   with_items: "{{ network_configuration_result.results | default([]) }}"
   tags:
     - skip_ansible_lint
+
+- name: Restart network-extra-init service
+  become: true
+  ansible.builtin.systemd_service:
+    name: network-extra-init
+    state: restarted
+    daemon_reload: true

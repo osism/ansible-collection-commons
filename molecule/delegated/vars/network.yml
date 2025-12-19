@@ -1,4 +1,5 @@
 ---
+network_extra_init_enable: true
 network_dispatcher_scripts:
   - src: /tmp/test_network.sh
     dest: routable.d/test_network.sh

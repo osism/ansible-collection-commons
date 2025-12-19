@@ -8,3 +8,7 @@ network_netplan_required_packages:
   - systemd-networkd
 
 network_dispatcher_service_name: NetworkManager-dispatcher
+
+network_extra_init_required_packages:
+  - bridge-utils
+  - iproute

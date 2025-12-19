@@ -138,3 +138,16 @@ network_dummy_interface_mtu: 9000
 ##     addresses:  # optional list of interface addresses
 ##       - 192.168.1.1/24
 network_vxlan_interfaces: {}
+
+# Extra network init service
+# This service runs custom bridge/ip commands after the network is ready
+network_extra_init_enable: false
+network_extra_init_commands: []
+# Example:
+# network_extra_init_commands:
+#   - bridge fdb append to 00:00:00:00:00:00 dst 192.0.2.10 dev vxlan100
+#   - bridge fdb append to 00:00:00:00:00:00 dst 192.0.2.20 dev vxlan100
+#   - ip link add vrrp4-2-1 link vxlan100 master vrf100 type macvlan mode bridge
+#   - ip link set dev vrrp4-2-1 address 00:00:5e:00:01:01
+#   - ip addr add 198.51.100.1/24 dev vrrp4-2-1
+#   - ip link set dev vrrp4-2-1 up

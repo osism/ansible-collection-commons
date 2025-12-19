@@ -23,3 +23,8 @@
     - network_networkd_remove_unmanaged_files | bool
   tags:
     - cleanup
+
+- name: Include network extra init
+  ansible.builtin.include_tasks: network-extra-init.yml
+  tags:
+    - network-extra-init
