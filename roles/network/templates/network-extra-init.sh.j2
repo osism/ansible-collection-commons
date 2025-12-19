@@ -1,0 +1,8 @@
+#!/bin/bash
+# {{ ansible_managed }}
+
+set -e
+
+{% for command in network_extra_init_commands %}
+{{ command }}
+{% endfor %}
