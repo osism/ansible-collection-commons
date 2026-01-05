@@ -1,11 +1,4 @@
 ---
-- name: Install required packages for network-extra-init
-  become: true
-  ansible.builtin.package:
-    name: "{{ network_extra_init_required_packages }}"
-    state: present
-  when: network_extra_init_enable | bool
-
 - name: Deploy network-extra-init script
   become: true
   ansible.builtin.template:

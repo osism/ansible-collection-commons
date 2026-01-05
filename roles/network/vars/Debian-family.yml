@@ -11,7 +11,3 @@ network_netplan_required_packages:
 
 network_dispatcher_package_name: networkd-dispatcher
 network_dispatcher_service_name: networkd-dispatcher
-
-network_extra_init_required_packages:
-  - bridge-utils
-  - iproute2
