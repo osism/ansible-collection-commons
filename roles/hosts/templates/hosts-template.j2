@@ -14,14 +14,15 @@ ff02::2          ip6-allrouters
 # Hosts defined in the inventory
 
 {% for item in groups[hosts_group_name] | default([]) | sort %}
-{% if item not in hosts_ignore and hostvars[item] is defined and hostvars[item]['hosts_enable'] | default(hosts_enable) | bool %}
-{% if hostvars[item]['hosts_interface'] is defined %}
-{% set hosts_interface = 'ansible_' + hostvars[item]['hosts_interface'] %}
+{% set hv = hostvars[item] | default(none) %}
+{% if item not in hosts_ignore and hv is not none and hv['hosts_enable'] | default(hosts_enable) | bool %}
+{% if hv['hosts_interface'] is defined %}
+{% set _iface = 'ansible_' + hv['hosts_interface'] %}
 {% else %}
-{% set hosts_interface = 'ansible_' + hostvars[item]['internal_interface'] | default('lo') %}
+{% set _iface = 'ansible_' + hv['internal_interface'] | default('lo') %}
 {% endif %}
-{% if hostvars[item][hosts_interface] is defined %}
-{{ hostvars[item][hosts_interface]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
+{% if hv[_iface] is defined %}
+{{ hv[_iface]['ipv4']['address'] }} {{ item }} {{ item.split('.')[0] }}
 {% endif %}
 {% endif %}
 {% endfor %}
