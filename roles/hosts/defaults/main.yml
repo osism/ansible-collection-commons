@@ -16,7 +16,7 @@ hosts_group_name: all
 # under hosts_group_name are then included in the hosts file.
 hosts_use_dns_as_single_source_of_truth: false
 
-# valid values: [block, local, template]
+# valid values: [block, fast, local, template]
 hosts_type: block
 
 # Path to the managed hosts file.

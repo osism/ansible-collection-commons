@@ -1,0 +1,48 @@
+---
+# Each host pre-computes its own hosts entry using its local (cached) facts.
+# This avoids expensive cross-host hostvars resolution in the template
+# and renders the template only once on localhost, reducing complexity
+# from O(N^2) to O(N).
+- name: Set hosts entry fact
+  ansible.builtin.set_fact:
+    _hosts_entry: "{{ hostvars[inventory_hostname][_iface]['ipv4']['address'] }} {{ inventory_hostname }} {{ inventory_hostname.split('.')[0] }}"
+  vars:
+    _iface: "ansible_{{ hosts_interface | default(internal_interface | default('lo')) }}"
+  when:
+    - not hosts_use_dns_as_single_source_of_truth | bool
+    - hosts_enable | bool
+    - inventory_hostname not in hosts_ignore
+    - _iface in hostvars[inventory_hostname]
+
+- name: Create temporary file
+  ansible.builtin.tempfile:
+    state: file
+    suffix: hosts
+  register: _hosts_tempfile
+  delegate_to: localhost
+  run_once: true
+
+- name: Generate temporary /etc/hosts file
+  ansible.builtin.template:
+    src: "hosts-fast.j2"
+    dest: "{{ _hosts_tempfile.path }}"
+    mode: 0644
+  delegate_to: localhost
+  run_once: true
+
+- name: Copy /etc/hosts file
+  become: true
+  ansible.builtin.copy:
+    src: "{{ _hosts_tempfile.path }}"
+    dest: "{{ hosts_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: "{{ hosts_file_backup }}"
+
+- name: Delete temporary file
+  ansible.builtin.file:
+    path: "{{ _hosts_tempfile.path }}"
+    state: absent
+  delegate_to: localhost
+  run_once: true
