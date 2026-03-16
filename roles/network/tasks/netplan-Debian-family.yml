@@ -24,40 +24,71 @@
   with_items:
     - "{{ network_netplan_path }}"
 
-# NOTE: The use of the local actions are a workaround to allow
-#       the use of variables as keys in the dictionaries.
-
-- name: Prepare netplan configuration template
-  ansible.builtin.template:
-    src: netplan/01-osism.yaml.j2
-    dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
-    mode: 0644
-  delegate_to: localhost
-  # NOTE: This task does not change anything on the target host and always
-  #       changes. Regardless of whether changes really take place. Therefore
-  #       changed_when is set to False here.
+- name: Write network_netplan_config_template to temporary file
+  ansible.builtin.copy:
+    content: "{{ network_netplan_config_template }}"
+    dest: "/tmp/.network_netplan_config_template_{{ inventory_hostname }}.j2"
+    mode: 0600
   changed_when: false
+  delegate_to: localhost
+  when: network_netplan_config_template is defined
 
-- name: Copy netplan configuration
+- name: Render netplan configuration from network_netplan_config_template variable
   become: true
   ansible.builtin.template:
-    src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    src: "/tmp/.network_netplan_config_template_{{ inventory_hostname }}.j2"
     dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
     mode: 0600
     owner: root
     group: root
   notify:
     - Netplan configuration changed
+  when: network_netplan_config_template is defined
 
-- name: Remove netplan configuration template
+- name: Remove temporary network_netplan_config_template file
   ansible.builtin.file:
-    path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+    path: "/tmp/.network_netplan_config_template_{{ inventory_hostname }}.j2"
     state: absent
-  delegate_to: localhost
-  # NOTE: This task does not change anything on the target host and always
-  #       changes. Regardless of whether changes really take place. Therefore
-  #       changed_when is set to False here.
   changed_when: false
+  delegate_to: localhost
+  when: network_netplan_config_template is defined
+
+# NOTE: The use of the local actions are a workaround to allow
+#       the use of variables as keys in the dictionaries.
+
+- when: network_netplan_config_template is not defined
+  block:  # noqa osism-fqcn
+    - name: Prepare netplan configuration template
+      ansible.builtin.template:
+        src: netplan/01-osism.yaml.j2
+        dest: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+        mode: 0644
+      delegate_to: localhost
+      # NOTE: This task does not change anything on the target host and always
+      #       changes. Regardless of whether changes really take place. Therefore
+      #       changed_when is set to False here.
+      changed_when: false
+
+    - name: Copy netplan configuration
+      become: true
+      ansible.builtin.template:
+        src: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+        dest: "{{ network_netplan_path }}/{{ network_netplan_file }}"
+        mode: 0600
+        owner: root
+        group: root
+      notify:
+        - Netplan configuration changed
+
+    - name: Remove netplan configuration template
+      ansible.builtin.file:
+        path: "/tmp/{{ inventory_hostname }}-01-osism.yaml.j2"
+        state: absent
+      delegate_to: localhost
+      # NOTE: This task does not change anything on the target host and always
+      #       changes. Regardless of whether changes really take place. Therefore
+      #       changed_when is set to False here.
+      changed_when: false
 
 # NOTE: On pure netplan systems, /etc/network as directory might just not exists
 - name: Check if path for interface file exists
