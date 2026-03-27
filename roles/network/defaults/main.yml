@@ -90,6 +90,11 @@ network_interface_restart_commands:
 
 # configuration for type netplan
 
+# Set network_netplan_config_template to provide the complete netplan configuration
+# as a Jinja2 template from a variable (e.g. injected via Netbox config context).
+# When defined, this takes precedence over the default template.
+# network_netplan_config_template:
+
 network_netplan_path: "/etc/netplan"
 network_netplan_file: "01-osism.yaml"
 network_netplan_permissions: 0600
