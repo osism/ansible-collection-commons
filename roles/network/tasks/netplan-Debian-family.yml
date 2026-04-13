@@ -56,7 +56,8 @@
 # NOTE: The use of the local actions are a workaround to allow
 #       the use of variables as keys in the dictionaries.
 
-- when: network_netplan_config_template is not defined
+- name: Render default netplan configuration
+  when: network_netplan_config_template is not defined
   block:  # noqa osism-fqcn
     - name: Prepare netplan configuration template
       ansible.builtin.template:
