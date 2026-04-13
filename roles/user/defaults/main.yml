@@ -20,6 +20,9 @@ user_sudoers_type: user
 #     # in the section "How do I generate encrypted passwords for
 #     # the user module?"
 #     # password: "$6$LA.PK9Lthg3..."
+#     # Per-user sudoers specification. Defaults to user_sudoers
+#     # if not set.
+#     # sudoers: "ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl"
 #   - name: testing_github
 #     key: https://github.com/testing.keys
 user_list: []
