@@ -63,9 +63,7 @@ def test_wrapper_file(host):
     assert f.exists
     assert f.is_file
     assert f.mode == 0o755
-    assert (
-        f.content_string.strip()
-        == """#!/usr/bin/env bash
+    assert f.content_string.strip() == """#!/usr/bin/env bash
 
 # The docker-compose CLI has been removed in OSISM.
 # The Compose plugin for Docker is now used.
@@ -73,7 +71,6 @@ def test_wrapper_file(host):
 
 /usr/bin/docker compose "$@"
 """.strip()
-    )
 
 
 def test_docker_compose_installation(host):

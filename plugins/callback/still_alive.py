@@ -6,7 +6,6 @@ import time
 
 from ansible.plugins.callback.default import CallbackModule as Default
 
-
 __metaclass__ = type
 
 DOCUMENTATION = """
