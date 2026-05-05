@@ -28,6 +28,7 @@
     mode: 0755
     recurse: true
   delegate_to: localhost
+  run_once: true
 
 - name: Generate report
   become: true
