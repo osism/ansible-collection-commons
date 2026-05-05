@@ -1,3 +1,5 @@
 ---
 operator_user: zuul
 operator_group: zuul
+
+sosreport_archive_directory: /tmp/archive
