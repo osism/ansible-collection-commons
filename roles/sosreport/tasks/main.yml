@@ -79,7 +79,6 @@
     src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.sha256"
     dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.sha256"
     flat: true
-    change: true
   when: file_sha256.files | length > 0
 
 - name: Fetch md5 file
@@ -87,7 +86,6 @@
     src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}.md5"
     dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}.md5"
     flat: true
-    change: true
   when: file_md5.files | length > 0
 
 - name: Fetch archive
@@ -95,7 +93,6 @@
     src: "{{ sosreport_tmpdir }}/{{ sosreport_archive_filename }}"
     dest: "{{ sosreport_archive_directory }}/{{ sosreport_archive_filename }}"
     flat: true
-    change: true
 
 - name: Create archive directory
   ansible.builtin.file:
