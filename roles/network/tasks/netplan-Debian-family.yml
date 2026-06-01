@@ -58,7 +58,7 @@
 
 - name: Render default netplan configuration
   when: network_netplan_config_template is not defined
-  block:  # noqa osism-fqcn
+  block:
     - name: Prepare netplan configuration template
       ansible.builtin.template:
         src: netplan/01-osism.yaml.j2

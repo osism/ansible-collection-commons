@@ -1,6 +1,6 @@
 ---
 - name: Trivy installation
-  block:  # noqa osism-fqcn
+  block:
     - name: Remove old architecture-dependent repository
       become: true
       ansible.builtin.apt_repository:
