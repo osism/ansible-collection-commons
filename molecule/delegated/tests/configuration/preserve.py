@@ -21,6 +21,22 @@ def test_preserved_file_survives_update(host):
     assert "FROM-REPOSITORY" not in content
 
 
+def test_preserved_file_keeps_local_ownership(host):
+    # The restore must reapply the file's original owner, group and mode rather
+    # than silently rewriting the secret to the user running the update (root
+    # under become: true). The fixture creates it as operator_user:operator_group
+    # with mode 0640.
+    directory = get_variable(host, "configuration_directory")
+    operator_user = get_variable(host, "operator_user")
+    operator_group = get_variable(host, "operator_group")
+
+    f = host.file(f"{directory}/netbox/settings.toml")
+
+    assert f.user == operator_user
+    assert f.group == operator_group
+    assert f.mode == 0o640
+
+
 def test_non_preserved_file_is_reset(host):
     # Control: marker.txt is tracked but not preserved, so the force checkout
     # must reset it to the repository version. This proves the checkout actually
@@ -33,9 +49,17 @@ def test_non_preserved_file_is_reset(host):
 
 
 def test_no_preserve_backup_left_behind(host):
-    # The backup created around the checkout must be removed again afterwards.
+    # The run-scoped backup directory created around the force checkout must be
+    # removed again afterwards, leaving no copy of the preserved secret behind —
+    # neither inside the worktree nor in the system temp directory.
     directory = get_variable(host, "configuration_directory")
 
-    backup = host.file(f"{directory}/netbox/settings.toml.osism-preserve")
+    stray_in_worktree = host.check_output(
+        f"find {directory} -name '*.osism-preserve' -print -quit"
+    )
+    assert stray_in_worktree == ""
 
-    assert not backup.exists
+    stray_in_tmp = host.check_output(
+        "find /tmp -maxdepth 1 -name 'osism-configuration-preserve.*' -print -quit"
+    )
+    assert stray_in_tmp == ""
