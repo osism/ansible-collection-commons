@@ -1,8 +1,29 @@
 ---
+# The configuration molecule scenario uses a self-contained fixture: a small
+# "monorepo" configuration repository served over a local git daemon, with a
+# pre-deployed and locally customized checkout (see prepare/configuration.yml).
+# This exercises the force checkout together with configuration_git_preserve_files
+# (issue #855) without depending on an external git server.
 operator_user: zuul
 operator_group: zuul
 
-configuration_git_port: 443
-configuration_git_protocol: https
+# Set explicitly (not only via the role defaults) so the prepare playbook,
+# which does not load the role, can reference it as well.
+configuration_directory: /opt/configuration
+
+configuration_no_log: false
+
+configuration_git_protocol: git
+configuration_git_host: 127.0.0.1
+configuration_git_port: 9418
 configuration_git_username: ""
-configuration_git_private_key: "PRIVATE_KEY"
+configuration_git_private_key: ""
+configuration_git_repository: configuration.git
+
+# netbox/settings.toml stands in for the file holding the local NetBox URL and
+# API token, which must not be discarded by an update.
+configuration_git_preserve_files:
+  - netbox/settings.toml
+
+# Test-only: base path of the fixture git remote served by the git daemon.
+configuration_preserve_remote_base: /opt/molecule-configuration
