@@ -1,0 +1,64 @@
+---
+# Restore the files listed in configuration_git_preserve_files from the
+# run-scoped backup directory created in update.yml, then remove that directory.
+#
+# This runs in the "always" block of the update, so it executes on the happy
+# path AND after a failed force checkout. Every step is guarded by the presence
+# of the individual backup (configuration_git_preserve_backup_stat), so a
+# failure that interrupts the backup loop before every file was copied cannot
+# turn the restore into a copy-from-missing-source error: files that were never
+# backed up were also never checked out, so their local content is still intact.
+
+- name: Stat the preserved file backups
+  ansible.builtin.stat:
+    path: "{{ configuration_git_preserve_tmp.path }}/{{ item.item }}"
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: item.stat.exists
+  register: configuration_git_preserve_backup_stat
+
+# A revision can drop the preserved file's parent directory (e.g. remove
+# netbox/) during the force checkout. ansible.builtin.copy does not create
+# missing parent directories for a file destination, so recreate them first,
+# owned by the operator as the rest of the configuration tree is.
+- name: Recreate the parent directories of the restored files
+  ansible.builtin.file:
+    path: "{{ (configuration_directory ~ '/' ~ item.item) | dirname }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: 0750
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+    index_var: configuration_git_preserve_index
+  when:
+    - item.stat.exists
+    - configuration_git_preserve_backup_stat.results[configuration_git_preserve_index].stat.exists | default(false)
+
+# Reapply the original owner, group and mode captured before the backup.
+# "mode: preserve" alone would keep the mode but reset owner/group to the user
+# running the update (root under become: true), silently rewriting the secret.
+- name: Restore the files that must be preserved across the update
+  ansible.builtin.copy:
+    src: "{{ configuration_git_preserve_tmp.path }}/{{ item.item }}"
+    dest: "{{ configuration_directory }}/{{ item.item }}"
+    remote_src: true
+    owner: "{{ item.stat.pw_name }}"
+    group: "{{ item.stat.gr_name }}"
+    mode: "{{ item.stat.mode }}"
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+    index_var: configuration_git_preserve_index
+  when:
+    - item.stat.exists
+    - configuration_git_preserve_backup_stat.results[configuration_git_preserve_index].stat.exists | default(false)
+
+# Cleanup runs last in "always". If a restore above failed, this is skipped and
+# the backup directory is intentionally left behind for manual recovery.
+- name: Remove the temporary directory used for the preserved file backups
+  ansible.builtin.file:
+    path: "{{ configuration_git_preserve_tmp.path }}"
+    state: absent

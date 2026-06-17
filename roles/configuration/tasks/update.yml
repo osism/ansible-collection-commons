@@ -7,62 +7,78 @@
     label: "{{ item }}"
   register: configuration_git_preserve_stat
 
-- name: Back up files that must be preserved across the update
-  ansible.builtin.copy:
-    src: "{{ configuration_directory }}/{{ item.item }}"
-    dest: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
-    remote_src: true
-    mode: preserve
-  loop: "{{ configuration_git_preserve_stat.results }}"
-  loop_control:
-    label: "{{ item.item }}"
-  when: item.stat.exists
+# The backups are kept in a run-scoped temporary directory OUTSIDE the
+# configuration directory. Keeping them inside the worktree would couple
+# preservation to the git module not running "git clean", and a revision that
+# tracks a "*.osism-preserve" path could clobber the backup during the force
+# checkout. A fresh directory per run also means a previous, interrupted run can
+# never leave a stale backup that a later run overwrites.
+- name: Create a temporary directory for the preserved file backups
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: osism-configuration-preserve.
+  register: configuration_git_preserve_tmp
+  when: configuration_git_preserve_files | length > 0
 
-- name: Clone configuration repository (ssh / with auth) with branch {{ configuration_git_version }}
-  ansible.builtin.git:
-    repo: "{{ configuration_git_repository_url }}"
-    dest: "{{ configuration_directory }}"
-    version: "{{ configuration_git_version }}"
-    key_file: "{{ configuration_git_private_key_file }}"
-    accept_hostkey: true
-    umask: "0007"
-    force: true
-    recursive: false
-  when: configuration_git_protocol == 'ssh'
+# Backup, force checkout and restore form one transaction: "force: true" makes
+# ansible.builtin.git run "git reset --hard", overwriting tracked files before
+# the restore runs. The restore therefore lives in "always", so the preserved
+# files (e.g. netbox/settings.toml with the local NetBox URL and API token) are
+# put back even if the checkout fails midway, and the original error is still
+# surfaced afterwards.
+- name: Update the configuration repository, preserving the listed local files
+  block:
+    - name: Create the parent directories for the preserved file backups
+      ansible.builtin.file:
+        path: "{{ (configuration_git_preserve_tmp.path ~ '/' ~ item.item) | dirname }}"
+        state: directory
+        mode: 0700
+      loop: "{{ configuration_git_preserve_stat.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      when: item.stat.exists
 
-- name: Clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
-  ansible.builtin.git:
-    repo: "{{ configuration_git_repository_url }}"
-    dest: "{{ configuration_directory }}"
-    version: "{{ configuration_git_version }}"
-    accept_hostkey: true
-    umask: "0007"
-    force: true
-    recursive: false
-  when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
-        configuration_git_protocol != 'ssh'
-  # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
-  no_log: "{{ configuration_no_log }}"
+    - name: Back up the files that must be preserved across the update
+      ansible.builtin.copy:
+        src: "{{ configuration_directory }}/{{ item.item }}"
+        dest: "{{ configuration_git_preserve_tmp.path }}/{{ item.item }}"
+        remote_src: true
+        mode: preserve
+      loop: "{{ configuration_git_preserve_stat.results }}"
+      loop_control:
+        label: "{{ item.item }}"
+      when: item.stat.exists
 
-- name: Restore files that must be preserved across the update
-  ansible.builtin.copy:
-    src: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
-    dest: "{{ configuration_directory }}/{{ item.item }}"
-    remote_src: true
-    mode: preserve
-  loop: "{{ configuration_git_preserve_stat.results }}"
-  loop_control:
-    label: "{{ item.item }}"
-  when: item.stat.exists
+    - name: Clone configuration repository (ssh / with auth) with branch {{ configuration_git_version }}
+      ansible.builtin.git:
+        repo: "{{ configuration_git_repository_url }}"
+        dest: "{{ configuration_directory }}"
+        version: "{{ configuration_git_version }}"
+        key_file: "{{ configuration_git_private_key_file }}"
+        accept_hostkey: true
+        umask: "0007"
+        force: true
+        recursive: false
+      when: configuration_git_protocol == 'ssh'
 
-- name: Remove backups of preserved files
-  ansible.builtin.file:
-    path: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
-    state: absent
-  loop: "{{ configuration_git_preserve_stat.results }}"
-  loop_control:
-    label: "{{ item.item }}"
-  when: item.stat.exists
+    - name: Clone configuration repository (without auth or personal access token) with branch {{ configuration_git_version }}
+      ansible.builtin.git:
+        repo: "{{ configuration_git_repository_url }}"
+        dest: "{{ configuration_directory }}"
+        version: "{{ configuration_git_version }}"
+        accept_hostkey: true
+        umask: "0007"
+        force: true
+        recursive: false
+      when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
+            configuration_git_protocol != 'ssh'
+      # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
+      no_log: "{{ configuration_no_log }}"
+
+  always:
+    - name: Restore the preserved files and remove their backups
+      ansible.builtin.include_tasks: restore.yml
+      when: configuration_git_preserve_tmp.path is defined
 
 - name: Set permissions of configuration directory
   ansible.builtin.file:
