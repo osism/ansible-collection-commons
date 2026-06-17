@@ -1,1 +1,84 @@
 ---
+# Build a self-contained fixture for the configuration role: a small "monorepo"
+# configuration repository (tracking netbox/settings.toml and a control marker)
+# served over a local git daemon, pre-deployed into the configuration directory
+# and locally customized. The converge run then performs the force checkout, so
+# the tests can assert that configuration_git_preserve_files keeps the local
+# modifications while a non-preserved tracked file is reset (see issue #855).
+
+- name: Install git (required to build and serve the fixture repository)
+  become: true
+  ansible.builtin.package:
+    name: git
+    state: present
+
+- name: Create the directory for the fixture git remote
+  become: true
+  ansible.builtin.file:
+    path: "{{ configuration_preserve_remote_base }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: "0755"
+
+- name: Build the bare fixture configuration repository
+  ansible.builtin.shell: |
+    set -eu
+    export GIT_AUTHOR_NAME=molecule GIT_AUTHOR_EMAIL=molecule@example.com
+    export GIT_COMMITTER_NAME=molecule GIT_COMMITTER_EMAIL=molecule@example.com
+    base="{{ configuration_preserve_remote_base }}"
+    rm -rf "$base/seed"
+    git init -q -b main "$base/seed"
+    cd "$base/seed"
+    mkdir netbox
+    printf 'token = "FROM-REPOSITORY"\n' > netbox/settings.toml
+    printf 'FROM-REPOSITORY\n' > marker.txt
+    git add .
+    git commit -qm "fixture configuration repository"
+    git clone -q --bare "$base/seed" "$base/configuration.git"
+  args:
+    creates: "{{ configuration_preserve_remote_base }}/configuration.git"
+
+- name: Start the git daemon serving the fixture repository
+  ansible.builtin.command:
+    cmd: >-
+      git daemon --reuseaddr --listen=127.0.0.1 --port={{ configuration_git_port }}
+      --base-path={{ configuration_preserve_remote_base }} --export-all --detach
+      --pid-file={{ configuration_preserve_remote_base }}/git-daemon.pid
+    creates: "{{ configuration_preserve_remote_base }}/git-daemon.pid"
+
+- name: Wait until the git daemon accepts connections
+  ansible.builtin.wait_for:
+    host: 127.0.0.1
+    port: "{{ configuration_git_port }}"
+    timeout: 30
+
+- name: Create the configuration directory (simulating an existing deployment)
+  become: true
+  ansible.builtin.file:
+    path: "{{ configuration_directory }}"
+    state: directory
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: "0750"
+
+- name: Pre-clone the fixture repository into the configuration directory
+  ansible.builtin.git:
+    repo: "git://127.0.0.1:{{ configuration_git_port }}/configuration.git"
+    dest: "{{ configuration_directory }}"
+    version: main
+
+- name: Apply the local customizations that must survive the update
+  ansible.builtin.copy:
+    content: "{{ item.content }}"
+    dest: "{{ configuration_directory }}/{{ item.path }}"
+    owner: "{{ operator_user }}"
+    group: "{{ operator_group }}"
+    mode: "0640"
+  loop:
+    - path: netbox/settings.toml
+      content: "token = \"LOCAL-SECRET-TOKEN\"\n"
+    - path: marker.txt
+      content: "LOCAL-MODIFIED\n"
+  loop_control:
+    label: "{{ item.path }}"

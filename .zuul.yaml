@@ -136,6 +136,8 @@
     files:
       - '^roles\/configuration\/.*$'
       - '^molecule\/delegated\/tests\/configuration.*$'
+      - '^molecule\/delegated\/prepare\/configuration.*$'
+      - '^molecule\/delegated\/vars\/configuration.*$'
 
 - job:
     name: ansible-collection-commons-molecule-docker_compose
