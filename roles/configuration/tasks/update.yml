@@ -1,4 +1,23 @@
 ---
+- name: Stat files that must be preserved across the update
+  ansible.builtin.stat:
+    path: "{{ configuration_directory }}/{{ item }}"
+  loop: "{{ configuration_git_preserve_files }}"
+  loop_control:
+    label: "{{ item }}"
+  register: configuration_git_preserve_stat
+
+- name: Back up files that must be preserved across the update
+  ansible.builtin.copy:
+    src: "{{ configuration_directory }}/{{ item.item }}"
+    dest: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
+    remote_src: true
+    mode: preserve
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: item.stat.exists
+
 - name: Clone configuration repository (ssh / with auth) with branch {{ configuration_git_version }}
   ansible.builtin.git:
     repo: "{{ configuration_git_repository_url }}"
@@ -24,6 +43,26 @@
         configuration_git_protocol != 'ssh'
   # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
   no_log: "{{ configuration_no_log }}"
+
+- name: Restore files that must be preserved across the update
+  ansible.builtin.copy:
+    src: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
+    dest: "{{ configuration_directory }}/{{ item.item }}"
+    remote_src: true
+    mode: preserve
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: item.stat.exists
+
+- name: Remove backups of preserved files
+  ansible.builtin.file:
+    path: "{{ configuration_directory }}/{{ item.item }}.osism-preserve"
+    state: absent
+  loop: "{{ configuration_git_preserve_stat.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: item.stat.exists
 
 - name: Set permissions of configuration directory
   ansible.builtin.file:
