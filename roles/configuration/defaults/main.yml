@@ -71,6 +71,16 @@ configuration_git_protocol: ssh
 # For HTTPS with PAT: use the personal access token as username
 configuration_git_username: git
 
+# Files (paths relative to configuration_directory) whose local
+# modifications must survive a configuration update. The git checkout runs
+# with force and would otherwise discard local changes to tracked files;
+# the listed files are backed up before the checkout and restored afterwards.
+# Typical use: netbox/settings.toml in a monorepo setup, which holds the
+# local NetBox URL and API token that are not part of the repository.
+# Not needed when netbox is used as a submodule (the submodule working tree
+# is not touched by the force checkout); setting it there is a harmless no-op.
+configuration_git_preserve_files: []
+
 ##########################
 # parameters for netbox submodule management
 
