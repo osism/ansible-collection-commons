@@ -84,6 +84,30 @@ user_groups: []
 # Default: ~/.ssh/authorized_keys (relative to each user's home directory)
 user_keyfile: "~/.ssh/authorized_keys"
 
+# Host the remote SSH authorized key fetch is delegated to
+# Applies only when a user's key is a remote URL or "github"; the fetch
+# itself runs on this host, while the keys are still installed on the
+# target host
+# Default: localhost (the Ansible controller), so target hosts without
+# outbound internet connectivity still receive their keys
+# Set to "{{ inventory_hostname }}" to fetch from the target host itself,
+# or to any other reachable host (e.g. a bastion) when connectivity is
+# the other way round
+# Type: string
+user_fetch_keys_delegate_to: localhost
+
+# Hosts the remote SSH authorized key fetch is allowed to contact
+# Only a remote key whose URL host is in this list is fetched. Because the
+# fetch runs on user_fetch_keys_delegate_to (the Ansible controller by
+# default), an operator-supplied URL could otherwise point the controller at
+# an internal-only service; the allowlist bounds that request surface
+# Default: [github.com], which also covers keys set to "github"
+# Add the host of any other key server you fetch from (e.g. a self-hosted
+# GitLab) to allow it
+# Type: list of strings
+user_fetch_keys_allowed_hosts:
+  - github.com
+
 # Default sudo permissions rule for all managed users
 # Defines the privilege escalation permissions in sudoers files
 # Type: string
