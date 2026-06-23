@@ -1,6 +1,6 @@
 import pytest
 
-from .util.util import get_ansible, get_variable
+from .util.util import get_ansible, get_variable, get_from_url
 
 testinfra_runner, testinfra_hosts = get_ansible()
 
@@ -30,7 +30,39 @@ def test_user_accounts_present(host):
             keyfile = host.file(f"/home/{user_name}/.ssh/authorized_keys")
             assert keyfile.exists
             assert not keyfile.is_directory
-            assert user_entry["key"] in keyfile.content_string
+
+            key = user_entry["key"]
+            keyfile_content = keyfile.content_string
+
+            if key.startswith("https") or key == "github":
+                # Remote keys are fetched (delegated to the controller by
+                # default via user_fetch_keys_delegate_to) and installed on
+                # the target host. Verify each fetched key's type and
+                # material landed in the keyfile.
+                url = (
+                    key
+                    if key.startswith("https")
+                    else f"https://github.com/{user_name}.keys"
+                )
+
+                # Collect the key lines actually served. Guard that the list
+                # is non-empty so an empty response (e.g. the account removed
+                # all its keys) fails loudly instead of skipping every
+                # assertion below and passing while verifying nothing.
+                key_lines = [
+                    line.strip().split(" ")
+                    for line in get_from_url(url).split("\n")
+                    if len(line.strip().split(" ")) >= 2
+                ]
+                assert (
+                    key_lines
+                ), f"no keys fetched from {url}; cannot verify {user_name}"
+
+                for components in key_lines:
+                    assert components[0] in keyfile_content
+                    assert components[1] in keyfile_content
+            else:
+                assert key in keyfile_content
 
 
 def test_user_sudo(host):
