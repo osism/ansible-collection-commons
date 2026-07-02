@@ -1,5 +1,7 @@
 import os
 import re
+import time
+import urllib.error
 import urllib.request
 import testinfra.utils.ansible_runner
 
@@ -95,14 +97,22 @@ def get_dist_arch_role_variable(host, name):
     )
 
 
-def get_from_url(url, binary=False):
+def get_from_url(url, binary=False, retries=3, delay=5):
     # Create a request object with a faked User-Agent header.
     # Some websites like https://pkg.osquery.io/rpm/GPG need this, otherwise they will return http 403 forbidden.
     req = urllib.request.Request(
         url, headers={"User-Agent": "Mozilla/5.0 (Linux x86_64) Chrome/103.0.0.0"}
     )
-    # Open the URL with the custom request object
-    resource = urllib.request.urlopen(req)
+    # Unauthenticated fetches are occasionally throttled (403/429), retry
+    # with the same treatment the user role applies (retries: 3, delay: 5).
+    for attempt in range(retries + 1):
+        try:
+            resource = urllib.request.urlopen(req)
+            break
+        except urllib.error.URLError:
+            if attempt == retries:
+                raise
+            time.sleep(delay)
 
     if not binary:
         encoding = resource.headers.get_content_charset()
