@@ -1,4 +1,8 @@
 ---
+- name: Include tasks to prefetch remote SSH authorized keys
+  ansible.builtin.include_tasks: remote-key-prefetch.yml
+  when: user_fetch_keys_delegate_to == 'localhost'
+
 - name: Write SSH authorized keys into a keyfile
   ansible.builtin.include_tasks: remote-key.yml
   loop: "{{ user_list }}"

@@ -1,57 +1,49 @@
 ---
 - name: Get and set remote SSH authorized keys
   when: item.key.startswith('https') or item.key == "github"
+  vars:
+    user_fetch_keys_url: >-
+      {{ item.key
+         if item.key.startswith('https')
+         else 'https://github.com/' ~ item.name ~ '.keys' }}
+    user_fetch_keys_content: >-
+      {{ (user_fetch_keys_prefetch | default({})).results | default([])
+         | selectattr('content', 'defined')
+         | items2dict(key_name='fetch_url', value_name='content') }}
   block:
     - name: Fail when the remote SSH key host is not allowed
       ansible.builtin.fail:
         msg: >-
           Refusing to fetch the SSH key for user '{{ item.name }}' from
           untrusted host
-          '{{ item.key | ansible.builtin.urlsplit('hostname') }}'. Add the
-          host to user_fetch_keys_allowed_hosts to allow it.
-      when:
-        - item.key.startswith('https')
-        - item.key | ansible.builtin.urlsplit('hostname') not in user_fetch_keys_allowed_hosts
+          '{{ user_fetch_keys_url | ansible.builtin.urlsplit('hostname') }}'.
+          Add the host to user_fetch_keys_allowed_hosts to allow it.
+      when: user_fetch_keys_url | ansible.builtin.urlsplit('hostname') not in user_fetch_keys_allowed_hosts
 
     - name: Fetch SSH authorized key
       ansible.builtin.uri:
-        url: "{{ item.key }}"
+        url: "{{ user_fetch_keys_url }}"
         return_content: true
-      register: result1
-      failed_when: "'ssh' not in result1.content"
-      when: item.key.startswith('https')
+        follow_redirects: none
+      register: user_fetch_keys_result
+      failed_when: >-
+        user_fetch_keys_result.failed | default(false) or
+        'ssh' not in (user_fetch_keys_result.content | default(''))
+      when: user_fetch_keys_url not in user_fetch_keys_content
       delegate_to: "{{ user_fetch_keys_delegate_to }}"
-      no_log: true
       retries: 3
       delay: 5
-      until: result1 is success
+      until: user_fetch_keys_result is success
 
-    - name: Fetch SSH authorized key from GitHub
-      ansible.builtin.uri:
-        url: "https://github.com/{{ item.name }}.keys"
-        return_content: true
-      register: result2
-      failed_when: "'ssh' not in result2.content"
-      when: item.key == "github"
-      delegate_to: "{{ user_fetch_keys_delegate_to }}"
-      no_log: true
-      retries: 3
-      delay: 5
-      until: result2 is success
-
-    - name: Set user_keys fact when keys are not from GitHub
+    - name: Set user_keys fact
       ansible.builtin.set_fact:
-        user_keys: "{{ result1.content.split('\n') }}"
-      when:
-        - result2 is skipped
-        - result1.content is defined
-
-    - name: Set user_keys fact when keys are from GitHub
-      ansible.builtin.set_fact:
-        user_keys: "{{ result2.content.split('\n') }}"
-      when:
-        - result1 is skipped
-        - result2.content is defined
+        user_keys: >-
+          {{ (user_fetch_keys_content[user_fetch_keys_url]
+              if user_fetch_keys_url in user_fetch_keys_content
+              else user_fetch_keys_result.content).split('\n') }}
+      when: >-
+        user_fetch_keys_url in user_fetch_keys_content
+        or user_fetch_keys_result.content is defined
 
     - name: Set SSH authorized key
       become: true

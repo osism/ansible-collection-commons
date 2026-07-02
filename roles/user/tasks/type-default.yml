@@ -44,6 +44,10 @@
     label: "{{ item.name }}"
   when: item.key.startswith('ssh')
 
+- name: Include tasks to prefetch remote SSH authorized keys
+  ansible.builtin.include_tasks: remote-key-prefetch.yml
+  when: user_fetch_keys_delegate_to == 'localhost'
+
 - name: Include tasks to handle remote SSH authorized keys
   ansible.builtin.include_tasks: remote-key.yml
   loop: "{{ user_list }}"
