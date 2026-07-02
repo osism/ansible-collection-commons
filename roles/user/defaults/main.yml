@@ -93,6 +93,12 @@ user_keyfile: "~/.ssh/authorized_keys"
 # Set to "{{ inventory_hostname }}" to fetch from the target host itself,
 # or to any other reachable host (e.g. a bastion) when connectivity is
 # the other way round
+# With the default of localhost every unique key URL is prefetched only
+# once per play batch and reused for all hosts and users. Any other value
+# skips the prefetch and fetches per host and user again: an inventory of
+# N hosts with M remote-key users then issues up to N x M requests from
+# the configured host, so authenticate or cache accordingly on large
+# fleets
 # Type: string
 user_fetch_keys_delegate_to: localhost
 

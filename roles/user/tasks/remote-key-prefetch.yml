@@ -1,0 +1,50 @@
+---
+# Fetch every unique remote SSH key URL exactly once instead of once per
+# host and user. The registered result of a run_once task is copied to
+# all hosts in the batch, so remote-key.yml can reuse the content and
+# only falls back to fetching itself when a URL is missing here (e.g.
+# a host specific user_list).
+- name: Prefetch remote SSH authorized keys
+  run_once: true
+  vars:
+    user_fetch_keys_urls: >-
+      {{ ((user_list
+           | selectattr('key', 'defined')
+           | selectattr('key', 'match', 'https')
+           | map(attribute='key')
+           | list)
+          + (user_list
+             | selectattr('key', 'defined')
+             | selectattr('key', 'equalto', 'github')
+             | map(attribute='name')
+             | map('regex_replace', '^(.*)$', 'https://github.com/\1.keys')
+             | list))
+         | unique }}
+  block:
+    - name: Fail when a remote SSH key host is not allowed
+      ansible.builtin.fail:
+        msg: >-
+          Refusing to fetch an SSH key from untrusted host
+          '{{ fetch_url | ansible.builtin.urlsplit('hostname') }}'. Add the
+          host to user_fetch_keys_allowed_hosts to allow it.
+      when: fetch_url | ansible.builtin.urlsplit('hostname') not in user_fetch_keys_allowed_hosts
+      loop: "{{ user_fetch_keys_urls }}"
+      loop_control:
+        loop_var: fetch_url
+
+    - name: Fetch each remote SSH authorized key URL once
+      ansible.builtin.uri:
+        url: "{{ fetch_url }}"
+        return_content: true
+        follow_redirects: none
+      register: user_fetch_keys_prefetch
+      failed_when: >-
+        user_fetch_keys_prefetch.failed | default(false) or
+        'ssh' not in (user_fetch_keys_prefetch.content | default(''))
+      delegate_to: "{{ user_fetch_keys_delegate_to }}"
+      retries: 3
+      delay: 5
+      until: user_fetch_keys_prefetch is success
+      loop: "{{ user_fetch_keys_urls }}"
+      loop_control:
+        loop_var: fetch_url
