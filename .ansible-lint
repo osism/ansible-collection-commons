@@ -1,6 +1,4 @@
 ---
-mock_modules:
-  - scan_services
 skip_list:
   - var-naming[no-role-prefix]
   - package-latest
