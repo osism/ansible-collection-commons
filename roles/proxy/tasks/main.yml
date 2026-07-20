@@ -4,7 +4,7 @@
   when:
     - proxy_enable | bool
     - proxy_package_manager | bool
-    - proxy_proxies
+    - proxy_proxies | length > 0
 
 - name: Set system wide settings in environment file
   become: true
@@ -28,7 +28,7 @@
       NO_PROXY={{ proxy_no_proxy | join(',') }}
   when:
     - proxy_enable | bool
-    - proxy_proxies
+    - proxy_proxies | length > 0
 
 - name: Remove system wide settings in environment file
   become: true
@@ -38,4 +38,4 @@
     state: absent
   when:
     - proxy_enable | bool
-    - not proxy_proxies
+    - proxy_proxies | length == 0
