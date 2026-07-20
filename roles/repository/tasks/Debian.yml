@@ -26,7 +26,7 @@
       repository as files and set the repository_key_files_directory parameter
       (e.g. /opt/configuration/files/repository_keys).
   when:
-    - repository_key_ids
+    - repository_key_ids | length > 0
 
 # We ignore errors that can occur during the seeding of the
 # environment in constellations where the repository keys are
