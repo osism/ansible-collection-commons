@@ -7,6 +7,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260721.0] - 2026-07-21
+
+### Fixed
+- Make `proxy_proxies` and `repository_key_ids` conditionals evaluate to real booleans for ansible-core 2.19 compatibility (osism/ansible-collection-commons#866)
+
+### Removed
+- Remove dead `scan_services` mock_modules entry from ansible-lint config (osism/ansible-collection-commons#864)
+
+### Dependencies
+- ansible_molecule_ansible_version 11.13.0 → 12.3.0 (osism/ansible-collection-commons#867)
+
+## [v0.20260712.0] - 2026-07-12
+
+### Added
+- Add `configuration_git_preserve_files` to keep listed local files (e.g. `netbox/settings.toml`) intact across a configuration repository update, with a transactional, ownership-safe backup and restore (osism/ansible-collection-commons#856)
+- Add `user_fetch_keys_delegate_to` and `user_fetch_keys_allowed_hosts` to delegate and restrict remote SSH authorized key fetches, with prefetching to avoid duplicate requests (osism/ansible-collection-commons#861)
+
+### Changed
+- Drop obsolete osism-fqcn noqa suppressions on block constructs now that the underlying lint rule is fixed (osism/ansible-collection-commons#853)
+
+### Fixed
+- Fix project-board automation for fork pull requests by switching to pull_request_target and scoping the shared secret (osism/ansible-collection-commons#862)
+
+### Dependencies
+- pytest 9.0.3 → 9.1.1 (osism/ansible-collection-commons#854, osism/ansible-collection-commons#859)
+- actions/checkout v6 → v7 (osism/ansible-collection-commons#857)
+- molecule 26.4.0 → 26.6.0 (osism/ansible-collection-commons#863)
+
+## [v0.20260601.0] - 2026-06-01
+
+### Added
+- Add CHANGELOG.md to track release history (osism/ansible-collection-commons#839)
+- Support providing the complete netplan configuration via the new `network_netplan_config_template` variable, enabling external Jinja2 templates such as Netbox config context (osism/ansible-collection-commons#834)
+- Allow per-user sudoers rule overrides via the `sudoers` key in `user_list` entries (osism/ansible-collection-commons#843)
+- Add GitHub Action to automatically add opened issues and pull requests to project boards (osism/ansible-collection-commons#848)
+
+### Changed
+- Reformat code to comply with black 26.3.1 stable style (osism/ansible-collection-commons#845)
+- Add parameter documentation to user role defaults (osism/ansible-collection-commons#822)
+
+### Fixed
+- Fix ansible-lint name[missing] violations on the default netplan configuration blocks in the network role (osism/ansible-collection-commons#844)
+- Fix Ansible 2.19 deprecation warning by ensuring operator password when-conditions evaluate to a boolean (osism/ansible-collection-commons#846)
+- Fix sosreport local archive directory creation by dropping unnecessary privilege escalation and creating it only once per run (osism/ansible-collection-commons#849, osism/ansible-collection-commons#850)
+- Fix sosreport checksum file existence checks before rename, preventing silent loss of sha256/md5 files (osism/ansible-collection-commons#851)
+- Remove invalid `change: true` parameter from sosreport fetch tasks (osism/ansible-collection-commons#851)
+- Add default molecule stub scenario to silence misleading CRITICAL error when no default scenario exists (osism/ansible-collection-commons#852)
+
+### Removed
+- Remove CentOS 9 Stream and Ubuntu 22.04 (Jammy) test nodes from Zuul CI (osism/ansible-collection-commons#840)
+
+### Dependencies
+- molecule 25.12.0 → 26.4.0 (osism/ansible-collection-commons#835, osism/ansible-collection-commons#841)
+- pytest 9.0.2 → 9.0.3 (osism/ansible-collection-commons#842)
+- ansible 11.11.0 → 11.13.0 (osism/ansible-collection-commons#821)
+
 ## [v0.20260318.0] - 2026-03-18
 
 ### Added
