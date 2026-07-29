@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260724.0] - 2026-07-24
+
+### Fixed
+- Fix proxy role's apt task on Debian hosts raising a conditional type error under ansible-core 2.19 (osism/ansible-collection-commons#870)
+
+### Dependencies
+- actions/setup-python v6 → v7 (osism/ansible-collection-commons#869)
+
 ## [v0.20260721.0] - 2026-07-21
 
 ### Fixed
