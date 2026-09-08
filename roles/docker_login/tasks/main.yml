@@ -19,10 +19,21 @@
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
   when: ansible_os_family == "Debian"
 
-- name: Login to registry and force re-authorization
+- name: Login to registry and force re-authorization as the root user
   become: true
   community.docker.docker_login:
     registry: "{{ docker_login_registry }}"
     username: "{{ docker_login_username }}"
     password: "{{ docker_login_password }}"
     reauthorize: true
+  when: docker_login_as_root | bool
+
+- name: Login to registry and force re-authorization as the operator user
+  become: true
+  become_user: "{{ docker_login_operator_user }}"
+  community.docker.docker_login:
+    registry: "{{ docker_login_registry }}"
+    username: "{{ docker_login_username }}"
+    password: "{{ docker_login_password }}"
+    reauthorize: true
+  when: docker_login_as_operator | bool

@@ -16,3 +16,18 @@ docker_login_username:
 # Required: This parameter must be set for authentication to work
 # Security: Store this value securely (e.g., in Ansible Vault)
 docker_login_password:
+
+# Perform the login as the root user
+# Container images that are pulled with privilege escalation (e.g. by
+# Kolla) use the credentials stored for the root user.
+docker_login_as_root: true
+
+# Perform the login as the operator user
+# Container images that are pulled without privilege escalation (e.g. by
+# the manager service) use the credentials stored for the operator user.
+# The operator user has to exist and has to be a member of the docker group.
+docker_login_as_operator: true
+
+# Operator user the login is performed as when docker_login_as_operator is
+# enabled
+docker_login_operator_user: "{{ operator_user | default('dragon') }}"
