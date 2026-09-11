@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260910.0] - 2026-09-10
+
+### Added
+- docker_login role now also logs in as the operator user so pulled container images work with private registries out of the box, configurable via docker_login_as_root, docker_login_as_operator, and docker_login_operator_user (osism/ansible-collection-commons#873)
+
+### Dependencies
+- molecule 26.6.0 → 26.8.0 (osism/ansible-collection-commons#872)
+
 ## [v0.20260724.0] - 2026-07-24
 
 ### Fixed
