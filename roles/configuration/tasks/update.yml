@@ -72,8 +72,15 @@
         recursive: false
       when: (configuration_git_protocol == 'ssh' and (configuration_git_private_key is not defined or not configuration_git_private_key | length)) or
             configuration_git_protocol != 'ssh'
-      # NOTE: No logs are output to avoid leaking a PAT if it is used as a username.
-      no_log: "{{ configuration_no_log }}"
+      # NOTE: No logs are output to avoid leaking a PAT if it is used as a
+      # username. Only an http(s) URL carrying userinfo can leak one: git
+      # reports it in stderr ("could not read Password for
+      # 'http://<token>@host'"), which Ansible returns unsanitised, unlike cmd
+      # and msg. The censoring is therefore gated on both parts of that shape.
+      # Over ssh the username is 'git' (see defaults/main.yml), git:// has no
+      # auth at all, and a URL with no username has nothing to leak -- in those
+      # cases censoring would only hide why a clone failed.
+      no_log: "{{ configuration_no_log and configuration_git_protocol in ['http', 'https'] and configuration_git_username | default('', true) | length > 0 }}"
 
   always:
     - name: Restore the preserved files and remove their backups
