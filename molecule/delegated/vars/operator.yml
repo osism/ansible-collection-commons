@@ -1,4 +1,33 @@
 ---
-operator_authorized_keys: ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAsus5/h/wwuUKr1c9/6UFZe7T0oh6Zsv8gSoQvpMaR test@test.test"]
+# The keys below exercise the additional-key contract and its precedence against
+# the deployment-wide lists. Literal values, not anchors or Jinja references: the
+# testinfra helper reads this file with include_vars, which does not template.
+#
+# Ordering in the role is additional-set, additional-delete, primary-set,
+# primary-delete, so after convergence:
+#
+#   test@test.test           primary only                        -> present
+#   additional@test.test     additional only                     -> present
+#   addthendelete@test.test  additional + additional-delete      -> absent
+#   keep@test.test           primary + additional-delete         -> present
+#   drop@test.test           additional + primary-delete         -> absent
+#
+# No assertion here can pass while one of the two new tasks is missing: without
+# the additional-set task additional@test.test disappears, and without the
+# additional-delete task addthendelete@test.test survives.
+operator_authorized_keys:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHAsus5/h/wwuUKr1c9/6UFZe7T0oh6Zsv8gSoQvpMaR test@test.test"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGxer7gYWZ935vdGtrt0j4buwmTA1iu2VD1C0ZDszg2 keep@test.test"
+operator_authorized_keys_delete:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdvuMV2YkWT6XvC7fZGQBfw5hA/KGcnIUijJ9bEe04A drop@test.test"
+
+operator_additional_authorized_keys:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF5S14T3MEgFxMYV500skYycA9xJaJTuA6bDrHWfQ9Cy additional@test.test"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHl4lBLAe9XtqcdLmdJ93z2y9hCYPdPcA2FTl2HLzEKR addthendelete@test.test"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJdvuMV2YkWT6XvC7fZGQBfw5hA/KGcnIUijJ9bEe04A drop@test.test"
+operator_additional_authorized_keys_delete:
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHl4lBLAe9XtqcdLmdJ93z2y9hCYPdPcA2FTl2HLzEKR addthendelete@test.test"
+  - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIGxer7gYWZ935vdGtrt0j4buwmTA1iu2VD1C0ZDszg2 keep@test.test"
+
 operator_authorized_github_accounts: ["lindenb1"]
 operator_password: "$6$w8oIwOSR/jOsNQNH$FcTjfn5mOeZkrgM8lo/w77MLuWp0EjQa9L.v4FolN.lCEvsTOVqJjixJDvqqUELTLaHJS9dlpH0Hj7uy6dAk.0"

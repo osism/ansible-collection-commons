@@ -89,6 +89,28 @@
     msg: "At least {{ operator_authorized_keys_minimal }} SSH authorized keys must be set."
   when: operator_authorized_keys|length < operator_authorized_keys_minimal
 
+# Placed before the deployment-wide pair on purpose: Ansible applies tasks in
+# order and the last write wins, so running these first leaves
+# operator_authorized_keys/_delete authoritative. A group-scoped delete therefore
+# cannot drop a deployment-wide key, and a deployment-wide delete overrides a
+# group-scoped addition.
+- name: Set additional ssh authorized keys
+  become: true
+  ansible.posix.authorized_key:
+    key: "{{ item }}"
+    user: "{{ operator_user }}"
+  loop: "{{ operator_additional_authorized_keys }}"
+  no_log: true
+
+- name: Delete additional ssh authorized keys
+  become: true
+  ansible.posix.authorized_key:
+    key: "{{ item }}"
+    user: "{{ operator_user }}"
+    state: absent
+  loop: "{{ operator_additional_authorized_keys_delete }}"
+  no_log: true
+
 - name: Set ssh authorized keys
   become: true
   ansible.posix.authorized_key:
