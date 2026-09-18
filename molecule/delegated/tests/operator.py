@@ -92,6 +92,106 @@ def test_sshkeys(host):
             assert authorized_key in authorized_keys_content
 
 
+def _authorized_keys_content(host):
+    user = host.user(get_variable(host, "operator_user"))
+    assert user.exists
+
+    authorized_keys_file = host.ansible(
+        "file", f"path={user.home}/.ssh/authorized_keys", become=True
+    )
+    assert authorized_keys_file["state"] == "file"
+
+    with host.sudo(get_variable(host, "operator_user")):
+        return host.check_output(f"cat {user.home}/.ssh/authorized_keys")
+
+
+def test_additional_sshkeys(host):
+    """Keys from operator_additional_authorized_keys are authorized.
+
+    Without this the deletion assertions below would pass vacuously: a key that
+    was never added is trivially absent.
+    """
+    expected = get_variable(host, "operator_additional_authorized_keys")
+
+    if len(expected) <= 0:
+        pytest.skip("No operator_additional_authorized_keys defined")
+
+    deleted = get_variable(host, "operator_additional_authorized_keys_delete")
+    deleted += get_variable(host, "operator_authorized_keys_delete")
+    content = _authorized_keys_content(host)
+
+    for key in expected:
+        if key in deleted:
+            continue
+        assert key in content
+
+
+def test_additional_sshkeys_deleted(host):
+    """Keys in operator_additional_authorized_keys_delete are removed.
+
+    The fixture puts addthendelete@test.test in both additional lists, so the
+    role adds it and then removes it again within the same run. The key is
+    therefore known to have existed, which is what stops this assertion from
+    passing when the deletion task is missing.
+    """
+    deleted = get_variable(host, "operator_additional_authorized_keys_delete")
+
+    if len(deleted) <= 0:
+        pytest.skip("No operator_additional_authorized_keys_delete defined")
+
+    added = get_variable(host, "operator_additional_authorized_keys")
+    content = _authorized_keys_content(host)
+
+    for key in deleted:
+        if key not in added:
+            # Only meaningful for keys the run actually added; a key listed for
+            # deletion alone may simply never have been present.
+            continue
+        assert key not in content
+
+
+def test_primary_keys_survive_an_additional_delete(host):
+    """A deployment-wide key cannot be dropped by a group-scoped delete.
+
+    The additional tasks run before the deployment-wide ones, so a key in both
+    operator_authorized_keys and operator_additional_authorized_keys_delete is
+    removed and then re-added. This fails if the additional tasks are ever moved
+    after the deployment-wide pair.
+    """
+    primary = get_variable(host, "operator_authorized_keys")
+    additional_deleted = get_variable(
+        host, "operator_additional_authorized_keys_delete"
+    )
+
+    overlap = [key for key in primary if key in additional_deleted]
+    if len(overlap) <= 0:
+        pytest.skip("No key is in both the primary and the additional delete list")
+
+    content = _authorized_keys_content(host)
+
+    for key in overlap:
+        assert key in content
+
+
+def test_primary_delete_overrides_an_additional_key(host):
+    """A deployment-wide delete overrides a group-scoped addition.
+
+    The mirror of the case above, and the half that would still pass if only one
+    of the two new tasks were moved.
+    """
+    additional = get_variable(host, "operator_additional_authorized_keys")
+    primary_deleted = get_variable(host, "operator_authorized_keys_delete")
+
+    overlap = [key for key in additional if key in primary_deleted]
+    if len(overlap) <= 0:
+        pytest.skip("No key is in both the additional and the primary delete list")
+
+    content = _authorized_keys_content(host)
+
+    for key in overlap:
+        assert key not in content
+
+
 def test_githubkeys(host):
     user = host.user(get_variable(host, "operator_user"))
     assert user.exists
