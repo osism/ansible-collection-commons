@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260924.0] - 2026-09-24
+
+### Changed
+- Narrow the configuration clone task's no_log to http(s) repository URLs with a username, so git errors stay visible for ssh, git:// and URLs without credentials (osism/ansible-collection-commons#875)
+
 ## [v0.20260910.0] - 2026-09-10
 
 ### Added
