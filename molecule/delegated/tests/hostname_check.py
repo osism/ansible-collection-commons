@@ -9,7 +9,7 @@ testinfra_runner, testinfra_hosts = get_ansible()
 # ever skipped rather than passed -- hostname_check_enabled defaulting to
 # false, a `when` that stops matching, a guard that swallows a probe failure
 # -- the role would report success and these would still measure the host and
-# find it wrong.
+# find it wrong. Two defects of exactly that shape were found in this role.
 #
 # They are only worth that much because prepare/hostname_check.yml puts the
 # host into a known state. Without it they would be measuring the CI image.

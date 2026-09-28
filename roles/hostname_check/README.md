@@ -26,7 +26,17 @@ establishes that three is the whole list, which is why this role refuses the
 
 ## What it checks
 
-Two conditions, both required:
+Three conditions. The first is about the *set* of hosts, the other two about
+each host:
+
+0. **The planned kernel names are unique.** A cluster whose kernel names
+   collide satisfies both per-host conditions on every host and is still
+   unworkable — nova cannot have two computes sharing `CONF.host`, and the
+   second host's OVN chassis overwrites the first's. Two hosts named
+   `node01.dc1.example.com` and `node01.dc2.example.com` collide under the
+   default `hostname_use_fqdn: false`, because only the first label is kept.
+
+Then, per host:
 
 1. `gethostname()` equals its `getaddrinfo(AI_CANONNAME)` form.
 2. `gethostname()` is lowercase — Cyrus folds case and libvirt does not, so a
