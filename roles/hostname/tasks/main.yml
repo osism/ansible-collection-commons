@@ -1,4 +1,26 @@
 ---
+# sethostname(2) rejects anything over HOST_NAME_MAX (64 bytes) with EINVAL,
+# which ansible.builtin.hostname surfaces as "Invalid argument" -- true, and
+# no help at all in finding the cause. Most likely to bite a deployment that
+# has just set hostname_use_fqdn: true, where the name grows by a domain.
+- name: Assert that the host name fits HOST_NAME_MAX
+  ansible.builtin.assert:
+    that:
+      - hostname_name | length <= 64
+    quiet: true
+    fail_msg: |
+      Host name '{{ hostname_name }}' is {{ hostname_name | length }} bytes.
+      The kernel accepts at most 64 (HOST_NAME_MAX), so this name cannot be
+      set on the machine.
+
+      Shorten it: a shorter domain, or a shorter first label.
+
+      A cluster whose inventory names are longer than 64 characters cannot be
+      deployed safely. This name does not fit; and configuring the machines to
+      use only the first label instead leaves each machine answering to one
+      name while the network answers with another, which breaks any service
+      that looks a host up by name.
+
 - name: Set hostname
   become: true
   ansible.builtin.hostname:

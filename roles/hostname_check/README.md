@@ -36,6 +36,10 @@ each host:
    `node01.dc1.example.com` and `node01.dc2.example.com` collide under the
    default `hostname_use_fqdn: false`, because only the first label is kept.
 
+(Length is **not** checked here. `sethostname(2)` rejects anything over
+`HOST_NAME_MAX` (64 bytes) with `EINVAL`, so `osism.commons.hostname` fails
+first and this role never runs.)
+
 Then, per host:
 
 1. `gethostname()` equals its `getaddrinfo(AI_CANONNAME)` form.
