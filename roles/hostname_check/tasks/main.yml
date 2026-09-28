@@ -3,6 +3,57 @@
 # derives its idea of "this host" from -- libvirt through virGetHostname(),
 # Cyrus SASL through get_fqhostname(), ovn-controller through its own lookup.
 # Asking Python for both is asking exactly what they ask.
+# Uniqueness is the other half of "the name identifies this host". A cluster
+# whose kernel names collide passes every per-host check below and is still
+# unworkable: nova cannot have two computes sharing CONF.host, and the OVN
+# chassis of the second overwrites the first. Derived from the inventory
+# rather than from facts, so it holds for hosts outside a --limit run too.
+# That is a trade: hostvars carries inventory vars, -e and facts, but not
+# play-scope vars, so hostname_name and hostname_use_fqdn are read correctly
+# from the inventory and from -e, and would be missed if a play set them.
+- name: Assert that the planned kernel host names are unique
+  ansible.builtin.assert:
+    that:
+      - _hostname_collisions | length == 0
+    quiet: true
+    fail_msg: >-
+      These host names would each be set on more than one machine, and no
+      component can tell those machines apart: {{ _hostname_collisions }}.
+      Give each host a name of its own. If the inventory names are FQDNs that
+      differ only after the first label, setting hostname_use_fqdn=true keeps
+      the whole name and separates them; that does not help where the
+      colliding name comes from an explicit hostname_name.
+  vars:
+    # What osism.commons.hostname will set on each host, keyed by name so the
+    # message can say which hosts collide rather than only that something did.
+    # An explicit hostname_name in the inventory wins in that role, so it must
+    # win here too -- otherwise a cluster that sets it gets judged on names it
+    # will never use, which both misses real collisions and rejects valid
+    # deployments. The fallback repeats that role's default derivation and is
+    # reached only when nothing overrides it.
+    _hostname_by_planned: >-
+      {%- set out = {} -%}
+      {%- for h in groups['all'] -%}
+      {%- if hostvars[h].get('hostname_name') -%}
+      {%- set n = hostvars[h]['hostname_name'] -%}
+      {%- else -%}
+      {%- set n = h if hostvars[h].get('hostname_use_fqdn', false) | bool
+                  else h.split('.')[0] -%}
+      {%- endif -%}
+      {%- set _ = out.setdefault(n, []).append(h) -%}
+      {%- endfor -%}
+      {{ out }}
+    _hostname_collisions: >-
+      {%- set out = {} -%}
+      {%- for n, hosts in _hostname_by_planned.items() -%}
+      {%- if hosts | length > 1 -%}
+      {%- set _ = out.update({n: hosts}) -%}
+      {%- endif -%}
+      {%- endfor -%}
+      {{ out }}
+  run_once: true
+  when: hostname_check_enabled | bool
+
 - name: Determine the kernel hostname and its canonical form
   ansible.builtin.command:
     argv:
