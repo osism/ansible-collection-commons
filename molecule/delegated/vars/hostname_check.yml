@@ -1,0 +1,4 @@
+---
+# Short, lowercase and resolvable to itself: the aligned shape, which is what
+# the role must accept. Used by the prepare step and by the tests.
+hostname_check_molecule_name: molecule-hostname-check

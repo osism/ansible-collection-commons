@@ -1,0 +1,9 @@
+---
+# Refuse a host whose kernel name disagrees with its canonical form.
+# See the role README for what that state breaks.
+hostname_check_enabled: true
+
+# Set true to downgrade the refusal to a warning. Only for a cluster that is
+# already in this state and cannot be renamed yet -- it does not make the
+# state safe, it records that you know about it.
+hostname_split_accepted: false
