@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: OSISM
+  description: Refuse a host whose kernel name disagrees with its canonical form
+  license: ASL 2.0
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - noble
+dependencies: []

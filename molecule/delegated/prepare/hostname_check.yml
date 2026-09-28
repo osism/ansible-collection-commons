@@ -1,0 +1,19 @@
+---
+# The hostname_check role only measures; it writes nothing. So whatever name
+# the CI image happens to carry decides the result, and a job whose verdict is
+# a property of the image rather than of the change is worse than no job: red
+# means the image moved, green means nothing. Put the host into the aligned
+# state the role is meant to pass, so a failure means the role changed.
+
+- name: Set a known host name
+  become: true
+  ansible.builtin.hostname:
+    name: "{{ hostname_check_molecule_name }}"
+
+- name: Make that name resolve to itself
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s'
+    line: "127.0.1.1 {{ hostname_check_molecule_name }}"
+    state: present

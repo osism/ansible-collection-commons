@@ -1,0 +1,125 @@
+---
+# gethostname() and its getaddrinfo(AI_CANONNAME) form are what every consumer
+# derives its idea of "this host" from -- libvirt through virGetHostname(),
+# Cyrus SASL through get_fqhostname(), ovn-controller through its own lookup.
+# Asking Python for both is asking exactly what they ask.
+- name: Determine the kernel hostname and its canonical form
+  ansible.builtin.command:
+    argv:
+      - python3
+      - -c
+      - |
+        import socket
+        n = socket.gethostname()
+        print(n)
+        try:
+            print(socket.getaddrinfo(n, None, flags=socket.AI_CANONNAME)[0][3])
+        except Exception as exc:
+            # Never print n here: the check below would compare it with itself
+            # and report agreement for a name nothing could look up.
+            print("!unresolved: %s" % exc)
+  changed_when: false
+  check_mode: false
+  register: _hostname_check_probe
+  when: hostname_check_enabled | bool
+
+# The probe prints exactly two lines on every path that can return 0, so as
+# written this cannot trigger. It is an assertion rather than a condition
+# because the alternative failure is silence: guarding the set_fact on the
+# line count skipped it, and every assertion below is reached only once those
+# facts exist, so one unexpected line disabled the whole check and reported a
+# clean run. Anyone who edits the probe gets told instead.
+- name: Assert that the probe returned both names
+  ansible.builtin.assert:
+    that:
+      - _hostname_check_probe.stdout_lines | default([]) | length == 2
+    quiet: true
+    fail_msg: >-
+      The host name probe should print the kernel name and its canonical form,
+      two lines, but printed
+      {{ _hostname_check_probe.stdout_lines | default([]) | length }}:
+      {{ _hostname_check_probe.stdout_lines | default([]) }}. Without both
+      names nothing below can be checked.
+  when: hostname_check_enabled | bool
+
+- name: Record the two names
+  ansible.builtin.set_fact:
+    _hostname_kernel: "{{ _hostname_check_probe.stdout_lines[0] }}"
+    _hostname_canonical: "{{ _hostname_check_probe.stdout_lines[1] }}"
+  when: hostname_check_enabled | bool
+
+# A name that does not resolve is not evidence that anything agrees about it.
+# This runs after hosts and resolvconf, both of which exist to make this
+# lookup work, so a failure here is a deployment fault in its own right -- and
+# the usual error is EAI_AGAIN, "Temporary failure in name resolution", which
+# means a pass now would say nothing about the cluster five minutes from now.
+- name: Assert that the host's own name resolves
+  ansible.builtin.assert:
+    that:
+      - not _hostname_canonical.startswith('!unresolved')
+    quiet: true
+    fail_msg: |
+      This host's own name could not be looked up, so what other components
+      will derive for it is unknown.
+
+        gethostname()                  {{ _hostname_kernel }}
+        getaddrinfo(AI_CANONNAME)      {{ _hostname_canonical | replace('!unresolved: ', 'failed: ') }}
+
+      Every component that resolves a host name starts from this lookup. Until
+      it answers, nothing can be said about whether they will agree, so this
+      refuses rather than assuming they do.
+
+      Check that /etc/hosts carries an entry for this host and that the
+      resolver configured on it answers. Both are set up by the roles that run
+      immediately before this one.
+  when:
+    - hostname_check_enabled | bool
+    - not (hostname_split_accepted | bool)
+
+# Each of these two is on its own enough to break a lookup; the assertion
+# passes only when neither holds. The case check is the less obvious one:
+# Cyrus SASL folds case in get_fqhostname() and libvirt does not, so a
+# mixed-case name breaks libvirt SASL even where the kernel name and its
+# canonical form are otherwise identical.
+- name: Assert that every component will derive the same host name
+  ansible.builtin.assert:
+    that:
+      - _hostname_kernel == _hostname_canonical
+      - _hostname_kernel == _hostname_kernel | lower
+    quiet: true
+    fail_msg: |
+      This host's name is not what other components will derive for it.
+
+        gethostname()                  {{ _hostname_kernel }}
+        getaddrinfo(AI_CANONNAME)      {{ _hostname_canonical }}
+        lowercase                      {{ 'yes' if _hostname_kernel == _hostname_kernel | lower else 'no' }}
+
+      Components that resolve a host name independently will disagree with
+      components that do not. Three are known to break in this state, each
+      fatally: kolla's compute_id delivery overwrites a compute's identity,
+      nova-compute cannot authenticate to libvirt (SASL realm), and OVN refuses
+      to bind any port. That list is not known to be complete.
+
+      Choose one alignment, in lowercase, and the problem does not arise:
+      set hostname_use_fqdn: true so every name is the FQDN, or give this host
+      a short inventory name so every name is short. Either has to fit
+      HOST_NAME_MAX (64 bytes). That choice is free now and not later, because
+      nova records the name it first saw and has no rename path.
+
+      To deploy this state deliberately, set hostname_split_accepted=true. It
+      continues with a warning and records the decision; it does not make the
+      state safe.
+  when:
+    - hostname_check_enabled | bool
+    - not (hostname_split_accepted | bool)
+
+- name: Warn that an accepted host name split is in effect
+  ansible.builtin.debug:
+    msg: >-
+      hostname_split_accepted is set: gethostname() is
+      '{{ _hostname_kernel }}' but other components will derive
+      '{{ _hostname_canonical }}'. Continuing anyway.
+  when:
+    - hostname_check_enabled | bool
+    - hostname_split_accepted | bool
+    - _hostname_kernel != _hostname_canonical or _hostname_kernel != _hostname_kernel | lower

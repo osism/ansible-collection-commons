@@ -185,6 +185,15 @@
       - '^molecule\/delegated\/tests\/hostname.*$'
 
 - job:
+    name: ansible-collection-commons-molecule-hostname_check
+    parent: abstract-ansible-collection-commons-molecule
+    vars:
+      ansible_role: hostname_check
+    files:
+      - '^roles\/hostname_check\/.*$'
+      - '^molecule\/delegated\/tests\/hostname_check.*$'
+
+- job:
     name: ansible-collection-commons-molecule-hosts
     parent: abstract-ansible-collection-commons-molecule
     vars:
@@ -423,6 +432,7 @@
         - ansible-collection-commons-molecule-facts
         - ansible-collection-commons-molecule-firewall
         - ansible-collection-commons-molecule-hostname
+        - ansible-collection-commons-molecule-hostname_check
         - ansible-collection-commons-molecule-hosts
         - ansible-collection-commons-molecule-ipmitool
         - ansible-collection-commons-molecule-kernel_modules
