@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260929.0] - 2026-09-29
+
+### Added
+- Add `hostname_check` role to refuse hosts whose kernel name disagrees with its canonical form, is not lowercase, or collides with another host's planned kernel name (osism/ansible-collection-commons#878)
+
+### Changed
+- Hostname role now refuses a host name longer than HOST_NAME_MAX (64 bytes) with a clear error instead of an opaque kernel failure (osism/ansible-collection-commons#878)
+
+### Dependencies
+- molecule 26.8.0 → 26.9.0 (osism/ansible-collection-commons#877)
+
 ## [v0.20260924.0] - 2026-09-24
 
 ### Changed
