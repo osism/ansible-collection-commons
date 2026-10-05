@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261005.0] - 2026-10-05
+
+### Added
+- Add `operator_additional_authorized_keys` and `operator_additional_authorized_keys_delete` for group-scoped SSH keys (osism/ansible-collection-commons#880)
+
 ## [v0.20260929.0] - 2026-09-29
 
 ### Added
