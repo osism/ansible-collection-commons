@@ -1,4 +1,10 @@
 ---
+# The host comes with a working network that OSISM must leave alone. If
+# true, the role changes nothing on the host: no netplan or interfaces file,
+# no cleanup, no dummy or vxlan interfaces, no network-extra-init service. osism.services.frr uses this
+# as the default of its own frr_managed_externally.
+network_managed_externally: false
+
 # possible values: [interfaces, netplan]
 network_type: netplan
 
