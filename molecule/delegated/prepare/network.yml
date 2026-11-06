@@ -11,3 +11,69 @@
     line: "#!/bin/bash"
     create: true
     mode: 0644
+
+# network_managed_externally: the role must leave the host unchanged. The
+# converge vars (vars/network.yml) enable network-extra-init and a dispatcher
+# script, so a role that ignored the flag would change files here.
+# Debian Bookworm has no netplan before the role installs it, so the
+# directory may not exist yet.
+- name: Create the netplan directory
+  become: true
+  ansible.builtin.file:
+    path: /etc/netplan
+    state: directory
+    mode: 0755
+
+- name: Write a netplan file the role does not manage
+  become: true
+  ansible.builtin.copy:
+    content: |
+      network:
+        version: 2
+    dest: /etc/netplan/99-molecule-unmanaged.yaml
+    mode: 0600
+
+- name: Fingerprint the network configuration before the opted-out run
+  become: true
+  ansible.builtin.shell:
+    cmd: &network_fingerprint |
+      set -o pipefail
+      for path in /etc/netplan /etc/systemd/network /etc/network \
+          /etc/networkd-dispatcher /etc/systemd/system/network-extra-init.service \
+          /usr/local/sbin/network-extra-init; do
+        if [ -e "$path" ]; then find "$path" -type f -exec sha256sum {} +; fi
+      done | sort
+      ip -o link show | awk -F': ' '{print $2}' | sort
+      if command -v dpkg-query >/dev/null; then
+        dpkg-query -W -f '${binary:Package} ${Version} ${db:Status-Abbrev}\n'
+      else
+        rpm -qa
+      fi | sort
+    executable: /bin/bash
+  register: network_fingerprint_before
+  changed_when: false
+
+- name: Run the network role with network_managed_externally
+  ansible.builtin.include_role:
+    name: network
+  vars:
+    network_managed_externally: true
+
+- name: Fingerprint the network configuration after the opted-out run
+  become: true
+  ansible.builtin.shell:
+    cmd: *network_fingerprint
+    executable: /bin/bash
+  register: network_fingerprint_after
+  changed_when: false
+
+- name: Assert that the opted-out run changed nothing
+  ansible.builtin.assert:
+    that: network_fingerprint_after.stdout == network_fingerprint_before.stdout
+    fail_msg: network_managed_externally is true, but the network role changed the host
+
+- name: Remove the netplan file the role does not manage
+  become: true
+  ansible.builtin.file:
+    path: /etc/netplan/99-molecule-unmanaged.yaml
+    state: absent
