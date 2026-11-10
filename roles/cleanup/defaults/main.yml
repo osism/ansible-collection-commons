@@ -28,3 +28,8 @@ cleanup_services: "{{ cleanup_services_default + cleanup_services_extra + cleanu
 # When true: Removes cloud-init package and deletes /etc/cloud directory
 # When false: Leaves cloud-init untouched
 cleanup_cloudinit: true
+
+# Whether to remove unattended-upgrades package and configuration
+# When true: Removes unattended-upgrades package
+# When false: Leaves unattended-upgrades untouched
+cleanup_unattended_upgrades: true

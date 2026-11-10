@@ -13,6 +13,9 @@ def check_ansible_os_family(host):
 def test_cleanup_unattended_upgrades(host):
     check_ansible_os_family(host)
 
+    if not get_variable(host, "cleanup_unattended_upgrades"):
+        pytest.skip("cleanup_unattended_upgrades is not True")
+
     package_name = "unattended-upgrades"
     package = host.package(package_name)
     assert not package.is_installed
