@@ -23,6 +23,7 @@
     state: absent
     lock_timeout: "{{ apt_lock_timeout | default(300) }}"
     purge: true
+  when: cleanup_unattended_upgrades | bool
 
 - name: Remove useless packages from the cache
   become: true
