@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261111.0] - 2026-11-11
+
+### Added
+- Add network_managed_externally opt-out so the network role leaves an externally managed network untouched (osism/ansible-collection-commons#886)
+- Add cleanup_unattended_upgrades option to make removing unattended-upgrades optional (osism/ansible-collection-commons#887)
+
+### Dependencies
+- molecule 26.9.0 → 26.11.0 (osism/ansible-collection-commons#883, osism/ansible-collection-commons#885)
+- pytest 9.1.1 → 9.2.0 (osism/ansible-collection-commons#884)
+
 ## [v0.20261005.0] - 2026-10-05
 
 ### Added
