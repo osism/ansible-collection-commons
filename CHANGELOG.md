@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261111.0] - 2026-11-11
+
+### Added
+- Add `network_managed_externally` opt-out to the network role so hosts with an externally managed network are left unchanged; `osism.services.frr` gets a matching `frr_managed_externally` default (osism/ansible-collection-commons#886)
+- Add `cleanup_unattended_upgrades` variable to make removing unattended-upgrades optional in the cleanup role (osism/ansible-collection-commons#887)
+
+### Changed
+- Run the publish workflow on Python 3.12 with ansible-core 2.18.18 to match the ubuntu-26.04 GitHub runner (osism/ansible-collection-commons#889)
+
+### Dependencies
+- molecule 26.9.0 → 26.10.0 (osism/ansible-collection-commons#883)
+- pytest 9.1.1 → 9.2.0 (osism/ansible-collection-commons#884)
+- molecule 26.10.0 → 26.11.0 (osism/ansible-collection-commons#885)
+
 ## [v0.20261005.0] - 2026-10-05
 
 ### Added
