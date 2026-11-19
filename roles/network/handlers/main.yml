@@ -6,9 +6,28 @@
     state: reloaded
   when: network_allow_service_restart
 
+# netplan apply makes systemd-networkd reconfigure the links, which deletes
+# the kernel nexthop objects FRR's zebra installed; zebra does not reinstall
+# its multipath routes afterwards, so a BGP node would lose its default route
+# (and any other ECMP route) until FRR restarts. The restart runs in the same
+# command as netplan apply: on a node whose route back to the controller is
+# ECMP, a separate task could not be delivered once netplan has applied.
+# It runs even if netplan apply fails (the links may be reconfigured already).
+# The handler fails with netplan's status if netplan failed, else with the
+# restart's: try-restart is a no-op (0) where FRR is not running, and 5 (no
+# such unit, a host without FRR) counts as success.
 - name: Netplan configuration changed
   become: true
-  ansible.builtin.command: netplan apply
+  ansible.builtin.shell: >-
+    netplan apply
+    {% if network_restart_frr_after_netplan_apply | bool %}
+    ; rc=$?
+    ; systemctl try-restart {{ (network_frr_service_name ~ '.service') | quote }}
+    ; frr=$?
+    ; if [ "$rc" -ne 0 ]; then exit "$rc"; fi
+    ; if [ "$frr" -eq 5 ]; then exit 0; fi
+    ; exit "$frr"
+    {% endif %}
   when: network_allow_service_restart
   changed_when: true
 

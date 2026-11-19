@@ -18,6 +18,15 @@ network_manage_devices: true
 # This is only triggered, when the all interface file was changed
 network_allow_service_restart: false
 
+# Restart FRR after the role ran netplan apply (requires
+# network_allow_service_restart). networkd deletes FRR's kernel nexthops when
+# it reconfigures the links, and FRR does not restore its multipath routes on
+# its own.
+network_restart_frr_after_netplan_apply: true
+# The FRR unit restarted after netplan apply. Follows osism.services.frr's
+# frr_service_name when the inventory sets it.
+network_frr_service_name: "{{ frr_service_name | default('frr') }}"
+
 # How should changed interfaces be treated?
 #
 # Options:
