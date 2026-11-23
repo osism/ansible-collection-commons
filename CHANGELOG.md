@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on December 16, 2020. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261123.0] - 2026-11-23
+
+### Fixed
+- Restart FRR after netplan apply so BGP ECMP routes, including the default route, are restored after link reconfiguration (osism/ansible-collection-commons#891)
+
 ## [v0.20261111.0] - 2026-11-11
 
 ### Added
